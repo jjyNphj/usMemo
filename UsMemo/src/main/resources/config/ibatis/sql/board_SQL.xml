@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Board">
+	<typeAlias alias="Board" type="com.twogether.usMemo.dto.Board" />
+	<typeAlias alias="MemberGrade" type="com.twogether.usMemo.dto.MemberGrade" />
+	
+	
+	<resultMap id="getMemberGrade" class="MemberGrade">
+       <result property="num" column="num"/>
+       <result property="bNum" column="bNum"/>
+       <result property="mNum" column="mNum"/>
+       <result property="grade" column="grade"/>
+    </resultMap>
+
+	
+
+	<select id="getMemberGradeBymNum" parameterClass="int"
+		resultMap="getMemberGrade">
+		select * from memberGrade where mNum=#mNum#
+	</select>
+
+	<select id="getBoardNameBybNum" parameterClass="int" resultClass="String">
+		select name from board where num=#bNum#
+	</select>
+
+
+</sqlMap>
+	

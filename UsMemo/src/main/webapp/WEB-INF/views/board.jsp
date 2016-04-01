@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,13 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%-- <c:set var="BoardInfo" value="${ BoardInfo }" />
- --%>
- <c:forEach var="list" items="${Board}" varStatus="i">
-	  	
-${list.name} <br>
+<h1>로그인하면 보이는 보드 목록화면</h1>
 
-</c:forEach>
+<form action="/usMemo/board/main">
+<input type="hidden" name="mNum" value=2 />
+<button type="submit">보드보러가기 </button>
+</form>
+
 
 </body>
 </html>

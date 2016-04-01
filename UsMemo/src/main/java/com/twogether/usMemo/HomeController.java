@@ -1,4 +1,4 @@
-package com.twogather.usMemo;
+package com.twogether.usMemo;
 
 import java.text.DateFormat;
 import java.util.Date;

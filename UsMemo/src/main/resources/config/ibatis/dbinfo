@@ -1,0 +1,51 @@
+create table member(
+	num number primary key,
+	id varchar(100),
+	name varchar(100),
+	picture BLOB
+);
+
+create table board(
+	num number primary key,
+	name varchar(100)
+);
+
+create table list(
+	num number primary key,
+	name varchar(100),
+	bNum number,
+	location number
+);
+
+create table card(
+	num number primary key,
+	name varchar(200),
+	content CLOB,
+	attach BLOB,
+	mNum number,
+	date date,
+	lNum number,
+	location number
+);
+
+create table reply(
+	num number primary key,
+	content CLOB,
+	mNum number,
+	date date,
+	cNum number,
+	attach BLOB
+);
+
+create table activity(
+	num number primary key
+);
+
+create table memberGrade(
+	num number primary key,
+	bNum number,
+	mNum number,
+	grade number
+
+);
+

@@ -1,4 +1,4 @@
-package com.twogather.usMemo.dto;
+package com.twogether.usMemo.dto;
 
 public class Member {
 	private int num;

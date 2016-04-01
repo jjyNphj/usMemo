@@ -1,6 +1,6 @@
-package com.twogather.usMemo.dto;
+package com.twogether.usMemo.dto;
 
-public class BoardInfo {
+public class Board {
 	
 	private int bNum;
 	private String name;
