@@ -7,6 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-보드화면임
+<h1>로그인하면 보이는 보드 목록화면</h1>
+
+<form action="/usMemo/board/main">
+<input type="hidden" name="mNum" value=2 />
+<button type="submit">보드보러가기 </button>
+</form>
+
+
 </body>
 </html>

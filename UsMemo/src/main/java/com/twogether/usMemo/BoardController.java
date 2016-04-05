@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,7 +36,7 @@ public class BoardController {
 
 	@RequestMapping("/login")
 	public String boardLogin(){
-		return "board";
+		return "login";
 	}
 	
 	@RequestMapping("/main")
@@ -52,6 +53,22 @@ public class BoardController {
 		mv.addObject("Board",boardService.myBoardList(mNum));
 		
 	//	logger.info("보드리스트이다.{}",boardService.myBoardList(mNum));
+		
+		return mv;
+		
+	}
+	
+	//ModelAttribute는 RequestParam과 비슷함. 그저 하나의 파라메터가 아닌 객체로 바인딩해서 받아오는것.
+	@RequestMapping("/index")
+	public ModelAndView boardIndex(@ModelAttribute Board board){
+		//하나의 보드 화면 
+		/*
+		 * bNum으로 해당 보드의 리스트, 카드정보 가지고와야함. 
+		 * 
+		 */
+		ModelAndView mv= new ModelAndView();
+		mv.setViewName("board");
+//		mv.addObject(attributeName, attributeValue)
 		
 		return mv;
 		
