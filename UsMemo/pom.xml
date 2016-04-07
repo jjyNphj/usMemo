@@ -24,6 +24,19 @@
 	</repositories>
 
 	<dependencies>
+	<!-- 인터셉터 설정시 만든 jackson임. spring-servlet.xml에 있음.  -->
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.8.5</version>
+	</dependency>
+	
+	<!-- org.springframework.test-3.0.7.release.jar -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.0.7.RELEASE</version>
+		</dependency>
 
 		<!-- jstl -->
 		<!-- standard.jar -->

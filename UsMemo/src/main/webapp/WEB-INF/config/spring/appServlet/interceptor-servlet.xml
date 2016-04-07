@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	
+<!-- 	스프링 3.2 이상에서는 mvc를 설정하는게 많이 바뀌었다. 
+<mvc:mapping path/>를 통해서 인터셉터가 동작할 URL을 지정할 수 있다. 
+지금 작성하는 로거는 모든 요청에서 동작을 하기때문에 전체 패스를 의미하는 "/**" 로 설정하였다.
+그 후, bean을 수동으로 등록한다. 
+중요!!! 위에서 이야기 했듯이, Interceptor는 Controller가 요청되기 전에 수행된다. 
+즉, Interceptor는 DispatcherServlet과 같은 위치에 등록이 되어있어야지 정상적으로 수행이 된다.
+DispatcherServlet의 설정파일의 위치는 /WEB-INF/config/ 폴더 밑의 -servlet.xml 로 끝나는 모든 xml 파일이라고 명시한 것이다.
+
+즉, spring-servlet.xml에 interceptor를 설정함으로써, 
+우리는 DispatcherServlet과 Interceptor를 같은 위치에 등록을 한것이다. 
+DispatcherServlet은 root 컨텍스트의 자식임!! 
+만약, spring-servlet에서 Interceptor의 설정을 분리하여 다른 파일로 만들고싶으면, 
+spring-servlet.xml이 있는 폴더에 *-servlet.xml의 이름 형식 (예를 들어 interceptor-servlet.xml )으로 만들면 된다. -->
+
+	<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean id="loggerInterceptor" class="usMemo.common.logger.LoggerInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+     
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+     
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
+     
+    <bean
+        class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
+        p:viewClass="org.springframework.web.servlet.view.JstlView"
+        p:prefix="/WEB-INF/views/" p:suffix=".jsp">
+    </bean>
+    
+    
+</beans>
