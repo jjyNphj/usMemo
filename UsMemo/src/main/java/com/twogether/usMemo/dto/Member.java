@@ -1,23 +1,23 @@
 package com.twogether.usMemo.dto;
 
 public class Member {
-	private int num;
 	private String id;
+	private String nickname;
 	private String name;
-	private String picture;
+	private String email;
+	private String profile_image;
 	
-	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getName() {
 		return name;
@@ -25,12 +25,19 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPicture() {
-		return picture;
+	public String getEmail() {
+		return email;
 	}
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	public String getProfile_image() {
+		return profile_image;
+	}
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
+	
 	
 
 }

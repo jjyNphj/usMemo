@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.MemberGrade;
 
 
@@ -50,6 +51,28 @@ public class BoardService {
 		return resultList;
 		
 		
+	}
+	
+	public List<List> getList(Board board){
+		/*
+		 * 선택된 보드의 bNum으로 해당 보드의 리스트정보를 가지고 오기
+		 * 가져온 리스트의 num으로 각각의 card리스트를 불러옴
+		 * 
+		 */
+		List<List> list = new ArrayList<List>();
+		list=boardDao.getListBybNum(board.getbNum());
+						
+		return list;
+		
+	}
+	public List<Card> getCard(Board board){
+		/*
+		 * 선택된 리스트의 lNum으로 해당 리스트의 카드 정보를 가지고 오기
+		 */
+		List<Card> list = new ArrayList<Card>();
+//		list=boardDao.getCardBybNum(boardDao.getListNum());
+		
+		return list;
 	}
 	
 }

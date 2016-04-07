@@ -35,5 +35,15 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping("/index")
+	public String index(){
+		
+		return "index";
+	}
+	@RequestMapping("/loginPro")
+	public String loginPro(){
+		
+		return "loginPro";
+	}
 	
 }

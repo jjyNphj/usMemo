@@ -24,6 +24,7 @@
 	</repositories>
 
 	<dependencies>
+
 		<!-- jstl -->
 		<!-- standard.jar -->
 		<dependency>

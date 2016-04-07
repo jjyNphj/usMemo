@@ -68,7 +68,8 @@ public class BoardController {
 		 */
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("board");
-//		mv.addObject(attributeName, attributeValue)
+		mv.addObject("list", boardService.getList(board));
+		mv.addObject("card",boardService.getCard(board));
 		
 		return mv;
 		

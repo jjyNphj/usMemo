@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="List">
+	<typeAlias alias="List" type="com.twogether.usMemo.dto.List" />
+	
+	<resultMap id="ListMap" class="List">
+       <result property="num" column="num"/>
+       <result property="bNum" column="bNum"/>
+       <result property="location" column="location"/>
+       <result property="name" column="name"/>
+    </resultMap>
+
+	
+	<select id="getListByNum" parameterClass="int" resultMap="ListMap">
+		select * from List where bNum=#bNum# Order by location asc 
+	</select>
+	
+
+</sqlMap>
+	

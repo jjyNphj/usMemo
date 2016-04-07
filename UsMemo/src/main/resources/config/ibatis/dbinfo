@@ -23,7 +23,7 @@ create table card(
 	content CLOB,
 	attach BLOB,
 	mNum number,
-	date date,
+	n_date date,
 	lNum number,
 	location number
 );
