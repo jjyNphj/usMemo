@@ -1,8 +1,8 @@
 package com.twogether.usMemo.service;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class MemberService {
 
 }

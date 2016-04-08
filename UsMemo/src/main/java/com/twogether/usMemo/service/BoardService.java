@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
@@ -12,7 +13,7 @@ import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.MemberGrade;
 
 
-@Component
+@Service
 public class BoardService {
 	
 	@Autowired
