@@ -1,5 +1,7 @@
 package com.twogether.usMemo.dto;
 
+import oracle.sql.BLOB;
+
 public class Member {
 	private String id;
 	private String nickname;
@@ -37,7 +39,7 @@ public class Member {
 	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;
 	}
-	
+
 	
 
 }

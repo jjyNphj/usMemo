@@ -1,10 +1,15 @@
 package com.twogether.usMemo;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.service.MemberService;
 
 /**
  * Handles requests for the application home page.
@@ -21,6 +27,8 @@ import com.twogether.usMemo.dto.Member;
 
 @Controller
 public class HomeController {
+	@Autowired
+	MemberService memberService;
 	
 //	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -42,32 +50,31 @@ public class HomeController {
 	}
 	@RequestMapping("/index")
 	public String index(){
-		
 		return "index";
 	}
 	@RequestMapping("/login")
 	public String login(){
 		
-		return "/join/login";
+		return "join/login";
 	}
 	
 	@RequestMapping("/loginPro")
-	public ModelAndView loginPro(@ModelAttribute Member member){
+	public ModelAndView loginPro(@ModelAttribute Member member,HttpSession session) throws SQLException{
 		
 		ModelAndView mv=new ModelAndView();
-		mv.addObject("checklogout", "Y");
-		mv.setViewName("/join/loginPro");
+		
+		memberService.loginMember(member,session);
+/*		
+		mv.addObject("memberInfo", member);*/
+		mv.setViewName("join/loginPro");
 		return mv;
+
 		
-//		logger.info("userEmail: {}", member.getEmail());
-		
-		/*
-		 * 가져온 memeber의 id로 Dao에서 조회
-		 * ->있으면 세션넣기
-		 * ->없으면 insert 후 로그인 
-		 *
-		 */
-		
+	}
+	@RequestMapping("/index.do")
+	public String logout(HttpSession session){
+		session.invalidate();
+		return "index";
 	}
 	
 }

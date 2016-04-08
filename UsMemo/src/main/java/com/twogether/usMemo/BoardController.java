@@ -34,9 +34,9 @@ public class BoardController {
 	 * 로그인 회원정보-> 회원번호로 회원의 보드 보여주기 / 보드의 메인인 셈 
 	 */
 
-	@RequestMapping("/login")
+	@RequestMapping("/login2")
 	public String boardLogin(){
-		return "login";
+		return "login2";
 	}
 	
 	@RequestMapping("/main")

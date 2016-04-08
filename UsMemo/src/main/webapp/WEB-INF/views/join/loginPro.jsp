@@ -18,6 +18,7 @@
 
 </head>
 <body>
+${sessionScope.id }
 <script type="text/javascript">
 /* var checklogout='${checklogout}'; */
 		var access_token= $.cookie("access_token");
@@ -26,20 +27,20 @@
 
 var naver = NaverAuthorize({
 	client_id : "ZnxAOuCVv8j9OLASYEHE",
-	redirect_uri : "http://192.168.0.2:8080/usMemo/loginPro",
+	redirect_uri : "http://192.168.133.14:8080/usMemo/loginPro",
 	client_secret : "tJrkiSgMRo"
 });
 
 window.onload = function() {
 /* 	console.log("체크:",checklogout);
 	if(checklogout=="Y"){ */
-		logoutNaver();
+		deleteNaverInfo();
 /* 	}
 	// callback이 오면 checkLoginState()함수를 호출한다.
 	else{/* checkLoginState(); }*/ 
 
 }
-function logoutNaver() {
+function deleteNaverInfo() {
 	console.log("=====로그아웃들어옴========================================"); 
 	log("<로그아웃전>",access_token,refresh_token,state_token);
 
@@ -55,19 +56,18 @@ function logoutNaver() {
 		log("<네이버 로그아웃후>",access_token,refresh_token,state_token);
 		
 		$.removeCookie("state_token");
-		$.removeCookie("refresh_token");
-		$.removeCookie("access_token");
+		/* $.removeCookie("refresh_token");
+		$.removeCookie("access_token"); */
 		
-		access_token= $.cookie("access_token");
-		refresh_token= $.cookie("refresh_token");
+/* 		access_token= $.cookie("access_token");
+		refresh_token= $.cookie("refresh_token"); */
 		state_token= $.cookie("state_token");
 		log("<쿠키 삭제후>",access_token,refresh_token,state_token);
 		
 		
-		/*세션 넣고 index페이지로 다시 보내주기 
-		var url ='/usMemo/loginPro?id='+ res.response.id+'&nickname='+res.response.nickname
-		+'&name='+res.response.name+'&email='+res.response.email+'&profile_image='+res.response.profile_image;
-    window.open(url, "_self",  ''); */
+		/*세션 넣고 index페이지로 다시 보내주기 */
+		var url ='/usMemo/index';
+    window.open(url, "_self",  ''); 
 
 	});
 /* 	console.log("access", tokenInfo.access_token);

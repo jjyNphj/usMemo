@@ -17,7 +17,7 @@
 	<script type="text/javascript">
 	var naver = NaverAuthorize({
 		client_id : "ZnxAOuCVv8j9OLASYEHE",
-		redirect_uri : "http://192.168.0.2:8080/usMemo/login",
+		redirect_uri : "http://192.168.133.14:8080/usMemo/login",
 		client_secret : "tJrkiSgMRo"
 	});
 	function getNaverUserInfo() {
@@ -59,9 +59,9 @@ window.onload = function() {
 
 
 var tokenInfo = {
-	access_token : "",
-	refresh_token : ""
+	access_token : "",	refresh_token : ""
 };
+
 function checkLoginState() {
 	var state = $.cookie("state_token");
 	if (naver.checkAuthorizeState(state) === "connected") {
@@ -77,9 +77,9 @@ function checkLoginState() {
 			tokenInfo.access_token = response.access_token;
 			tokenInfo.refresh_token = response.refresh_token;
 
-	 	 	$.cookie("refresh_token", response.refresh_token);
+	 	 /* 	$.cookie("refresh_token", response.refresh_token);
 			$.cookie("access_token", response.access_token);
-	 
+	  */
 			console.log("success to get access token", response);
 			getNaverUserInfo();
 		});

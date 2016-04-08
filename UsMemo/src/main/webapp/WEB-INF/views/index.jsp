@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
 
@@ -21,10 +22,24 @@
 <body>
 	<div id="area">
 	<center><h1>UsMemo 메인화면</h1></center>
-	<button id="loginBtn" onclick='loginNaver()'>네이버로 로그인하기</button>
-	<button id="logoutBtn" onclick='logoutNaver()'>로그아웃</button>
-	<button id="userinfoBtn" onclick='getNaverUserInfo()'>내 정보 보기</button>
+	세션적었음: ${sessionScope.id}
 	
+	<c:if test="${sessionScope.id == null }">
+	<button id="loginBtn" onclick='loginNaver()'>네이버로 로그인하기</button>
+	</c:if>
+		<c:if test="${sessionScope.id != null }">
+			<button id="logoutBtn" onclick="location.href='/usMemo/index.do'">로그아웃</button>
+			<button id="userinfoBtn" onclick=''>내 정보 보기</button>
+		</c:if>
+	<%-- <c:choose>
+	    <c:when test="${empty sessionScope.id } ">
+			
+		</c:when>
+		
+		<c:otherwise>
+		</c:otherwise>
+	</c:choose>
+	 --%>
 	</div>
 	<script type="text/javascript">
 		function generateState() {
@@ -41,7 +56,7 @@
 		}
 		var naver = NaverAuthorize({
 			client_id : "ZnxAOuCVv8j9OLASYEHE",
-			redirect_uri : "http://192.168.0.2:8080/usMemo/login",
+			redirect_uri : "http://192.168.133.14:8080/usMemo/login",
 			client_secret : "tJrkiSgMRo"
 		});
 

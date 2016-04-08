@@ -5,11 +5,11 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Board">
-	<typeAlias alias="Board" type="com.twogether.usMemo.dto.Board" />
-	<typeAlias alias="MemberGrade" type="com.twogether.usMemo.dto.MemberGrade" />
+	<typeAlias alias="board" type="com.twogether.usMemo.dto.Board" />
+	<typeAlias alias="memberGrade" type="com.twogether.usMemo.dto.MemberGrade" />
 	
 	
-	<resultMap id="getMemberGrade" class="MemberGrade">
+	<resultMap id="getMemberGrade" class="memberGrade">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
        <result property="mNum" column="mNum"/>

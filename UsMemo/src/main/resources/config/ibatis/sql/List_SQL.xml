@@ -5,9 +5,9 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="List">
-	<typeAlias alias="List" type="com.twogether.usMemo.dto.List" />
+	<typeAlias alias="list" type="com.twogether.usMemo.dto.List" />
 	
-	<resultMap id="ListMap" class="List">
+	<resultMap id="ListMap" class="list">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
        <result property="location" column="location"/>

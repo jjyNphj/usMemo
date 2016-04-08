@@ -13,7 +13,7 @@ import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.MemberGrade;
 
 
-@Service
+@Component
 public class BoardService {
 	
 	@Autowired
