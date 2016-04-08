@@ -15260,9 +15260,17 @@ NaverAuthorize = function(htOption) {
          * @param {requestCallback} callback 응답이 올 때 호출 될 콜백
          */
 
-        logout : function(access_token, callBack) {
-            _removeAccessToken(access_token, callBack);
-            document.location.href ="http://192.168.0.2:8080/usMemo/index";
+        logout : function(access_token,callBack) {
+           _removeAccessToken(access_token, callBack);
+           
+/*            document.location.href = 
+            	URL.AUTHORIZE
+            +"?grant_type="+GRANT_TYPE.DELETE
+            +"&client_id="+client_id
+            +"&client_secret="+client_secret
+            +"&access_token="+encodeURIComponent(access_token)
+      	  +"&service_provider="+SERVICE_PROVIDER
+      ;*/
         },
 
         /**

@@ -17,44 +17,46 @@
 	<script type="text/javascript">
 	var naver = NaverAuthorize({
 		client_id : "ZnxAOuCVv8j9OLASYEHE",
-		redirect_uri : "http://192.168.0.2:8080/usMemo/loginPro",
+		redirect_uri : "http://192.168.0.2:8080/usMemo/logoutPro",
 		client_secret : "tJrkiSgMRo"
 	});
 	function getNaverUserInfo() {
 		naver.api(/* URI, */tokenInfo.access_token, function(data) {
-			var response = data._response.responseJSON;
-			console.log("success to get user info", response);
-			/*컨트롤러로 사용자 정보 넘기기*/
+			var res = data._response.responseJSON;
+			console.log("success to get user info", res);
+			/*
+			토큰 모두 지우기(사실상 네이버에서의 로그아웃)
+			컨트롤러로 사용자 정보 넘기기
+			*/
 			
-		 	 alert(response.response.email + ', ' + response.response.id
-					+ ', ' + response.response.nickname); 
-			    
-			var url ='/usMemo/testLogin/make?userEmail='+ response.response.email;
+/*   alert(res.response.email + ', ' + res.response.id
+					+ ', ' + res.response.nickname);  
+			     */
+			     
+			var url ='/usMemo/testLogin?id='+ res.response.id+'&nickname='+res.response.nickname
+					+'&name='+res.response.name+'&email='+res.response.email+'&profile_image='+res.response.profile_image;
                 window.open(url, "_self",  '');
+			     //logoutNaver();
+
 			
 		});
 	}
 	
+	/* function logoutNaver() {
+		  alert('로그아웃들어옴'); 
+		naver.logout(tokenInfo.access_token);
+		console.log("access", tokenInfo.access_token);
+		console.log("refresh", tokenInfo.refresh_token);
+		//console.log("state",state_check);
+
+	}
+	 */
 window.onload = function() {
 	// callback이 오면 checkLoginState()함수를 호출한다.
 	checkLoginState();
-	/* if(checkCookie()==undefined)
-		{
-			$('#loginBtn').show();	
-			$('#logoutBtn').hide();	
-			$('#userinfoBtn').hide();
-		}
-	else{
-			$('#loginBtn').hide();
-			$('#logoutBtn').show();
-			$('#userinfoBtn').show();
-	}
- */
+
 }
 
-function checkCookie(){
-	return $.cookie("state_token");
-}
 
 var tokenInfo = {
 	access_token : "",
@@ -62,7 +64,6 @@ var tokenInfo = {
 };
 function checkLoginState() {
 	var state = $.cookie("state_token");
-	//state_check=state;
 	if (naver.checkAuthorizeState(state) === "connected") {
 
 		//정상적으로 Callback정보가 전달되었을 경우 Access Token발급 요청 수행
@@ -76,9 +77,9 @@ function checkLoginState() {
 			tokenInfo.access_token = response.access_token;
 			tokenInfo.refresh_token = response.refresh_token;
 
-	/* 	 	$.cookie("refresh_token", response.refresh_token);
+	 	 	$.cookie("refresh_token", response.refresh_token);
 			$.cookie("access_token", response.access_token);
-	 */
+	 
 			console.log("success to get access token", response);
 			getNaverUserInfo();
 		});

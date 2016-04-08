@@ -7,9 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.twogether.usMemo.dto.Member;
 
 /**
  * Handles requests for the application home page.
@@ -47,10 +51,22 @@ public class HomeController {
 		return "loginPro";
 	}
 	
-	@RequestMapping("/testLogin/make")
-	public void testUserInfo(@RequestParam String userEmail){
+	@RequestMapping("/testLogin")
+	public ModelAndView testUserInfo(@ModelAttribute Member member){
 		
-		logger.info("userEmail: {}", userEmail);
+		ModelAndView mv=new ModelAndView();
+		mv.addObject("checklogout", "Y");
+		mv.setViewName("logoutPro");
+		return mv;
+		
+//		logger.info("userEmail: {}", member.getEmail());
+		
+		/*
+		 * 가져온 memeber의 id로 Dao에서 조회
+		 * ->있으면 세션넣기
+		 * ->없으면 insert 후 로그인 
+		 *
+		 */
 		
 	}
 	
