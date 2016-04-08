@@ -1,8 +1,11 @@
+<테이블 정보>
+
 create table member(
-	num number primary key,
-	id varchar(100),
+	id varchar(100) primary key,
+	nickname varchar(100),
 	name varchar(100),
-	picture BLOB
+    email varchar(100),
+    profile_image varchar(500)
 );
 
 create table board(
@@ -22,7 +25,7 @@ create table card(
 	name varchar(200),
 	content CLOB,
 	attach BLOB,
-	mNum number,
+	memId varchar(100),
 	n_date date,
 	lNum number,
 	location number
@@ -31,7 +34,7 @@ create table card(
 create table reply(
 	num number primary key,
 	content CLOB,
-	mNum number,
+	memId varchar(100),
 	date date,
 	cNum number,
 	attach BLOB
@@ -44,7 +47,7 @@ create table activity(
 create table memberGrade(
 	num number primary key,
 	bNum number,
-	mNum number,
+	memId varchar(100),
 	grade number
 
 );

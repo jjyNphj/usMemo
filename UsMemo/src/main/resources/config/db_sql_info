@@ -1,11 +1,3 @@
-create table memberGrade(
-	num number primary key,
-	bNum number,
-	mNum number,
-	grade number
-
-);
-
 insert into memberGrade values(1,1,2,1);
 insert into memberGrade values(2,2,2,1);
 insert into memberGrade values(3,3,2,1);
