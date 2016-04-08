@@ -17,7 +17,7 @@
 	<script type="text/javascript">
 	var naver = NaverAuthorize({
 		client_id : "ZnxAOuCVv8j9OLASYEHE",
-		redirect_uri : "http://192.168.0.2:8080/usMemo/logoutPro",
+		redirect_uri : "http://192.168.0.2:8080/usMemo/login",
 		client_secret : "tJrkiSgMRo"
 	});
 	function getNaverUserInfo() {
@@ -33,7 +33,7 @@
 					+ ', ' + res.response.nickname);  
 			     */
 			     
-			var url ='/usMemo/testLogin?id='+ res.response.id+'&nickname='+res.response.nickname
+			var url ='/usMemo/loginPro?id='+ res.response.id+'&nickname='+res.response.nickname
 					+'&name='+res.response.name+'&email='+res.response.email+'&profile_image='+res.response.profile_image;
                 window.open(url, "_self",  '');
 			     //logoutNaver();

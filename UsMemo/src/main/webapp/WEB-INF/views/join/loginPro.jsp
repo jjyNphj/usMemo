@@ -26,7 +26,7 @@
 
 var naver = NaverAuthorize({
 	client_id : "ZnxAOuCVv8j9OLASYEHE",
-	redirect_uri : "http://192.168.0.2:8080/usMemo/logoutPro",
+	redirect_uri : "http://192.168.0.2:8080/usMemo/loginPro",
 	client_secret : "tJrkiSgMRo"
 });
 
@@ -62,6 +62,12 @@ function logoutNaver() {
 		refresh_token= $.cookie("refresh_token");
 		state_token= $.cookie("state_token");
 		log("<쿠키 삭제후>",access_token,refresh_token,state_token);
+		
+		
+		/*세션 넣고 index페이지로 다시 보내주기 
+		var url ='/usMemo/loginPro?id='+ res.response.id+'&nickname='+res.response.nickname
+		+'&name='+res.response.name+'&email='+res.response.email+'&profile_image='+res.response.profile_image;
+    window.open(url, "_self",  ''); */
 
 	});
 /* 	console.log("access", tokenInfo.access_token);

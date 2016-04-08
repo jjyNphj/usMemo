@@ -45,18 +45,18 @@ public class HomeController {
 		
 		return "index";
 	}
-	@RequestMapping("/loginPro")
-	public String loginPro(){
+	@RequestMapping("/login")
+	public String login(){
 		
-		return "loginPro";
+		return "/join/login";
 	}
 	
-	@RequestMapping("/testLogin")
-	public ModelAndView testUserInfo(@ModelAttribute Member member){
+	@RequestMapping("/loginPro")
+	public ModelAndView loginPro(@ModelAttribute Member member){
 		
 		ModelAndView mv=new ModelAndView();
 		mv.addObject("checklogout", "Y");
-		mv.setViewName("logoutPro");
+		mv.setViewName("/join/loginPro");
 		return mv;
 		
 //		logger.info("userEmail: {}", member.getEmail());
