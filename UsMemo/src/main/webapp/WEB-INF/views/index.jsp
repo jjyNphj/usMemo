@@ -21,26 +21,22 @@
 
 <body>
 	<div id="area">
-	<center><h1>UsMemo 메인화면</h1></center>
-	세션적었음: ${sessionScope.id}
-	
-	<c:if test="${sessionScope.id == null }">
-	<button id="loginBtn" onclick='loginNaver()'>네이버로 로그인하기</button>
-	</c:if>
+		<center>
+			<h1>UsMemo 메인화면</h1>
+		</center>
+		
+		세션적었음: ${sessionScope.id}
+
+		<c:if test="${sessionScope.id == null }">
+			<button id="loginBtn" onclick='loginNaver()'>네이버로 로그인하기</button>
+		</c:if>
+
 		<c:if test="${sessionScope.id != null }">
 			<button id="logoutBtn" onclick="location.href='/usMemo/index.do'">로그아웃</button>
-			<button id="userinfoBtn" onclick=''>내 정보 보기</button>
+			<button id="userinfoBtn" onclick=''>내 보드 보기</button>
 		</c:if>
-	<%-- <c:choose>
-	    <c:when test="${empty sessionScope.id } ">
-			
-		</c:when>
-		
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
-	 --%>
 	</div>
+	
 	<script type="text/javascript">
 		function generateState() {
 			// CSRF 방지를 위한 state token 생성 코드
@@ -49,26 +45,20 @@
 			return oDate.getTime();
 		}
 		function saveState(state) {
-
 			$.removeCookie("state_token");
 			$.cookie("state_token", state);
-
 		}
 		var naver = NaverAuthorize({
-			client_id : "ZnxAOuCVv8j9OLASYEHE",
-			redirect_uri : "http://192.168.133.14:8080/usMemo/login",
-			client_secret : "tJrkiSgMRo"
+			client_id : "h1ZMSWqDjJSY20p865Ys",
+			redirect_uri : "http://192.168.0.14:8080/usMemo/login",
+			client_secret : "fCKQuU8hmN"
 		});
-
 		function loginNaver() {
 			var state = generateState();
 			saveState(state);
 			naver.login(state);
 		}
-
-
 	</script>
-	
 
 </body>
 </html>

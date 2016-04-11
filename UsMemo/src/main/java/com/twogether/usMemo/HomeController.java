@@ -54,10 +54,8 @@ public class HomeController {
 	}
 	@RequestMapping("/login")
 	public String login(){
-		
 		return "join/login";
 	}
-	
 	@RequestMapping("/loginPro")
 	public ModelAndView loginPro(@ModelAttribute Member member,HttpSession session) throws SQLException{
 		
@@ -67,9 +65,7 @@ public class HomeController {
 /*		
 		mv.addObject("memberInfo", member);*/
 		mv.setViewName("join/loginPro");
-		return mv;
-
-		
+		return mv;	
 	}
 	@RequestMapping("/index.do")
 	public String logout(HttpSession session){

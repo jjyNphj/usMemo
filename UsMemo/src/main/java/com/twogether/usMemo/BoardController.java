@@ -1,12 +1,5 @@
 package com.twogether.usMemo;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
-import com.twogether.usMemo.dto.MemberGrade;
 import com.twogether.usMemo.service.BoardService;
 
 

@@ -35,7 +35,7 @@ create table reply(
 	num number primary key,
 	content CLOB,
 	memId varchar(100),
-	date date,
+	n_date date,
 	cNum number,
 	attach BLOB
 );

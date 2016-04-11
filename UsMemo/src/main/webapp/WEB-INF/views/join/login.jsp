@@ -16,9 +16,9 @@
 <body>
 	<script type="text/javascript">
 	var naver = NaverAuthorize({
-		client_id : "ZnxAOuCVv8j9OLASYEHE",
-		redirect_uri : "http://192.168.133.14:8080/usMemo/login",
-		client_secret : "tJrkiSgMRo"
+		client_id : "h1ZMSWqDjJSY20p865Ys",
+		redirect_uri : "http://192.168.0.14:8080/usMemo/login",
+		client_secret : "fCKQuU8hmN"
 	});
 	function getNaverUserInfo() {
 		naver.api(/* URI, */tokenInfo.access_token, function(data) {

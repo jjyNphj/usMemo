@@ -9,7 +9,7 @@
 
 	<resultMap id="CardMap" class="card">
 		<result property="num" column="num" />
-		<result property="mNum" column="mNum" />
+		<result property="memId" column="memId" />
 		<result property="lNum" column="lNum" />
 		<result property="location" column="location" />
 		<result property="name" column="name" />
