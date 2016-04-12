@@ -1,12 +1,11 @@
 package com.twogether.usMemo;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
-import com.twogether.usMemo.dto.MemberGrade;
+import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.ListAndCard;
+import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.service.BoardService;
 
 
@@ -66,10 +67,11 @@ public class BoardController {
 		 * bNum으로 해당 보드의 리스트, 카드정보 가지고와야함. 
 		 * 
 		 */
+		HashMap<String, List> map=boardService.getListAndCard(board);
 		ModelAndView mv= new ModelAndView();
-		mv.setViewName("board");
-		mv.addObject("list", boardService.getList(board));
-		mv.addObject("card",boardService.getCard(board));
+		mv.setViewName("board/boardMain");
+		mv.addObject("listList", map.get("listList"));
+		mv.addObject("cardList",map.get("cardList"));
 		
 		return mv;
 		

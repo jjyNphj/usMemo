@@ -15,7 +15,7 @@ import com.twogether.usMemo.dao.MemberDao;
 import com.twogether.usMemo.dto.Member;
 
 
-@Component
+@Service
 public class MemberService {
 
 	@Autowired

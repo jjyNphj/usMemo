@@ -1,20 +1,27 @@
 package com.twogether.usMemo.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.ListAndCard;
+import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
 
 
-@Component
+@Service
 public class BoardService {
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	BoardDao boardDao;
@@ -54,26 +61,62 @@ public class BoardService {
 		
 	}
 	
-	public List<List> getList(Board board){
+	public HashMap<String, List> getListAndCard(Board board){
 		/*
+		 * 리스트->lNum으로 card 정보조회 ->Map으로 넘기기 
+		 * 
+		 */
+//		list=boardDao.getListAndCardBybNum(board.getbNum());
+		
+		
+		
+		HashMap<String, List> mapList = new HashMap<String, List>();
+		
+		List<ListDTO> listList = boardDao.getListBybNum(board.getbNum());
+		mapList.put("listList", listList);
+		/*
+		
+		List<List> cardList=new LinkedList<List>();
+		
+		for(ListDTO i:listList){
+			List<Card> resultCards=new LinkedList<Card>();
+			resultCards=boardDao.getCardBybNum(i.getNum());
+			//lNum에 따라 여러장의 card가 linkedList에 저장됨.
+			cardList.add(resultCards);
+			//list의 반환순서와 동일하게 넣기 
+			//즉, list의 위치가 변하면 cardList의 index도 변해야함.
+		}
+		
+	*/	
+		
+		
+		List<ListAndCard> cardList=boardDao.getCardBybNum(board.getbNum());
+		mapList.put("cardList", cardList);
+		
+		return mapList;
+		
+	}
+	
+/*	public List<List> getList(Board board){
+		
 		 * 선택된 보드의 bNum으로 해당 보드의 리스트정보를 가지고 오기
 		 * 가져온 리스트의 num으로 각각의 card리스트를 불러옴
 		 * 
-		 */
-		List<List> list = new ArrayList<List>();
+		 
+		List<List> list = new LinkedList<List>();
 		list=boardDao.getListBybNum(board.getbNum());
 						
 		return list;
 		
 	}
 	public List<Card> getCard(Board board){
-		/*
+		
 		 * 선택된 리스트의 lNum으로 해당 리스트의 카드 정보를 가지고 오기
-		 */
+		 
 		List<Card> list = new ArrayList<Card>();
 //		list=boardDao.getCardBybNum(boardDao.getListNum());
 		
 		return list;
-	}
+	}*/
 	
 }

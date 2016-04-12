@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Card {
 	
-	private int num,mNum,lNum,location;
-	private String name,content,attach;
+	private int num,lNum,location;
+	private String name,content,attach,memId;
 	private Date n_date;
 	
 	public int getNum() {
@@ -13,12 +13,6 @@ public class Card {
 	}
 	public void setNum(int num) {
 		this.num = num;
-	}
-	public int getmNum() {
-		return mNum;
-	}
-	public void setmNum(int mNum) {
-		this.mNum = mNum;
 	}
 	public int getlNum() {
 		return lNum;
@@ -55,6 +49,12 @@ public class Card {
 	}
 	public void setN_date(Date n_date) {
 		this.n_date = n_date;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 	
 	

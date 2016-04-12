@@ -1,6 +1,6 @@
 package com.twogether.usMemo.dto;
 
-public class List {
+public class ListDTO {
 	
 	private int num, bNum, location;
 	private String name;

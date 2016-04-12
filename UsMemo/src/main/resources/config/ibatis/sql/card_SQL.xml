@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Card">
+	<typeAlias alias="card" type="com.twogether.usMemo.dto.Card" />
+	<typeAlias alias="listAndCard" type="com.twogether.usMemo.dto.ListAndCard" />
+	
+	<resultMap id="CardMap" class="card">
+		<result property="num" column="num" />
+		<result property="memId" column="memId" />
+		<result property="lNum" column="lNum" />
+		<result property="location" column="location" />
+		<result property="name" column="name" />
+		<result property="content" column="content" />
+		<result property="attach" column="attach" />
+		<result property="n_date" column="n_date" />
+	</resultMap>
+	
+	<resultMap id="ListAndCardMap" class="listAndCard" >
+       <result property="list_num" column="list_num"/>
+       <result property="list_name" column="list_name"/>
+       <result property="list_bNum" column="bNum"/>
+       <result property="list_location" column="list_location"/>
+  		<result property="card_num" column="card_num" />
+		<result property="card_name" column="card_name" />
+		<result property="card_content" column="content" />
+		<result property="card_attach" column="attach" />
+		<result property="card_memId" column="memId" />
+		<result property="card_n_date" column="n_date" />
+		<result property="card_lNum" column="lNum" />
+		<result property="card_location" column="card_location" />
+	</resultMap>
+
+
+	<select id="getCardBylNum" parameterClass="int" resultMap="CardMap">
+		select * from card where lNum=#lNum# order by location asc
+	</select>
+	
+		<select id="getCardBybNum" parameterClass="int" resultMap="ListAndCardMap" >
+	select L.num as list_num, L.name as list_name, L.bNum,L.location as list_location ,
+			C.num as card_num, C.name as card_name, C.content,C.attach,C.memId,C.n_date,C.lNum,C.location as card_location 
+		from List L Inner Join Card C 
+		on L.num=C.lNum
+		where L.bNum=#bNum# Order by L.location asc 
+	</select>
+	
+
+</sqlMap>
+	

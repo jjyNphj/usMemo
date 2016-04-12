@@ -8,4 +8,6 @@
  	<!-- Common -->
 	<sqlMap resource="/config/ibatis/sql/member_SQL.xml"/>
 	<sqlMap resource="/config/ibatis/sql/board_SQL.xml"/>
+	<sqlMap resource="/config/ibatis/sql/list_SQL.xml"/>
+	<sqlMap resource="/config/ibatis/sql/card_SQL.xml"/>
 </sqlMapConfig> 

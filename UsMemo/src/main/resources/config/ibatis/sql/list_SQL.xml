@@ -5,20 +5,21 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="List">
-	<typeAlias alias="list" type="com.twogether.usMemo.dto.List" />
+	<typeAlias alias="listDTO" type="com.twogether.usMemo.dto.ListDTO" />
 	
-	<resultMap id="ListMap" class="list">
+	<resultMap id="ListMap" class="listDTO">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
        <result property="location" column="location"/>
        <result property="name" column="name"/>
     </resultMap>
 
-	
 	<select id="getListByNum" parameterClass="int" resultMap="ListMap">
 		select * from List where bNum=#bNum# Order by location asc 
 	</select>
 	
+	
+
 
 </sqlMap>
 	

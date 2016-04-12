@@ -4,7 +4,7 @@ public class MemberGrade {
 	
 	private int	num;
 	private int	bNum;
-	private int mNum;
+	private String memId;
 	private int grade;
 	
 	public int getNum() {
@@ -19,17 +19,17 @@ public class MemberGrade {
 	public void setbNum(int bNum) {
 		this.bNum = bNum;
 	}
-	public int getmNum() {
-		return mNum;
-	}
-	public void setmNum(int mNum) {
-		this.mNum = mNum;
-	}
 	public int getGrade() {
 		return grade;
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	public String getMemId() {
+		return memId;
+	}
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 	
 	
