@@ -104,12 +104,11 @@
 			$.removeCookie("state_token");
 			$.cookie("state_token", state);
 		}
- 		var naver = NaverAuthorize({
+  		var naver = NaverAuthorize({
 			client_id : "h1ZMSWqDjJSY20p865Ys",
-			redirect_uri : "http://192.168.0.16:8080/usMemo/login",
+			redirect_uri : "http://192.168.43.106:8080/usMemo/login",
 			client_secret : "fCKQuU8hmN"
 		}); 
-/* 		var naver = NaverAuthorize({ client_id,	redirect_uri, client_secret}); */
 		function loginNaver() {
 			var state = generateState();
 			saveState(state);

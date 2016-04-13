@@ -37,7 +37,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/main")
-	public ModelAndView boardMain(@RequestParam int memId){
+	public ModelAndView boardMain(@RequestParam String memId){
 		
 		/*
 		 * 1) 회원번호를 memberGrade로 가서 그 사람의 모든 boardNum가지고오기

@@ -17,7 +17,7 @@
 
 	
 
-	<select id="getMemberGradeBymNum" parameterClass="int" resultMap="getMemberGrade">
+	<select id="getMemberGradeBymNum" parameterClass="String" resultMap="getMemberGrade">
 		select * from memberGrade where memId=#memId#
 	</select>
 

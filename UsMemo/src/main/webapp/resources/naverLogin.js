@@ -15036,6 +15036,7 @@ nv.$Ajax.Queue.prototype._requestAsync = function () {
  * });
  */
 NaverAuthorize = function(htOption) {
+/*NaverAuthorize = function() {*/
     var SERVICE_PROVIDER = "NAVER",
         URL = {
             LOGIN : "https://nid.naver.com/oauth2.0/authorize",
@@ -15053,9 +15054,9 @@ NaverAuthorize = function(htOption) {
         redirect_uri = htOption.redirect_uri,
         code, state_token;
 
-/*    var client_id = "h1ZMSWqDjJSY20p865Ys",
+    /*var client_id = "h1ZMSWqDjJSY20p865Ys",
     client_secret = "fCKQuU8hmN",
-    redirect_uri = "http://192.168.133.20:8080/usMemo/login",
+    redirect_uri = "http://192.168.43.106:8080/usMemo/login",
     code, state_token;*/
 
     /**

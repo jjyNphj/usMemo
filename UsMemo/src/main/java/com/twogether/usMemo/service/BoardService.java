@@ -23,7 +23,7 @@ public class BoardService {
 	@Autowired
 	BoardDao boardDao;
 	
-	public List<Board> myBoardList(int memId){
+	public List<Board> myBoardList(String memId){
 		//로그인 후 보이는 회원의 보드목록
 		/*
 		 * 1) 회원번호를 memberGrade로 가서 그 사람의 모든 boardNum가지고오기

@@ -28,7 +28,7 @@ public class BoardDao {
 		
 	}
 	
-	public List<MemberGrade> getMemberGradeBymNum(int memId){
+	public List<MemberGrade> getMemberGradeBymNum(String memId){
 		
 		List<MemberGrade> list= new ArrayList<MemberGrade>();
 		list=(List<MemberGrade>) sqlMapClientTemplate.queryForList("Board.getMemberGradeBymNum",memId);
