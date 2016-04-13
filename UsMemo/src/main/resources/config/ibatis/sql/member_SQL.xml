@@ -11,6 +11,7 @@
 		<select id="getMemberById" parameterClass="String" resultClass="int">
 			select count(*) from member where id=#id#
 		</select>
+		
 		<insert id="setMember" parameterClass="member">
 			insert into member values(#id#,	#nickname#,#name#,#email#,#profile_image#)
 		</insert>

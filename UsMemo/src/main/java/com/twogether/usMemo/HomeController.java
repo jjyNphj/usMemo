@@ -48,6 +48,7 @@ public class HomeController {
 		
 		return "home";
 	}
+//	메인화면
 	@RequestMapping("/index")
 	public String index(){
 		return "index";

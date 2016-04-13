@@ -15053,6 +15053,10 @@ NaverAuthorize = function(htOption) {
         redirect_uri = htOption.redirect_uri,
         code, state_token;
 
+/*    var client_id = "h1ZMSWqDjJSY20p865Ys",
+    client_secret = "fCKQuU8hmN",
+    redirect_uri = "http://192.168.133.20:8080/usMemo/login",
+    code, state_token;*/
 
     /**
      * ajax 통신 객체 리턴

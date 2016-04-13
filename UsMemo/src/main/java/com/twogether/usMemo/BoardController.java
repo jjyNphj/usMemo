@@ -1,5 +1,10 @@
 package com.twogether.usMemo;
 
+import java.io.Console;
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
+import com.twogether.usMemo.dto.Member;
 import com.twogether.usMemo.service.BoardService;
 
 
@@ -19,7 +25,6 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	/*
@@ -32,7 +37,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/main")
-	public ModelAndView boardMain(@RequestParam int mNum){
+	public ModelAndView boardMain(@RequestParam int memId){
 		
 		/*
 		 * 1) 회원번호를 memberGrade로 가서 그 사람의 모든 boardNum가지고오기
@@ -41,13 +46,13 @@ public class BoardController {
 		 * 
 		 */
 		ModelAndView mv= new ModelAndView();
-		mv.setViewName("myBoard");
-		mv.addObject("Board",boardService.myBoardList(mNum));
+		//myBoard.jsp 부름
+		mv.setViewName("myBoard");	
+		mv.addObject("Board",boardService.myBoardList(memId));
 		
 	//	logger.info("보드리스트이다.{}",boardService.myBoardList(mNum));
 		
 		return mv;
-		
 	}
 	
 	//ModelAttribute는 RequestParam과 비슷함. 그저 하나의 파라메터가 아닌 객체로 바인딩해서 받아오는것.
@@ -64,9 +69,29 @@ public class BoardController {
 		mv.addObject("card",boardService.getCard(board));
 		
 		return mv;
-		
 	}
 	
+//	@RequestMapping("/createBoard")
+//	public ModelAndView boardCreate(@RequestParam String name) {
+//		System.out.println("보드 이름 :" + name);
+//		
+//		ModelAndView mv= new ModelAndView();
+//		mv.setViewName("index");
+//		
+//		return mv;
+//	}
+	
+	@RequestMapping("/createBoard")
+	public ModelAndView boardCreate(@RequestParam String name, @RequestParam String memId) throws SQLException{
+		logger.info("memId: {}",memId);
+		ModelAndView mv = new ModelAndView();
+		
+		boardService.boardCreate(name, memId);
+
+		mv.setViewName("index");
+		//mv.addObject("Board",boardService.boardCreate(name));
+		return mv;	
+	}
 	
 
 }

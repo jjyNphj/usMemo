@@ -19,14 +19,13 @@ public class MemberDao {
 		public void test(String id){
 			logger.info("member id= {}",id);
 		}
+		
 		public int getMemberById(String id){
 			//회원정보가 DB에 존재하는지 확인
 			int count = (Integer) sqlMapClientTemplate.queryForObject("Member.getMemberById",id);
 			
 			return count ;
-			
 		}
-
 
 		public void setMember(Member member) {
 			sqlMapClientTemplate.insert("Member.setMember", member);
