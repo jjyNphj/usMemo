@@ -39,4 +39,47 @@ insert into Card values(1,'20160314.hwp','<회의내용>
  insert into Card values(5,'할리스에서 만나기',null,null,2,sysdate,5,1);
  insert into Card values(6,'독후감보드임 그것도 리스트 첫번째의 카드임',null,null,118120900,sysdate,6,1);
          
+         
+         
+ ===================================================4.15 update===================================================
+<list 추가>
+//맨 마지막 컬럼은 위치이므로 bNum이 같을 경우 1부터 순차적으로 적을것.
 
+insert into List values(list_num_seq.nextval,'회의록',<bNum 자리임. 내보드보기의 맨 앞 숫자 넣기>,1);	 
+insert into List values(list_num_seq.nextval,'팀명/이름정하기',<bNum 자리임. 내보드보기의 맨 앞 숫자 넣기>,2);	
+insert into List values(list_num_seq.nextval,'박혜진공간',<bNum 자리임. 내보드보기의 맨 앞 숫자 넣기>,3);	
+insert into List values(list_num_seq.nextval,'독후감보드의 첫번째 리스트',<bNum 자리임. 내보드보기의 맨 앞 숫자 넣기>,1);	
+
+
+
+<card 추가> 
+//맨 마지막 컬럼은 위치이므로 lNum이 같을 경우 1부터 순차적으로 적을것.
+
+insert into Card values(card_num_seq.nextval ,'20160314.hwp','<회의내용>
+				===============================
+				▶ 웹 제작 프로젝트 주제 브레인스토밍
+				▶ 아이디어 선별 후 벤치마킹
+				▶ 사용할 툴, 적용 가능한 기술 구상
+				
+				
+				
+				<결정사항>
+				===============================
+				▶ 칠판/게시판에 붙이는 포스트잇에서 착안한 간편한 메모 기능의 웹 선정
+				▶ 벤치마킹 대상 Trello
+				▶ 개발 툴 : eclipse, maven, git
+				   기술 : spring MVC, 디자인패턴, JUnit, 
+				         오라클 데이터베이스, 라이브러리(ex bootstrap, ajax), API 오픈소스',null,118120900,sysdate,<lNum 자리임. 맨 마지막 쿼리문으로 확인한 num값 아무거나 넣기>,1);
+				         
+ insert into Card values(card_num_seq.nextval,'20160318입니다.','오늘의 내용은 다음이다.',null,118120900,sysdate,<lNum 자리임. 맨 마지막 쿼리문으로 확인한 num값 아무거나 넣기>,2);
+ insert into Card values(card_num_seq.nextval,'2016년인데,언제지?','오늘은 화요일!',null,118120900,sysdate,<lNum 자리임. 맨 마지막 쿼리문으로 확인한 num값 아무거나 넣기>,3);
+ 
+ insert into Card values(card_num_seq.nextval,'팀명이름정하기','뭐가좋을지 생각해보자',null,118120900,sysdate,<lNum 자리임. 맨 마지막 쿼리문으로 확인한 num값 아무거나 넣기>,1);
+ insert into Card values(card_num_seq.nextval,'할리스에서 만나기',null,null,2,sysdate,<lNum 자리임. 맨 마지막 쿼리문으로 확인한 num값 아무거나 넣기>,1);
+ insert into Card values(card_num_seq.nextval,'독후감보드임 그것도 리스트 첫번째의 카드임',null,null,118120900,sysdate,<lNum 자리임. 맨 마지막 쿼리문으로 확인한 num값 아무거나 넣기>,1);
+         
+         
+         
+         -----------------------------
+         select * from list;
+         -----------------------------
