@@ -1,6 +1,6 @@
-insert into memberGrade values(1,1,2,1);
-insert into memberGrade values(2,2,2,1);
-insert into memberGrade values(3,3,2,1);
+insert into memberGrade values(1,1,118120900,1);
+insert into memberGrade values(2,2,118120900,1);
+insert into memberGrade values(3,3,118120900,1);
 
 insert into BOARD values (1,'프로젝트 트렐로');
 insert into BOARD values (2,'읽을 책 목록');
@@ -30,13 +30,13 @@ insert into Card values(1,'20160314.hwp','<회의내용>
 				▶ 벤치마킹 대상 Trello
 				▶ 개발 툴 : eclipse, maven, git
 				   기술 : spring MVC, 디자인패턴, JUnit, 
-				         오라클 데이터베이스, 라이브러리(ex bootstrap, ajax), API 오픈소스',null,2,sysdate,3,1);
+				         오라클 데이터베이스, 라이브러리(ex bootstrap, ajax), API 오픈소스',null,118120900,sysdate,3,1);
 				         
  insert into Card values(2,'20160318입니다.','오늘의 내용은 다음이다.',null,3,sysdate,3,2);
- insert into Card values(3,'2016년인데,언제지?','오늘은 화요일!',null,2,sysdate,3,3);
+ insert into Card values(3,'2016년인데,언제지?','오늘은 화요일!',null,118120900,sysdate,3,3);
  
- insert into Card values(4,'팀명이름정하기','뭐가좋을지 생각해보자',null,2,sysdate,4,1);
+ insert into Card values(4,'팀명이름정하기','뭐가좋을지 생각해보자',null,118120900,sysdate,4,1);
  insert into Card values(5,'할리스에서 만나기',null,null,2,sysdate,5,1);
- insert into Card values(6,'독후감보드임 그것도 리스트 첫번째의 카드임',null,null,2,sysdate,6,1);
+ insert into Card values(6,'독후감보드임 그것도 리스트 첫번째의 카드임',null,null,118120900,sysdate,6,1);
          
 

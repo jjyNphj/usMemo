@@ -1,8 +1,8 @@
 package com.twogether.usMemo.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
-import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
@@ -26,7 +25,7 @@ public class BoardService {
 	@Autowired
 	BoardDao boardDao;
 	
-	public List<Board> myBoardList(int mNum){
+	public List<Board> myBoardList(String memId){
 		//로그인 후 보이는 회원의 보드목록
 		/*
 		 * 1) 회원번호를 memberGrade로 가서 그 사람의 모든 boardNum가지고오기
@@ -40,7 +39,7 @@ public class BoardService {
 		
 		List<MemberGrade> list = new ArrayList<MemberGrade>();
 		
-		list=boardDao.getMemberGradeBymNum(mNum);
+		list=boardDao.getMemberGradeBymNum(memId);
 		
 		List<Board> resultList=new ArrayList<Board>();
 		
@@ -52,13 +51,10 @@ public class BoardService {
 			
 			System.out.println("보드: "+resultBoard.getName());
 			
-			resultList.add(resultBoard);
-			
+			resultList.add(resultBoard);			
 		}
 		
-		return resultList;
-		
-		
+		return resultList;		
 	}
 	
 	public HashMap<String, List> getListAndCard(Board board){
@@ -106,8 +102,7 @@ public class BoardService {
 		List<List> list = new LinkedList<List>();
 		list=boardDao.getListBybNum(board.getbNum());
 						
-		return list;
-		
+		return list;	
 	}
 	public List<Card> getCard(Board board){
 		
@@ -119,4 +114,11 @@ public class BoardService {
 		return list;
 	}*/
 	
+	public void boardCreate(String name, String memId) throws SQLException {
+		/*보드 생성*/
+		MemberGrade memberGrade = new MemberGrade();
+		memberGrade.setmemId(memId);
+		
+		boardDao.addBoard(name, memberGrade);
+	}
 }

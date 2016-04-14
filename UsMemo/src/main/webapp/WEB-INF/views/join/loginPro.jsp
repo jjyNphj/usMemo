@@ -67,7 +67,7 @@ function deleteNaverInfo() {
 		
 		/*세션 넣고 index페이지로 다시 보내주기 */
 		var url ='/usMemo/index';
-    window.open(url, "_self",  ''); 
+   		window.open(url, "_self",  ''); 
 
 	});
 /* 	console.log("access", tokenInfo.access_token);
@@ -83,10 +83,8 @@ function log(message, access, refresh, state ){
 	console.log(" refresh_token:",refresh );
 	console.log(" state_token: ",state);
 	console.log("==================================");
-	
 }
-
-
 </script>
+
 </body>
 </html>

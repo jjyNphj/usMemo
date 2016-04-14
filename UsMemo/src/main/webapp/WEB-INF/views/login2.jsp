@@ -10,7 +10,7 @@
 <h1>로그인하면 보이는 보드 목록화면</h1>
 
 <form action="/usMemo/board/main">
-<input type="hidden" name="mNum" value=2 />
+<input type="hidden" name="memId" value=${sessionScope.id } />
 <button type="submit">보드보러가기 </button>
 </form>
 

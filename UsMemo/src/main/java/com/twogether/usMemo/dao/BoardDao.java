@@ -28,10 +28,10 @@ public class BoardDao {
 		
 	}
 	
-	public List<MemberGrade> getMemberGradeBymNum(int mNum){
+	public List<MemberGrade> getMemberGradeBymNum(String memId){
 		
 		List<MemberGrade> list= new ArrayList<MemberGrade>();
-		list=(List<MemberGrade>) sqlMapClientTemplate.queryForList("Board.getMemberGradeBymNum",mNum);
+		list=(List<MemberGrade>) sqlMapClientTemplate.queryForList("Board.getMemberGradeBymNum",memId);
 		
 		return list;
 		
@@ -61,6 +61,28 @@ public class BoardDao {
 		return list;
 	}*/
 
+	public void addBoard(String name, MemberGrade memberGrade) {
+		sqlMapClientTemplate.insert("Board.addBoard", name);
+		sqlMapClientTemplate.insert("Board.addMemberGradeBybNum", memberGrade);
+		
+	}
+
+	
+//	public int getBoardNumById(String id){
+//		//회원 id로 보드의 bNum 구하기
+//		int count = (Integer) sqlMapClientTemplate.queryForObject("Board.getBoardNumById",id);
+//		
+//		return count ;
+//	}
+	
+
+//	
+//	public List<Card> getCardBybNum(int bNum){
+//		List<Card> list= new ArrayList<Card>();
+//		
+//		list=(List<Card>) sqlMapClientTemplate.queryForList("Board.getCardByNum",bNum);
+//		return list;
+//	}
 
 
 }

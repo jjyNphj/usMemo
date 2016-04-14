@@ -48,6 +48,7 @@ public class HomeController {
 		
 		return "home";
 	}
+//	메인화면
 	@RequestMapping("/index")
 	public String index(){
 		return "index";
@@ -68,7 +69,6 @@ public class HomeController {
 		mv.addObject("memberInfo", member);*/
 		mv.setViewName("join/loginPro");
 		return mv;
-
 		
 	}
 	@RequestMapping("/index.do")

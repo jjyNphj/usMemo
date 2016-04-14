@@ -52,3 +52,7 @@ create table memberGrade(
 
 );
 
+create sequence board_num_seq start with 1; 
+create sequence list_num_seq start with 1;
+create sequence card_num_seq start with 1;
+create sequence memberGrade_num_seq start with 1; 

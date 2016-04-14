@@ -8,7 +8,6 @@
 	<typeAlias alias="board" type="com.twogether.usMemo.dto.Board" />
 	<typeAlias alias="memberGrade" type="com.twogether.usMemo.dto.MemberGrade" />
 	
-	
 	<resultMap id="getMemberGrade" class="memberGrade">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
@@ -18,8 +17,7 @@
 
 	
 
-	<select id="getMemberGradeBymNum" parameterClass="int"
-		resultMap="getMemberGrade">
+	<select id="getMemberGradeBymNum" parameterClass="String" resultMap="getMemberGrade">
 		select * from memberGrade where memId=#memId#
 	</select>
 
@@ -27,6 +25,22 @@
 		select name from board where num=#bNum#
 	</select>
 	
+	<insert id="addBoard" parameterClass="String">
+			<!-- insert into board values(#bNum#,#name#) -->
+			insert into board values(board_num_seq.nextval,#name#)			
+	</insert>
+	
+	<insert id="addMemberGradeBybNum" parameterClass="memberGrade">
+	    <selectKey keyProperty="bNum" resultClass="int">
+	        select max(num) from board
+	    </selectKey>
+			insert into memberGrade values (memberGrade_num_seq.nextval,#bNum#,#memId#,'1')
+	</insert>
+<!-- 	<select id="getBoardNumById" parameterClass="int" resultClass="int">
+	    	select * from memberGrade where memId=#memId#
+			select count(*) from board where bNum=#bNum#
+	</select>
+	 -->
 
 </sqlMap>
 	
