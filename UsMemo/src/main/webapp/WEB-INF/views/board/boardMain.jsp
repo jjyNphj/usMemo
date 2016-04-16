@@ -81,6 +81,21 @@
 	 }
 	 function addList(bNum){
 		 /*bNum으로 location 맨 마지막으로 설정 후 list에 추가 */
+		 var listName=$("#listName").val();
+		 var url='/usMemo/list/add?bNum='+bNum+'&name='+listName;
+		 
+		  $.ajax({
+	            url: url,
+	            type:'post',
+	            success:function(){
+	               	alert("success");
+	            	window.location.reload();
+	            } ,
+		       error : function(xhr, status, error) {
+	               alert(error);
+	         }
+	        })
+			
 	 }
 	 
 </script>
@@ -94,13 +109,6 @@
 
 		$(".card_unit").sortable();
 		$(".card_unit").disableSelection();
-
-		$("#CardType0").sortable();
-		$("#CardType0").disableSelection();
-		$("#CardType1").sortable();
-		$("#CardType1").disableSelection();
-		$("#CardType2").sortable();
-		$("#CardType2").disableSelection();
 
 	});
 </script>
@@ -135,7 +143,7 @@
 			
 			<input type="button" class="addListBtn" value="add list..."/>
 					<div class="hide">
-						<textarea rows="5" cols="30" id="listContents${bNum }"></textarea><br>
+						<textarea rows="5" cols="30" id="listName"></textarea><br>
 						<input type="button" value="add" onclick="addList(${bNum})"/>
 						<input type="button" class="cancelListBtn" value="cancel" />
 					</div>
