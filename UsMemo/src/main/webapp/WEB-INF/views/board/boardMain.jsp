@@ -28,6 +28,7 @@
 	 
 	// html dom 이 다 로딩된 후 실행된다.
 	    $(document).ready(function(){
+	    	
 	        // .addCardBtn 클래스 중 아무거나 클릭했을 때 
 	        $(".addCardBtn").click(function(){
 	            // 현재 버튼의 옆의 태그중 div 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
@@ -43,7 +44,20 @@
 	           $(this).parents("div").prev(":button").show();
 	        });
 	        
+	        // .addListBtn 클래스 중 아무거나 클릭했을 때 
+	        $(".addListBtn").click(function(){
+	            // 현재 버튼의 옆의 태그중 div 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+	            $(this).next(".hide").toggleClass("hide");
+	            $(this).hide();
+	        });
 	        
+	        //카드 추가버튼클릭 후 취소 버튼 클릭했을 때
+	        $(".cancelListBtn").click(function(){
+	            //cancel 클릭했을 때 입력창 감추기! 
+	            $(this).parents("div").toggleClass("hide");
+	            //원래 버튼인 add card... 버튼 보이기 
+	           $(this).parents("div").prev(":button").show();
+	        });
 	    });
 	 
 	 function addCardButton(){
@@ -111,9 +125,9 @@
 			
 			<input type="button" class="addListBtn" value="add list..."/>
 					<div class="hide">
-						<textarea rows="5" cols="30" name="listContents"></textarea>
+						<textarea rows="5" cols="30" name="listContents"></textarea><br>
 						<input type="button" value="add" onclick="addList(${bNum})"/>
-						<input type="button" value="cancel" />
+						<input type="button" class="cancelListBtn" value="cancel" />
 					</div>
 	</ul>
 	</form>
