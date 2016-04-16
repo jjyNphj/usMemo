@@ -12,7 +12,7 @@
 		<result property="num" column="num" />
 		<result property="memId" column="memId" />
 		<result property="lNum" column="lNum" />
-		<result property="location" column="location" />
+		<result property="location" column="location" nullValue="1"/>
 		<result property="name" column="name" />
 		<result property="content" column="content" />
 		<result property="attach" column="attach" />
@@ -49,6 +49,13 @@
 		where L.bNum=#bNum# Order by L.location asc , C.location
 		asc
 	</select>
+	
+	<insert id="addCard" parameterClass="card">
+	<selectKey keyProperty="location" resultClass="int" >
+	        select NVL(max(location)+1,1) from card where lNum=#lNum#
+	    </selectKey>
+		insert into card values(card_num_seq.nextval,#name#,null,null,#memId#,sysdate,#lNum#,#location#)
+	</insert>
 
 
 </sqlMap>

@@ -60,14 +60,24 @@
 	        });
 	    });
 	 
-	 function addCardButton(){
-		 
-	 }
-	 function addListButton(){
-		 
-	 }
-	 function addCard(lNum){
+	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
+		 var u='#listContents'+lNum;
+		 var name=nameNum.value;
+		 var url='/usMemo/card/add?lNum='+lNum+'&name='+name+'&memId='+${sessionScope.id};
+		  $.ajax({
+            url: url,
+           
+            type:'post',
+            success:function(){
+            
+            	alert("happy!");
+            	window.location.reload();
+            } ,
+	       error : function(xhr, status, error) {
+               alert(error);
+         }
+        })
 	 }
 	 function addList(bNum){
 		 /*bNum으로 location 맨 마지막으로 설정 후 list에 추가 */
@@ -113,8 +123,8 @@
 								<input type="button" class="addCardBtn" value="add card..."/>
 							
 								<div class="hide">
-									<textarea rows="5" cols="30" name="cardContents"></textarea><br>
-									<input type="button" value="add" onclick="addCard(${l.num})"/>
+									<textarea rows="5" cols="30" id="cardName${l.num}"></textarea><br>
+									<input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})"/>
 									<input type="button" class="cancelCardBtn" value="cancel"/>
 								</div>
 							
@@ -125,7 +135,7 @@
 			
 			<input type="button" class="addListBtn" value="add list..."/>
 					<div class="hide">
-						<textarea rows="5" cols="30" name="listContents"></textarea><br>
+						<textarea rows="5" cols="30" id="listContents${bNum }"></textarea><br>
 						<input type="button" value="add" onclick="addList(${bNum})"/>
 						<input type="button" class="cancelListBtn" value="cancel" />
 					</div>

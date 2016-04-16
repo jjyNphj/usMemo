@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.service.BoardService;
 
 
@@ -91,6 +92,6 @@ public class BoardController {
 		//mv.addObject("Board",boardService.boardCreate(name));
 		return mv;	
 	}
-	
+
 
 }
