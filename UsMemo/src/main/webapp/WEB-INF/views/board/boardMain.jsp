@@ -8,6 +8,11 @@
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <title>Insert title here</title>
+<style type="text/css">
+  .list_all{ overflow:auto;}
+  .list_unit{ float:left;}
+  .hide{display: none;}
+</style>
 <script type="text/javascript">
 	/* 	function goPage(bNum, name) {
 	 var answer = confirm("선택하신 도서를 대출목록에서 삭제하시겠습니까?");
@@ -18,14 +23,41 @@
 	 }
 	 }
 	 */
+	 
+	// html dom 이 다 로딩된 후 실행된다.
+	    $(document).ready(function(){
+	        // memu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+	        $(".addCardBtn").click(function(){
+	            // 현재 클릭한 태그가 a 이기 때문에
+	            // a 옆의 태그중 ul 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
+	            $(this).next("div").toggleClass("hide");
+	        });
+	    });
+	 
+	 function addCardButton(){
+		 
+	 }
+	 function addListButton(){
+		 
+	 }
+	 function addCard(lNum){
+		 /*lnum과 sessionid로 card에 정보 넣기*/
+	 }
+	 function addList(bNum){
+		 /*bNum으로 location 맨 마지막으로 설정 후 list에 추가 */
+	 }
+	 
 </script>
 <script>
 	$(function() {
 		/*
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
-		$("#ListType").sortable();
-		$("#ListType").disableSelection();
+		$(".list_all").sortable();
+		$(".list_all").disableSelection();
+
+		$(".card_unit").sortable();
+		$(".card_unit").disableSelection();
 
 		$("#CardType0").sortable();
 		$("#CardType0").disableSelection();
@@ -40,35 +72,35 @@
 <body>
 
 	<form>
-	<ul id="ListType">
-			<c:forEach var="list" items="${listList}" varStatus="i">
-				<%-- <input type="hidden" name=bNum${i.index}  value="${list.bNum}" />
-		<input type="hidden" name=name${i.index}  value="${list.name}" /> --%>
-
-				<center>
-					<h1>${list.num},${list.name},${list.location}</h1>
-								<ul id="CardType${i.index}">
+	<ul class="list_all">
+			<c:forEach var="l" items="${listList}">
+			<li class="list_unit">
+					<h1>${l.num},${l.name},${l.location}</h1>
+							<ul class="card_unit">
 					<c:forEach var="c" items="${cardList}">
-						<c:if test="${list.num == c.card_lNum }">
-							<li>	[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li>
-							</br>
+						<c:if test="${l.num == c.card_lNum }">
+							<li>[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li></br>
 						</c:if>
 					</c:forEach>
 							</ul>
-				</center>
+							<input type="button" class="addCardBtn" value="add card..."/>
+							
+								<div class="hide">
+									<textarea rows="5" cols="30" name="cardContents"></textarea>
+									<input type="button" value="add" onclick="addCard(${l.num})"/>
+									<input type="button" value="cancel"/>
+								</div>
+							
 				</br>
+			</li>
 			</c:forEach>
-			</ul>
+			<input type="button" class="addListBtn" value="add list..."/>
+					<div class="hide">
+						<textarea rows="5" cols="30" name="listContents"></textarea>
+						<input type="button" value="add" onclick="addList(${bNum})"/>
+						<input type="button" value="cancel" />
+					</div>
+	</ul>
 	</form>
 </body>
 </html>
-
-				<%-- <c:forEach var="num" begin="0" end="${cardListSize }" varStatus="k">
-		 <c:set value="cardList${num }" var="cardListName" />
-		 ${cardListName}
-		 <c:forEach var="card" items="${${cardListName}}" varStatus="j">
-	
-		 [${card.num }] ${card.name }, [${card.lNum }/${card.location }] 
-		</c:forEach> 
-	</c:forEach>  --%>
-				<%-- <input type="button" value="선택" onclick="goPage(bNum${i.index},name${i.index })"/> --%>

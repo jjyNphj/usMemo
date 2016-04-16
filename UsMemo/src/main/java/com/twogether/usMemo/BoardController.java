@@ -66,7 +66,7 @@ public class BoardController {
 		mv.setViewName("board/boardMain");
 		mv.addObject("listList", map.get("listList"));
 		mv.addObject("cardList",map.get("cardList"));
-		
+		mv.addObject("bNum",board.getbNum());
 		return mv;
 	}
 	
