@@ -23,6 +23,12 @@
 	    delete from list where exists (select 1 from board where list.bNum = board.num and board.num=#bNum#)
 	</delete>
 	
+	<insert id="addList" parameterClass="listDTO">
+	<selectKey  keyProperty="location" resultClass="int" >
+		select NVL(max(location)+1,1) from list where bNum=#bNum#
+	</selectKey>
+		insert into list values(list_num_seq.nextval,#name#,#bNum#,#location# )
+	</insert>
 
 
 </sqlMap>
