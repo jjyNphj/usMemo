@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -84,6 +85,7 @@
 	 }
 	 
 </script>
+
 <script>
 	$(function() {
 		/*
@@ -105,41 +107,38 @@
 	});
 </script>
 </head>
+
 <body>
 
 	<form>
-	<ul class="list_all">
+		<ul class="list_all">
 			<c:forEach var="l" items="${listList}">
-			<li class="list_unit">
+				<li class="list_unit">
 					<h1>${l.num},${l.name},${l.location}</h1>
-							<ul class="card_unit">
-					<c:forEach var="c" items="${cardList}">
-						<c:if test="${l.num == c.card_lNum }">
-							<li>[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li><br>
-						</c:if>
-					</c:forEach>
-							</ul>
-						
-								<input type="button" class="addCardBtn" value="add card..."/>
-							
-								<div class="hide">
-									<textarea rows="5" cols="30" id="cardName${l.num}"></textarea><br>
-									<input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})"/>
-									<input type="button" class="cancelCardBtn" value="cancel"/>
-								</div>
-							
-							
-				</br>
-			</li>
-			</c:forEach>
-			
-			<input type="button" class="addListBtn" value="add list..."/>
+					<ul class="card_unit">
+						<c:forEach var="c" items="${cardList}">
+							<c:if test="${l.num == c.card_lNum }">
+								<li>[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li>
+								<br>
+							</c:if>
+						</c:forEach>
+					</ul> <input type="button" class="addCardBtn" value="add card..." />
+
 					<div class="hide">
-						<textarea rows="5" cols="30" id="listContents${bNum }"></textarea><br>
-						<input type="button" value="add" onclick="addList(${bNum})"/>
-						<input type="button" class="cancelListBtn" value="cancel" />
-					</div>
-	</ul>
+						<textarea rows="5" cols="30" id="cardName${l.num}"></textarea>
+						<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
+						<input type="button" class="cancelCardBtn" value="cancel" />
+					</div> </br>
+				</li>
+			</c:forEach>
+
+			<input type="button" class="addListBtn" value="add list..." />
+			<div class="hide">
+				<textarea rows="5" cols="30" id="listContents${bNum }"></textarea>
+				<br> <input type="button" value="add" onclick="addList(${bNum})" /> 
+				<input type="button" class="cancelListBtn" value="cancel" />
+			</div>
+		</ul>
 	</form>
 </body>
 </html>

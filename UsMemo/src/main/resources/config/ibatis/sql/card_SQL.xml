@@ -40,7 +40,7 @@
 	</select>
 
 	<select id="getCardBybNum" parameterClass="int" resultMap="ListAndCardMap">
-		select L.num as list_num, L.name as list_name, L.bNum,L.location as
+		select L.num as list_num, L.name as list_name, L.bNum, L.location as
 		list_location ,
 		C.num as card_num, C.name as card_name,
 		C.content,C.attach,C.memId,C.n_date,C.lNum,C.location as card_location
@@ -51,11 +51,16 @@
 	</select>
 	
 	<insert id="addCard" parameterClass="card">
-	<selectKey keyProperty="location" resultClass="int" >
+		<selectKey keyProperty="location" resultClass="int" >
 	        select NVL(max(location)+1,1) from card where lNum=#lNum#
 	    </selectKey>
 		insert into card values(card_num_seq.nextval,#name#,null,null,#memId#,sysdate,#lNum#,#location#)
 	</insert>
+	
+	<delete id="deleteCardBybNum" parameterClass="int">
+	    <!-- card.lNum=list.num이 같으면서 전달받은 bNum의 값이 list.bNum값과 같은 card의 행 모두 삭제  -->
+	    delete from card where exists (select 1 from list where card.lNum = list.num and list.bNum=#bNum#)
+	</delete>
 
 
 </sqlMap>

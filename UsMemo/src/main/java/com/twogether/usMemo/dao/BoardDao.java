@@ -60,7 +60,25 @@ public class BoardDao {
 		list=(List<ListDTO>) sqlMapClientTemplate.queryForList("List.getListAndCardBybNum",bNum);
 		return list;
 	}*/
-
+	
+	/*board 삭제시 딸려있는 정보 찾아서 모두 삭제하는 부분*/
+	public void deleteBoardBybNum(int bNum)	{
+		sqlMapClientTemplate.delete("Board.deleteBoardBybNum", bNum);
+	}
+	
+	public void deleteMemberGradeBybNum(int bNum) {
+		sqlMapClientTemplate.delete("Board.deleteMemberGradeBybNum", bNum);
+	}
+	
+	public void deleteListBybNum(int bNum) {
+		sqlMapClientTemplate.delete("List.deleteListBybNum", bNum);
+	}
+	 
+	public void deleteCardBybNum(int bNum) {
+		sqlMapClientTemplate.delete("Card.deleteCardBybNum", bNum);
+	}	
+	
+	//board와 memberGarde 데이터 추가 관련 부분
 	public void addBoard(String name, MemberGrade memberGrade) {
 		sqlMapClientTemplate.insert("Board.addBoard", name);
 		sqlMapClientTemplate.insert("Board.addMemberGradeBybNum", memberGrade);

@@ -74,15 +74,8 @@
 									<!-- submit 누르면 form에 적힌 action 주소로 넘어감. -->
 									<button type="submit" class="btn btn-primary">Submit</button>
 								</div>
-								
-								<%-- <c:forEach var="list" items="${Board}" varStatus="i">
-									<!-- Board.java의 변수 bNum,name? var="변수이름",items="반복데이터가 있는 아이템(리스트or배열)", varStatus="반복 상태값 지닌 변수" value="출력될 값" varStatus인덱스 종류 i.index=0부터 시작, i.count=1부터 시작 -->
-									<input type="hidden" name=bNum${i.index} value="${list.bNum}" />
-									<input type="hidden" name=name${i.index} value="${list.name}" />
-									<input type="button" value="생성" onclick="goAddBoardPage(bNum${i.index+1},name${i.index+1})" />
-									</br>
-								</c:forEach>  --%>
 							</form>
+							
 						</div>
 					</div>
 
@@ -105,9 +98,9 @@
 			$.cookie("state_token", state);
 		}
 		var naver = NaverAuthorize({
-			client_id : "ZnxAOuCVv8j9OLASYEHE",
-			redirect_uri : "http://192.168.0.2:8080/usMemo/login",
-			client_secret : "tJrkiSgMRo"
+			client_id : "h1ZMSWqDjJSY20p865Ys",
+			redirect_uri : "http://192.168.0.13:8080/usMemo/login",
+			client_secret : "fCKQuU8hmN"
 		});
 
 		function loginNaver() {
@@ -115,10 +108,6 @@
 			saveState(state);
 			naver.login(state);
 		}
-/* 		function goAddBoardPage(bNum,name){
-			var url ='/usMemo/board/addBoard?bNum='+ bNum.value+'&name='+name.value;
-			window.open(url, "_self",  '');
-		} */
 	</script>
 	</c:if>
 </body>

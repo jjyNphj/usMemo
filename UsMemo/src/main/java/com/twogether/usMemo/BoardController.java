@@ -60,7 +60,6 @@ public class BoardController {
 		//하나의 보드 화면 
 		/*
 		 * bNum으로 해당 보드의 리스트, 카드정보 가지고와야함. 
-		 * 
 		 */
 		HashMap<String, List> map=boardService.getListAndCard(board);
 		ModelAndView mv= new ModelAndView();
@@ -71,19 +70,26 @@ public class BoardController {
 		return mv;
 	}
 	
-//	@RequestMapping("/createBoard")
-//	public ModelAndView boardCreate(@RequestParam String name) {
-//		System.out.println("보드 이름 :" + name);
-//		
-//		ModelAndView mv= new ModelAndView();
-//		mv.setViewName("index");
-//		
-//		return mv;
-//	}
+	@RequestMapping("/deleteBoard")
+	public ModelAndView boardDelete(@RequestParam int bNum) throws SQLException {
+		logger.info("bNum: {}",bNum);
+		/*
+		 * 사용자가 선택한 보드(bNum)에 해당하는 card,list,memberGrade,board 행 모두 삭제
+		 * */
+
+		ModelAndView mv= new ModelAndView();
+		/*myBoard.jsp에서 선택된 bNum 전달*/
+		boardService.getBoardDelete(bNum);
+		//myBoard.jsp 부름
+		mv.setViewName("myBoard");
+		//mv.addObject("Board",boardService.getBoardDelete(bNum));
+		return mv;		
+	}
 	
 	@RequestMapping("/createBoard")
 	public ModelAndView boardCreate(@RequestParam String name, @RequestParam String memId) throws SQLException{
 		logger.info("memId: {}",memId);
+		
 		ModelAndView mv = new ModelAndView();
 		
 		boardService.boardCreate(name, memId);
@@ -92,6 +98,5 @@ public class BoardController {
 		//mv.addObject("Board",boardService.boardCreate(name));
 		return mv;	
 	}
-
 
 }

@@ -113,9 +113,24 @@ public class BoardService {
 		
 		return list;
 	}*/
+	public void getBoardDelete(int bNum) throws SQLException {
+		//삭제 순서 중요! 순서 바꾸지 말기!
+		
+		//전달받은 bNum과 list의 bNum값과 같으면서(and) list의 num과 card의 lNum과 같은 card의 행 모두 삭제
+		boardDao.deleteCardBybNum(bNum);
+		//list테이블의 bNum과 board 테이블의 num(전달받은 bNum) 같은 행 모두 삭제
+		boardDao.deleteListBybNum(bNum);
+		/*bNum으로 memberGarde에 저장된 보드 찾아서 삭제(여러명과 공유할 경우 여러개)*/
+		boardDao.deleteMemberGradeBybNum(bNum);
+		/*전달 받은 bNum으로 board에서 해당 행 삭제*/
+		boardDao.deleteBoardBybNum(bNum);
+	}
 	
 	public void boardCreate(String name, String memId) throws SQLException {
-		/*보드 생성*/
+		/*
+		 * board 생성과  추가한 bNum과 회원 id 넣은 memberGrade 생성
+		 * */
+		//memberGrade 객체에 회원 id만 넣어놓기(나머진 null)
 		MemberGrade memberGrade = new MemberGrade();
 		memberGrade.setmemId(memId);
 		

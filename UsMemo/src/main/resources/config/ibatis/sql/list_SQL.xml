@@ -18,6 +18,10 @@
 		select * from List where bNum=#bNum# Order by location asc 
 	</select>
 	
+	<delete id="deleteListBybNum"  parameterClass="int" >
+	    <!-- list.bNum=board.num이 같으면서 전달받은 bNum의 값이 board.num값과 같은 list의 행 모두 삭제  -->
+	    delete from list where exists (select 1 from board where list.bNum = board.num and board.num=#bNum#)
+	</delete>
 	
 
 
