@@ -109,8 +109,9 @@
 		$(".list_all").sortable();
 		$(".list_all").disableSelection();
 
-		$(".card_unit").sortable();
-		$(".card_unit").disableSelection();
+		$(".card_unit").sortable({
+		      connectWith: ".card_unit"
+	    }).disableSelection();
 
 	});
 </script>
