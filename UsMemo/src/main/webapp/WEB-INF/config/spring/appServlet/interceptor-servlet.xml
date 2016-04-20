@@ -33,8 +33,22 @@ spring-servlet.xml이 있는 폴더에 *-servlet.xml의 이름 형식 (예를 �
     <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
      
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
-    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
-     
+    
+   <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
+<!-- json설정  
+      	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jsonConverter" />
+			</list>
+		</property>
+	</bean>
+json설정 끝 -->
+	
     <bean
         class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
         p:viewClass="org.springframework.web.servlet.view.JstlView"

@@ -98,6 +98,44 @@
 	        })
 			
 	 }
+	 function listChangeLocation(arr){
+		 /*html의 구조상 빈값 두개가 고정으로 계속 들어감, 임시방편으로 배열에서 그 값은 제외*/
+		 var result=new Object();
+
+		 arr= jQuery.grep(arr, function(value) {
+			  return value != "";
+			});
+		 
+			 var first=true;
+		 $.each(arr, function(index, location) { 
+			 /*배열의 반복문*/
+			 if (index+1 != location) {
+				 if(first){
+					 result.first=location;
+				 first=false;}
+				 else{result.second=location;}
+			console.log(location);	 
+			 }
+			});
+		 var data=JSON.stringify(result);
+		 var url='/usMemo/list/update';
+		 console.log(data);
+		  $.ajax({
+	            url: url,
+	            type :'post',
+	            data:data,
+	            contentType: 'application/json',
+	            success:function(){
+	            	alert("success!");
+	            	window.location.reload();
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        })
+	 }
+
 	 
 </script>
 
@@ -106,11 +144,23 @@
 		/*
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
-		$(".list_all").sortable();
+		$(".list_all").sortable({
+			axis:"x",
+			update: function(event, ui) {    
+	               var productOrder = $(this).sortable("toArray");
+	              console.log(productOrder);
+	              listChangeLocation(productOrder);
+	            },
+	            
+		});
 		$(".list_all").disableSelection();
 
 		$(".card_unit").sortable({
-		      connectWith: ".card_unit"
+		      connectWith: ".card_unit",
+		      update: function(event, ui) {    
+	               var productOrder = $(this).sortable("toArray");
+	              console.log(productOrder);
+	            }
 	    }).disableSelection();
 
 	});
@@ -122,13 +172,12 @@
 	<form>
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}">
-				<li class="list_unit">
+				<li class="list_unit" id="${l.location}">
 					<h1>${l.num},${l.name},${l.location}</h1>
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.card_lNum }">
-								<li>[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li>
-								<br>
+								<li id="${l.num}/${c.card_location }">[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li>
 							</c:if>
 						</c:forEach>
 					</ul> <input type="button" class="addCardBtn" value="add card..." />
@@ -137,7 +186,7 @@
 						<textarea rows="5" cols="30" id="cardName${l.num}"></textarea>
 						<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
 						<input type="button" class="cancelCardBtn" value="cancel" />
-					</div> </br>
+					</div>
 				</li>
 			</c:forEach>
 			
@@ -147,7 +196,9 @@
 						<input type="button" value="add" onclick="addList(${bNum})"/>
 						<input type="button" class="cancelListBtn" value="cancel" />
 					</div>
+					
 	</ul>
 	</form>
+	
 </body>
 </html>
