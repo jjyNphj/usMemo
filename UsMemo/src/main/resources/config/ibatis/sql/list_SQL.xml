@@ -29,7 +29,10 @@
 	</selectKey>
 		insert into list values(list_num_seq.nextval,#name#,#bNum#,#location# )
 	</insert>
-
+	
+	<update id="updateLocation" parameterClass="listDTO">
+		update list set location=#location# where num=#num#
+	</update>
 
 </sqlMap>
 	

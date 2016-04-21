@@ -1,5 +1,8 @@
 package com.twogether.usMemo;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.twogether.usMemo.dto.ListChange;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.service.ListService;
 
@@ -28,9 +29,12 @@ public class ListController {
 		return "/board/boardMain";
 	}
 	
-	@RequestMapping("/update")
-	public String update(@RequestBody ListChange data){
-		logger.info("check change location: first - {} second - {}",data.getFirst(),data.getSecond());
+	@RequestMapping("/update/location")
+	public String update(@RequestBody List<Map<String,Object>> listLocation){
+		
+		
+		logger.info("check change location: {}",listLocation.toString());
+		listService.updateLocation(listLocation);
 		return "/board/boardMain";
 	}
 

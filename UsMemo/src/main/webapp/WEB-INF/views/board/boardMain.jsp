@@ -100,30 +100,44 @@
 	 }
 	 function listChangeLocation(arr){
 		 /*html의 구조상 빈값 두개가 고정으로 계속 들어감, 임시방편으로 배열에서 그 값은 제외*/
-		 var result=new Object();
+		 var flag=true;
+		 var resultArr=new Array();
 
 		 arr= jQuery.grep(arr, function(value) {
 			  return value != "";
 			});
 		 
-			 var first=true;
-		 $.each(arr, function(index, location) { 
+		 
+		 $.each(arr, function(index, listObj) { 
 			 /*배열의 반복문*/
-			 if (index+1 != location) {
-				 if(first){
-					 result.first=location;
-				 first=false;}
-				 else{result.second=location;}
-			console.log(location);	 
+		 
+			 var listInfoRaw = listObj.split('_');
+			 
+			 if (index+1 != listInfoRaw[0]) {//listInfoRaw[0]은 location, listInfoRaw[1]은 listNum의미.
+				 
+				var listInfo = new Object();				 
+				listInfo.num=listInfoRaw[1];
+			 	listInfo.location=index+1;
+				console.log("num="+listInfoRaw[1]+" location="+listInfoRaw[0]);
+				
+		 		listInfo.bNum=$("#bNum").val();
+				resultArr.push(listInfo);
 			 }
 			});
-		 var data=JSON.stringify(result);
-		 var url='/usMemo/list/update';
-		 console.log(data);
-		  $.ajax({
+		 
+/* 		 var temp=resultArr[0].location;
+		 resultArr[0].location=resultArr[1].location;
+		 resultArr[1].location=temp;
+		 */
+		 var listLocation=JSON.stringify(resultArr);
+		 var url='/usMemo/list/update/location';
+		 
+		 console.log(listLocation);
+		 
+		 $.ajax({
 	            url: url,
 	            type :'post',
-	            data:data,
+	            data:listLocation,
 	            contentType: 'application/json',
 	            success:function(){
 	            	alert("success!");
@@ -170,9 +184,10 @@
 <body>
 
 	<form>
+	<input type="hidden" id="bNum" value="${bNum }"/>
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}">
-				<li class="list_unit" id="${l.location}">
+				<li class="list_unit" id="${l.location}_${l.num}">
 					<h1>${l.num},${l.name},${l.location}</h1>
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
