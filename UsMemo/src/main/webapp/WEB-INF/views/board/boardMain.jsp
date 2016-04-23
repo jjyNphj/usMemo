@@ -100,13 +100,14 @@
 	 }
 	 function listChangeLocation(arr){
 		 /*html의 구조상 빈값 두개가 고정으로 계속 들어감, 임시방편으로 배열에서 그 값은 제외*/
-		 var flag=true;
 		 var resultArr=new Array();
 
 		 arr= jQuery.grep(arr, function(value) {
 			  return value != "";
 			});
+		 //배열상에 공백을 없애기 
 		 
+		 console.log(arr);
 		 
 		 $.each(arr, function(index, listObj) { 
 			 /*배열의 반복문*/
@@ -120,7 +121,7 @@
 			 	listInfo.location=index+1;
 				console.log("num="+listInfoRaw[1]+" location="+listInfoRaw[0]);
 				
-		 		listInfo.bNum=$("#bNum").val();
+		 		listInfo.bNum=$("#bNum").val();//그냥적어둠.나중에 언제쓸지 몰라서
 				resultArr.push(listInfo);
 			 }
 			});
@@ -129,6 +130,7 @@
 		 resultArr[0].location=resultArr[1].location;
 		 resultArr[1].location=temp;
 		 */
+		 //string을 json타입으로 변환 
 		 var listLocation=JSON.stringify(resultArr);
 		 var url='/usMemo/list/update/location';
 		 
@@ -187,8 +189,8 @@
 	<input type="hidden" id="bNum" value="${bNum }"/>
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}">
-				<li class="list_unit" id="${l.location}_${l.num}">
-					<h1>${l.num},${l.name},${l.location}</h1>
+				<li class="list_unit" id="${l.llink}_${l.num}">
+					<h1>${l.num},${l.name}<br>${l.llink}/${l.rlink }</h1>
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.card_lNum }">

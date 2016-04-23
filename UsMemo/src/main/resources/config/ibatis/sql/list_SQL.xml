@@ -7,15 +7,23 @@
 <sqlMap namespace="List">
 	<typeAlias alias="listDTO" type="com.twogether.usMemo.dto.ListDTO" />
 	
+	<parameterMap id="listParamMap" class="listDTO">
+		<parameter property="name" jdbcType="varchar" javaType="java.lang.String" mode="IN"/>
+  		<parameter property="bNum" jdbcType="NUMBER" javaType="java.lang.Integer" mode="IN"/>
+ 	</parameterMap> 
+ 	
+
 	<resultMap id="ListMap" class="listDTO">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
-       <result property="location" column="location"/>
-       <result property="name" column="name"/>
+   <!--     <result property="location" column="location"/>
+    -->    <result property="name" column="name"/>
+       <result property="llink" column="llink"/>
+       <result property="rlink" column="rlink"/>
     </resultMap>
 
 	<select id="getListByNum" parameterClass="int" resultMap="ListMap">
-		select * from List where bNum=#bNum# Order by location asc 
+		select * from List where bNum=#bNum# order by llink
 	</select>
 	
 	<delete id="deleteListBybNum"  parameterClass="int" >
@@ -23,16 +31,20 @@
 	    delete from list where exists (select 1 from board where list.bNum = board.num and board.num=#bNum#)
 	</delete>
 	
-	<insert id="addList" parameterClass="listDTO">
-	<selectKey  keyProperty="location" resultClass="int" >
-		select NVL(max(location)+1,1) from list where bNum=#bNum#
+<!-- 	<insert id="addList" parameterClass="listDTO">
+	<selectKey  keyProperty="llink" resultClass="int" >
+		select num from list where bNum=#bNum# and rlink=-1
 	</selectKey>
-		insert into list values(list_num_seq.nextval,#name#,#bNum#,#location# )
+		insert into list values(list_num_seq.nextval,#name#,#bNum#,#location#,#llink#,-1 )
 	</insert>
 	
 	<update id="updateLocation" parameterClass="listDTO">
 		update list set location=#location# where num=#num#
-	</update>
+	</update> -->
+	
+	<procedure id="addListProc" parameterMap="listParamMap">
+	{ call addListProcedure(?,?) }
+	</procedure>
 
 </sqlMap>
 	

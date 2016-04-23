@@ -17,7 +17,8 @@ create table list(
 	num number primary key,
 	name varchar(100),
 	bNum number,
-	location number
+	llink number,
+	rlink number
 );
 
 create table card(

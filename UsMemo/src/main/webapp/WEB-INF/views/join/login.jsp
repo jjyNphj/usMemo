@@ -14,14 +14,15 @@
 <body>
 	<script type="text/javascript">
 	var naver = NaverAuthorize({
-		client_id : "h1ZMSWqDjJSY20p865Ys",
-		redirect_uri : "http://192.168.0.13:8080/usMemo/login",
-		client_secret : "fCKQuU8hmN"
+		client_id : "ZnxAOuCVv8j9OLASYEHE",
+		redirect_uri : "http://192.168.0.2:8080/usMemo/login",
+		client_secret : "tJrkiSgMRo"
 	});
 	function getNaverUserInfo() {
 		naver.api(/* URI, */tokenInfo.access_token, function(data) {
 			var res = data._response.responseJSON;
 			console.log("success to get user info", res);
+			console.log(res.response);
 			/*
 			토큰 모두 지우기(사실상 네이버에서의 로그아웃)
 			컨트롤러로 사용자 정보 넘기기

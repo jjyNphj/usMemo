@@ -1,6 +1,7 @@
 package com.twogether.usMemo.dao;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
@@ -16,8 +17,10 @@ public class ListDao {
 	
 	
 	public void addList(ListDTO listDTO){
-		sqlMapClientTemplate.insert("List.addList",listDTO);
-		
+//		Map<String, Object> map=new HashMap<String, Object>();
+//		map.put("name", listDTO.getName());
+//		map.put("bNum", listDTO.getbNum());
+		sqlMapClientTemplate.update("List.addListProc",listDTO);
 	}
 
 

@@ -28,7 +28,7 @@ public class ListService {
 		for(Map<String,Object> l: listLocation){
 		ListDTO listDto = new ListDTO();
 		listDto.setNum(Integer.parseInt((String)l.get("num")));
-		listDto.setLocation((Integer) l.get("location"));
+		//listDto.setLocation((Integer) l.get("location"));
 		listDao.updateLocation(listDto);//¹Ù²Ù±â
 		}
 		

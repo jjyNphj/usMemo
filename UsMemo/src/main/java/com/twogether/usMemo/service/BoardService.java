@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,37 +63,45 @@ public class BoardService {
 		 * 리스트->lNum으로 card 정보조회 ->Map으로 넘기기 
 		 * 
 		 */
-//		list=boardDao.getListAndCardBybNum(board.getbNum());
-		
-		
 		
 		HashMap<String, List> mapList = new HashMap<String, List>();
 		
-		List<ListDTO> listList = boardDao.getListBybNum(board.getbNum());
-		mapList.put("listList", listList);
-		/*
+		List<ListDTO> listArray = boardDao.getListBybNum(board.getbNum());
+		//sorting하기
+		listArray=sortingLinkedList(listArray);
+		mapList.put("listList", listArray);
 		
-		List<List> cardList=new LinkedList<List>();
-		
-		for(ListDTO i:listList){
-			List<Card> resultCards=new LinkedList<Card>();
-			resultCards=boardDao.getCardBybNum(i.getNum());
-			//lNum에 따라 여러장의 card가 linkedList에 저장됨.
-			cardList.add(resultCards);
-			//list의 반환순서와 동일하게 넣기 
-			//즉, list의 위치가 변하면 cardList의 index도 변해야함.
-		}
-		
-	*/	
-		
-		
-		List<ListAndCard> cardList=boardDao.getCardBybNum(board.getbNum());
-		mapList.put("cardList", cardList);
-		
+//		List<ListAndCard> cardList=boardDao.getCardBybNum(board.getbNum());
+//		mapList.put("cardList", cardList);
+//		
 		return mapList;
 		
 	}
-	
+	public List<ListDTO> sortingLinkedList(List<ListDTO> list){
+		
+		List<ListDTO> result=new ArrayList<ListDTO>(list.size());
+		
+		ListIterator<ListDTO> it= list.listIterator();
+		while(it.hasNext()){
+			ListDTO listDto = it.next();
+			if(listDto.getLlink()==-1){
+				result.add(listDto);
+				it.remove();
+			}
+		}
+		while(list.size()!=0){
+			do {
+				it= list.listIterator();
+				ListDTO listDto = it.next();
+				if(result.get(result.size()-1).getNum()==listDto.getLlink()){
+				result.add(listDto);
+				it.remove();
+				}
+				
+			} while (it.hasNext());
+			}
+		return result;
+	}
 /*	public List<List> getList(Board board){
 		
 		 * 선택된 보드의 bNum으로 해당 보드의 리스트정보를 가지고 오기
