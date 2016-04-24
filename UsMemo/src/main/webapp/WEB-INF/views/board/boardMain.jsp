@@ -28,6 +28,7 @@
 	 */
 	 
 	// html dom 이 다 로딩된 후 실행된다.
+	//자바스크립트의 onload와 비슷한 기능. html이 뿌려지고 나서 ready안의 이벤트들이 동작
 	    $(document).ready(function(){
 	    	
 	        // .addCardBtn 클래스 중 아무거나 클릭했을 때 
@@ -189,6 +190,7 @@
 			<c:forEach var="l" items="${listList}">
 				<li class="list_unit" id="${l.location}_${l.num}">
 					<h1>${l.num},${l.name},${l.location}</h1>
+					
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.card_lNum }">

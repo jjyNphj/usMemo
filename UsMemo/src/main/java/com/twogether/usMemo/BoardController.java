@@ -78,12 +78,14 @@ public class BoardController {
 		 * */
 
 		ModelAndView mv= new ModelAndView();
-		/*myBoard.jsp에서 선택된 bNum 전달*/
-		boardService.getBoardDelete(bNum);
+		mv.addObject("sucess","y");
 		//myBoard.jsp 부름
-		mv.setViewName("myBoard");
-		//mv.addObject("Board",boardService.getBoardDelete(bNum));
-		return mv;		
+		//mv.setViewName("board/myBoard");
+		mv.setViewName("myBoard");	
+		//DB 지우기 위해 보내는 부분, myBoard.jsp에서 선택된 bNum 전달
+		boardService.getBoardDelete(bNum);
+		//mv.addObject("Board",boardService.myBoardList(memId));
+		return mv;
 	}
 	
 	@RequestMapping("/createBoard")
@@ -95,7 +97,7 @@ public class BoardController {
 		boardService.boardCreate(name, memId);
 
 		mv.setViewName("index");
-		//mv.addObject("Board",boardService.boardCreate(name));
+
 		return mv;	
 	}
 

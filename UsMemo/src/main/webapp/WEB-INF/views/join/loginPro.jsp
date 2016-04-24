@@ -27,7 +27,7 @@ ${sessionScope.id }
 
 var naver = NaverAuthorize({
 	client_id : "h1ZMSWqDjJSY20p865Ys",
-	redirect_uri : "http://192.168.0.13:8080/usMemo/loginPro",
+	redirect_uri : "http://192.168.0.15:8080/usMemo/loginPro",
 	client_secret : "fCKQuU8hmN"
 });
 
