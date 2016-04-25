@@ -24,37 +24,48 @@
 	</repositories>
 
 	<dependencies>
-	<!-- json설정
-  <dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.6.4</version>
-</dependency>
- 
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.6.4</version>
-</dependency> -->
-	<!-- 인터셉터 설정시 만든 jackson임. spring-servlet.xml에 있음.  -->
-	<dependency>
-		<groupId>org.codehaus.jackson</groupId>
-		<artifactId>jackson-mapper-asl</artifactId>
-		<version>1.8.5</version>
-	</dependency>
-	<dependency><!-- spring mvc -->
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
-        <!-- jackson
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.4.2</version>
-        </dependency>-->
+		<!-- JSON Object를 쓰기 위한 json simple임. -->
 
-	<!-- org.springframework.test-3.0.7.release.jar -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- json설정 
+		<dependency> 
+			<groupId>net.sf.json-lib</groupId> 
+			<artifactId>json-lib</artifactId> 
+			<version>2.4</version> 
+			<classifier>jdk15</classifier> 
+		</dependency> 
+		
+		<dependency> 
+			<groupId>com.fasterxml.jackson.core</groupId> 
+			<artifactId>jackson-core</artifactId> 
+			<version>2.6.4</version> 
+		</dependency> 
+		<dependency> 
+			<groupId>com.fasterxml.jackson.core</groupId> 
+			<artifactId>jackson-databind</artifactId> 
+			<version>2.6.4</version> 
+		</dependency> 
+			-->
+		<!-- 인터셉터 설정시 만든 jackson임. spring-servlet.xml에 있음. -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+		<dependency><!-- spring mvc -->
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- jackson <dependency> <groupId>org.codehaus.jackson</groupId> <artifactId>jackson-mapper-asl</artifactId> 
+			<version>1.4.2</version> </dependency> -->
+
+		<!-- org.springframework.test-3.0.7.release.jar -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>

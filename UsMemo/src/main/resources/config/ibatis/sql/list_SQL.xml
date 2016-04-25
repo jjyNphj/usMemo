@@ -45,6 +45,18 @@
 	<procedure id="addListProc" parameterMap="listParamMap">
 	{ call addListProcedure(?,?) }
 	</procedure>
+	
+	<update id="update_rlink" parameterClass="listDTO">
+		update list set rlink=#rlink# where num=#num#
+	</update>
+	<update id="update_llink" parameterClass="listDTO">
+		update list set llink=#llink# where num=#num#
+	</update>
+	<update id="update_allLink" parameterClass="listDTO">
+		update list set llink=#llink#, rlink=#rlink# where num=#num#
+	</update>
+	
+	
 
 </sqlMap>
 	

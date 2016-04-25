@@ -3,6 +3,7 @@ package com.twogether.usMemo.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -79,27 +80,42 @@ public class BoardService {
 	}
 	public List<ListDTO> sortingLinkedList(List<ListDTO> list){
 		
-		List<ListDTO> result=new ArrayList<ListDTO>(list.size());
+		List<ListDTO> result=new ArrayList<ListDTO>();
 		
 		ListIterator<ListDTO> it= list.listIterator();
+		
 		while(it.hasNext()){
 			ListDTO listDto = it.next();
 			if(listDto.getLlink()==-1){
 				result.add(listDto);
 				it.remove();
+				break;
 			}
 		}
+		
 		while(list.size()!=0){
-			do {
-				it= list.listIterator();
-				ListDTO listDto = it.next();
-				if(result.get(result.size()-1).getNum()==listDto.getLlink()){
-				result.add(listDto);
-				it.remove();
-				}
-				
-			} while (it.hasNext());
+		for(Iterator<ListDTO> itt = list.iterator() ; itt.hasNext() ;){
+			
+			ListDTO dto=itt.next();
+			if(result.get(result.size()-1).getRlink()==dto.getNum()){
+				result.add(dto);
+				itt.remove();
 			}
+		}
+		}
+/*		
+		ListIterator<ListDTO> it2= list.listIterator();
+		while(list.size()!=0){
+			while(it2.hasNext()){
+				it2= list.listIterator();
+				ListDTO listDto = it2.next();
+				
+				if(result.get(result.size()-1).getRlink()==listDto.getNum()){
+				result.add(listDto);
+				it2.remove();
+				}
+			}
+		}*/
 		return result;
 	}
 /*	public List<List> getList(Board board){

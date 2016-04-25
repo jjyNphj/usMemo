@@ -30,5 +30,23 @@ public class ListDao {
 		
 	}
 
+	public void update_rlink(ListDTO listDTO) {
+		
+		sqlMapClientTemplate.update("List.update_rlink",listDTO);
+	}
+
+
+	public void update_llink(ListDTO listDTO) {
+		
+		sqlMapClientTemplate.update("List.update_llink",listDTO);
+		
+	}
+	
+	public void update_allLink(ListDTO listDTO) {
+		
+		sqlMapClientTemplate.update("List.update_allLink",listDTO);
+		
+	}
+
 
 }

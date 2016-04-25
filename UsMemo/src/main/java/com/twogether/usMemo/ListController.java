@@ -1,8 +1,7 @@
 package com.twogether.usMemo;
 
-import java.util.List;
-import java.util.Map;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class ListController {
 	}
 	
 	@RequestMapping("/update/location")
-	public String update(@RequestBody List<Map<String,Object>> listLocation){
+	public String update(@RequestBody String listLocation) throws ParseException{
 		
 		
 		logger.info("check change location: {}",listLocation.toString());

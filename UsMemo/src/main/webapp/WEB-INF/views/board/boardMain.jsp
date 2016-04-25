@@ -17,6 +17,12 @@
 </style>
 
 <script type="text/javascript">
+
+var updateList =new Object();
+/* = new Array();
+var before=new Object();
+var after=new Object();
+var current=new Object(); */
 	/* 	function goPage(bNum, name) {
 	 var answer = confirm("선택하신 도서를 대출목록에서 삭제하시겠습니까?");
 	 if (answer) {
@@ -98,8 +104,8 @@
 	        })
 			
 	 }
-	 function listChangeLocation(arr){
-		 /*html의 구조상 빈값 두개가 고정으로 계속 들어감, 임시방편으로 배열에서 그 값은 제외*/
+	/*  function listChangeLocation(arr){
+		 html의 구조상 빈값 두개가 고정으로 계속 들어감, 임시방편으로 배열에서 그 값은 제외
 		 var resultArr=new Array();
 
 		 arr= jQuery.grep(arr, function(value) {
@@ -110,11 +116,11 @@
 		 console.log(arr);
 		 
 		 $.each(arr, function(index, listObj) { 
-			 /*배열의 반복문*/
+			 배열의 반복문
 		 
 			 var listInfoRaw = listObj.split('_');
 			 
-			 if (index+1 != listInfoRaw[0]) {//listInfoRaw[0]은 location, listInfoRaw[1]은 listNum의미.
+			 if (index != listInfoRaw[0]) {//listInfoRaw[0]은 location, listInfoRaw[1]은 listNum의미.
 				 
 				var listInfo = new Object();				 
 				listInfo.num=listInfoRaw[1];
@@ -126,15 +132,89 @@
 			 }
 			});
 		 
-/* 		 var temp=resultArr[0].location;
+ 		 var temp=resultArr[0].location;
 		 resultArr[0].location=resultArr[1].location;
 		 resultArr[1].location=temp;
-		 */
-		 //string을 json타입으로 변환 
+		
+		 string을 json타입으로 변환 
 		 var listLocation=JSON.stringify(resultArr);
 		 var url='/usMemo/list/update/location';
 		 
 		 console.log(listLocation);
+ 		 
+		 $.ajax({
+	            url: url,
+	            type :'post',
+	            data:listLocation,
+	            contentType: 'application/json',
+	            success:function(){
+	            	alert("success!");
+	            	window.location.reload();
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        }) 
+	 } */
+	 function updateListStart(arr,index){
+	 arr= jQuery.grep(arr, function(value) {
+		  return value != "";
+		});
+	 //배열상에 공백을 없애기 
+		console.log("item:"+arr);
+		 console.log("start: "+arr[index]);
+		 console.log("start index: "+index);
+		 console.log("start with: "+arr[index-1]+" / "+arr[index+1]);
+
+		/*  var beforePreItem_raw=arr[index-1];
+		 var beforePostItem_raw=arr[index+1];
+		  */
+		if(arr[index-1]!=undefined){
+			updateList.beforePreNum=arr[index-1];
+		}
+		else{
+			updateList.beforePreNum=0;
+		}
+		  
+		if(arr[index+1]!=undefined){
+			updateList.beforePostNum=arr[index+1];
+		  }
+		else {
+			updateList.beforePostNum=0;
+		}
+		 
+		 updateList.currentNum=arr[index];
+		
+	 }
+	 function updateListStop(arr,index){
+		 arr= jQuery.grep(arr, function(value) {
+  			  return value != "";
+  			});
+  		 //배열상에 공백을 없애기 
+         console.log("stop: "+arr[index]);
+         console.log("stop index: "+index);
+         console.log("stop with: "+arr[index-1]+" / "+arr[index+1]);
+         
+         if(arr[index-1]!=undefined){
+        	 updateList.afterPreNum=arr[index-1];
+ 		}
+ 		else{
+ 			 updateList.afterPreNum=0;
+ 		}
+ 		  
+ 		if(arr[index+1]!=undefined){
+ 			updateList.afterPostNum=arr[index+1];
+ 		  }
+ 		else {
+ 			updateList.afterPostNum=0;
+ 		}
+ 		
+	 }
+	 function updateListChange(){
+		 var listLocation=JSON.stringify(updateList);
+		 console.log("결과: "+listLocation);
+		 var url='/usMemo/list/update/location';
 		 
 		 $.ajax({
 	            url: url,
@@ -149,24 +229,50 @@
 		    	   alert("error: "+data+" status: "+status+" er:"+er);
 		    	   console.log("error: "+data+" status: "+status+" er:"+er);
 	         }
-	        })
+	        }) 
 	 }
-
-	 
 </script>
 
 <script>
+
 	$(function() {
 		/*
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
 		$(".list_all").sortable({
 			axis:"x",
+			item:function(event, ui) {    
+	               var productOrder = $(this).sortable("toArray");
+		              console.log("item:"+productOrder);
+		              }
+			,
+			position:function(event, ui) {    
+	            var productOrder = $(this).sortable("toArray");
+	            console.log("position: "+productOrder);
+	            }
+			,
+			originalPosition:function(event, ui) {    
+			    var productOrder = $(this).sortable("toArray");
+			    console.log("originalPosition:"+ui.item.index());
+			    }
+			,
+			  start: function (event, ui) {  
+				  var productOrder = $(this).sortable("toArray");
+					updateListStart(productOrder,ui.item.index());
+				  
+		        },
+		        stop: function (event, ui) {
+		        	 var productOrder = $(this).sortable("toArray");
+		    		
+		        },
 			update: function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
-	              console.log(productOrder);
-	              listChangeLocation(productOrder);
+	              console.log("위치: "+productOrder);updateListStop(productOrder,ui.item.index());
+	            //  listChangeLocation(productOrder);
+	              updateListChange();
 	            },
+	            beforeStop: function( event, ui ) {console.log("item:"+ui.item.index());},
+	            change: function( event, ui ) { console.log("change: "+ui.item.index());}
 	            
 		});
 		$(".list_all").disableSelection();
@@ -188,8 +294,8 @@
 	<form>
 	<input type="hidden" id="bNum" value="${bNum }"/>
 		<ul class="list_all">
-			<c:forEach var="l" items="${listList}">
-				<li class="list_unit" id="${l.llink}_${l.num}">
+			<c:forEach var="l" items="${listList}" varStatus="index">
+				<li class="list_unit" id="${l.num}">
 					<h1>${l.num},${l.name}<br>${l.llink}/${l.rlink }</h1>
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
@@ -207,14 +313,14 @@
 				</li>
 			</c:forEach>
 			
+					
+	</ul>
 			<input type="button" class="addListBtn" value="add list..."/>
 					<div class="hide">
 						<textarea rows="5" cols="30" id="listName"></textarea><br>
 						<input type="button" value="add" onclick="addList(${bNum})"/>
 						<input type="button" class="cancelListBtn" value="cancel" />
 					</div>
-					
-	</ul>
 	</form>
 	
 </body>
