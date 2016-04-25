@@ -11,6 +11,12 @@
 
 <title>Insert title here</title>
 
+<!-- 부트스트랩 CDN -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 function goPage(bNum,name){
     var answer=confirm("선택하신 보드를 보러 가시겠습니까?");
@@ -48,11 +54,57 @@ function deleteBoard(bNum,name){
 	   })
 	}
 }
+function createBoard(memId) {
+	//아래 보드추가 textarea안의 id값 = boardComment -> 사용자가 입력한 보드이름 내용 불러오기
+	var name=$("#boardComment").val();
+	var url='/usMemo/board/createBoard?name='+name+'&memId='+memId.value;
+	$.ajax({
+	       url: url,	      
+	       type:'post',
+	       
+	       success:function(){	       
+	       	alert("보드가 추가 되었습니다.");
+	       	window.location.reload();
+	       } ,
+	      error : function(xhr, status, error) {
+	          alert(error);
+	    }
+	   })
+}
 </script>
 
 </head>
 
 <body>
+
+	<!-- 보드 추가 부분 -->
+		<div class="dropdown">
+			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+				  board create   <span class="caret"></span>
+			</button>
+			
+			<ul class="dropdown-menu">
+			<div class="modal-body">
+				<p>Create Board</p>
+				
+				<form role="form">
+					<div class="form-group">
+						<!-- textarea의 내용 name변수에 저장해서 /createBoard 전달 -->
+						<textarea class="form-control" rows="3" cols="30" id="boardComment" placeholder="보드이름을 입력해주세요."></textarea>
+					</div>
+					
+					<div class="modal-footer">
+						<input type="hidden" name="memId" value=${sessionScope.id } />
+						<!-- submit 누르면 form에 적힌 action 주소로 넘어감. -->
+						<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+						<button type="button" class="btn btn-primary" onclick="createBoard(memId)">Submit</button>
+						<button type="button" class="btn btn-default" data-toggle="dropdown">Close</button>
+					</div>
+				</form>
+			</div>			
+			</ul>
+		</div>
+
 	<form>
 		<!-- 현재 memId에 연결된 Board의 bNum들  뷰에 보여주기-->
 		<c:forEach var="list" items="${Board}" varStatus="i">

@@ -47,7 +47,7 @@
 				</form>
 			</div>
 	
-			<!-- Bootstrap Modal Button-->
+<%-- 			<!-- Bootstrap Modal Button-->
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Board Create</button>
 
 			<!-- Bootstrap Modal Start -->
@@ -80,7 +80,7 @@
 					</div>
 
 				</div>
-			</div><!-- bootstrap Modal End -->
+			</div><!-- bootstrap Modal End --> --%>
 
 		</c:if>	
 
@@ -99,7 +99,7 @@
 		}
 		var naver = NaverAuthorize({
 			client_id : "h1ZMSWqDjJSY20p865Ys",
-			redirect_uri : "http://192.168.0.15:8080/usMemo/login",
+			redirect_uri : "http://192.168.0.26:8080/usMemo/login",
 			client_secret : "fCKQuU8hmN"
 		});
 

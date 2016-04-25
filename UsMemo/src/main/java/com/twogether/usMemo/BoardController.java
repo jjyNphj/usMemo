@@ -94,10 +94,10 @@ public class BoardController {
 		
 		ModelAndView mv = new ModelAndView();
 		
+		mv.addObject("sucess","y");
+		mv.setViewName("myBoard");
 		boardService.boardCreate(name, memId);
-
-		mv.setViewName("index");
-
+		
 		return mv;	
 	}
 
