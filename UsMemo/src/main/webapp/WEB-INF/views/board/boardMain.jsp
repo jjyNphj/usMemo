@@ -104,59 +104,7 @@ var current=new Object(); */
 	        })
 			
 	 }
-	/*  function listChangeLocation(arr){
-		 html의 구조상 빈값 두개가 고정으로 계속 들어감, 임시방편으로 배열에서 그 값은 제외
-		 var resultArr=new Array();
-
-		 arr= jQuery.grep(arr, function(value) {
-			  return value != "";
-			});
-		 //배열상에 공백을 없애기 
-		 
-		 console.log(arr);
-		 
-		 $.each(arr, function(index, listObj) { 
-			 배열의 반복문
-		 
-			 var listInfoRaw = listObj.split('_');
-			 
-			 if (index != listInfoRaw[0]) {//listInfoRaw[0]은 location, listInfoRaw[1]은 listNum의미.
-				 
-				var listInfo = new Object();				 
-				listInfo.num=listInfoRaw[1];
-			 	listInfo.location=index+1;
-				console.log("num="+listInfoRaw[1]+" location="+listInfoRaw[0]);
-				
-		 		listInfo.bNum=$("#bNum").val();//그냥적어둠.나중에 언제쓸지 몰라서
-				resultArr.push(listInfo);
-			 }
-			});
-		 
- 		 var temp=resultArr[0].location;
-		 resultArr[0].location=resultArr[1].location;
-		 resultArr[1].location=temp;
-		
-		 string을 json타입으로 변환 
-		 var listLocation=JSON.stringify(resultArr);
-		 var url='/usMemo/list/update/location';
-		 
-		 console.log(listLocation);
- 		 
-		 $.ajax({
-	            url: url,
-	            type :'post',
-	            data:listLocation,
-	            contentType: 'application/json',
-	            success:function(){
-	            	alert("success!");
-	            	window.location.reload();
-	            } ,
-		       error :function(data,status,er) { 
-		    	   alert("error: "+data+" status: "+status+" er:"+er);
-		    	   console.log("error: "+data+" status: "+status+" er:"+er);
-	         }
-	        }) 
-	 } */
+	
 	 function updateListStart(arr,index){
 	 arr= jQuery.grep(arr, function(value) {
 		  return value != "";
@@ -167,9 +115,7 @@ var current=new Object(); */
 		 console.log("start index: "+index);
 		 console.log("start with: "+arr[index-1]+" / "+arr[index+1]);
 
-		/*  var beforePreItem_raw=arr[index-1];
-		 var beforePostItem_raw=arr[index+1];
-		  */
+
 		if(arr[index-1]!=undefined){
 			updateList.beforePreNum=arr[index-1];
 		}
@@ -267,7 +213,8 @@ var current=new Object(); */
 		        },
 			update: function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
-	              console.log("위치: "+productOrder);updateListStop(productOrder,ui.item.index());
+	              console.log("위치: "+productOrder);
+	              updateListStop(productOrder,ui.item.index());
 	            //  listChangeLocation(productOrder);
 	              updateListChange();
 	            },

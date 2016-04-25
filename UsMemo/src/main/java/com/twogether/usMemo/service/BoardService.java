@@ -103,19 +103,7 @@ public class BoardService {
 			}
 		}
 		}
-/*		
-		ListIterator<ListDTO> it2= list.listIterator();
-		while(list.size()!=0){
-			while(it2.hasNext()){
-				it2= list.listIterator();
-				ListDTO listDto = it2.next();
-				
-				if(result.get(result.size()-1).getRlink()==listDto.getNum()){
-				result.add(listDto);
-				it2.remove();
-				}
-			}
-		}*/
+
 		return result;
 	}
 /*	public List<List> getList(Board board){

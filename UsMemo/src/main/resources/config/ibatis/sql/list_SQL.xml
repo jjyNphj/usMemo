@@ -30,18 +30,7 @@
 	    <!-- list.bNum=board.num이 같으면서 전달받은 bNum의 값이 board.num값과 같은 list의 행 모두 삭제  -->
 	    delete from list where exists (select 1 from board where list.bNum = board.num and board.num=#bNum#)
 	</delete>
-	
-<!-- 	<insert id="addList" parameterClass="listDTO">
-	<selectKey  keyProperty="llink" resultClass="int" >
-		select num from list where bNum=#bNum# and rlink=-1
-	</selectKey>
-		insert into list values(list_num_seq.nextval,#name#,#bNum#,#location#,#llink#,-1 )
-	</insert>
-	
-	<update id="updateLocation" parameterClass="listDTO">
-		update list set location=#location# where num=#num#
-	</update> -->
-	
+
 	<procedure id="addListProc" parameterMap="listParamMap">
 	{ call addListProcedure(?,?) }
 	</procedure>

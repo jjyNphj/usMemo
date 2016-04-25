@@ -28,36 +28,6 @@ public class ListService {
 		listDao.addList(listDTO);
 	}
 
-	public void updateLocation(List<Map<String, Object>> listLocation) {
-		/*
-		 * 1) 일단 파싱
-		 * 2) 두 list row의 location 바꾸기 
-		 */
-		
-		for(Map<String,Object> l: listLocation){
-		ListDTO listDto = new ListDTO();
-		listDto.setNum(Integer.parseInt((String)l.get("num")));
-		//listDto.setLocation((Integer) l.get("location"));
-		listDao.updateLocation(listDto);//바꾸기
-		}
-	}
-	
-	public void updateLocationNew(List<ListDTO> list){
-		/*
-		 * 리스트를 가지고 올땐 바꿀 두개의 노드의 앞의 노드까지 가지고 오기.
-		 * 인접한 두 개 노드의 링크를 서로를 향하게 위치를 바꾸자.
-		 * 
-		 * 첫번째 노드의 num을 두번째노드의 llink로 
-		 * 두번째 노드의 num을 세번째 노드의 llink로  
-		 * 
-		 */
-		list.get(1).setLlink(list.get(0).getNum());
-		list.get(2).setLlink(list.get(1).getNum());
-		
-		
-		
-	}
-
 	public int parsingObjectToInt(Object object){
 		
 		return Integer.parseInt(object.toString());

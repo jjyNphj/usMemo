@@ -23,13 +23,6 @@ public class ListDao {
 		sqlMapClientTemplate.update("List.addListProc",listDTO);
 	}
 
-
-	public void updateLocation(ListDTO listLocation) {
-		
-		sqlMapClientTemplate.update("List.updateLocation",listLocation);
-		
-	}
-
 	public void update_rlink(ListDTO listDTO) {
 		
 		sqlMapClientTemplate.update("List.update_rlink",listDTO);
