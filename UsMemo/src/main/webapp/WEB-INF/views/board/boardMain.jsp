@@ -234,7 +234,7 @@ var current=new Object(); */
 
 	});
 </script>
-</head>
+</head> 
 
 <body>
 
@@ -246,8 +246,8 @@ var current=new Object(); */
 					<h1>${l.num},${l.name}<br>${l.llink}/${l.rlink }</h1>
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
-							<c:if test="${l.num == c.card_lNum }">
-								<li id="${l.num}/${c.card_location }">[${c.card_num }] ${c.card_name }, [${c.card_lNum }/${c.card_location }]</li>
+							<c:if test="${l.num == c.lNum }">
+								<li id="${c.card_num }">[${c.card_num }] ${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]</li>
 							</c:if>
 						</c:forEach>
 					</ul> <input type="button" class="addCardBtn" value="add card..." />

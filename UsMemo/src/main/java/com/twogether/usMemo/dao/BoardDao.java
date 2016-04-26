@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
@@ -44,9 +45,16 @@ public class BoardDao {
 		return list;
 	}
 	
+//	public List<Card> getCardBylNum(List<Card> cardArray) {
+//		for(Card card:cardArray){
+//		List<Card> list = new ArrayList<Card>();
+//		list=(List<Card>) sqlMapClientTemplate.queryForList("Card.getCardBylNum",card.getlNum());
+//				}
+//		return list;
+//	}
 	public List<ListAndCard> getCardBybNum(int bNum){
 		//join 이용하기!
-		List<ListAndCard> list= new LinkedList<ListAndCard>();
+		List<ListAndCard> list= new ArrayList<ListAndCard>();
 		
 		list=(List<ListAndCard>) sqlMapClientTemplate.queryForList("Card.getCardBybNum",bNum);
 		return list;
@@ -84,6 +92,7 @@ public class BoardDao {
 		sqlMapClientTemplate.insert("Board.addMemberGradeBybNum", memberGrade);
 		
 	}
+
 
 	
 //	public int getBoardNumById(String id){

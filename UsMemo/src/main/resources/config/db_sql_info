@@ -32,13 +32,12 @@ insert into Card values(1,'20160314.hwp','<회의내용>
 				   기술 : spring MVC, 디자인패턴, JUnit, 
 				         오라클 데이터베이스, 라이브러리(ex bootstrap, ajax), API 오픈소스',null,118120900,sysdate,3,1);
 				         
- insert into Card values(2,'20160318입니다.','오늘의 내용은 다음이다.',null,3,sysdate,3,2);
- insert into Card values(3,'2016년인데,언제지?','오늘은 화요일!',null,118120900,sysdate,3,3);
+insert into Card values(1,'20160318입니다.','오늘의 내용은 다음이다.',null,3,sysdate,181,-1,2);
+insert into Card values(2,'2016년인데,언제지?','오늘은 화요일!',null,118120900,sysdate,181,1,3);
  
- insert into Card values(4,'팀명이름정하기','뭐가좋을지 생각해보자',null,118120900,sysdate,4,1);
- insert into Card values(5,'할리스에서 만나기',null,null,2,sysdate,5,1);
- insert into Card values(6,'독후감보드임 그것도 리스트 첫번째의 카드임',null,null,118120900,sysdate,6,1);
-         
+insert into Card values(3,'팀명이름정하기','뭐가좋을지 생각해보자',null,118120900,sysdate,181,2,4);
+insert into Card values(4,'할리스에서 만나기',null,null,2,sysdate,181,3,5);
+insert into Card values(5,'독후감보드임 그것도 리스트 첫번째의 카드임',null,null,118120900,sysdate,181,4,-1);
          
          
  ===================================================4.15 update===================================================

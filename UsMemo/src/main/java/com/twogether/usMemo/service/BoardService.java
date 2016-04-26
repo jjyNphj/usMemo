@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
@@ -69,16 +70,51 @@ public class BoardService {
 		
 		List<ListDTO> listArray = boardDao.getListBybNum(board.getbNum());
 		//sorting«œ±‚
-		listArray=sortingLinkedList(listArray);
+		listArray=sortingList(listArray);
 		mapList.put("listList", listArray);
 		
-//		List<ListAndCard> cardList=boardDao.getCardBybNum(board.getbNum());
-//		mapList.put("cardList", cardList);
+//		List<Card> cardArray = new ArrayList<Card>();
+//		for(ListDTO list :listArray){
+//			Card cardOfListNum= new Card();
+//			cardOfListNum.setlNum(list.getNum());
+//			cardArray.add(cardOfListNum);
+//		}
+//		
+		List<ListAndCard> cardList=boardDao.getCardBybNum(board.getbNum());
+		//cardList=sortingCard(cardList);
+		mapList.put("cardList", cardList);
 //		
 		return mapList;
 		
 	}
-	public List<ListDTO> sortingLinkedList(List<ListDTO> list){
+	public List<ListAndCard> sortingCard(List<ListAndCard> list){
+	List<ListAndCard> result=new ArrayList<ListAndCard>();
+		
+		ListIterator<ListAndCard> it= list.listIterator();
+		
+		while(it.hasNext()){
+			ListAndCard listDto = it.next();
+			if(listDto.getLlink()==-1){
+				result.add(listDto);
+				it.remove();
+				break;
+			}
+		}
+		
+		while(list.size()!=0){
+		for(Iterator<ListAndCard> itt = list.iterator() ; itt.hasNext() ;){
+			
+			ListAndCard dto=itt.next();
+			if(result.get(result.size()-1).getRlink()==dto.getbNum()){
+				result.add(dto);
+				itt.remove();
+			}
+		}
+		}
+
+		return result;
+	}
+	public List<ListDTO> sortingList(List<ListDTO> list){
 		
 		List<ListDTO> result=new ArrayList<ListDTO>();
 		
