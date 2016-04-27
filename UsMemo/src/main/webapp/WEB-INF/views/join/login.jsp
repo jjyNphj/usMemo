@@ -17,6 +17,7 @@
 		client_id : "ZnxAOuCVv8j9OLASYEHE",
 		redirect_uri : "http://192.168.0.2:8080/usMemo/login",
 		client_secret : "tJrkiSgMRo"
+
 	});
 	function getNaverUserInfo() {
 		naver.api(/* URI, */tokenInfo.access_token, function(data) {

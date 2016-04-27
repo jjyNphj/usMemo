@@ -29,7 +29,8 @@ create table card(
 	memId varchar(100),
 	n_date date,
 	lNum number,
-	location number
+	llink number,
+	rlink number
 );
 
 create table reply(

@@ -47,7 +47,7 @@
 				</form>
 			</div>
 	
-			<!-- Bootstrap Modal Button-->
+<%-- 			<!-- Bootstrap Modal Button-->
 			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Board Create</button>
 
 			<!-- Bootstrap Modal Start -->
@@ -80,7 +80,7 @@
 					</div>
 
 				</div>
-			</div><!-- bootstrap Modal End -->
+			</div><!-- bootstrap Modal End --> --%>
 
 		</c:if>	
 
