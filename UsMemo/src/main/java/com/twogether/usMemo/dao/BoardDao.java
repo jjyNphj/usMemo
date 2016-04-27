@@ -41,7 +41,7 @@ public class BoardDao {
 	public List<ListDTO> getListBybNum(int bNum){
 		List<ListDTO> list= new ArrayList<ListDTO>();
 		
-		list=(List<ListDTO>) sqlMapClientTemplate.queryForList("List.getListByNum",bNum);
+		list=(List<ListDTO>) sqlMapClientTemplate.queryForList("List.getListBybNum",bNum);
 		return list;
 	}
 	

@@ -58,6 +58,21 @@
 	<procedure id="addCard" parameterMap="cardParamMap">
 		{ call addCardProcedure(?,?,?) }
 	</procedure>
+
+	<update id="update_rlink" parameterClass="card">
+		update card set	rlink=#rlink# where num=#num#
+	</update>
+	<update id="update_llink" parameterClass="card">
+		update card set	llink=#llink# where num=#num#
+	</update>
+	<update id="update_allLink" parameterClass="card">
+		update card set	llink=#llink#, rlink=#rlink# where num=#num#
+	</update>
+	<update id="update_lNum" parameterClass="card">
+		update card set	lNum=#lNum# where num=#num#
+	</update>
+	
+	
 <!-- 	
 	<insert id="addCard" parameterClass="card">
 		<selectKey keyProperty="location" resultClass="int" >

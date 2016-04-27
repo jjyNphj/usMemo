@@ -11,14 +11,25 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-  .list_all{ overflow:auto;}
-  .list_unit{ float:left;}
-  .hide{display: none;}
+.list_all {
+	overflow: auto;
+}
+
+.list_unit {
+	float: left;
+}
+
+.hide {
+	display: none;
+}
 </style>
 
 <script type="text/javascript">
 
+//json 만드려고 객체 생성
 var updateList =new Object();
+var updateCard =new Object();
+var sameListFlag=true;
 /* = new Array();
 var before=new Object();
 var after=new Object();
@@ -105,50 +116,93 @@ var current=new Object(); */
 			
 	 }
 	
+	 //현재 사용자가 리스트 중 한개를 집은 상태
 	 function updateListStart(arr,index){
 	 arr= jQuery.grep(arr, function(value) {
 		  return value != "";
 		});
 	 //배열상에 공백을 없애기 
-		console.log("item:"+arr);
+/* 		console.log("item:"+arr);
 		 console.log("start: "+arr[index]);
 		 console.log("start index: "+index);
 		 console.log("start with: "+arr[index-1]+" / "+arr[index+1]);
-
-
+ */
+		//옮기기 전 앞에 있는 노드를 빈 오브젝트에 넣음
 		if(arr[index-1]!=undefined){
 			updateList.beforePreNum=arr[index-1];
 		}
 		else{
+			//앞노드가 없으면 0으로 넣어줌
 			updateList.beforePreNum=0;
 		}
-		  
+		//옮기기 전 뒤에 있는 노드를 빈 오브젝트에 넣음
 		if(arr[index+1]!=undefined){
 			updateList.beforePostNum=arr[index+1];
 		  }
 		else {
 			updateList.beforePostNum=0;
 		}
-		 
+		 //옮기려고 하는 노드 빈 오브젝트에 넣음
 		 updateList.currentNum=arr[index];
 		
 	 }
+	 function updateCardStart(arr,index){
+		 	    //1) 옮기기 전 리스트 번호, 옮긴 후 리스트 번호
+		 		//2) 옮기기 전 리스트의 앞뒤 
+		 		//3) 옮긴 후의 앞뒤 
+		 var cardInfoRaw;
+/* 		 arr= jQuery.grep(arr, function(value) {
+			  return value != "";
+			}); */
+		 //배열상에 공백을 없애기 
+		 	console.log("item:"+arr);
+			 console.log("start: "+arr[index]);
+			 console.log("start index: "+index);
+			 console.log("start with: "+arr[index-1]+" / "+arr[index+1]);
+
+			 cardInfoRaw=arr[index].split("_");
+			 
+			 //드래그하는 카드의 listNum을 의미.
+			 updateCard.beforeLNum=cardInfoRaw[0];
+			 //드래그하는 카드의 cardNum을 의미.
+		 	 updateCard.currentNum=cardInfoRaw[1];
+			 
+			if(arr[index-1]!=undefined){
+				cardInfoRaw=arr[index-1].split("_");
+				updateCard.beforePreNum=cardInfoRaw[1];
+			}
+			else{
+				updateCard.beforePreNum=0;
+			}
+			  
+			if(arr[index+1]!=undefined){
+				cardInfoRaw=arr[index+1].split("_");
+				updateCard.beforePostNum=cardInfoRaw[1];
+			  }
+			else {
+				updateCard.beforePostNum=0;
+			}
+			
+			
+		 }
+	 /* 집었던 리스트를 놓는 순간 */
 	 function updateListStop(arr,index){
 		 arr= jQuery.grep(arr, function(value) {
   			  return value != "";
   			});
   		 //배열상에 공백을 없애기 
-         console.log("stop: "+arr[index]);
-         console.log("stop index: "+index);
-         console.log("stop with: "+arr[index-1]+" / "+arr[index+1]);
-         
+     /*     console.log("update: "+arr[index]);
+         console.log("update index: "+index);
+         console.log("update with: "+arr[index-1]+" / "+arr[index+1]);
+          */
+         //옮긴 후 앞에 있는 노드를 빈 오브젝트에 넣기 
          if(arr[index-1]!=undefined){
         	 updateList.afterPreNum=arr[index-1];
- 		}
+ 		}  
  		else{
  			 updateList.afterPreNum=0;
  		}
- 		  
+       	//옮긴 후 뒤에 있는 노드를 빈 오브젝트에 넣기 
  		if(arr[index+1]!=undefined){
  			updateList.afterPostNum=arr[index+1];
  		  }
@@ -157,15 +211,76 @@ var current=new Object(); */
  		}
  		
 	 }
+	 function updateCardStop(arr,index){
+		    //1) 옮기기 전 리스트 번호, 옮긴 후 리스트 번호
+	 		//2) 옮기기 전 리스트의 앞뒤 
+	 		//3) 옮긴 후의 앞뒤 
+	 		//var cardInfoRaw;
+/* 		 arr= jQuery.grep(arr, function(value) {
+  			  return value != "";
+  			}); */
+  		 //배열상에 공백을 없애기 
+          console.log("update: "+arr);
+         console.log("update index: "+index);
+         console.log("update with: "+arr[index-1]+" / "+arr[index+1]);
+         
+         var cardInfoRaw=arr[index].split('_');
+         updateCard.afterLNum=cardInfoRaw[0];
+      
+         if(arr[index-1]!=undefined){
+        	 cardInfoRaw=arr[index-1].split('_');
+        	 updateCard.afterPreNum=cardInfoRaw[1];
+        	 //lNum을 받음
+             updateCard.afterLNum=cardInfoRaw[0];
+            
+ 		}  
+ 		else{
+ 			updateCard.afterPreNum=0;
+ 		}
+ 		  
+ 		if(arr[index+1]!=undefined){
+ 			cardInfoRaw=arr[index+1].split('_');
+ 			updateCard.afterPostNum=cardInfoRaw[1];
+ 			//lNum을 받음.
+            updateCard.afterLNum=cardInfoRaw[0];
+ 		  }
+ 		else {
+ 			updateCard.afterPostNum=0;
+ 		}
+ 		
+	 }
 	 function updateListChange(){
+		 //json타입으로 변환
 		 var listLocation=JSON.stringify(updateList);
-		 console.log("결과: "+listLocation);
+		 console.log("List update JSON결과: "+listLocation);
 		 var url='/usMemo/list/update/location';
 		 
 		 $.ajax({
 	            url: url,
 	            type :'post',
 	            data:listLocation,
+	            contentType: 'application/json',
+	            success:function(){
+	            	alert("success!");
+	            	window.location.reload();
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        }) 
+	 }
+	 
+	 function updateCardChange(){
+		 //json타입으로 변환
+		 var cardLocation=JSON.stringify(updateCard);
+		 console.log("card의 결과 JSON정보: "+cardLocation);
+		  var url='/usMemo/card/update/location';
+		 
+		 $.ajax({
+	            url: url,
+	            type :'post',
+	            data: cardLocation,
 	            contentType: 'application/json',
 	            success:function(){
 	            	alert("success!");
@@ -213,7 +328,7 @@ var current=new Object(); */
 		        },
 			update: function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
-	              console.log("위치: "+productOrder);
+	              console.log("List update : "+productOrder);
 	              updateListStop(productOrder,ui.item.index());
 	            //  listChangeLocation(productOrder);
 	              updateListChange();
@@ -225,21 +340,45 @@ var current=new Object(); */
 		$(".list_all").disableSelection();
 
 		$(".card_unit").sortable({
+			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
 		      connectWith: ".card_unit",
+			  start: function (event, ui) {  
+				  var productOrder = $(this).sortable("toArray");
+				  updateCardStart(productOrder,ui.item.index());
+		        },
 		      update: function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
-	              console.log(productOrder);
-	            }
+	              console.log("card Update: "+productOrder);
+	              if(sameListFlag){
+	              updateCardStop(productOrder,ui.item.index());
+	              }
+	            },
+	           stop: function (event, ui) {
+	              updateCardChange();
+		        },
+			   receive: function( event, ui ) {
+				/* 다른 리스트로 넘어갔을 때, 넘어간 요소를 포함한 그 리스트의 요소를 반환 */
+					 var productOrder = $(this).sortable("toArray");
+			         console.log("receive:"+productOrder+" index: "+productOrder[ui.item.index()]);
+			         updateCardStop(productOrder,ui.item.index());
+			         sameListFlag=false;
+					},
+				remove: function( event, ui ) {
+				/* 다른 리스트로 넘어갈때, 넘어가기 전의 리스트의 목록을 보여줌. 단, 넘어간 요소는 제거된 상태로!*/
+					 var productOrder = $(this).sortable("toArray");
+			         console.log("remove:"+productOrder+" index: "+productOrder[ui.item.index()]);
+				 }
 	    }).disableSelection();
 
 	});
+
 </script>
-</head> 
+</head>
 
 <body>
 
 	<form>
-	<input type="hidden" id="bNum" value="${bNum }"/>
+		<input type="hidden" id="bNum" value="${bNum }" />
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 				<li class="list_unit" id="${l.num}">
@@ -247,28 +386,30 @@ var current=new Object(); */
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
-								<li id="${c.card_num }">[${c.card_num }] ${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]</li>
+								<li id="${l.num}_${c.card_num }">[${c.card_num }]
+									${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]</li>
 							</c:if>
 						</c:forEach>
 					</ul> <input type="button" class="addCardBtn" value="add card..." />
 
 					<div class="hide">
 						<textarea rows="5" cols="30" id="cardName${l.num}"></textarea>
-						<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
-						<input type="button" class="cancelCardBtn" value="cancel" />
+						<br> <input type="button" value="add"
+							onclick="addCard(${l.num},cardName${l.num})" /> <input
+							type="button" class="cancelCardBtn" value="cancel" />
 					</div>
 				</li>
 			</c:forEach>
-			
-					
-	</ul>
-			<input type="button" class="addListBtn" value="add list..."/>
-					<div class="hide">
-						<textarea rows="5" cols="30" id="listName"></textarea><br>
-						<input type="button" value="add" onclick="addList(${bNum})"/>
-						<input type="button" class="cancelListBtn" value="cancel" />
-					</div>
+
+
+		</ul>
+		<input type="button" class="addListBtn" value="add list..." />
+		<div class="hide">
+			<textarea rows="5" cols="30" id="listName"></textarea>
+			<br> <input type="button" value="add" onclick="addList(${bNum})" />
+			<input type="button" class="cancelListBtn" value="cancel" />
+		</div>
 	</form>
-	
+
 </body>
 </html>

@@ -5,6 +5,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.ListDTO;
 
 @Repository
 public class CardDao {
@@ -17,5 +18,27 @@ public class CardDao {
 		sqlMapClientTemplate.insert("Card.addCard", card);
 	}
 
+	public void update_rlink(Card card) {
+		
+		sqlMapClientTemplate.update("Card.update_rlink",card);
+	}
+
+
+	public void update_llink(Card card) {
+		
+		sqlMapClientTemplate.update("Card.update_llink",card);
+		
+	}
+	
+	public void update_allLink(Card card) {
+		
+		sqlMapClientTemplate.update("Card.update_allLink",card);
+		
+	}
+
+	public void update_lNum(Card card) {
+		sqlMapClientTemplate.update("Card.update_lNum",card);
+		
+	}
 	
 }

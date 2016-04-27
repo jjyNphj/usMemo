@@ -22,7 +22,7 @@
        <result property="rlink" column="rlink"/>
     </resultMap>
 
-	<select id="getListByNum" parameterClass="int" resultMap="ListMap">
+	<select id="getListBybNum" parameterClass="int" resultMap="ListMap">
 		select * from List where bNum=#bNum# order by llink
 	</select>
 	

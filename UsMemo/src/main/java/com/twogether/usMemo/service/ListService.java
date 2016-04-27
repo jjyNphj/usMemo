@@ -1,11 +1,6 @@
 package com.twogether.usMemo.service;
 
-import java.io.Reader;
-import java.util.List;
-import java.util.Map;
-
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
@@ -28,7 +23,7 @@ public class ListService {
 		listDao.addList(listDTO);
 	}
 
-	public int parsingObjectToInt(Object object){
+	public int parseObjToInt(Object object){
 		
 		return Integer.parseInt(object.toString());
 	}
@@ -38,7 +33,7 @@ public class ListService {
 		 * 1) before이 붙은 것 끼리 링크연결
 		 * 2) after과 current를 연결 
 		 */
-		//파싱
+		//파싱(String->json)
 		JSONObject obj= parsingJson(listLocation);
 	
 //		logger.info("before-> pre: {}, ",parsingObjectToInt(obj.get("beforePreNum")));
@@ -47,12 +42,12 @@ public class ListService {
 //		logger.info("after-> post: {} ",parsingObjectToInt(obj.get("afterPostNum")));
 //		logger.info("after-> current: {}",parsingObjectToInt(obj.get("currentNum")));
 //	
-		beforeListUpdate(parsingObjectToInt(obj.get("beforePreNum")),parsingObjectToInt(obj.get("beforePostNum")));
-		afterListUpdate(parsingObjectToInt(obj.get("afterPreNum")),parsingObjectToInt(obj.get("afterPostNum")),parsingObjectToInt(obj.get("currentNum")));
+		beforeListUpdate(parseObjToInt(obj.get("beforePreNum")),parseObjToInt(obj.get("beforePostNum")));
+		afterListUpdate(parseObjToInt(obj.get("afterPreNum")),parseObjToInt(obj.get("afterPostNum")),parseObjToInt(obj.get("currentNum")));
 		
 	}
 
-	private void afterListUpdate(Integer preNum, Integer postNum,
+	public void afterListUpdate(Integer preNum, Integer postNum,
 			Integer currentNum) {
 		
 		/*
@@ -94,7 +89,7 @@ public class ListService {
 		
 			listDao.update_allLink(currentList);
 		}
-		else{
+		else{//중간->중간으로 바뀐후
 			currentList.setNum(currentNum);
 			currentList.setLlink(preNum);
 			currentList.setRlink(postNum);
@@ -113,7 +108,7 @@ public class ListService {
 		
 }
 
-	private void beforeListUpdate(Integer preNum, Integer postNum) {
+	public void beforeListUpdate(Integer preNum, Integer postNum) {
 		//리스트 변경 후 이전 위치에서의 리스트정보 갱신.
 		
 		//앞노드의 rlink를 postNum으로,
@@ -164,10 +159,6 @@ public class ListService {
 		
 		//string을 json으로 파싱시킴.
 		JSONObject obj=(JSONObject)jsonPaser.parse(listLocation);
-		
-		
-		
-		logger.info("currentNum의 파싱결과: {}",obj.get("currentNum"));
 		
 		return obj;
 		}

@@ -81,34 +81,63 @@ public class BoardService {
 //		}
 //		
 		List<ListAndCard> cardList=boardDao.getCardBybNum(board.getbNum());
-		//cardList=sortingCard(cardList);
+		cardList=sortingCard(cardList);
 		mapList.put("cardList", cardList);
 //		
 		return mapList;
 		
 	}
+	
+	/**
+	 * 카드를 순서대로 sorting하는 메서드<br>
+	 * 하나의 리스트 안의 카드를 정렬해야하는데, 현재 반환값은 여러개의 리스트의 모든 카드를 반환해야함.<br>
+	 * lNum이 순차적으로 되지 않는 것은 문제되지 않으나, llink와 rlink의 순서만 지켜지면, view에서 순서대로 나올 수 있음.<br>
+	 * 
+	 *  참고: listIterator()과 iterator()의 차이 <br>
+	 *  iterator()은 add나 이전노드의 참조가 불가능하지만, listIteratro()은 가능하다.
+	 * 
+	 * @param list
+	 * @return 현재 보드의 모든 리스트의 카드를 순차적으로 저장한 array를 반환 
+	 */
 	public List<ListAndCard> sortingCard(List<ListAndCard> list){
-	List<ListAndCard> result=new ArrayList<ListAndCard>();
+	
+		List<ListAndCard> result=new ArrayList<ListAndCard>();
+		List<ListAndCard> firstNode=new ArrayList<ListAndCard>();
 		
 		ListIterator<ListAndCard> it= list.listIterator();
 		
+	
+		
+		
+			
 		while(it.hasNext()){
 			ListAndCard listDto = it.next();
 			if(listDto.getLlink()==-1){
-				result.add(listDto);
+				firstNode.add(listDto);
 				it.remove();
-				break;
 			}
 		}
 		
-		while(list.size()!=0){
-		for(Iterator<ListAndCard> itt = list.iterator() ; itt.hasNext() ;){
+		ListIterator<ListAndCard> firstNodeIt= firstNode.listIterator();
+		while(firstNodeIt.hasNext()){
+			ListAndCard firstObj=firstNodeIt.next();
+			result.add(firstObj);
 			
-			ListAndCard dto=itt.next();
-			if(result.get(result.size()-1).getRlink()==dto.getbNum()){
-				result.add(dto);
-				itt.remove();
+			//반복문이 없으면, 만일 같은 lNum을 가졌더라도 card의 rlink와 num이 같지않은게 바로 뒤에 나오면 갸는 두고가는것임.
+			//중간에 break로 함부로 나가도 안됨. 낙오자가 생김.
+			//따라서 현재 result에 들어있는 맨 마지막 노드가 현재 찾는 리스트의 카드들 중에서 맨 마지막(rlink가 -1)이 아니면
+			//끝난게 아니므로 계속해서 찾는다. 
+		while(result.get(result.size()-1).getRlink()!=-1){
+		for(it = list.listIterator() ; it.hasNext() ;){
+			ListAndCard dto=it.next();
+			if(firstObj.getlNum()==dto.getlNum()){
+				if(result.get(result.size()-1).getRlink()==dto.getCard_num()){
+					result.add(dto);
+					it.remove();
+				}
+				
 			}
+		}
 		}
 		}
 
@@ -118,11 +147,16 @@ public class BoardService {
 		
 		List<ListDTO> result=new ArrayList<ListDTO>();
 		
+		//listIterator 배열을 하나하나 뒤지는 역할(while,for문 안에 있을떄만)
 		ListIterator<ListDTO> it= list.listIterator();
 		
+		//hasNext->커서역할(listIterartor)
+		//다음 객체 여부 검증 (있으면 true 반환),제일 처음엔 -1값이 들어가있음.
 		while(it.hasNext()){
+			//next()는 다음 객체를 가져옴. 반환은 생성한 ListDTO로
 			ListDTO listDto = it.next();
 			if(listDto.getLlink()==-1){
+				//add->ArrayList 제공함수, 가장 마지막에 데이터 넣기
 				result.add(listDto);
 				it.remove();
 				break;
@@ -130,12 +164,12 @@ public class BoardService {
 		}
 		
 		while(list.size()!=0){
-		for(Iterator<ListDTO> itt = list.iterator() ; itt.hasNext() ;){
+		for(it = list.listIterator() ; it.hasNext() ;){
 			
-			ListDTO dto=itt.next();
+			ListDTO dto=it.next();
 			if(result.get(result.size()-1).getRlink()==dto.getNum()){
 				result.add(dto);
-				itt.remove();
+				it.remove();
 			}
 		}
 		}
