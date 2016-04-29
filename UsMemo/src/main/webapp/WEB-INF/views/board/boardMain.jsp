@@ -355,30 +355,18 @@ var current=new Object(); */
 	              			문제는 자신의 리스트 안에서 카드가 움직일때는 update에서만 카드의 처리가 이루어짐. 
 	              			즉, 다른리스트로 가면 receive로 처리하면 되지만, 같은리스트면 update에서만 가능함. 
 	              			
-	              	if 1) A-2개 , B는 상관 x
-	              			A에서 B로 옮기면 A에는 값이 1개만 존재. 
-	              			그렇게 되면 첫번째 update가 실행될때는 옮기기 전 리스트의 상황이 찍힘.
-	              			그러면 A에 남은 1개의 카드만 productOrder에 있음. ui.item.index()는 디폴트인듯한 1이 남음.
-	              			여기서 오류가 발생. 
-	              			updateCardStop 함수로 넘어갈때 array형식이 아닌 그냥 값으로 넘어가니깐, productOrder[ui.item.index()]값이 없다!!
-	              			그러니 split 함수에서 에러가 남. 
-	              			한개의 값만 배열에 존재할 경우 arr[0]을 참조해야하는데 현재 넘어가는 어레이에는 arr[1]로 넘어가게 되니 당연히 값을 못찾지.
-	              	if 2) A-1개 B는 상관X
-	              			이때도 마찬가지. 
-	              			다른 리스트로 넘어가게 된다면 A에는 아무값도 없으니 당연히 오류가 난다. 
-	              			
-	              			그렇다면
 	              			<해결책>
-	              			update가 실행될때 값이 1개만 존재하거나 혹은 0개만 존재할 경우는 다른리스트로 카드가 넘어갔을때 뿐임. 
-	              			자기자신의 리스트에서 움직임이 일어난다면 최소 2개의 카드가 존재해야 할 것이고, 그때는 문제가 되지 않음. productOrder이 배열로 인식할테니깐.
-	              			그러므로 productOrder이 0이거나 1이면 updateCardStop 함수를 확실하게 다른 리스트로 넘어갔을 때 실행시켜주기 위해서
-	              			receive 옵션에서 실행시키자. 
+	              				같은리스트에서 카드가 옮겨지면 stop에서 처리, 
+	              				다른리스트로 카드가 옮겨지면 receive에서 처리.
 	              */
-	               if(productOrder.length > 1){
-	              updateCardStop(productOrder,ui.item.index());
-	              } 
+	      
 	            },
 	           stop: function (event, ui) {
+	        	   var productOrder = $(this).sortable("toArray");
+		            console.log("card stop: "+productOrder);
+		            if(sameListFlag){
+		            	//같은 리스트에서 카드가 옮겨졌을 때 처리.
+		            	updateCardStop(productOrder,ui.item.index());}
 	              updateCardChange();
 		        },
 			   receive: function( event, ui ) {
