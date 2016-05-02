@@ -89,7 +89,7 @@ function createBoard(memId) {
 				
 				<form role="form">
 					<div class="form-group">
-						<!-- textarea의 내용 name변수에 저장해서 /createBoard 전달 -->
+						<!-- textarea의 내용 id변수에 저장해서 /createBoard 전달 -->
 						<textarea class="form-control" rows="3" cols="30" id="boardComment" placeholder="보드이름을 입력해주세요."></textarea>
 					</div>
 					

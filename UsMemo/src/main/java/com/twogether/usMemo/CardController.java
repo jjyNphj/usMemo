@@ -1,5 +1,8 @@
 package com.twogether.usMemo;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Card;
@@ -40,5 +44,22 @@ public class CardController {
 		logger.info("check change location: {}",cardLocation.toString());
 		cardService.updateLocation(cardLocation);
 		return "/board/boardMain";
+	}
+	
+	@RequestMapping("/edit")
+	public ModelAndView editCardWindow(@RequestParam int lNum, @RequestParam int cNum){
+		logger.info("check : Num{}, cNum{}" , lNum, cNum);
+		
+		HashMap<String, List> map=cardService.editCardWindow(lNum,cNum);
+		
+		ModelAndView mv= new ModelAndView();
+		
+		mv.addObject("sucess","y");
+		mv.setViewName("board/boardMain");
+		mv.addObject("cardInfo", map.get("cardInfo"));
+		logger.info("check : Num{}, cNum{}" , lNum, cNum);
+		//cardService.editCardWindow(lNum,cNum);
+		return mv;
+		
 	}
 }
