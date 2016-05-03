@@ -212,7 +212,7 @@ var current=new Object(); */
  		}
  		
 	 }
-	 function updateCardStop(arr,index){
+	 function updateCardStop(arr,index,lNum){
 		    //1) 옮기기 전 리스트 번호, 옮긴 후 리스트 번호
 	 		//2) 옮기기 전 리스트의 앞뒤 
 	 		//3) 옮긴 후의 앞뒤 
@@ -226,15 +226,13 @@ var current=new Object(); */
          console.log("update with: "+arr[index-1]+" / "+arr[index+1]);
          
     
-         var cardInfoRaw=arr[index].split('_');
-         updateCard.afterLNum=cardInfoRaw[0];
+         var cardInfoRaw;
+       	 //lNum을 받음
+         updateCard.afterLNum=lNum;
       
          if(arr[index-1]!=undefined){
         	 cardInfoRaw=arr[index-1].split('_');
         	 updateCard.afterPreNum=cardInfoRaw[1];
-        	 //lNum을 받음
-             updateCard.afterLNum=cardInfoRaw[0];
-            
  		}  
  		else{
  			updateCard.afterPreNum=0;
@@ -243,8 +241,6 @@ var current=new Object(); */
  		if(arr[index+1]!=undefined){
  			cardInfoRaw=arr[index+1].split('_');
  			updateCard.afterPostNum=cardInfoRaw[1];
- 			//lNum을 받음.
-            updateCard.afterLNum=cardInfoRaw[0];
  		  }
  		else {
  			updateCard.afterPostNum=0;
@@ -363,7 +359,7 @@ var current=new Object(); */
 	            },
 	           stop: function (event, ui) {
 	        	   var productOrder = $(this).sortable("toArray");
-		            console.log("card stop: "+productOrder);
+		           // console.log("card stop: "+productOrder);
 		            if(sameListFlag){
 		            	//같은 리스트에서 카드가 옮겨졌을 때 처리.
 		            	updateCardStop(productOrder,ui.item.index());}
@@ -373,14 +369,16 @@ var current=new Object(); */
 				/* 다른 리스트로 넘어갔을 때, 넘어간 요소를 포함한 그 리스트의 요소를 반환 */
 					 var productOrder = $(this).sortable("toArray");
 			         console.log("receive:"+productOrder+" index: "+productOrder[ui.item.index()]);
-			         updateCardStop(productOrder,ui.item.index());
+			         console.log("ui.item.context.parentNode.id:"+ui.item.context.parentNode.id+" ui.position : "+ui.position);
+			         updateCardStop(productOrder,ui.item.index(),ui.item.context.parentNode.id);
 			         sameListFlag=false;
 					},
 				remove: function( event, ui ) {
 				/* 다른 리스트로 넘어갈때, 넘어가기 전의 리스트의 목록을 보여줌. 단, 넘어간 요소는 제거된 상태로!*/
 					 var productOrder = $(this).sortable("toArray");
-			         console.log("remove:"+productOrder+" index: "+productOrder[ui.item.index()]);
-				 }
+			       //  console.log("remove:"+productOrder+" index: "+productOrder[ui.item.index()]);
+				 }, beforeStop: function( event, ui ) {console.log("item:"+ui.item.index());},
+		            //change: function( event, ui ) { console.log("change: "+ui.item.index());}
 	    }).disableSelection();
 
 	});
@@ -397,7 +395,8 @@ var current=new Object(); */
 				<li class="list_unit" id="${l.num}">
 					<h1>${l.num},${l.name}<br>${l.llink}/${l.rlink }</h1>
 
-					<ul class="card_unit">
+					<ul class="card_unit" id="${l.num }">
+					-
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
 								<li id="${l.num}_${c.card_num }">[${c.card_num }]

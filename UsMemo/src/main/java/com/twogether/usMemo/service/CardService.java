@@ -90,6 +90,8 @@ public class CardService {
 		Card preCard= new Card();
 		Card postCard= new Card();
 		if(preNum==0 && postNum==0){
+			// 옮기기 전 리스트에서 한장남아있던 카드를 다른 리스트로 옮기면
+			//pre와 post 모두 0이 되는데, 아무것도 없으니까 아무일도 안하면됨.
 			return;
 		}
 		else if(preNum==0||postNum==0){
@@ -153,7 +155,7 @@ public class CardService {
 		if(postNum==0 || preNum==0){
 			
 			
-			if(preNum==0){
+			if(preNum==0 && postNum!=0){
 				//맨 앞으로 이동한거니깐 current의 llink를 -1, 
 				//post의 llink만 current로 
 				currentCard.setLlink(-1);
@@ -164,7 +166,7 @@ public class CardService {
 				cardDao.update_llink(postCard);
 				
 			}
-			else if(postNum==0){
+			else if(preNum!=0 && postNum==0){
 				//맨 뒤로 이동한것이므로 current가 맨 뒤가 됨.그러면? current의 rlink를 -1
 				//pre의 rlink 만 current로 
 				currentCard.setLlink(preNum);
@@ -174,6 +176,12 @@ public class CardService {
 				preCard.setNum(preNum);
 				preCard.setRlink(currentNum);
 				cardDao.update_rlink(preCard);
+				
+			}else if(preNum==0 && postNum==0){
+				//옮긴 곳이 아무것도 없는 리스트였을 때이므로 pre,post 카드가 아무것도 없다. 
+				//그러니 현재 카드의 llink,rlink만 -1로 바꿔주면 됨.
+				currentCard.setLlink(-1);
+				currentCard.setRlink(-1);
 			}
 		
 			cardDao.update_allLink(currentCard);

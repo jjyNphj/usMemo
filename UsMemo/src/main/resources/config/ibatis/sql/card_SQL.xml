@@ -80,11 +80,11 @@
 	    </selectKey>
 		insert into card values(card_num_seq.nextval,#name#,null,null,#memId#,sysdate,#lNum#,#location#)
 	</insert>
-	
+	 -->
 	<delete id="deleteCardBybNum" parameterClass="int">
 	    card.lNum=list.num이 같으면서 전달받은 bNum의 값이 list.bNum값과 같은 card의 행 모두 삭제 
 	    delete from card where exists (select 1 from list where card.lNum = list.num and list.bNum=#bNum#)
-	</delete> -->
+	</delete>
 
 
 </sqlMap>
