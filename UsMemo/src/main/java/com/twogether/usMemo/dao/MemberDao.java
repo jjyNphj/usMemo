@@ -1,5 +1,7 @@
 package com.twogether.usMemo.dao;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.dto.MemberGrade;
 
 @Repository
 public class MemberDao {
@@ -31,6 +34,10 @@ public class MemberDao {
 		public void setMember(Member member) {
 			sqlMapClientTemplate.insert("Member.setMember", member);
 			
+		}
+		
+		public List<Member> getMemberList(int bNum) {
+			return sqlMapClientTemplate.queryForList("Member.getMemberListBybNum",bNum);
 		}
 
 }

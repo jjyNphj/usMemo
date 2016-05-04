@@ -5,6 +5,15 @@
 	
 	<sqlMap namespace="Member">
 	 	<typeAlias alias="member" type="com.twogether.usMemo.dto.Member"/>
+	 	
+	 	<resultMap class="member" id="memberMap">
+	 		<result property="id" column="id"/>
+	 		<result property="nickname" column="nickname"/>
+	 		<result property="name" column="name"/>
+	 		<result property="email" column="email"/>
+	 		<result property="profile_image" column="profile_image"/>
+	 		<result property="grade" column="grade"/>
+	 	</resultMap>
 
 
 		
@@ -14,6 +23,11 @@
 		<insert id="setMember" parameterClass="member">
 			insert into member values(#id#,	#nickname#,#name#,#email#,#profile_image#)
 		</insert>
+		<select id="getMemberListBybNum" parameterClass="int" resultMap="memberMap">
+			select * from Member m Inner Join MemberGrade g
+			on m.id=g.memId
+			where g.bNum=#bNum# 
+		</select>
 	
 	</sqlMap>
 	

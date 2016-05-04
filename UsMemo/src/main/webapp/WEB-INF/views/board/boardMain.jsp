@@ -290,6 +290,24 @@ var current=new Object(); */
 	         }
 	        }) 
 	 }
+	 
+	 function openMenu(bNum, memId){
+		 
+		  var url='/usMemo/member/friend/index?bNum='+bNum+'&memId='+memId;
+		  window.open(url, "_self",  '');
+	/* 	 $.ajax({
+	            url: url,
+	            type :'post',
+	            success:function(){
+	            	alert("success!");
+	            	window.location.reload(); 
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        })  */
+	 }
 </script>
 
 <script>
@@ -422,6 +440,8 @@ var current=new Object(); */
 			<br> <input type="button" value="add" onclick="addList(${bNum})" />
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
+		
+		<input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
 	</form>
 
 </body>

@@ -1,18 +1,18 @@
 package com.twogether.usMemo.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.MemberDao;
 import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.dto.MemberGrade;
 
 
 @Service
@@ -49,6 +49,16 @@ public class MemberService {
 			String check=(String)session.getAttribute("id");
 	
 		logger.info("세션아이디: {}", check);
+		
+	}
+
+	/**
+	 * 보드에서 메뉴창의 현재 참여하는 회원리스트 불러오는 서비스
+	 * @param memberInfo
+	 */
+	public List<Member> getMemberList(MemberGrade memberInfo) {
+		
+		return memberDao.getMemberList(memberInfo.getbNum());
 		
 	}
 
