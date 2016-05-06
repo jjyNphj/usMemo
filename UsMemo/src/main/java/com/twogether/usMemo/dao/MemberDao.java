@@ -39,5 +39,24 @@ public class MemberDao {
 		public List<Member> getMemberList(int bNum) {
 			return sqlMapClientTemplate.queryForList("Member.getMemberListBybNum",bNum);
 		}
+		
+		/**
+		 * 친구검색 서비스
+		 * @param memberFindInfo
+		 * @return 검색결과가 여러개일 경우를 대비하여 list로 반환
+		 */
+		public List<Member> friendFind(String memberFindInfo) {
+			
+			return sqlMapClientTemplate.queryForList("Member.friendFind",memberFindInfo);
+		}
+		
+		/**
+		 * 친구 추가 서비스
+		 * @param addMemberInfo
+		 */
+		public void addFriend(MemberGrade addMemberInfo) {
+			
+			sqlMapClientTemplate.insert("Member.addFriend",addMemberInfo);			
+		}
 
 }

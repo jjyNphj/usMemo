@@ -62,4 +62,24 @@ public class MemberService {
 		
 	}
 
+	/**
+	 * 친구 찾기 서비스
+	 * @param memberFindInfo
+	 */
+	public List<Member> friendFind(String memberFindInfo) {
+		//member 테이블에서 찾기
+		//memberFindInfo는 name,nickname,email정보임.
+		
+		return memberDao.friendFind(memberFindInfo);
+		
+	}
+
+	/**
+	 * 친구추가 서비스
+	 * @param addMemberInfo
+	 */
+	public void addFriend(MemberGrade addMemberInfo) {
+		memberDao.addFriend(addMemberInfo);
+	}
+
 }

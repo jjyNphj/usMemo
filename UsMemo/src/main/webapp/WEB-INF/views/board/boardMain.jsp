@@ -30,8 +30,8 @@
 var updateList =new Object();
 var updateCard =new Object();
 var sameListFlag=true;
-/* = new Array();
 var before=new Object();
+/* = new Array();
 var after=new Object();
 var current=new Object(); */
 	/* 	function goPage(bNum, name) {
@@ -417,8 +417,9 @@ var current=new Object(); */
 					-
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
-								<li id="${l.num}_${c.card_num }">[${c.card_num }]
-									${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]</li>
+								<li id="${l.num}_${c.card_num }">
+								[${c.card_num }] ${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]
+								</li>
 							</c:if>
 						</c:forEach>
 					</ul> <input type="button" class="addCardBtn" value="add card..." />
