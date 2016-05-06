@@ -18,6 +18,9 @@
 	display: none;
 }
 img {margin: 5px 2px 2px 2px}
+.list-group-item:hover{
+	background-color: gray;}
+/* 마진이 바깥쪽 여백, 패딩이 안쪽여백 의미, 숫자는 순서대로 윗쪽부터 시계방향 */
 </style>
 
 </head>
@@ -26,7 +29,9 @@ img {margin: 5px 2px 2px 2px}
 
 <script type="text/javascript">
 $(document).ready(function(){
-	   $('[data-toggle="popover"]').popover();   
+	//팝업설정
+	$('[data-toggle="popover"]').popover();   
+	
 	$(".addMemberBtn").click(function(){
 	    // 현재 버튼의 옆의 태그중 div 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
 	    $(this).next(".hide").toggleClass("hide");
@@ -46,7 +51,7 @@ $(document).ready(function(){
 	$("#findMember").keyup(function(){
 	/* 	alert("gg");
 	 */
-	 var url='/usMemo/member/friend/find/'+$(this).val();
+	 var url='/usMemo/member/friend/find/'+$(this).val()+'/'+${bNum};
 		 
 		  $.ajax({
 	            url: url,
@@ -56,9 +61,10 @@ $(document).ready(function(){
 	               	console.log(data);
 	               	var result='';
 	               	$.each(data,function(index,val){
-	               		result+='<br><div id="friendFinding_'+val.id+'" onclick="addMemberFunc('+val.id+',${bNum})"><img src="'
-	               				+val.profile_image+'"/><span>'
-	               				+val.name+'</span><span>('+val.nickname+')</span><br><span>'+val.email+'</span></div>';
+	               		result+='<br><a class="list-group-item"><div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id
+	               				+',${bNum})"><div class="col-xs-2"><img src="'+val.profile_image
+	               				+'" class="img-rounded" /></div><div class="col-xs-4"><span>'+val.name
+	               				+'<br>('+val.nickname+')<br>'+val.email+'</span></div></div></a>';
 	               	});
 	               		$("#findMemberResult").html(result);
 	               	
@@ -99,32 +105,40 @@ $(document).ready(function(){
 	 3) 그 권한에 따라 권한변경버튼, 삭제버튼 보이기
 	 -->
 <div class="container">
-	<c:forEach var="m" items="${memberList }">
-	
-		<c:if test="${m.grade == 1}">
-			<img src="${m.profile_image }"  title="${m.name }(admin)" data-toggle="popover" data-trigger="hover" data-content="${m.email }" data-placement="bottom">
-		</c:if>
-		<c:if test="${m.grade == 2}">
-			<img src="${m.profile_image }"  title="${m.name }(member)" data-toggle="popover" data-trigger="hover" data-content="${m.email }" data-placement="bottom" >
-		</c:if>
-		
-	</c:forEach>
-	<br>
-	<br>
- 	<form role="form">
- 		<div class="col-xs-5">
-		<input type="button" class="addMemberBtn" value="addMembers...">
-		<div id="findOption" class="hide">
-			<label for="pwd">친구검색</label>
-			<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
-			<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
-			<div id="findMemberResult">
-			</div>
-			<br> <input type="button" value="specialLink생성"/> 
-			<br><input type="button" class="cancelAddMemberBtn" value="cancel" />
+	<div class="panel-group">
+    <div class="panel panel-default">
+    	<div class="panel-heading">이 보드의 멤버</div>
+    	 <div class="panel-body">
+			<c:forEach var="m" items="${memberList }">
+				<c:if test="${m.grade == 1}">
+					<img src="${m.profile_image }"  title="${m.name }(admin)" data-toggle="popover" data-trigger="hover" data-content="${m.email }" data-placement="bottom" class="img-circle">
+				</c:if>
+				<c:if test="${m.grade == 2}">
+					<img src="${m.profile_image }"  title="${m.name }(member)" data-toggle="popover" data-trigger="hover" data-content="${m.email }" data-placement="bottom" class="img-circle">
+				</c:if>
+			</c:forEach>
 		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+		 	<form role="form">
+		 		<!-- input상자의 설정 -->
+		 		<div class="col-xs-8">
+				<input type="button" class="addMemberBtn" value="addMembers...">
+				<div id="findOption" class="hide">
+					<label for="pwd">친구검색</label>
+					<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
+					<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
+					<div id="findMemberResult" class="list-group"></div>
+					<br> <input type="button" value="specialLink생성"/> 
+					<br><input type="button" class="cancelAddMemberBtn" value="cancel" />
+				</div>
+				<!-- /end input상자의 설정-->
+				</div>
+			</form>
 		</div>
-	</form>
+	</div>
+	</div>
 </div>
 
 </body>

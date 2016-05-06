@@ -1,7 +1,9 @@
 package com.twogether.usMemo.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpSession;
 
@@ -66,11 +68,27 @@ public class MemberService {
 	 * 친구 찾기 서비스
 	 * @param memberFindInfo
 	 */
-	public List<Member> friendFind(String memberFindInfo) {
+	public List<Member> friendFind(String memberFindInfo,int bNum) {
 		//member 테이블에서 찾기
 		//memberFindInfo는 name,nickname,email정보임.
+		List<Member> memberList=new ArrayList<Member>();
+		memberList=memberDao.getMemberList(bNum);
+		List<Member> findMembetList=new ArrayList<Member>();
+		findMembetList=	memberDao.friendFind(memberFindInfo);
 		
-		return memberDao.friendFind(memberFindInfo);
+		ListIterator<Member> it = findMembetList.listIterator();
+		
+		while(it.hasNext()){
+			Member findFriend=it.next();
+			for(Member m:memberList){
+				if(findFriend.getId().equals(m.getId()))
+				{
+					it.remove();
+			}
+		}
+		}
+			
+		return findMembetList;
 		
 	}
 

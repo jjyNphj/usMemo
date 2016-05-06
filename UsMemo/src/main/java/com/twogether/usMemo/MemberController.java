@@ -39,11 +39,11 @@ public class MemberController {
 		return mv;
 	}
 	
-	@RequestMapping("/friend/find/{memberFindInfo}")
-	public @ResponseBody List<Member> friendFind(@PathVariable("memberFindInfo") String memberFindInfo){
+	@RequestMapping("/friend/find/{memberFindInfo}/{bNum}")
+	public @ResponseBody List<Member> friendFind(@PathVariable("memberFindInfo") String memberFindInfo,@PathVariable("bNum") int bNum){
 		//{memberFindInfo}를 pathVariable로 받아서 사용
 		logger.info("memberFindInfo: -> {}",memberFindInfo);
-		List<Member> friendList=memberService.friendFind(memberFindInfo);
+		List<Member> friendList=memberService.friendFind(memberFindInfo,bNum);
 		//logger.info("memberFindInfoName: -> {}",friendList.get(0).getName());
 		
 		return friendList;
