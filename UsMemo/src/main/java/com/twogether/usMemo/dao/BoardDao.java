@@ -32,6 +32,7 @@ public class BoardDao {
 	public List<MemberGrade> getMemberGradeBymNum(String memId){
 		
 		List<MemberGrade> list= new ArrayList<MemberGrade>();
+		/*1개 이상의 레코드(행)을 select해서 가져 오는 경우 queryForList을 사용. List로 받아야함. Map,list로 반환 가능*/
 		list=(List<MemberGrade>) sqlMapClientTemplate.queryForList("Board.getMemberGradeBymNum",memId);
 		
 		return list;
@@ -42,6 +43,7 @@ public class BoardDao {
 		List<ListDTO> list= new ArrayList<ListDTO>();
 		
 		list=(List<ListDTO>) sqlMapClientTemplate.queryForList("List.getListBybNum",bNum);
+		
 		return list;
 	}
 	

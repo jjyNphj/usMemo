@@ -1,8 +1,5 @@
 package com.twogether.usMemo.service;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -12,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.CardDao;
-import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.Card;
-import com.twogether.usMemo.dto.ListDTO;
+import com.twogether.usMemo.dto.ListAndCard;
 /**
  * card¿« model
  * @author HyeJin
@@ -33,23 +29,25 @@ public class CardService {
 
 	}
 	
-	public HashMap<String, List> editCardWindow(int lNum, int cNum){	
+	/*public HashMap<String, List> editCardWindow(int lNum, int cNum){	
 
 		HashMap<String, List> mapList = new HashMap<String, List>();
 		
 		List<Card> listArray = cardDao.getCardInfoBycNum(cNum);
 		mapList.put("cardInfo", listArray);
 			
-		logger.info("check : listArray{}" , listArray.size());
+		logger.info("check : listArray{}" , listArray);
 		
 		return mapList;
 		
-	}
-	/*public void editCardWindow(int lNum,int cNum) {
-		//Card card = new Card();
-		List<Card> card = cardDao.getCardInfoBycNum(cNum);
-		logger.info("check : card{}" , card.size());
 	}*/
+	public ListAndCard editCardWindow(int cNum) {
+		ListAndCard listAndcard = new ListAndCard();
+		listAndcard = cardDao.getCardInfoBycNum(cNum);
+				
+		logger.info("check : card{}" , listAndcard);
+		return listAndcard;
+	}
 	
 
 	/**

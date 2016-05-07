@@ -86,10 +86,15 @@
 	    delete from card where exists (select 1 from list where card.lNum = list.num and list.bNum=#bNum#)
 	</delete> 
 	
-	<select id="getCardInfoBycNum" parameterClass="int">	    
-	    
-	   select * from card where num=#cNum#
-
+	<select id="getCardInfoBycNum" parameterClass="int" resultMap="ListAndCardMap">	    
+	    <!-- boardMain.jsp에서 넘겨준 cNum으로 card 테이블의 num과 같은 행을 모두 검색 후 ListAndCardMap에 결과 담아서 넘기기 -->
+	    <!-- 여러가지 정보를 넘겨주어야 해서 ListAndCardMap에 담아 보냄 -->
+	    select L.num as list_num, L.name as list_name, L.bNum, 
+		C.num as card_num, C.name as card_name,
+		C.content,C.attach,C.memId,C.n_date,C.lNum,C.llink, C.rlink
+		from List L Inner Join Card C
+		on L.num=C.lNum
+		where C.num=#cNum#
 	</select>
 
 

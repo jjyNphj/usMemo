@@ -394,29 +394,55 @@ var current=new Object(); */
 </script>
 
 <script>
- function editCard(lNum,cNum) {
-	//아래 보드추가 textarea안의 id값 = boardComment -> 사용자가 입력한 보드이름 내용 불러오기
-	//var name=$("#boardComment").val();
-	 /* var lNum = lNum.value;
-	 var cNum = cNum.value; */
-	 var url='/usMemo/card/edit?lNum='+lNum+'&cNum='+cNum;
-	 console.log(lNum, cNum);
+function editCard(cNum) {
+	var url='/usMemo/card/edit';
+	var listAndcard = new Object();
+	listAndcard.cNum = cNum;
+	 
+	/* JSP 상에서 서버에 데이터를 전송할 시 String 형태로 데이터를 만들어야함
+		자바스크립트의 JSON.stringify 함수를 이용해서 JSON 문자열(String)로 변환(형변환) */
+	var cNum = JSON.stringify(listAndcard);
+	 
+	console.log(cNum);
 	$.ajax({
-	       url: url,	      
-	       type:'post',
-	       
-	       success:function(){	       
-	       	/* alert("카드 수정창의 정보를 불러왔습니다.");
-	       	window.location.reload(); */
-	       	//console.log("editCard success");
-	    	   console.log(lNum, cNum);
-	       } ,
-	      error : function(xhr, status, error) {
-	          alert(error);
-	    }
-	   }) 
+		url: url,	      
+		type:'post',
+		data: cNum,
+		dataType:'json',
+		/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+		contentType: 'application/json',
+		success:function(data){
+			//의아한 점> CardController에서 넘어온 json 형태의 객체는 jsp에서 자동으로 자바스크립트 객체로 변환되는 것인가..? 파싱 일을 여러번 하는것 같은 느낌..
+			//결론> 지워도 되네여. CardController에서 넘어오는 json 타입 자동으로 자바스크립트 객체로 변환해주는듯? 
+			//    혹은 json 형태로도 자바스크립트에서는 파싱없이 데이터가 읽히는 것일지두..json은 어차피 자바스크립트에서 나온거라..? 서버에서 주고 받을때만 json형태인지 아닌지만 검증하는건가봄
+			/* JSON.stringify -> 자바스크립트 값을 JSON 문자열(String)로 변환 
+			   JSON.parse -> JSON 문자열(String)을 자바스크립트 객체로 변환  */
+			/* var card=JSON.parse(JSON.stringify(data)); 
+			   setCardInfo(card) */
+			setCardInfo(data);
+				       	 
+			console.log(data);
+		} ,
+		error : function(xhr, status, error) {
+		alert(error);
+		}
+	}) 
 }  
+ 
+ function setCardInfo(cardInfo){
+	 /* ListAndCard dto의 card 정보와 list 정보를 html에서 쓰기위해 세팅하는 부분  */
+	 $("#card_Name").text(cardInfo.card_name);
+	 $("#list_Name").text(cardInfo.list_name);
+	 
+	 /* Sat Apr 30 2016 20:31:18 GMT+0900 형태로 date에 들어감 */
+	 var date = new Date(cardInfo.n_date);
+	 /* 2016. 4. 30. 오후 8:31:18 형태로 바꿔줌*/
+	 var card_date = date.toLocaleString();
+	$("#card_Date").text(card_date);
+
+ }
 </script>
+
 <script>
  	//clear,close나 X버튼 누르면 textarea 내용 초기화 시키기.
     function clearForm(o){
@@ -438,16 +464,13 @@ var current=new Object(); */
 					<ul class="card_unit">
 						<c:forEach var="c" items="${cardList}" >
 							<c:if test="${l.num == c.lNum }">
-							<div>
-								<div style="float:left;" id="${l.num}_${c.card_num }">[${c.card_num }]
-									${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]&nbsp;&nbsp;&nbsp;</div>
-								<!-- 수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
-								<%-- <input type="hidden" name=lNum${i.index} value="${l.num}"/>
-								<input type="hidden" name=cNum${i.index} value="${c.card_num}"/> --%>
-								<div style="float:right;"><input type="button" value="Edit" onclick="editCard(${l.num},${c.card_num})" data-toggle="modal" data-target="#myModal"/></div>
- 			 					<%-- <div style="float:right;"><input type="button" value="Edit" onclick="editCard(lNum${i.index},cNum${i.index})" data-toggle="modal" data-target="#myModal"/></div> --%>
-								<%-- <input type="button" value="수정" class="editCardBtn" onclick="editCard(lNum${l.num},cNum${c.card_num})" /> --%>
-							</div>
+							
+								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
+								<li id="${l.num}_${c.card_num }">
+									[${c.card_num }] ${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]&nbsp;&nbsp;&nbsp;
+									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#myModal"/>
+								</li>
+
 							</c:if>
 						</c:forEach>
 					</ul> <input type="button" class="addCardBtn" value="add card..." />
@@ -469,23 +492,21 @@ var current=new Object(); */
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
 		
-	
 	</form>
 	
+	
 	<!-- Modal 길어서 쪼갬-->
-	<form>
-	<%-- <input type="hidden" id="cInfo" value="${cardInfo}" /> --%>
 	<div class="container">
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">${cardInfo} , 카드이름 카드수정 카드삭제</h4>
-						<h6 class="modal-title">리스트 이름</h6>
+						<h4 class="modal-title" ><span id="card_Name" /></h4>
+						<h6 class="modal-title" >in list <span id="list_Name" /></h6>
 					</div>
 					<div class="modal-body">
-						<p>카드 생성 날짜</p>
+						<p>You wrote:<br><span id="card_Date"/></p>
 						
 						<p>카드 상세 내용 입력하는 부분, 수정</p>
 						<!-- textarea의 내용 id변수에 저장해서 /createBoard 전달 -->
@@ -509,6 +530,6 @@ var current=new Object(); */
 			</div>
 		</div>
 	</div>
-	</form>
+	
 </body>
 </html>
