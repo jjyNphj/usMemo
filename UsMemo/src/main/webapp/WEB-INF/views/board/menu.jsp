@@ -19,8 +19,10 @@
 }
 img {margin: 5px 2px 2px 2px}
 .list-group-item:hover{
-	background-color: gray;}
 /* 마진이 바깥쪽 여백, 패딩이 안쪽여백 의미, 숫자는 순서대로 윗쪽부터 시계방향 */
+	background-color: gray;}
+/*멤버사진 가로정렬*/
+.dropdown{ display:inline}
 </style>
 
 </head>
@@ -109,14 +111,66 @@ $(document).ready(function(){
     <div class="panel panel-default">
     	<div class="panel-heading">이 보드의 멤버</div>
     	 <div class="panel-body">
-			<c:forEach var="m" items="${memberList }">
+	
+				<!-- 현재 로그인 한 사람의 grade값을 찾아서 seesionGrade라는 변수에 넣는 과정.  -->			
+				<c:forEach var="m" items="${memberList }" varStatus="index">
+					<c:if test="${sessionScope.id==m.id }">
+						<c:set var="sessionGrade" value="${m.grade }"/>
+					</c:if>
+				</c:forEach>
+				<!--/end 현재 로그인 한 사람의 grade값을 찾아서 seesionGrade라는 변수에 넣는 과정.  -->			
+				
+				<!-- 현재 이 보드에 추가된 사람의 목록을 불러오는 for문 -->
+			<c:forEach var="m" items="${memberList }" varStatus="index">
 				<c:if test="${m.grade == 1}">
-					<img src="${m.profile_image }"  title="${m.name }(admin)" data-toggle="popover" data-trigger="hover" data-content="${m.email }" data-placement="bottom" class="img-circle">
+				<!-- 드롭다운메뉴생성 -->
+    	 		<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+					<img src="${m.profile_image }"  title="${m.name }(admin)" data-toggle="popover" data-trigger="hover" 
+						data-content="${m.email }" data-placement="bottom" class="img-circle" >
+				<span class="caret"></span>
+				</button>
+				<!-- 관리자일경우만 메뉴참조가능 -->
+					<c:if test="${sessionGrade ==1 }">
+				<!-- 자기자신일 경우는 메뉴참조못함 -->
+				<c:if test="${m.id!=sessionScope.id }">
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						     <li><a tabindex="-1" href="#">권한설정</a></li>
+						    <li class="divider"></li>
+						    <li><a tabindex="-1" href="#">삭제</a></li>
+						</ul>
+				<!--/end 자기자신일 경우는 메뉴참조못함 -->
+				</c:if>
+				<!--/end 관리자일경우만 메뉴참조가능 -->
+				</c:if>
+				</div>
 				</c:if>
 				<c:if test="${m.grade == 2}">
+				 <!-- 드롭다운메뉴생성 -->
+    	 		<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
 					<img src="${m.profile_image }"  title="${m.name }(member)" data-toggle="popover" data-trigger="hover" data-content="${m.email }" data-placement="bottom" class="img-circle">
+				<span class="caret"></span>
+				</button>
+				<!-- 관리자일경우만 메뉴참조가능 -->
+					<c:if test="${sessionGrade ==1 }">
+				<!-- 자기자신일 경우는 메뉴참조못함 -->
+				<c:if test="${m.id!=sessionScope.id }">
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						    <li><a tabindex="-1" href="#">권한설정</a></li>
+						    <li class="divider"></li>
+						    <li><a tabindex="-1" href="#">삭제</a></li>
+						</ul>
+				<!--/end 자기자신일 경우는 메뉴참조못함 -->
+				</c:if>
+				<!--/end 관리자일경우만 메뉴참조가능 -->
+				</c:if>
+				</div>
 				</c:if>
 			</c:forEach>
+			<!--/end 현재 이 보드에 추가된 사람의 목록을 불러오는 for문 -->
+			</div>
+			<!-- /end 드롭다운메뉴생성 -->
 		</div>
 	</div>
 	<div class="panel panel-default">
