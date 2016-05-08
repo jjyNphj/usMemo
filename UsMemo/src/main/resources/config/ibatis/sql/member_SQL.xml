@@ -40,6 +40,14 @@
 		<insert id="addFriend" parameterClass="memberGrade">
 			insert into memberGrade values(memberGrade_num_seq.nextval,#bNum#,#memId#,2)
 		</insert>
+		
+		<delete id="deleteFriend" parameterClass="memberGrade">
+			delete memberGrade where bNum=#bNum# and memId=#memId#
+		</delete>
+		
+		<update id="updateFriend" parameterClass="memberGrade">
+			update memberGrade set grade=#grade# where bNum=#bNum# and memId=#memId#
+		</update>
 	
 	</sqlMap>
 	

@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-<script src="/usMemo/resources/textchange.js"></script>
+<%-- 상대경로로 설정해야 안전함.  
+ <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+ --%>
 <style type="text/css">
 .hide {
 	display: none;
@@ -33,7 +34,7 @@ img {margin: 5px 2px 2px 2px}
 $(document).ready(function(){
 	//팝업설정
 	$('[data-toggle="popover"]').popover();   
-	
+	$('[data-submenu]').submenupicker();
 	$(".addMemberBtn").click(function(){
 	    // 현재 버튼의 옆의 태그중 div 태그에 hide 클래스 태그를 넣던지 빼던지 한다.
 	    $(this).next(".hide").toggleClass("hide");
@@ -100,6 +101,39 @@ $(document).ready(function(){
 		        }); 
 		 }
 	}
+	
+	function updateMemberGrade(id,bNum,grade){
+		
+		
+		 $.ajax({
+	            url: 'update?memId='+id+'&bNum='+bNum+'&grade='+grade,
+	            type :'post',
+	            success:function(){
+	            	alert("success!");
+	            	window.location.reload();
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        }); 
+	}
+	
+	function deleteMember(id,bNum){
+		
+		 $.ajax({
+	            url: 'delete?memId='+id+'&bNum='+bNum,
+	            type :'post',
+	            success:function(){
+	            	alert("success!");
+	            	window.location.reload();
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        }); 
+	}
 </script>
 
 	<!-- 1) 현재 보드에 속해있는 인원 보여주기
@@ -135,7 +169,9 @@ $(document).ready(function(){
 				<!-- 자기자신일 경우는 메뉴참조못함 -->
 				<c:if test="${m.id!=sessionScope.id }">
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						     <li><a tabindex="-1" href="#">권한설정</a></li>
+							  <!-- 함수에 리턴값이 있던 없던 상관 없음. 클릭해도 페이지의 최상위(href의 경로)로 이동하지 않음 -->
+						     <li><a tabindex="-1" href='javascript:void(0);' onclick="updateMemberGrade(${m.id},${bNum },2)">일반멤버로 변경</a></li>					  		
+					  		
 						    <li class="divider"></li>
 						    <li><a tabindex="-1" href="#">삭제</a></li>
 						</ul>
@@ -157,9 +193,10 @@ $(document).ready(function(){
 				<!-- 자기자신일 경우는 메뉴참조못함 -->
 				<c:if test="${m.id!=sessionScope.id }">
 					  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-						    <li><a tabindex="-1" href="#">권한설정</a></li>
+					  		<!-- 함수에 리턴값이 있던 없던 상관 없음. 클릭해도 페이지의 최상위(href의 경로)로 이동하지 않음 -->
+						    <li><a tabindex="-1" href='javascript:void(0);' onclick="updateMemberGrade(${m.id},${bNum },1)">관리자로 변경</a></li>					  		
 						    <li class="divider"></li>
-						    <li><a tabindex="-1" href="#">삭제</a></li>
+						    <li><a tabindex="-1" href='javascript:void(0);' onclick="deleteMember(${m.id},${bNum })">삭제</a></li>
 						</ul>
 				<!--/end 자기자신일 경우는 메뉴참조못함 -->
 				</c:if>

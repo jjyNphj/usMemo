@@ -99,5 +99,23 @@ public class MemberService {
 	public void addFriend(MemberGrade addMemberInfo) {
 		memberDao.addFriend(addMemberInfo);
 	}
+	
+	/**
+	 * 模备昏力
+	 * @param id
+	 */
+
+	public void deleteFriend(MemberGrade member) {
+		memberDao.deleteFriend(member);
+		
+	}
+
+	/**
+	 * 模备 殿鞭函版
+	 * @param member
+	 */
+	public void updateFriend(MemberGrade member) {
+		memberDao.updateFriend(member);
+	}
 
 }

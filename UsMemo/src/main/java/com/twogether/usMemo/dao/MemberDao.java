@@ -58,5 +58,21 @@ public class MemberDao {
 			
 			sqlMapClientTemplate.insert("Member.addFriend",addMemberInfo);			
 		}
+		/**
+		 * 模备 昏力 
+		 * @param id
+		 */
+		public void deleteFriend(MemberGrade member) {
+			
+			sqlMapClientTemplate.delete("Member.deleteFriend",member);
+		}
+		
+		/**
+		 * 模备殿鞭 函版
+		 * @param member
+		 */
+		public void updateFriend(MemberGrade member) {
+			sqlMapClientTemplate.update("Member.updateFriend",member);
+		}
 
 }

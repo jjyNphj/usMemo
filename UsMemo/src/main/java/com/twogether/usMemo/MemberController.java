@@ -59,6 +59,19 @@ public class MemberController {
 		
 		return "/board/menu";
 	}
+	
+	@RequestMapping("/friend/delete")
+	public String deleteFriend(@ModelAttribute MemberGrade member){
+		memberService.deleteFriend(member);
+		
+		return "/board/menu";
+	}
+	
+	@RequestMapping("/friend/update")
+	public String updateFriend(@ModelAttribute MemberGrade member){
+		memberService.updateFriend(member);
+		return "/board/menu";
+	}
 
 
 }
