@@ -12,6 +12,7 @@
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/config/spring/appServlet/spring-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/config/spring/appServlet/interceptor-servlet.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
