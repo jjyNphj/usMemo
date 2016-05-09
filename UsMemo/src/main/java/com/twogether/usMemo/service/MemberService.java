@@ -1,18 +1,20 @@
 package com.twogether.usMemo.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.MemberDao;
 import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.dto.MemberGrade;
 
 
 @Service
@@ -50,6 +52,70 @@ public class MemberService {
 	
 		logger.info("세션아이디: {}", check);
 		
+	}
+
+	/**
+	 * 보드에서 메뉴창의 현재 참여하는 회원리스트 불러오는 서비스
+	 * @param memberInfo
+	 */
+	public List<Member> getMemberList(MemberGrade memberInfo) {
+		
+		return memberDao.getMemberList(memberInfo.getbNum());
+		
+	}
+
+	/**
+	 * 친구 찾기 서비스
+	 * @param memberFindInfo
+	 */
+	public List<Member> friendFind(String memberFindInfo,int bNum) {
+		//member 테이블에서 찾기
+		//memberFindInfo는 name,nickname,email정보임.
+		List<Member> memberList=new ArrayList<Member>();
+		memberList=memberDao.getMemberList(bNum);
+		List<Member> findMembetList=new ArrayList<Member>();
+		findMembetList=	memberDao.friendFind(memberFindInfo);
+		
+		ListIterator<Member> it = findMembetList.listIterator();
+		
+		while(it.hasNext()){
+			Member findFriend=it.next();
+			for(Member m:memberList){
+				if(findFriend.getId().equals(m.getId()))
+				{
+					it.remove();
+			}
+		}
+		}
+			
+		return findMembetList;
+		
+	}
+
+	/**
+	 * 친구추가 서비스
+	 * @param addMemberInfo
+	 */
+	public void addFriend(MemberGrade addMemberInfo) {
+		memberDao.addFriend(addMemberInfo);
+	}
+	
+	/**
+	 * 친구삭제
+	 * @param id
+	 */
+
+	public void deleteFriend(MemberGrade member) {
+		memberDao.deleteFriend(member);
+		
+	}
+
+	/**
+	 * 친구 등급변경
+	 * @param member
+	 */
+	public void updateFriend(MemberGrade member) {
+		memberDao.updateFriend(member);
 	}
 
 }

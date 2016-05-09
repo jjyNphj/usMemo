@@ -4,7 +4,19 @@
 	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
 	
 	<sqlMap namespace="Member">
-	 	<typeAlias alias="member" type="com.twogether.usMemo.dto.Member"/>
+		<typeAlias alias="member" type="com.twogether.usMemo.dto.Member"/>
+		<typeAlias alias="memberGrade" type="com.twogether.usMemo.dto.MemberGrade"/>
+	
+		<resultMap id="memberMap" class="member" >
+			<result property="id" column="id" />
+			<result property="nickname" column="nickname" />
+			<result property="name" column="name" />
+			<result property="email" column="email" />
+			<result property="profile_image" column="profile_image" />
+		</resultMap>
+	 	<resultMap id="memberGradeMap" class="member" extends="memberMap" >
+	 		<result property="grade" column="grade"/>
+	 	</resultMap>
 
 
 		
@@ -14,6 +26,28 @@
 		<insert id="setMember" parameterClass="member">
 			insert into member values(#id#,	#nickname#,#name#,#email#,#profile_image#)
 		</insert>
+		<select id="getMemberListBybNum" parameterClass="int" resultMap="memberGradeMap">
+			select * from Member m Inner Join MemberGrade g
+			on m.id=g.memId
+			where g.bNum=#bNum# 
+		</select>
+
+		<select id="friendFind" parameterClass="String" resultMap="memberMap">
+			select * from member
+			where name like #memberFindInfo#||'%' OR nickname like #memberFindInfo#||'%' OR email like #memberFindInfo#||'%'
+		</select>
+		
+		<insert id="addFriend" parameterClass="memberGrade">
+			insert into memberGrade values(memberGrade_num_seq.nextval,#bNum#,#memId#,2)
+		</insert>
+		
+		<delete id="deleteFriend" parameterClass="memberGrade">
+			delete memberGrade where bNum=#bNum# and memId=#memId#
+		</delete>
+		
+		<update id="updateFriend" parameterClass="memberGrade">
+			update memberGrade set grade=#grade# where bNum=#bNum# and memId=#memId#
+		</update>
 	
 	</sqlMap>
 	

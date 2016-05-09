@@ -24,7 +24,33 @@
 	</repositories>
 
 	<dependencies>
-		<!-- JSON Object를 쓰기 위한 json simple임. -->
+	
+	<!--jUnit설정-->
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.11</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.mockito</groupId>
+		<artifactId>mockito-all</artifactId>
+		<version>1.9.5</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+		<version>3.2.3.RELEASE</version>
+		<scope>test</scope>
+	</dependency>
+	<!-- jUnit에서 목객체를 쉽게 쓸 수 있게함 
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>3.0</version>
+		</dependency>-->
+	<!-- JSON Object를 쓰기 위한 json simple임. -->
 
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>

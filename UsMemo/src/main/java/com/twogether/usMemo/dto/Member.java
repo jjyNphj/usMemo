@@ -8,6 +8,7 @@ public class Member {
 	private String name;
 	private String email;
 	private String profile_image;
+	private int grade;
 	
 	public String getId() {
 		return id;
@@ -38,6 +39,12 @@ public class Member {
 	}
 	public void setProfile_image(String profile_image) {
 		this.profile_image = profile_image;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 
 	

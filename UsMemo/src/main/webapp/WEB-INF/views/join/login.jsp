@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 <script src="resources/naverLogin.js"></script>
 
@@ -14,9 +14,9 @@
 <body>
 	<script type="text/javascript">
 	var naver = NaverAuthorize({
-		client_id : "h1ZMSWqDjJSY20p865Ys",
-		redirect_uri : "http://192.168.0.13:8080/usMemo/login",
-		client_secret : "fCKQuU8hmN"
+		client_id : "ZnxAOuCVv8j9OLASYEHE",
+		redirect_uri : "http://192.168.0.2:8080/usMemo/login",
+		client_secret : "tJrkiSgMRo"
 
 	});
 	function getNaverUserInfo() {
@@ -25,8 +25,8 @@
 			console.log("success to get user info", res);
 			console.log(res.response);
 			/*
-			ÅäÅ« ¸ğµÎ Áö¿ì±â(»ç½Ç»ó ³×ÀÌ¹ö¿¡¼­ÀÇ ·Î±×¾Æ¿ô)
-			ÄÁÆ®·Ñ·¯·Î »ç¿ëÀÚ Á¤º¸ ³Ñ±â±â
+			í† í° ëª¨ë‘ ì§€ìš°ê¸°(ì‚¬ì‹¤ìƒ ë„¤ì´ë²„ì—ì„œì˜ ë¡œê·¸ì•„ì›ƒ)
+			ì»¨íŠ¸ë¡¤ëŸ¬ë¡œ ì‚¬ìš©ì ì •ë³´ ë„˜ê¸°ê¸°
 			*/
 			
 /*   alert(res.response.email + ', ' + res.response.id
@@ -43,7 +43,7 @@
 	}
 	
 	/* function logoutNaver() {
-		  alert('·Î±×¾Æ¿ôµé¾î¿È'); 
+		  alert('ë¡œê·¸ì•„ì›ƒë“¤ì–´ì˜´'); 
 		naver.logout(tokenInfo.access_token);
 		console.log("access", tokenInfo.access_token);
 		console.log("refresh", tokenInfo.refresh_token);
@@ -52,7 +52,7 @@
 	}
 	 */
 window.onload = function() {
-	// callbackÀÌ ¿À¸é checkLoginState()ÇÔ¼ö¸¦ È£ÃâÇÑ´Ù.
+	// callbackì´ ì˜¤ë©´ checkLoginState()í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•œë‹¤.
 	checkLoginState();
 
 }
@@ -66,12 +66,12 @@ function checkLoginState() {
 	var state = $.cookie("state_token");
 	if (naver.checkAuthorizeState(state) === "connected") {
 
-		//Á¤»óÀûÀ¸·Î CallbackÁ¤º¸°¡ Àü´ŞµÇ¾úÀ» °æ¿ì Access Token¹ß±Ş ¿äÃ» ¼öÇà
+		//ì •ìƒì ìœ¼ë¡œ Callbackì •ë³´ê°€ ì „ë‹¬ë˜ì—ˆì„ ê²½ìš° Access Tokenë°œê¸‰ ìš”ì²­ ìˆ˜í–‰
 		naver.getAccessToken(function(data) {
 
 			var response = data._response.responseJSON;
 			if (response.error === "fail") {
-				//access token »ı¼º ¿äÃ»ÀÌ ½ÇÆĞÇÏ¿´À» °æ¿ì¿¡ ´ëÇÑ Ã³¸®
+				//access token ìƒì„± ìš”ì²­ì´ ì‹¤íŒ¨í•˜ì˜€ì„ ê²½ìš°ì— ëŒ€í•œ ì²˜ë¦¬
 				return;
 			}
 			tokenInfo.access_token = response.access_token;
@@ -84,7 +84,7 @@ function checkLoginState() {
 			getNaverUserInfo();
 		});
 	} else {
-		//CallbackÀ¸·Î Àü´ŞµÈ µ¥ÀÌÅÍ°¡ Á¤»óÀûÀÌÁö ¾ÊÀ» °æ¿ì¿¡ ´ëÇÑ Ã³¸®
+		//Callbackìœ¼ë¡œ ì „ë‹¬ëœ ë°ì´í„°ê°€ ì •ìƒì ì´ì§€ ì•Šì„ ê²½ìš°ì— ëŒ€í•œ ì²˜ë¦¬
 		return;
 	}
 
