@@ -7,6 +7,9 @@ import java.util.ListIterator;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +60,17 @@ public class MemberService {
 	/**
 	 * 보드에서 메뉴창의 현재 참여하는 회원리스트 불러오는 서비스
 	 * @param memberInfo
+	 * @throws ParseException 
 	 */
 	public List<Member> getMemberList(MemberGrade memberInfo) {
+		
+		
+/*		//Json파싱
+		JSONParser jsonPaser = new JSONParser();
+		JSONObject inputObj = (JSONObject)jsonPaser.parse(memberInfoString);
+		MemberGrade memberInfo=new MemberGrade();
+		memberInfo.setbNum(Integer.parseInt(inputObj.get("bNum").toString()));
+		memberInfo.setmemId(inputObj.get("memId").toString());*/
 		
 		return memberDao.getMemberList(memberInfo.getbNum());
 		

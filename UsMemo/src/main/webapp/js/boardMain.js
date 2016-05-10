@@ -320,7 +320,7 @@ var before=new Object();
 		           // console.log("card stop: "+productOrder);
 		            if(sameListFlag){
 		            	//같은 리스트에서 카드가 옮겨졌을 때 처리.
-		            	updateCardStop(productOrder,ui.item.index());}
+		            	updateCardStop(productOrder,ui.item.index(),ui.item.context.parentNode.id);}
 	              updateCardChange();
 		        },
 			   receive: function( event, ui ) {
@@ -348,9 +348,5 @@ var before=new Object();
     
     
 	 
-	 function openMenu(bNum, memId){
-		 
-		  var url='/usMemo/member/friend/index?bNum='+bNum+'&memId='+memId;
-		  window.open(url, "_self",  '');
-	 }
+	 
 

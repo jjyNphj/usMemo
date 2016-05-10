@@ -20,15 +20,24 @@
 .list_all {	overflow: auto;}
 .list_unit { float: left;}
 .hide {	display: none;}
-</style>
 
+.list-group-item:hover{
+	background-color: gray;}
+/*멤버사진 가로정렬*/
+.dropdown{ display:inline}
+</style>
+<script type="text/javascript">
+</script>
 </head>
 
 <body>
 
 	<form>
+	<div id="setVar">
 		<input type="hidden" id="bNum" value="${bNum }" />
 		<input type="hidden" id="memId" value="${sessionScope.id }" />
+				
+	</div>
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 				<li class="list_unit" id="${l.num}">
@@ -41,7 +50,7 @@
 								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
 								<li id="${l.num}_${c.card_num }">
 									[${c.card_num }] ${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]&nbsp;&nbsp;&nbsp;
-									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#myModal"/>
+									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
 								</li>
 							</c:if>
 						</c:forEach>
@@ -63,14 +72,16 @@
 			<br> <input type="button" value="add" onclick="addList(${bNum})" />
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
-		
-		<input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
-	</form>
+		<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
+							
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#menuView" onClick="openMenu(${bNum},${sessionScope.id})" >menu</button>
+		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
+ --%>	
 	
 	
 	<!-- Modal 길어서 쪼갬-->
 	<div class="container">
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="cardInfoView" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -87,14 +98,14 @@
 						<button type="button" class="btn btn-primary" style="float:right;" onclick="">&nbsp;Save&nbsp;</button>
 						<button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button></br>
 						
-						<form>
+					
 							<div class="form-group" >
 								<label for="exampleInputFile" >파일 업로드</label> 
 								<input type="file"	id="exampleInputFile"  >
 								<p class="help-block">파일 추가, 삭제, 다운</p>
 							</div>
 							<button type="submit" class="btn btn-default">첨부하기</button>
-						</form>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>
@@ -102,9 +113,79 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
+	
+	
+	
+	<!-- menu modal -->
+	<div class="modal fade"  id="menuView" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="gridSystemModalLabel">이 보드의 멤버</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+          
+            <div class="row">
+              <div class="col-md-9">    
+              <div class="panel panel-default">
+		    	 <div id="setMember" class="panel-body">
+					
+						<!-- 드롭다운메뉴생성 -->
+		    	 	<!--	<div class="dropdown">
+					 	<button id="img_button" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+							<img id="profile_image" src="default"  title="default" data-toggle="popover" data-trigger="hover" 
+								data-content="default" data-placement="bottom" class="img-circle" >
+						 --><!-- <span class="caret"></span>
+						</button> -->
+							  <!-- <ul id="dropDown" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+								</ul> -->
+					<!--/end 현재 이 보드에 추가된 사람의 목록을 불러오는 for문 -->
+					<!-- </div>-->
+					<!-- /end 드롭다운메뉴생성 -->
+				</div>
+				</div>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
+               <div class="panel panel-default">
+					<div class="panel-body">
+					 	<form role="form">
+					 		<!-- input상자의 설정 -->
+					 		<!-- <div class="col-xs-8"> -->
+							<input type="button" class="addMemberBtn" value="addMembers...">
+							<div id="findOption" class="hide">
+								<label for="pwd">친구검색</label>
+								<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
+								<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
+								<div id="findMemberResult" class="list-group"></div>
+								<br> <input type="button" value="specialLink생성"/> 
+								<br><input type="button" class="cancelAddMemberBtn" value="cancel" />
+							</div>
+							<!-- /end input상자의 설정-->
+						<!-- 	</div> -->
+							</form>
+						</div>
+					</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.menu modal-content -->
+    </div><!-- /.menu modal-dialog -->
+  </div><!-- /.menu modal -->
+  
+  	</div>
+  	</form>
 <script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 <script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
+<script src="${pageContext.request.contextPath}/js/menu.js"></script>
 	
 </body>
 </html>

@@ -19,8 +19,9 @@
 	display: none;
 }
 img {margin: 5px 2px 2px 2px}
-.list-group-item:hover{
 /* 마진이 바깥쪽 여백, 패딩이 안쪽여백 의미, 숫자는 순서대로 윗쪽부터 시계방향 */
+
+.list-group-item:hover{
 	background-color: gray;}
 /*멤버사진 가로정렬*/
 .dropdown{ display:inline}
