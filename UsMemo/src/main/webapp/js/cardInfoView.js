@@ -48,6 +48,9 @@ function addCardDescription(card_num,cardDescription){
 	console.log(num);
 	//textarea에 기입한 내용 가져오기
 	var content = cardDescription.value;
+	
+	content = content.replace(/\n/g,'<br>');
+	content = content.replace(/\r/g,'<br>');
 	console.log(content);
 	
 	var url='/usMemo/card/add/CardContent?num='+num+'&content='+content;
@@ -69,7 +72,9 @@ function addCardDescription(card_num,cardDescription){
 	 $("#card_Name").text(cardInfo.card_name);
 	 $("#list_Name").text(cardInfo.list_name);
 	 $("#card_num").text(cardInfo.card_num);
-	 $("#card_Content").val(cardInfo.content);
+	 
+	 var cardDescription = cardInfo.content.replace(/\<br>/g,'\n');
+	 $("#cardDescription").val(cardDescription);
 	 console.log(cardInfo.content);
 	 
 	 /* Sat Apr 30 2016 20:31:18 GMT+0900 형태로 date에 들어감 */
