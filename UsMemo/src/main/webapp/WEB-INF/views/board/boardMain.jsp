@@ -72,7 +72,6 @@
 			<br> <input type="button" value="add" onclick="addList(${bNum})" />
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
-		<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
 							
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#menuView" onClick="openMenu(${bNum},${sessionScope.id})" >menu</button>
 		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
@@ -86,17 +85,23 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" ><span id="card_Name" /></h4>
-						<h6 class="modal-title" >in list <span id="list_Name" /></h6>
+						<h4 class="modal-title" ><span id="card_Name"></span></h4>
+						<h6 class="modal-title" >in list <span id="list_Name"></span></h6>
+						<!-- <h6 class="modal-title"><span id="card_Content"></span></h6> -->
 					</div>
 					<div class="modal-body">
-						<p>You wrote:<br><span id="card_Date"/></p>
+						<p>You wrote:<br><span id="card_Date"></span></p>
 						
-						<p>카드 상세 내용 입력하는 부분, 수정</p>
-						<!-- textarea의 내용 id변수에 저장해서 /createBoard 전달 -->
-						<textarea class="form-control" style="resize:none;" rows="10"  id="boardComment" placeholder="카드상세내용을 입력해주세요."></textarea></br>
-						<button type="button" class="btn btn-primary" style="float:right;" onclick="">&nbsp;Save&nbsp;</button>
-						<button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button></br>
+						<!-- span 안에 담기는 카드의 넘버를 cardInfoView.js로 넘겨주기 위함 -->
+						<p><span class="hide" id="card_num"></span>카드 상세 내용 입력하는 부분, 수정</p>
+						
+						<!-- textarea의 내용 id변수에 저장 -->
+						<textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요.">${card_Content}</textarea>
+						</br>
+						
+						<button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
+						<button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
+						</br>
 						
 					
 							<div class="form-group" >

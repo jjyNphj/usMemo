@@ -29,24 +29,16 @@ public class CardService {
 
 	}
 	
-	/*public HashMap<String, List> editCardWindow(int lNum, int cNum){	
-
-		HashMap<String, List> mapList = new HashMap<String, List>();
-		
-		List<Card> listArray = cardDao.getCardInfoBycNum(cNum);
-		mapList.put("cardInfo", listArray);
-			
-		logger.info("check : listArray{}" , listArray);
-		
-		return mapList;
-		
-	}*/
 	public ListAndCard editCardWindow(int cNum) {
 		ListAndCard listAndcard = new ListAndCard();
 		listAndcard = cardDao.getCardInfoBycNum(cNum);
 				
 		logger.info("check : card{}" , listAndcard);
 		return listAndcard;
+	}
+	
+	public void addCardContent(Card card) {
+		cardDao.addCardContent(card);
 	}
 	
 

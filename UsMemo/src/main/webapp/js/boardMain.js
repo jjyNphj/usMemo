@@ -42,6 +42,7 @@ var before=new Object();
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;
+		 //console.log(u);
 		 var name=nameNum.value;
 		 var memId=$("#memId").val();
 		 var url='/usMemo/card/add?lNum='+lNum+'&name='+name+'&memId='+memId;
