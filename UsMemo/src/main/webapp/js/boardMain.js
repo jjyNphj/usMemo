@@ -42,6 +42,7 @@ var before=new Object();
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;
+		 //console.log(u);
 		 var name=nameNum.value;
 		 var memId=$("#memId").val();
 		 var url='/usMemo/card/add?lNum='+lNum+'&name='+name+'&memId='+memId;
@@ -320,7 +321,7 @@ var before=new Object();
 		           // console.log("card stop: "+productOrder);
 		            if(sameListFlag){
 		            	//같은 리스트에서 카드가 옮겨졌을 때 처리.
-		            	updateCardStop(productOrder,ui.item.index());}
+		            	updateCardStop(productOrder,ui.item.index(),ui.item.context.parentNode.id);}
 	              updateCardChange();
 		        },
 			   receive: function( event, ui ) {

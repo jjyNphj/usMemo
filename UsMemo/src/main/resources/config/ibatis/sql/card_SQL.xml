@@ -97,6 +97,11 @@
 		on L.num=C.lNum
 		where C.num=#cNum#
 	</select>
+	
+	<update id="addCardContent" parameterClass="card">
+	    <!-- 전달받은 card 안에 cardInfoView에서 넘겨준 num값과 content값이 존재. -->
+	   update card set content=#content# where num=#num#
+	</update>
 
 </sqlMap>
 	

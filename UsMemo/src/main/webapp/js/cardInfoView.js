@@ -36,12 +36,41 @@ function editCard(cNum) {
 		alert(error);
 		}
 	}) 
-}  
+}
+
+function addCardDescription(card_num,cardDescription){
+	/*
+	 * <span id="card_num"> 내용 </span>
+	 * span 안의 내용을 가져오려면 아래와 같이 하면 된다. 참고로 꼭 span이 아니어도 됨. 어떤 id 값이든 가능
+	 * document.getElementById('아이디').innerHTML  
+	 * */
+	var num = document.getElementById('card_num').innerHTML;
+	console.log(num);
+	//textarea에 기입한 내용 가져오기
+	var content = cardDescription.value;
+	console.log(content);
+	
+	var url='/usMemo/card/add/CardContent?num='+num+'&content='+content;
+	$.ajax({
+		url: url,
+
+		type:'post',
+		success:function(){
+			alert("CardContent add!");
+		} ,
+		error : function(xhr, status, error) {
+			alert(error);
+		}
+	})
+}
  
  function setCardInfo(cardInfo){
 	 /* ListAndCard dto의 card 정보와 list 정보를 html에서 쓰기위해 세팅하는 부분  */
 	 $("#card_Name").text(cardInfo.card_name);
 	 $("#list_Name").text(cardInfo.list_name);
+	 $("#card_num").text(cardInfo.card_num);
+	 $("#card_Content").val(cardInfo.content);
+	 console.log(cardInfo.content);
 	 
 	 /* Sat Apr 30 2016 20:31:18 GMT+0900 형태로 date에 들어감 */
 	 var date = new Date(cardInfo.n_date);

@@ -65,6 +65,7 @@ public class CardController {
 	 * */
 	@ResponseBody	//클라이언트에게 전송할 응답 데이터를 JSON 객체로 변환
 	public ListAndCard editCardWindow(@RequestBody String cNum) throws ParseException{
+		//카드 수정하기 눌렀을때 세부창 뜨면서 리스트와 카드 정보 가져오는 부분
 		
 		ListAndCard listAndcard = new ListAndCard();
 		
@@ -79,6 +80,18 @@ public class CardController {
 		
 		listAndcard = cardService.editCardWindow(intcNum);
 		return listAndcard;
+	}
+	
+	@RequestMapping("/add/CardContent")
+	public ModelAndView addCardContent(@ModelAttribute Card card){
+
+		//카드 수정하기 눌렀을때 뜨는 세부창에서 자세하게 카드의 내용을 서술하고 저장하는 부분
+		ModelAndView mv= new ModelAndView();
+		
+		mv.setViewName("board/boardMain");
+		cardService.addCardContent(card);
+		return mv;
+
 	}
 	
 }
