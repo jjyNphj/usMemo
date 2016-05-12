@@ -5,18 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <!-- 부트스트랩 CDN -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<!-- <script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
-<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Custom CSS -->
+    <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
 
 <title>Insert title here</title>
 
 <style type="text/css">
+#page-content-wrapper {overflow: auto;}
 .list_all {	overflow: auto;}
 .list_unit { float: left;}
 .hide {	display: none;}
@@ -26,24 +25,61 @@
 /*멤버사진 가로정렬*/
 .dropdown{ display:inline}
 </style>
-<script type="text/javascript">
-</script>
+
+
 </head>
-
 <body>
+    <div id="wrapper">
 
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+           <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul> 
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+	
+	   <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+            
 	<form>
-	<div id="setVar">
+            
 		<input type="hidden" id="bNum" value="${bNum }" />
 		<input type="hidden" id="memId" value="${sessionScope.id }" />
 				
-	</div>
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 				<li class="list_unit" id="${l.num}">
 					<h1>${l.num},${l.name}<br>${l.llink}/${l.rlink }</h1>
 					<ul class="card_unit" id="${l.num }">
-					-
+					&nbsp;&nbsp;
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
 							
@@ -76,9 +112,17 @@
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#menuView" onClick="openMenu(${bNum},${sessionScope.id})" >menu</button>
 		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>	
+	 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                 
+	</form>
+	</div>
+	</div>
+	<!-- /#page Content -->
+	</div>
+    <!-- /#wrapper -->
 	
-	
-	<!-- Modal 길어서 쪼갬-->
+	<!-- Modal -->
+	<!-- cardInfo Modal -->
 	<div class="container">
 		<div class="modal fade" id="cardInfoView" role="dialog">
 			<div class="modal-dialog modal-lg">
@@ -118,11 +162,11 @@
 				</div>
 			</div>
 		</div>
-
+	</div>
+	<!-- /#cardInfo Modal -->
 	
 	
-	
-	<!-- menu modal -->
+	<!-- menu Modal -->
 	<div class="modal fade"  id="menuView" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -182,15 +226,33 @@
           <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
         </div>
-      </div><!-- /.menu modal-content -->
-    </div><!-- /.menu modal-dialog -->
-  </div><!-- /.menu modal -->
+      </div><!-- /#menu modal-content -->
+    </div><!-- /#menu modal-dialog -->
+  </div><!-- /#menu modal -->
   
   	</div>
-  	</form>
-<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
-<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
-<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+  	<!-- /#menu Modal -->
+  <!-- /#Modal -->
+  	
+
+  	
+		<!-- js -->
+	
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
+	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
+	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+
+	    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 	
 </body>
 </html>
