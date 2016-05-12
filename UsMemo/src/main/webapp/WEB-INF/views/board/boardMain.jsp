@@ -28,7 +28,7 @@
 
 </head>
 <body>
-    <div id="wrapper" class="toggled">
+    <div id="wrapper" class="toggled" >
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -40,28 +40,26 @@
             <div class="container-fluid">
           
             <div class="row">
-              <div class="col-md-9">    
+              <div class="span12">    
               <div class="panel panel-default">
-		    	 <div id="setMember" class="panel-body">
-
-				</div>
+		    	 <div id="setMember" class="panel-body"></div>
 				</div>
             </div>
-            <div class="row">
-              <div class="col-md-9">
+             <div class="row">
+     		 <div class="span12">
                <div class="panel panel-default">
 					<div class="panel-body">
 					 	<form role="form">
 					 		<!-- input상자의 설정 -->
 					 		<!-- <div class="col-xs-8"> -->
-							<input type="button" class="addMemberBtn" value="addMembers...">
-							<div id="findOption" class="hide">
+							<!-- <input type="button" class="addMemberBtn" value="addMembers..."> -->
+							<div id="findOption"><!--  class="hide" -->
 								<label for="pwd">친구검색</label>
 								<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
 								<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
 								<div id="findMemberResult" class="list-group"></div>
-								<br> <input type="button" value="specialLink생성"/> 
-								<br><input type="button" class="cancelAddMemberBtn" value="cancel" />
+								<!-- <br> <input type="button" value="specialLink생성"/> 
+								<br><input type="button" class="cancelAddMemberBtn" value="cancel" /> -->
 							</div>
 							<!-- /end input상자의 설정-->
 						<!-- 	</div> -->
@@ -70,22 +68,24 @@
 					</div>
               </div>
             </div>
-          </div>
+            <!-- /#안쪽row -->
+         </div>
+         <!-- /#바깥row -->
         </div>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Overview</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Events</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">About</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Services</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Contact</a>
                 </li>
             </ul>  
