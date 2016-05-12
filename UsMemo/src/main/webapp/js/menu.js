@@ -219,12 +219,33 @@ function addMemberFunc(id,bNum){
 			$('#findMember').val('');
 		}
 		//이벤트: 모달 창 끄면 
-		$('#menuView').on('hidden.bs.modal',function(){
+		/*$('#menuView').on('hidden.bs.modal',function(){
 			cleanMemberListView();
 			cleanFindMemberListView();
 			cleanFindeMemberText();
 			
-		})
+		})*/
+
+		// 슬라이드바 클릭시
+		$("#menu-toggle").click(function(e) {
+			e.preventDefault();
+			
+			//토글클래스가 아님
+			if(!$("#wrapper").hasClass('toggled')) {
+			
+			//화면지움
+				cleanMemberListView();
+				cleanFindMemberListView();
+				cleanFindeMemberText();
+				
+				//토글클래스일 때 
+			}else if($("#wrapper").hasClass('toggled')){
+			 //화면그림
+				openMenu($("#bNum").val(),$("#memId").val());
+			}
+			$("#wrapper").toggleClass("toggled");
+
+		});
 	
 		
 	/*

@@ -15,7 +15,6 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-#page-content-wrapper {overflow: auto;}
 .list_all {	overflow: auto;}
 .list_unit { float: left;}
 .hide {	display: none;}
@@ -29,21 +28,50 @@
 
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="toggled">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
            <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
+                    <a>Menu</a>
                 </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Shortcuts</a>
+                   <li>
+            <div class="container-fluid">
+          
+            <div class="row">
+              <div class="col-md-9">    
+              <div class="panel panel-default">
+		    	 <div id="setMember" class="panel-body">
+
+				</div>
+				</div>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
+               <div class="panel panel-default">
+					<div class="panel-body">
+					 	<form role="form">
+					 		<!-- input상자의 설정 -->
+					 		<!-- <div class="col-xs-8"> -->
+							<input type="button" class="addMemberBtn" value="addMembers...">
+							<div id="findOption" class="hide">
+								<label for="pwd">친구검색</label>
+								<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
+								<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
+								<div id="findMemberResult" class="list-group"></div>
+								<br> <input type="button" value="specialLink생성"/> 
+								<br><input type="button" class="cancelAddMemberBtn" value="cancel" />
+							</div>
+							<!-- /end input상자의 설정-->
+						<!-- 	</div> -->
+							</form>
+						</div>
+					</div>
+              </div>
+            </div>
+          </div>
+        </div>
                 </li>
                 <li>
                     <a href="#">Overview</a>
@@ -60,7 +88,7 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
-            </ul> 
+            </ul>  
         </div>
         <!-- /#sidebar-wrapper -->
 
@@ -109,10 +137,9 @@
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
 							
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#menuView" onClick="openMenu(${bNum},${sessionScope.id})" >menu</button>
+		<button type="button" id="menu-toggle" class="btn btn-primary">menu</button>
 		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>	
-	 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
                  
 	</form>
 	</div>
@@ -246,13 +273,5 @@
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
 	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
 
-	    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
-	
 </body>
 </html>
