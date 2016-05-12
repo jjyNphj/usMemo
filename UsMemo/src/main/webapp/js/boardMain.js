@@ -4,9 +4,30 @@ var updateCard =new Object();
 var sameListFlag=true;
 var before=new Object();
 	 
-/*
- * 버튼설정
- * */
+
+
+		/*
+		 * body영역 설정
+		 * */
+
+			/**
+			 * nav 고정영역만큼 body영역의 위치고정
+			 */
+			resizeBodyByNav();
+			function resizeBodyByNav(){
+				/*
+				 *  $(".navbar").outerHeight(); 
+				 *  엘리먼트의 padding 포함한 높이 구하기
+				 *  $(".navbar").outerHeight(true);
+				 *  엘리먼트의 margin 포함한 높이 구하기  
+				 */
+				var navSize=$(".navbar").outerHeight();
+				$("body").css('padding-top',navSize);
+			}
+
+		/*
+		 * 버튼설정
+		 * */
 
 	        // .addCardBtn 클래스 중 아무거나 클릭했을 때 
 	        $(".addCardBtn").click(function(){
@@ -38,6 +59,7 @@ var before=new Object();
 	           $(this).parents("div").prev(":button").show();
 	        });
 
+	 
 	        
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/

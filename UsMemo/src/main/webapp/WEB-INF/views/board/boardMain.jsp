@@ -6,15 +6,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<!-- 부트스트랩 CDN -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- 부트스트랩 CDN -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+
+	 
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
+ 	<link href="${pageContext.request.contextPath}/css/ct-paper.css" rel="stylesheet"/>
+   
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
-<title>Insert title here</title>
+<title>Your Board</title>
 
 <style type="text/css">
+body{padding-top:auto !important;}
 .list_all {	overflow: auto;}
 .list_unit { float: left;}
 .hide {	display: none;}
@@ -28,6 +37,77 @@
 
 </head>
 <body>
+<!-- UPnavbar -->
+ <div id="navbar">
+    
+    <!-- navbar-fixed-top 속성이 상단고정임. -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    
+          <div class="container-fluid">
+    
+            <div class="navbar-header">
+    
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    
+                <span class="sr-only">Toggle navigation</span>
+    
+                <span class="icon-bar"></span>
+    
+                <span class="icon-bar"></span>
+    
+                <span class="icon-bar"></span>
+    
+              </button>
+    
+              <a class="navbar-brand" href="#">Brand</a>
+    
+            </div>
+    
+    
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
+              <ul class="nav navbar-nav">
+    
+                <li><a href="#">Work in progress...</a></li>
+    
+                <li class="active"><a href="#">Link</a></li>
+    
+                <li><a href="#">Link</a></li>
+    
+                <li class="dropdown">
+    
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+    
+                  <ul class="dropdown-menu">
+    
+                    <li><a href="#">Action</a></li>
+    
+                    <li><a href="#">Another action</a></li>
+    
+                    <li><a href="#">Something else here</a></li>
+    
+                    <li class="divider"></li>
+    
+                    <li><a href="#">Separated link</a></li>
+    
+                    <li class="divider"></li>
+    
+                    <li><a href="#">One more separated link</a></li>
+    
+                  </ul>
+    
+                </li>
+    
+              </ul>
+    
+            </div><!-- /.navbar-collapse -->
+    
+          </div><!-- /.container-fluid -->
+    
+        </nav>
+    
+    </div><!--  end UPnavbar --> 
+    
     <div id="wrapper" class="toggled" >
 
         <!-- Sidebar -->
@@ -136,8 +216,8 @@
 			<br> <input type="button" value="add" onclick="addList(${bNum})" />
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
-							
-		<button type="button" id="menu-toggle" class="btn btn-primary">menu</button>
+		
+		<button type="button" id="menu-toggle" class="btn btn-warning">menu</button>
 		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>	
                  
@@ -266,12 +346,15 @@
 		<!-- js -->
 	
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
 	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+	<!-- 디자인 -->
+	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>
 
 </body>
 </html>
