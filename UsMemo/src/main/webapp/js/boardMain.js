@@ -15,16 +15,16 @@ var before=new Object();
 			 */
 			resizeBodyByNav();
 			function resizeBodyByNav(){
-				/*
-				 *  $(".navbar").outerHeight(); 
+				
+				/*  $(".navbar").outerHeight(); 
 				 *  엘리먼트의 padding 포함한 높이 구하기
 				 *  $(".navbar").outerHeight(true);
 				 *  엘리먼트의 margin 포함한 높이 구하기  
 				 */
-				var navSize=$(".navbar").outerHeight();
-				$("body").css('padding-top',navSize);
+				var navSize=$("#navId").outerHeight(true);
+				$(".list_all").css('padding-top',navSize+'px');
+				$(".list_all").css('padding-bottom',navSize+'px');
 			}
-
 		/*
 		 * 버튼설정
 		 * */
@@ -37,12 +37,12 @@ var before=new Object();
 	        });
 	        
 	        //카드 추가버튼클릭 후 취소 버튼 클릭했을 때
-	        $(".cancelCardBtn").click(function(){
+	 /*       $(".cancelCardBtn").click(function(){
 	            //cancel 클릭했을 때 입력창 감추기! 
 	            $(this).parents("div").toggleClass("hide");
 	            //원래 버튼인 add card... 버튼 보이기 
 	           $(this).parents("div").prev(":button").show();
-	        });
+	        });*/
 	        
 	        // .addListBtn 클래스 중 아무거나 클릭했을 때 
 	        $(".addListBtn").click(function(){
@@ -100,18 +100,35 @@ var before=new Object();
 	        })
 			
 	 }
-	
+
 	 //현재 사용자가 리스트 중 한개를 집은 상태
-	 function updateListStart(arr,index){
-	 arr= jQuery.grep(arr, function(value) {
+	 function updateListStart(inputArr,moveItemId){
+		 var arr=new Array();
+		 var index;
+		 
+		 inputArr= jQuery.grep(inputArr, function(value) {
 		  return value != "";
 		});
+	 //1) arr에서 카드의 id는 제외시키기
+		 $.each(inputArr,function(inx,value){
+			 if(value.indexOf("_")==-1){
+				 //리스트의 id가 제대로 들어있는경우임.
+				 arr.push(value);
+			 }
+		 });
+	 //2) 정리된 arr에서 moveItemId와 같은것을 찾아서 index로 만들기 
+		 $.each(arr,function(inx,value){
+			 if(value==moveItemId){
+				 //현재 id와 같은것을 찾음.index를 가지고와야함.
+				 index=inx;
+			 }
+		 });
 	 //배열상에 공백을 없애기 
-/* 		console.log("item:"+arr);
+		console.log("item:"+arr);
 		 console.log("start: "+arr[index]);
 		 console.log("start index: "+index);
 		 console.log("start with: "+arr[index-1]+" / "+arr[index+1]);
- */
+
 		//옮기기 전 앞에 있는 노드를 빈 오브젝트에 넣음
 		if(arr[index-1]!=undefined){
 			updateList.beforePreNum=arr[index-1];
@@ -171,15 +188,33 @@ var before=new Object();
 			
 		 }
 	 /* 집었던 리스트를 놓는 순간 */
-	 function updateListStop(arr,index){
-		 arr= jQuery.grep(arr, function(value) {
-  			  return value != "";
-  			});
+	 function updateListStop(inputArr,moveItemId){
+		 var arr=new Array();
+		 var index;
+		 
+		 inputArr= jQuery.grep(inputArr, function(value) {
+		  return value != "";
+		});
+	 //1) arr에서 카드의 id는 제외시키기
+		 $.each(inputArr,function(inx,value){
+			 if(value.indexOf("_")==-1){
+				 //리스트의 id가 제대로 들어있는경우임.
+				 arr.push(value);
+			 }
+		 });
+	 //2) 정리된 arr에서 moveItemId와 같은것을 찾아서 index로 만들기 
+		 $.each(arr,function(inx,value){
+			 if(value==moveItemId){
+				 //현재 id와 같은것을 찾음.index를 가지고와야함.
+				 index=inx;
+			 }
+		 });
   		 //배열상에 공백을 없애기 
-     /*     console.log("update: "+arr[index]);
+		 console.log("--------------------------");
+         console.log("update: "+arr[index]);
          console.log("update index: "+index);
          console.log("update with: "+arr[index-1]+" / "+arr[index+1]);
-          */
+         
          //옮긴 후 앞에 있는 노드를 빈 오브젝트에 넣기 
          if(arr[index-1]!=undefined){
         	 updateList.afterPreNum=arr[index-1];
@@ -207,29 +242,37 @@ var before=new Object();
   		 //배열상에 공백을 없애기 
           console.log("update: "+arr.length);
          console.log("update index: "+index);
-         console.log("update with: "+arr[index-1]+" / "+arr[index+1]);
+         console.log("update with: "+arr[index-1]+"/"+arr[index] +" / "+arr[index+1]);
          
     
          var cardInfoRaw;
        	 //lNum을 받음
          updateCard.afterLNum=lNum;
       
-         if(arr[index-1]!=undefined){
-        	 cardInfoRaw=arr[index-1].split('_');
-        	 updateCard.afterPreNum=cardInfoRaw[1];
- 		}  
- 		else{
- 			updateCard.afterPreNum=0;
- 		}
- 		  
- 		if(arr[index+1]!=undefined){
- 			cardInfoRaw=arr[index+1].split('_');
- 			updateCard.afterPostNum=cardInfoRaw[1];
- 		  }
- 		else {
- 			updateCard.afterPostNum=0;
- 		}
- 		
+         if(arr.length==1){
+        	 //카드없는 리스트에 카드를 넘길때 
+        	 updateCard.afterPreNum=0;
+        	 updateCard.afterPostNum=0;
+         }
+         else{
+        	 //카드 있는 리스트에 카드를 넘길때 
+		         if(arr[index-1]!=undefined){
+		        	 //옮긴 후의 카드의 앞에 카드가 있을때
+		        	 cardInfoRaw=arr[index-1].split('_');
+		        	 updateCard.afterPreNum=cardInfoRaw[1];
+		 		}  
+		 		else{//리스트에 카드를 맨 앞자리로 옮겼을 때 
+		 			updateCard.afterPreNum=0;
+		 		}
+		 		  
+		 		if(arr[index+1]!=undefined){
+		 			cardInfoRaw=arr[index+1].split('_');
+		 			updateCard.afterPostNum=cardInfoRaw[1];
+		 		  }
+		 		else {//리스트에 카드를 맨 뒷자리로 옮겼을 때 
+		 			updateCard.afterPostNum=0;
+		 		}
+         }
 	 }
 	 function updateListChange(){
 		 //json타입으로 변환
@@ -281,6 +324,9 @@ var before=new Object();
 		2) 리스트간 카드 넘기기  */
 		$(".list_all").sortable({
 			axis:"x",
+/*			cancel: "#addListLI" 입력을 못하게 막음,*/
+			items: "li:not(#addListLI,#addCardLI,.card_all)",
+			/*움직이는 대상에서 제외*/
 			item:function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
 		              console.log("item:"+productOrder);
@@ -298,7 +344,8 @@ var before=new Object();
 			,
 			  start: function (event, ui) {  
 				  var productOrder = $(this).sortable("toArray");
-					updateListStart(productOrder,ui.item.index());
+				  console.log("item:"+productOrder);
+					updateListStart(productOrder,ui.item[0].id);
 				  
 		        },
 		        stop: function (event, ui) {
@@ -308,7 +355,7 @@ var before=new Object();
 			update: function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
 	              console.log("List update : "+productOrder);
-	              updateListStop(productOrder,ui.item.index());
+	              updateListStop(productOrder,ui.item[0].id);
 	            //  listChangeLocation(productOrder);
 	              updateListChange();
 	            },
@@ -318,9 +365,11 @@ var before=new Object();
 		});
 		$(".list_all").disableSelection();
 
-		$(".card_unit").sortable({
+		$(".card_all").sortable({
 			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
-		      connectWith: ".card_unit",
+		      connectWith: ".card_all",
+	/*	      cancel: "#addCardLI" addbtn은 움직일 수 없게 설정,*/
+		      items: "li:not(#addCardLI,#addListLI)",
 			  start: function (event, ui) {  
 				  var productOrder = $(this).sortable("toArray");
 				  updateCardStart(productOrder,ui.item.index());

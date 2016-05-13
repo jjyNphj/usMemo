@@ -14,6 +14,7 @@
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
  	<link href="${pageContext.request.contextPath}/css/ct-paper.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/bootstrap-horizon.css" rel="stylesheet"/>
    
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,25 +24,46 @@
 <title>Your Board</title>
 
 <style type="text/css">
-body{padding-top:auto !important;}
-.list_all {	overflow: auto;}
-.list_unit { float: left;}
-.hide {	display: none;}
+ul.list_all, ul.card_all, li.list_unit, li.card_unit{
+	list-style-type: none;
+}
 
+li.list_unit {
+	display:inline-block; /* Op, Saf, Moz3.0이상, IE8등 */
+    height: 100%;
+}
+ 
+/* body{padding-top:auto !important;}
+ */
+/* .list_all {	overflow: auto;}
+.list_unit { float: left;} */
+ html, body{
+	height: 100%; overflow: auto;
+}
+
+.list_all{
+ height: 100%;
+ position: absolute; /* 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다. */
+}
+.hide {	display: none;}
 .list-group-item:hover{
 	background-color: gray;}
 /*멤버사진 가로정렬*/
 .dropdown{ display:inline}
+/* 
+.list_unit > #list-horizon-div{ width:100%; } */
 </style>
 
 
 </head>
 <body>
+<div class="content">
+<div id="header">
 <!-- UPnavbar -->
  <div id="navbar">
     
     <!-- navbar-fixed-top 속성이 상단고정임. -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <nav id="navId" class="navbar navbar-ct-danger navbar-fixed-top" role="navigation">
     
           <div class="container-fluid">
     
@@ -72,8 +94,7 @@ body{padding-top:auto !important;}
     
                 <li class="active"><a href="#">Link</a></li>
     
-                <li><a href="#">Link</a></li>
-    
+             
                 <li class="dropdown">
     
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -97,6 +118,8 @@ body{padding-top:auto !important;}
                   </ul>
     
                 </li>
+                   <li><button type="button" id="menu-toggle" class="btn btn-warning">menu</button></li>
+    
     
               </ul>
     
@@ -107,7 +130,8 @@ body{padding-top:auto !important;}
         </nav>
     
     </div><!--  end UPnavbar --> 
-    
+    </div><!-- end header -->
+    <div id="section">
     <div id="wrapper" class="toggled" >
 
         <!-- Sidebar -->
@@ -175,62 +199,74 @@ body{padding-top:auto !important;}
 	
 	   <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-            
-	<form>
+            <!-- <div class="container-fluid"> -->
+			<div class="row row-horizon">
+		<form>
             
 		<input type="hidden" id="bNum" value="${bNum }" />
 		<input type="hidden" id="memId" value="${sessionScope.id }" />
 				
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}" varStatus="index">
+					
 				<li class="list_unit" id="${l.num}">
-					<h1>${l.num},${l.name}<br>${l.llink}/${l.rlink }</h1>
-					<ul class="card_unit" id="${l.num }">
-					&nbsp;&nbsp;
+     	<!-- 	 <div class="col-md-5">  -->
+						${l.num }<h1>${l.name}</h1>
+					<ul class="card_all" id="${l.num }">
+					-
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
 							
 								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
-								<li id="${l.num}_${c.card_num }">
-									[${c.card_num }] ${c.card_name }, [${c.lNum }/${c.llink }/${c.rlink }]&nbsp;&nbsp;&nbsp;
+								<li class="card_unit" id="${l.num}_${c.card_num }" >
+									${c.card_num }/${c.card_name }
 									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
 								</li>
 							</c:if>
 						</c:forEach>
-					</ul> <input type="button" class="addCardBtn" value="add card..." />
-
-					<div class="hide">
-						<textarea rows="5" cols="30" id="cardName${l.num}"></textarea>
-						<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
-						<input type="button" class="cancelCardBtn" value="cancel" />
-					</div>
+						<li id="addCardLI">
+						<input type="button" class="addCardBtn" value="add card..." />
+							<div >
+							<textarea rows="5" id="cardName${l.num}"></textarea>
+							<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
+							<input type="button" class="cancelCardBtn" value="cancel" />
+							</div>
+					</li>
+					</ul>
+					<!-- </div> -->
 				</li>
 			</c:forEach>
 
-
-		</ul>
+		<li  class="list_unit" id="addListLI">
 		<input type="button" class="addListBtn" value="add list..." />
 		<div class="hide">
 			<textarea rows="5" cols="30" id="listName"></textarea>
 			<br> <input type="button" value="add" onclick="addList(${bNum})" />
 			<input type="button" class="cancelListBtn" value="cancel" />
 		</div>
+		</li>
+		</ul>
 		
-		<button type="button" id="menu-toggle" class="btn btn-warning">menu</button>
+		
 		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>	
                  
 	</form>
 	</div>
+	<!-- </div> -->
+
 	</div>
 	<!-- /#page Content -->
 	</div>
     <!-- /#wrapper -->
-	
+    </div>
+    <!-- end section -->
+	</div>
+	<!-- /.content -->
 	<!-- Modal -->
+	
+	
 	<!-- cardInfo Modal -->
-	<div class="container">
 		<div class="modal fade" id="cardInfoView" role="dialog">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -269,80 +305,8 @@ body{padding-top:auto !important;}
 				</div>
 			</div>
 		</div>
-	</div>
 	<!-- /#cardInfo Modal -->
 	
-	
-	<!-- menu Modal -->
-	<div class="modal fade"  id="menuView" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="gridSystemModalLabel">이 보드의 멤버</h4>
-        </div>
-        <div class="modal-body">
-          <div class="container-fluid">
-          
-            <div class="row">
-              <div class="col-md-9">    
-              <div class="panel panel-default">
-		    	 <div id="setMember" class="panel-body">
-					
-						<!-- 드롭다운메뉴생성 -->
-		    	 	<!--	<div class="dropdown">
-					 	<button id="img_button" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-							<img id="profile_image" src="default"  title="default" data-toggle="popover" data-trigger="hover" 
-								data-content="default" data-placement="bottom" class="img-circle" >
-						 --><!-- <span class="caret"></span>
-						</button> -->
-							  <!-- <ul id="dropDown" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-								</ul> -->
-					<!--/end 현재 이 보드에 추가된 사람의 목록을 불러오는 for문 -->
-					<!-- </div>-->
-					<!-- /end 드롭다운메뉴생성 -->
-				</div>
-				</div>
-            </div>
-            <div class="row">
-              <div class="col-md-9">
-               <div class="panel panel-default">
-					<div class="panel-body">
-					 	<form role="form">
-					 		<!-- input상자의 설정 -->
-					 		<!-- <div class="col-xs-8"> -->
-							<input type="button" class="addMemberBtn" value="addMembers...">
-							<div id="findOption" class="hide">
-								<label for="pwd">친구검색</label>
-								<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
-								<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
-								<div id="findMemberResult" class="list-group"></div>
-								<br> <input type="button" value="specialLink생성"/> 
-								<br><input type="button" class="cancelAddMemberBtn" value="cancel" />
-							</div>
-							<!-- /end input상자의 설정-->
-						<!-- 	</div> -->
-							</form>
-						</div>
-					</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div><!-- /#menu modal-content -->
-    </div><!-- /#menu modal-dialog -->
-  </div><!-- /#menu modal -->
-  
-  	</div>
-  	<!-- /#menu Modal -->
-  <!-- /#Modal -->
-  	
-
-  	
 		<!-- js -->
 	
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>

@@ -1,100 +1,260 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+	<!-- 부트스트랩 CDN -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
-
+	 
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
+ 	<link href="${pageContext.request.contextPath}/css/ct-paper.css" rel="stylesheet"/>
+    <link href="${pageContext.request.contextPath}/css/bootstrap-horizon.css" rel="stylesheet"/>
+   
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+<title>Your Board</title>
+
+<style type="text/css">
+ html, body { height: 100%; overflow:hidden }
+   #wrap {
+		height:100%;  background-color:yellow; border:3px red solid; z-index: 1000;}
+ #container #page-content-wrapper{
+		height:100%;}
+</style>
 
 </head>
-
 <body>
-
-    <div id="wrapper">
+        <div id="wrap">
+            <!-- Head Start-->
+            <div id="header"><!-- UPnavbar -->
+ <div id="navbar">
+    
+    <!-- navbar-fixed-top 속성이 상단고정임. -->
+        <nav id="navId" class="navbar navbar-ct-danger navbar-fixed-top" role="navigation">
+    
+          <div class="container-fluid">
+    
+            <div class="navbar-header">
+    
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    
+                <span class="sr-only">Toggle navigation</span>
+    
+                <span class="icon-bar"></span>
+    
+                <span class="icon-bar"></span>
+    
+                <span class="icon-bar"></span>
+    
+              </button>
+    
+              <a class="navbar-brand" href="#">Brand</a>
+    
+            </div>
+    
+    
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    
+              <ul class="nav navbar-nav">
+    
+                <li><a href="#">Work in progress...</a></li>
+    
+                <li class="active"><a href="#">Link</a></li>
+    
+             
+                <li class="dropdown">
+    
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+    
+                  <ul class="dropdown-menu">
+    
+                    <li><a href="#">Action</a></li>
+    
+                    <li><a href="#">Another action</a></li>
+    
+                    <li><a href="#">Something else here</a></li>
+    
+                    <li class="divider"></li>
+    
+                    <li><a href="#">Separated link</a></li>
+    
+                    <li class="divider"></li>
+    
+                    <li><a href="#">One more separated link</a></li>
+    
+                  </ul>
+    
+                </li>
+                   <li><button type="button" id="menu-toggle" class="btn btn-warning">menu</button></li>
+    
+    
+              </ul>
+    
+            </div><!-- /.navbar-collapse -->
+    
+          </div><!-- /.container-fluid -->
+    
+        </nav>
+    
+    </div><!--  end UPnavbar --> </div>
+            <!-- Head End-->
+            <!-- Body Start-->
+            <div id="container">
+                <div class="contents-box">
+                     <div id="wrapper" class="toggled" >
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+           <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        Start Bootstrap
-                    </a>
+                    <a>Menu</a>
                 </li>
-                <li>
-                    <a href="#">Dashboard</a>
+                   <li>
+            <div class="container-fluid">
+          
+            <div class="row">
+              <div class="span12">    
+              <div class="panel panel-default">
+		    	 <div id="setMember" class="panel-body"></div>
+				</div>
+            </div>
+             <div class="row">
+     		 <div class="span12">
+               <div class="panel panel-default">
+					<div class="panel-body">
+					 	<form role="form">
+					 		<!-- input상자의 설정 -->
+					 		<!-- <div class="col-xs-8"> -->
+							<!-- <input type="button" class="addMemberBtn" value="addMembers..."> -->
+							<div id="findOption"><!--  class="hide" -->
+								<label for="pwd">친구검색</label>
+								<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
+								<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
+								<div id="findMemberResult" class="list-group"></div>
+								<!-- <br> <input type="button" value="specialLink생성"/> 
+								<br><input type="button" class="cancelAddMemberBtn" value="cancel" /> -->
+							</div>
+							<!-- /end input상자의 설정-->
+						<!-- 	</div> -->
+							</form>
+						</div>
+					</div>
+              </div>
+            </div>
+            <!-- /#안쪽row -->
+         </div>
+         <!-- /#바깥row -->
+        </div>
                 </li>
-                <li>
-                    <a href="#">Shortcuts</a>
-                </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Overview</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Events</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">About</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Services</a>
                 </li>
-                <li>
+                <li class="basic-li">
                     <a href="#">Contact</a>
                 </li>
-            </ul>
+            </ul>  
         </div>
         <!-- /#sidebar-wrapper -->
 
-        <!-- Page Content -->
+	
+	   <!-- Page Content -->
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>Simple Sidebar</h1>
-                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-                    </div>
+            <!-- <div class="container-fluid"> -->
+			<div class="row row-horizon"> 
+		<form>
+            
+		<input type="hidden" id="bNum" value="${bNum }" />
+		<input type="hidden" id="memId" value="${sessionScope.id }" />
+				
+		<ul class="list_all">
+			<c:forEach var="l" items="${listList}" varStatus="index">
+					
+				<li class="list_unit" id="${l.num}">
+     		 <div class="col-md-5"> 
+						<h1>${l.name}</h1>
+					<ul class="card_all" id="${l.num }">
+					-
+						<c:forEach var="c" items="${cardList}">
+							<c:if test="${l.num == c.lNum }">
+							
+								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
+								<li class="card_unit" id="${l.num}_${c.card_num }" >
+									${c.card_name }
+									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
+								</li>
+							</c:if>
+						</c:forEach>
+					</ul> <input type="button" class="addCardBtn" value="add card..." />
+
+					<div class="hide">
+						<textarea rows="5" cols="30" id="cardName${l.num}"></textarea>
+						<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
+						<input type="button" class="cancelCardBtn" value="cancel" />
+					</div>
+					</div>
+				</li>
+			</c:forEach>
+
+
+		</ul>
+		
+		<input type="button" class="addListBtn" value="add list..." />
+		<div class="hide">
+			<textarea rows="5" cols="30" id="listName"></textarea>
+			<br> <input type="button" value="add" onclick="addList(${bNum})" />
+			<input type="button" class="cancelListBtn" value="cancel" />
+		</div>
+		
+		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
+ --%>	
+                 
+	</form>
+	
+	<!-- </div> -->
+
+	</div>
+	</div>
+	<!-- /#page Content -->
+	</div>
+    <!-- /#wrapper -->
                 </div>
             </div>
+            <!-- Body End-->
+            <!-- Footer Start-->
+         <!--    <div id="footer">Footer</div> -->
+            <!-- Footer End-->
         </div>
-        <!-- /#page-content-wrapper -->
+		<!-- js -->
+	
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="${pageContext.request.contextPath}/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-    </script>
+	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
+	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
+	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+	<!-- 디자인 -->
+	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>
 
 </body>
-
 </html>
