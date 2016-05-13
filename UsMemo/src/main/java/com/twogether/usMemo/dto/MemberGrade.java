@@ -35,12 +35,7 @@ public class MemberGrade {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	public String getMemId() {
-		return memId;
-	}
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
+
 	
 	
 	

@@ -349,9 +349,5 @@ var before=new Object();
     
     
 	 
-	 function openMenu(bNum, memId){
-		 
-		  var url='/usMemo/member/friend/index?bNum='+bNum+'&memId='+memId;
-		  window.open(url, "_self",  '');
-	 }
+	 
 

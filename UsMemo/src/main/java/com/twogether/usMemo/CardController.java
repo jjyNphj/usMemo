@@ -76,7 +76,7 @@ public class CardController {
 		//cNum의 값을 추출 후 값을 String으로 반환. 반환된 String 타입을 다시 int형으로 변환.(card_SQL에서 검색하려는 cNum은 int형이므로)
 		int intcNum = Integer.parseInt(inputObj.get("cNum").toString());
 		
-		System.out.println("CardController intcNum = "+intcNum);
+		//System.out.println("CardController intcNum = "+intcNum);
 		
 		listAndcard = cardService.editCardWindow(intcNum);
 		return listAndcard;
@@ -90,8 +90,20 @@ public class CardController {
 		
 		mv.setViewName("board/boardMain");
 		cardService.addCardContent(card);
+		System.out.println("CardController card content: " + card.getContent());
 		return mv;
+	}
+	
+	@RequestMapping("/edit/CardName")
+	public ModelAndView editCardName(@ModelAttribute Card card){
+		
+		//카드 수정하기 창에서 카드 이름을 수정하고 엔터를 칠 경우 저장하는 부분
+		ModelAndView mv= new ModelAndView();
 
+		mv.setViewName("board/boardMain");
+		cardService.editCardName(card);
+		System.out.println("CardController card name: " + card.getName());
+		return mv;
 	}
 	
 }

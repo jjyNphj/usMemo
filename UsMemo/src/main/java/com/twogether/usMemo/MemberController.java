@@ -1,7 +1,11 @@
 package com.twogether.usMemo;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,14 +34,19 @@ public class MemberController {
 	
 	
 	@RequestMapping("/friend/index")
-	public ModelAndView friendIndex(@ModelAttribute MemberGrade memberInfo){
+	public @ResponseBody List<Member> friendIndex(@RequestBody MemberGrade memberInfo){
 		//logger.info("memberInfo: bNum-> {}, memId-> {}", memberInfo.getbNum(),memberInfo.getmemId());
-		ModelAndView mv= new ModelAndView();
+	/*	ModelAndView mv= new ModelAndView();
+		
 		mv.addObject("memberList", memberService.getMemberList(memberInfo));
 		mv.addObject("bNum",memberInfo.getbNum());
 		mv.setViewName("/board/menu");
 		
-		return mv;
+		return mv;*/
+		List<Member> resultMemberList=new ArrayList<Member>();
+		resultMemberList=memberService.getMemberList(memberInfo);
+		
+		return resultMemberList;
 	}
 	
 	@RequestMapping("/friend/find/{memberFindInfo}/{bNum}")

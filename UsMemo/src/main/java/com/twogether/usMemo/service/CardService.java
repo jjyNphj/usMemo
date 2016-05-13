@@ -24,16 +24,14 @@ public class CardService {
 	CardDao cardDao;
 
 	public void addCard(Card card){
-
 		cardDao.addCard(card);
-
 	}
 	
 	public ListAndCard editCardWindow(int cNum) {
 		ListAndCard listAndcard = new ListAndCard();
 		listAndcard = cardDao.getCardInfoBycNum(cNum);
 				
-		logger.info("check : card{}" , listAndcard);
+		//logger.info("check : card{}" , listAndcard);
 		return listAndcard;
 	}
 	
@@ -41,6 +39,10 @@ public class CardService {
 		cardDao.addCardContent(card);
 	}
 	
+	public void editCardName(Card card) {
+		cardDao.editCardName(card);
+		System.out.println("CardService card name: " + card.getName());
+	}
 
 	/**
 	 * 카드의 위치가 변경 되었을 때의 모델<br>

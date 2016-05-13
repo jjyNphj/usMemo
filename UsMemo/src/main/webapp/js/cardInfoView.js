@@ -3,6 +3,58 @@
  * 카드의 정보창과 관련한 js
  * 
  */
+/*$(document).ready(function(){
+	$("#card_Name").mousedown(function(){
+		$('#card_Name').detach();
+		$('#card_Name_attach').append(
+				'<textarea class="textarea-card-name" id="card_Name" cols=45 rows=1 onkeypress="enterProcess(event, this)"></textarea>'
+		);
+	});
+});*/
+function heightResize(obj) {
+	//textarea에 입력된 크기만큼 세로 길이 조정
+	obj.style.height = "1px";
+	obj.style.height = (10+obj.scrollHeight)+"px";
+	/*$("#card_Name").attr('rows',''); */
+	cardHeight = obj.style.height;
+	console.log(cardHeight);
+}
+
+function enterSaveProcess(e) {
+	/*
+	 * boardMain에서 키가 눌릴때마다 키코드를 찾음
+	 * keyCode가 0이면  which 리턴, 엔터의 키코드 13이므로 엔터 치는 순간 if문으로 넘어감
+	 * keyCode와 which는 ie,firefox 브라우저의 차이떄문에...?
+	 * */
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) { //Enter keycode
+    	//value는 현재 이벤트가 일어난 textarea의 id의 값(사용자가 입력한 내용)을 가져옴
+        var name = document.getElementById('card_Name').value;
+        //innerHTML은 전체 html 소스에서 card_num이라는 id를 가진 태그 안의 내용을 가져옴
+        var num = document.getElementById('card_num').innerHTML;
+        //이벤트(엔터) 사용을 금지하는 함수. 엔터 눌러도 포커스가 다음줄로 넘어가지 않도록 하기 위함.
+        e.preventDefault();
+        //엔터 친후 textarea에서 커서 제거하기
+        document.getElementById('card_Name').blur();
+
+        var url='/usMemo/card/edit/CardName?num='+num+'&name='+name;
+    	$.ajax({
+    		url: url,
+    		type:'post',
+    		success:function(){
+    			alert("CardName edit!");
+    			
+    			console.log(name);
+    			console.log(num);    		
+    		} ,
+    		error : function(xhr, status, error) {
+    			alert(error);
+    		}
+    	})
+       
+    }
+}
+
 function editCard(cNum) {
 	var url='/usMemo/card/edit';
 	var listAndcard = new Object();
@@ -43,11 +95,17 @@ function addCardDescription(card_num,cardDescription){
 	 * <span id="card_num"> 내용 </span>
 	 * span 안의 내용을 가져오려면 아래와 같이 하면 된다. 참고로 꼭 span이 아니어도 됨. 어떤 id 값이든 가능
 	 * document.getElementById('아이디').innerHTML  
+	 * innerHTML : 해당 id 태그 안의 내용을 가져오거나 설정
 	 * */
 	var num = document.getElementById('card_num').innerHTML;
 	console.log(num);
 	//textarea에 기입한 내용 가져오기
 	var content = cardDescription.value;
+	if(content != null) {
+		//조건문으로 체크 안해주면 replace 할게 없다고 오류남
+		content = content.replace(/\n/g,'<br>');
+		content = content.replace(/\r/g,'<br>');
+	}
 	console.log(content);
 	
 	var url='/usMemo/card/add/CardContent?num='+num+'&content='+content;
@@ -69,8 +127,16 @@ function addCardDescription(card_num,cardDescription){
 	 $("#card_Name").text(cardInfo.card_name);
 	 $("#list_Name").text(cardInfo.list_name);
 	 $("#card_num").text(cardInfo.card_num);
-	 $("#card_Content").val(cardInfo.content);
-	 console.log(cardInfo.content);
+	 
+	 if(cardInfo.content != null) {
+		 //조건문으로 체크 안해주면 replace 할게 없다고 오류남
+	 	var cardDescription = cardInfo.content.replace(/\<br>/g,'\n');
+	 	$("#cardDescription").val(cardDescription);
+	 	console.log(cardDescription);
+ 	} else {
+ 		$("#cardDescription").val(cardInfo.content);
+ 		console.log(cardInfo.content);
+ 	}	 
 	 
 	 /* Sat Apr 30 2016 20:31:18 GMT+0900 형태로 date에 들어감 */
 	 var date = new Date(cardInfo.n_date);
