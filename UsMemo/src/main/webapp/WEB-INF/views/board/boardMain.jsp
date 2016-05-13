@@ -14,6 +14,7 @@
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
  	<link href="${pageContext.request.contextPath}/css/ct-paper.css" rel="stylesheet"/>
+<%--  	<link href="${pageContext.request.contextPath}/css/gsdk-base.css" rel="stylesheet"/> --%>
     <link href="${pageContext.request.contextPath}/css/bootstrap-horizon.css" rel="stylesheet"/>
    
     <!--     Fonts and icons     -->
@@ -27,11 +28,10 @@
 ul.list_all, ul.card_all, li.list_unit, li.card_unit{
 	list-style-type: none;
 }
-
 li.list_unit {
 	display:inline-block; /* Op, Saf, Moz3.0이상, IE8등 */
     height: 100%;
-    width: 20%;/*카드의 가로길이 지정*/
+    width: 400px;/*카드의 가로길이 지정*/
     vertical-align: top;
 }
  
@@ -55,7 +55,7 @@ li.list_unit {
 /* 
 .list_unit > #list-horizon-div{ width:100%; } */
 
-#list_unit_view, #card_unit_view{
+.list_unit_view, .card_unit_view{
 	white-space: normal;
 }
 .card_all{
@@ -210,39 +210,37 @@ li.list_unit {
         <div id="page-content-wrapper">
            <div class="container-fluid">
 			<div class="row row-horizon">
-		<form>
-            
-		<input type="hidden" id="bNum" value="${bNum }" />
-		<input type="hidden" id="memId" value="${sessionScope.id }" />
-				
+            <form>
+				<input type="hidden" id="bNum" value="${bNum }" />
+				<input type="hidden" id="memId" value="${sessionScope.id }" />
+			</form>
 		<ul class="list_all">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 					
 				<li class="list_unit" id="${l.num}" style= "background-color: yellow;">
-     		 <div id="list_unit_view" style= "background-color: blue;"> 
-     		 	<div id="list_unit_name"   style="background-color: red;"><h3>${l.num } / ${l.name}</h3></div>
+     		 <div class="list_unit_view" style= "background-color: blue;"> 
+     		 	<div class="list_unit_name"   style="background-color: red;"><h3>${l.num } / ${l.name}</h3></div>
 					<ul class="card_all" id="${l.num }">
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
 							
 								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
 								<li class="card_unit" id="${l.num}_${c.card_num }" >
-								<div id="card_unit_view" class="col-md-8"> 
-									${c.card_num }/${c.card_name }
-									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
-									</div>
+								<div class="card_unit_view" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"> <!-- class="col-md-8" --> 
+									<div class="card_unit_name" style="background-color: green;">${c.card_num }/${c.card_name }</div>
+								</div>
 								</li>
 							</c:if>
 						</c:forEach>
 						<li id="addCardLI">
-						<center>
-						<input type="button" class="addCardBtn" value="add card..." />
-							<div >
-							<textarea rows="5" id="cardName${l.num}"></textarea>
-							<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
-							<input type="button" class="cancelCardBtn" value="cancel" />
+						   <button class="addCardBtn btn btn-primary btn-simple" >add card...</button>
+							<div  class="hide"> 
+								<div class="form-group"><!-- textarea 폼의 디자인 div -->
+								<textarea class="form-control" placeholder="Here, add Card's name" rows="5" id="cardName${l.num}" style="resize: none;"></textarea>
+								</div>
+							<br> <button class="btn btn-primary" onclick="addCard(${l.num},cardName${l.num})" >add</button>
+							<button class="cancelCardBtn btn btn-primary" >cancel</button>
 							</div>
-						</center>
 					</li>
 					</ul>
 					 </div> 
@@ -250,12 +248,13 @@ li.list_unit {
 			</c:forEach>
 
 		<li  class="list_unit" id="addListLI">
-		<input type="button" class="addListBtn" value="add list..." />
-		<div class="hide">
-			<textarea rows="5" cols="30" id="listName" onKeyUp="fnChkByte(this,'100')"></textarea>
-			<span id="byteInfo">0</span>/100Byte
-			<br> <input type="button" value="add" onclick="addList(${bNum})" />
-			<input type="button" class="cancelListBtn" value="cancel" />
+		<button class="addListBtn btn btn-primary btn-fill" >add list...</button>
+		<div class="hide"> 
+			<div class="form-group"><!-- textarea 폼의 디자인 div -->
+			<textarea class="form-control" placeholder="Here, add List name" rows="5" cols="30" id="listName_textarea" style="resize: none;"></textarea>
+			</div><span id="byteInfo">0</span>/100Byte
+			<br><button id="addListFuncBtn" class="btn btn-primary" onclick="addList(${bNum})" >add</button>
+			<button class="cancelListBtn btn btn-primary" >cancel</button>
 		</div>
 		</li>
 		</ul>
@@ -264,7 +263,6 @@ li.list_unit {
 		<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>	
                  
-	</form>
 	</div>
 	</div> 
 

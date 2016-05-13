@@ -185,37 +185,35 @@
 		<input type="hidden" id="bNum" value="${bNum }" />
 		<input type="hidden" id="memId" value="${sessionScope.id }" />
 				
-		<ul class="list_all">
+		<div class="list_all">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 					
-				<li class="list_unit" id="${l.num}">
-     		 <div class="col-md-5"> 
+				<div class="list_unit" id="${l.num}">
 						<h1>${l.name}</h1>
-					<ul class="card_all" id="${l.num }">
+					<div class="card_all" id="${l.num }">
 					-
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
 							
 								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
-								<li class="card_unit" id="${l.num}_${c.card_num }" >
+								<div class="card_unit" id="${l.num}_${c.card_num }" >
 									${c.card_name }
 									<input type="button" value="Edit" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"/>
-								</li>
+								</div>
 							</c:if>
 						</c:forEach>
-					</ul> <input type="button" class="addCardBtn" value="add card..." />
+					</div> <%-- <input type="button" class="addCardBtn" value="add card..." />
 
 					<div class="hide">
 						<textarea rows="5" cols="30" id="cardName${l.num}"></textarea>
 						<br> <input type="button" value="add" onclick="addCard(${l.num},cardName${l.num})" /> 
 						<input type="button" class="cancelCardBtn" value="cancel" />
+					</div> --%>
 					</div>
-					</div>
-				</li>
 			</c:forEach>
 
 
-		</ul>
+		</div>
 		
 		<input type="button" class="addListBtn" value="add list..." />
 		<div class="hide">

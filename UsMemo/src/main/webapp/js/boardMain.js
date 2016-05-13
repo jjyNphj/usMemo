@@ -24,6 +24,13 @@ var before=new Object();
 				var navSize=$("#navId").outerHeight(true);
 				$(".list_all").css('padding-top',navSize+'px');
 				$(".list_all").css('padding-bottom',navSize+'px');
+				//리스트 중에서 맨 끝에가 화면상으로 딱 붙어있으므로 오른쪽 패딩만큼 패딩을 줌.
+				var list_all_padding=$(".list_all").css("padding-left");
+				$(".list_all").css("padding-right",list_all_padding);
+				//리스트추가 버튼을 리스트 하나의 크기만큼 너비를 줌 
+				var list_unit_width=$(".list_unit").css("width");
+				$(".addListBtn").css("width",list_unit_width);
+				
 			}
 		/*
 		 * 버튼설정
@@ -35,14 +42,15 @@ var before=new Object();
 	            $(this).next(".hide").toggleClass("hide");
 	            $(this).hide();
 	        });
-	        
+
 	        //카드 추가버튼클릭 후 취소 버튼 클릭했을 때
-	 /*       $(".cancelCardBtn").click(function(){
+	        $(".cancelCardBtn").click(function(){
 	            //cancel 클릭했을 때 입력창 감추기! 
-	            $(this).parents("div").toggleClass("hide");
+	            $(this).parent().toggleClass("hide");
 	            //원래 버튼인 add card... 버튼 보이기 
 	           $(this).parents("div").prev(":button").show();
-	        });*/
+	           $(this).parent().children("div").children("textarea").val('');
+	        });
 	        
 	        // .addListBtn 클래스 중 아무거나 클릭했을 때 
 	        $(".addListBtn").click(function(){
@@ -54,15 +62,17 @@ var before=new Object();
 	        //카드 추가버튼클릭 후 취소 버튼 클릭했을 때
 	        $(".cancelListBtn").click(function(){
 	            //cancel 클릭했을 때 입력창 감추기! 
-	            $(this).parents("div").toggleClass("hide");
+	            $(this).parent().toggleClass("hide");
 	            //원래 버튼인 add card... 버튼 보이기 
 	           $(this).parents("div").prev(":button").show();
+	           //입력창 지우기
+	           $("#listName_textarea").val('');
 	        });
 
-	        
-	        
-	        function fnChkByte(obj, maxByte){
-	        	var str = obj.value;
+	        $("textarea").keyup(function(){
+	        	/*fnChkByte(obj, maxByte){*/
+	        	var maxByte=100;
+	        	var str = $(this).val();
 	        	var str_len = str.length;
 
 	        	var rbyte = 0;
@@ -86,12 +96,19 @@ var before=new Object();
 	        	if(rbyte > maxByte){
 	        	    alert("한글 "+(maxByte/2)+"자 / 영문 "+maxByte+"자를 초과 입력할 수 없습니다.");
 	        	    str2 = str.substr(0,rlen);                                  //문자열 자르기
-	        	    obj.value = str2;
-	        	    fnChkByte(obj, maxByte);
+	        	    $(this).val(str2);
+	        	    //글자수를 넘었으므로 입력창의 스타일을 바꿔준다.
+	        	    $(this).parent("div").removeClass("has-success");
+	        	    $(this).parent("div").addClass("has-error has-feedback");
+	        	    //fnChkByte(obj, maxByte);
 	        	}else{
-	        	    document.getElementById('byteInfo').innerText = rbyte;
+	        	    $("#byteInfo").text(rbyte);
+	        	    //입력창의 스타일을 바꿔줌 
+	        	    $(this).parent("div").removeClass("has-error has-feedback");
+	        	    $(this).parent("div").addClass("has-success");
+
 	        	}
-	        	}
+	        	});
 	        
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
