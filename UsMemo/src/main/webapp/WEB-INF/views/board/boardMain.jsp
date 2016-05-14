@@ -47,9 +47,13 @@ li.list_unit {
  height: 100%;
  position: absolute; /* 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다. */
 }
+/* #te{
+	
+	position: relative;
+} */
 .hide {	display: none;}
-.list-group-item:hover{
-	background-color: gray;}
+/* .list-group-item:hover{
+	background-color: gray;} */
 /*멤버사진 가로정렬*/
 .dropdown{ display:inline}
 /* 
@@ -215,6 +219,7 @@ li.list_unit {
 				<input type="hidden" id="memId" value="${sessionScope.id }" />
 			</form>
 		<ul class="list_all">
+			<div id="te">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 					
 				<li class="list_unit" id="${l.num}" style= "background-color: yellow;">
@@ -257,6 +262,7 @@ li.list_unit {
 			<button class="cancelListBtn btn btn-primary" >cancel</button>
 		</div>
 		</li>
+		</div>
 		</ul>
 		
 		
