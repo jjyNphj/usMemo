@@ -133,7 +133,7 @@ var before=new Object();
 	 }
 	 function addList(bNum){
 		 /*bNum으로 location 맨 마지막으로 설정 후 list에 추가 */
-		 var listName=$("#listName").val();
+		 var listName=$("#listName_textarea").val();
 		 var url='/usMemo/list/add?bNum='+bNum+'&name='+listName;
 		 
 		  $.ajax({

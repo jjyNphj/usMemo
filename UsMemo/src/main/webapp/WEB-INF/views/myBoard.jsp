@@ -113,7 +113,7 @@ function createBoard(memId) {
 			<input type="hidden" name=bNum${i.index} value="${list.bNum}" />
 			<input type="hidden" name=name${i.index} value="${list.name}" />
 
-			<h1>${list.bNum}, ${list.name} </h1>
+			<h1><%-- ${list.bNum},  --%>${list.name} </h1>
 			<input type="button" value="보러가기" onclick="goPage(bNum${i.index},name${i.index })" />
 			<input type="button" value="삭제하기" class="deleteBoardBtn" onclick="deleteBoard(bNum${i.index},name${i.index })" />
 			<%-- <input type="button" value="삭제하기" onclick="goDeletePage(bNum${i.index},name${i.index })" /> --%>

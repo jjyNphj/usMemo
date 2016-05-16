@@ -13,7 +13,7 @@
 	 
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
- 	<link href="${pageContext.request.contextPath}/css/ct-paper.css" rel="stylesheet"/>
+ 	<link href="${pageContext.request.contextPath}/css/ct-paper/ct-paper.css" rel="stylesheet"/>
 <%--  	<link href="${pageContext.request.contextPath}/css/gsdk-base.css" rel="stylesheet"/> --%>
     <link href="${pageContext.request.contextPath}/css/bootstrap-horizon.css" rel="stylesheet"/>
    
@@ -222,9 +222,9 @@ li.list_unit {
 			<div id="te">
 			<c:forEach var="l" items="${listList}" varStatus="index">
 					
-				<li class="list_unit" id="${l.num}" style= "background-color: yellow;">
-     		 <div class="list_unit_view" style= "background-color: blue;"> 
-     		 	<div class="list_unit_name"   style="background-color: red;"><h3>${l.num } / ${l.name}</h3></div>
+				<li class="list_unit" id="${l.num}"> <!-- style= "background-color: yellow;"> -->
+     		 <div class="list_unit_view"> <!-- style= "background-color: blue;"> --> 
+     		 	<div class="list_unit_name" > <!--  style="background-color: red;"> --><h3><%-- ${l.num } / --%> ${l.name}</h3></div>
 					<ul class="card_all" id="${l.num }">
 						<c:forEach var="c" items="${cardList}">
 							<c:if test="${l.num == c.lNum }">
@@ -232,7 +232,7 @@ li.list_unit {
 								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
 								<li class="card_unit" id="${l.num}_${c.card_num }" >
 								<div class="card_unit_view" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"> <!-- class="col-md-8" --> 
-									<div class="card_unit_name" style="background-color: green;">${c.card_num }/${c.card_name }</div>
+									<div class="card_unit_name" style="border: 1px solid #c0c0c0;"><!--  style="background-color: green;"> --><%-- ${c.card_num }/ --%>${c.card_name }</div>
 								</div>
 								</li>
 							</c:if>
