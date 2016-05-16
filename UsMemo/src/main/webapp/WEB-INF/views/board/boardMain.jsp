@@ -36,7 +36,7 @@
  <div id="navbar">
     
     <!-- navbar-fixed-top 속성이 상단고정임. -->
-        <nav id="navId" class="navbar navbar-ct-danger navbar-fixed-top" role="navigation">
+        <nav id="navId" class="navbar nav-color-red navbar-fixed-top" role="navigation">
     
           <div class="container-fluid">
     
@@ -180,48 +180,48 @@
 			</form>
 		<ul class="list_all">
 			<div id="te">
-			<c:forEach var="l" items="${listList}" varStatus="index">
-					
-				<li class="list_unit" id="${l.num}"> <!-- style= "background-color: yellow;"> -->
-     		 <div class="list_unit_view"> <!-- style= "background-color: blue;"> --> 
-     		 	<div class="list_unit_name" > <!--  style="background-color: red;"> --><h3><%-- ${l.num } / --%> ${l.name}</h3></div>
-					<ul class="card_all" id="${l.num }">
-						<c:forEach var="c" items="${cardList}">
-							<c:if test="${l.num == c.lNum }">
-							
-								<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
-								<li class="card_unit" id="${l.num}_${c.card_num }" >
-								<div class="card_unit_view" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"> <!-- class="col-md-8" --> 
-									<div class="card_unit_name" style="border: 1px solid #c0c0c0;"><!--  style="background-color: green;"> --><%-- ${c.card_num }/ --%>${c.card_name }</div>
+				<c:forEach var="l" items="${listList}" varStatus="index">
+						
+					<li class="list_unit" id="${l.num}"> <!-- style= "background-color: yellow;"> -->
+	     		 <div class="list_unit_view"> <!-- style= "background-color: blue;"> --> 
+	     		 	<div class="list_unit_name" > <!--  style="background-color: red;"> --><h6><%-- ${l.num } / --%> ${l.name}</h6></div>
+						<ul class="card_all" id="${l.num }">
+							<c:forEach var="c" items="${cardList}">
+								<c:if test="${l.num == c.lNum }">
+								
+									<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
+									<li class="card_unit" id="${l.num}_${c.card_num }" >
+									<div class="card_unit_view" onclick="editCard(${c.card_num})" data-toggle="modal" data-target="#cardInfoView"> <!-- class="col-md-8" --> 
+										<div class="card_unit_name"><!--  style="background-color: green;"> --><%-- ${c.card_num }/ --%>${c.card_name }</div>
+									</div>
+									</li>
+								</c:if>
+							</c:forEach>
+							<li id="addCardLI">
+							   <button class="addCardBtn btn btn-primary btn-simple" >add card...</button>
+								<div  class="addCard_group hide"> 
+									<div class="form-group"><!-- textarea 폼의 디자인 div -->
+									<textarea class="form-control" placeholder="Here, add Card's name" rows="5" id="cardName${l.num}" style="resize: none;"></textarea>
+									</div>
+								<button class="btn btn-primary" onclick="addCard(${l.num},cardName${l.num})" >add</button>
+								<button class="cancelCardBtn btn btn-primary" >cancel</button>
 								</div>
-								</li>
-							</c:if>
-						</c:forEach>
-						<li id="addCardLI">
-						   <button class="addCardBtn btn btn-primary btn-simple" >add card...</button>
-							<div  class="hide"> 
-								<div class="form-group"><!-- textarea 폼의 디자인 div -->
-								<textarea class="form-control" placeholder="Here, add Card's name" rows="5" id="cardName${l.num}" style="resize: none;"></textarea>
-								</div>
-							<br> <button class="btn btn-primary" onclick="addCard(${l.num},cardName${l.num})" >add</button>
-							<button class="cancelCardBtn btn btn-primary" >cancel</button>
-							</div>
+						</li>
+						</ul>
+						 </div> 
 					</li>
-					</ul>
-					 </div> 
-				</li>
-			</c:forEach>
-
-		<li  class="list_unit" id="addListLI">
-		<button class="addListBtn btn btn-primary btn-fill" >add list...</button>
-		<div class="hide"> 
-			<div class="form-group"><!-- textarea 폼의 디자인 div -->
-			<textarea class="form-control" placeholder="Here, add List name" rows="5" cols="30" id="listName_textarea" style="resize: none;"></textarea>
-			</div><span id="byteInfo">0</span>/100Byte
-			<br><button id="addListFuncBtn" class="btn btn-primary" onclick="addList(${bNum})" >add</button>
-			<button class="cancelListBtn btn btn-primary" >cancel</button>
-		</div>
-		</li>
+				</c:forEach>
+	
+			<li class="list_unit" id="addListLI" >
+				<button class="addListBtn btn btn-primary btn-simple" >add list...</button>
+					<div class="addList_group hide"> 
+						<div class="addList_textarea form-group"><!-- textarea 폼의 디자인 div -->
+						<textarea class="form-control" placeholder="Here, add List name" rows="5" cols="30" id="listName_textarea" style="resize: none;"></textarea>
+						</div><span id="byteInfo_group"><span id="byteInfo">0</span>/100Byte</span><br>
+						<button id="addListFuncBtn" class="btn btn-primary" onclick="addList(${bNum})" >add</button>
+						<button class="cancelListBtn btn btn-primary" >cancel</button>
+					</div>
+			</li>
 		</div>
 		</ul>
 		
