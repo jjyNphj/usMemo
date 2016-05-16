@@ -36,7 +36,7 @@
         <div class="container">
         <div class="row">
        
-		<div class="col-md-5">
+		<div class="col-md-6">
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
@@ -70,9 +70,9 @@
                     </li>              --%>
                 </ul>
             </div>
-            </div> <div class="col-md-3">
+            </div> <div class="col-md-2">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll" style=" vertical-align:middle;">
+            <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -82,16 +82,16 @@
                 <a class="navbar-brand page-scroll" href="#page-top">UsMemo</a>
             </div>
 		</div>
-                <div class="col-md-4 navbar-right">
-                <div style="float: right;">
+                <div class="col-md-4 ">
+                <div class="login_group" >
                 <c:if test="${sessionScope.id != null }">
-                <button class="btn btn-primary" onclick="goToMyboard(${sessionScope.id })">Go to My Board</button>
+                <button class="btn btn-primary loginBtn_group" onclick="goToMyboard(${sessionScope.id })">Go to My Board</button>
                 </c:if>
                 <c:if test="${sessionScope.id == null }">
-                     	   <button class="btn btn-primary"  id="loginBtn"  onclick="loginNaver()">Log In</button>
+                     	   <button class="btn btn-primary loginBtn_group"  id="loginBtn"  onclick="loginNaver()">Log In</button>
 						</c:if>
 						<c:if test="${sessionScope.id != null }">
-						   <button class="btn btn-primary"  id="logoutBtn"  onclick="location.href='/usMemo/index.do'">Log Out</button>
+						   <button class="btn btn-primary loginBtn_group"  id="logoutBtn"  onclick="location.href='/usMemo/index.do'">Log Out</button>
 				</c:if>
 				</div>
 				</div>

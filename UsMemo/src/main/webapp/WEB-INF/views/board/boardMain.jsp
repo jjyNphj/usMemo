@@ -22,50 +22,10 @@
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
+<!-- 	board의 전반적인 css파일 -->
+	<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
+
 <title>Your Board</title>
-
-<style type="text/css">
-ul.list_all, ul.card_all, li.list_unit, li.card_unit{
-	list-style-type: none;
-}
-li.list_unit {
-	display:inline-block; /* Op, Saf, Moz3.0이상, IE8등 */
-    height: 100%;
-    width: 400px;/*카드의 가로길이 지정*/
-    vertical-align: top;
-}
- 
-/* body{padding-top:auto !important;}
- */
-/* .list_all {	overflow: auto;}
-.list_unit { float: left;} */
- html, body{
-	height: 100%; overflow: auto;
-}
-
-.list_all{
- height: 100%;
- position: absolute; /* 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다. */
-}
-/* #te{
-	
-	position: relative;
-} */
-.hide {	display: none;}
-/* .list-group-item:hover{
-	background-color: gray;} */
-/*멤버사진 가로정렬*/
-.dropdown{ display:inline}
-/* 
-.list_unit > #list-horizon-div{ width:100%; } */
-
-.list_unit_view, .card_unit_view{
-	white-space: normal;
-}
-.card_all{
-	padding: 0;
-}
-</style>
 
 
 </head>

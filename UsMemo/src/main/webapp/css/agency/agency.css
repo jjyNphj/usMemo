@@ -50,6 +50,19 @@ background-color:#f7f7f7
  {
 background-color:#222
 }
+
+/* 로그인상태에 따라 변하는 버튼들의 패딩 , 화면상에서 간격때문에 이상해보이므로 패딩넣음. */
+.loginBtn_group
+{
+	padding: 15px 15px 15px 15px;
+}
+/*로그인 상태에 따라 변하는 버튼들을 묶은 div, 이 속성을 빼면 모바일,패드에서 아래가 붙어서 나오므로 필수*/
+.login_group
+{
+	float: right;
+	padding-bottom: 10px;
+}
+
 .btn-primary
  {
 color:#fff;
