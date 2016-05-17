@@ -28,7 +28,25 @@
 
 <title>Your Board</title>
 
+<style type="text/css">
 
+/* 사용자가 카드의 이름을 수정하는 부분 */
+.textarea-card-name {
+	/*사용자가 textarea 사이즈 조정 금지*/
+	resize:none;
+	/* 스크롤바 생성X */
+	overflow-y:hidden;
+	width: 90%;
+	border:0;
+	background:clear;
+	/* height:30px; */	
+	/* display:inline; */
+	/* overflow: auto;  */
+	/* height: $('card_Name').prop("scrollHeight"); */
+	
+} 
+
+</style>
 </head>
 <body>
 <!-- surface: 화면에 보이는부분 -->
@@ -73,8 +91,6 @@
 				 			</div>
 						</div>
 				</div>
-
-
 
 					<!-- board-canvas -->
 					<div id="board-canvas">
@@ -162,7 +178,6 @@
 							</div>
 						</div>
 
-					</div>
 				</div>
 				<div id="board-menu">
 					<div id="wrapper" class="toggled" >
@@ -229,51 +244,62 @@
 		        </div>
 		        <!-- /#sidebar-wrapper -->
 						</div>
-			</div>
-		</div><!-- /.board-canvas -->
+			</div><!-- /.board-menu -->
+		</div><!-- /.board-wrapper -->
+	</div><!-- /.content  -->
 	</div><!-- /.surface: 화면에 보이는 부분  -->
 	
 	<!-- Modal -->
-	<!-- cardInfo Modal -->
-		<div class="modal fade" id="cardInfoView" role="dialog">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" ><span id="card_Name"></span></h4>
-						<h6 class="modal-title" >in list <span id="list_Name"></span></h6>
-						<!-- <h6 class="modal-title"><span id="card_Content"></span></h6> -->
-					</div>
-					<div class="modal-body">
-						<p>You wrote:<br><span id="card_Date"></span></p>
-						
-						<!-- span 안에 담기는 카드의 넘버를 cardInfoView.js로 넘겨주기 위함 -->
-						<p><span class="hide" id="card_num"></span>카드 상세 내용 입력하는 부분, 수정</p>
-						
-						<!-- textarea의 내용 id변수에 저장 -->
-						<textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요."></textarea>
-						</br>
-						
-						<button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
-						<button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
-						</br>
-						
-					
-							<div class="form-group" >
-								<label for="exampleInputFile" >파일 업로드</label> 
-								<input type="file"	id="exampleInputFile"  >
-								<p class="help-block">파일 추가, 삭제, 다운</p>
-							</div>
-							<button type="submit" class="btn btn-default">첨부하기</button>
-						
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>
-					</div>
-				</div>
-			</div>
-		</div>
+	<!-- CardInfo Modal-->
+   <div class="container">
+      <div class="modal fade" id="cardInfoView" role="dialog">
+         <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <!-- span 안에 담기는 카드의 넘버를 cardInfoView.js로 넘겨주기 위함 -->
+                  <span class="hide" id="card_num"></span>
+                  
+                  <button type="button" class="close" data-dismiss="modal" onclick="clearForm(this.form)">&times;</button>
+                  
+                  <h4 class="modal-title" >
+                     <!-- <h2 class="card-name-edit" id="card_Name" dir="auto"></h2> -->
+
+                     <!-- 키를 누르는 순간마다 enterProcess로 값을 넘김. 엔터의 아스키코드값인 경우 사용자가 입력한 값 에이작스로 전달, heightResize:사용자 입력할떄마다 textarea 사이즈 자동조정 -->
+                     <textarea class="textarea-card-name" id="card_Name" maxlength="200" onkeypress="enterSaveProcess(event,this)" onkeyup="heightResize(this)" ></textarea>
+                  </h4>
+
+                  <h6 class="modal-title" >in list <span id="list_Name"></span></h6>
+               </div>
+               
+               <div class="modal-body">
+                  <p>You wrote:<br><span id="card_Date"></span></p>
+                  <p>카드 상세 내용 입력하는 부분, 수정</p>
+
+                  <!-- textarea의 내용 id변수에 저장 -->
+                  <textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요."></textarea>
+                  </br>
+                  
+                  <button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
+                  <button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
+                  </br>                  
+               
+                     <div class="form-group" >
+                        <label for="exampleInputFile" >파일 업로드</label> 
+                        <input type="file"   id="exampleInputFile"  >
+                        <p class="help-block">파일 추가, 삭제, 다운</p>
+                     </div>
+                     <button type="submit" class="btn btn-default">첨부하기</button>
+                  
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
 	<!-- /#cardInfo Modal -->
+
 	
 		<!-- js -->
 	
@@ -281,7 +307,7 @@
 	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/bootstrap.js"></script>
-	
+	<script src="${pageContext.request.contextPath}/js/board/jquery.autogrowtextarea.js"></script>
 	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
 	<script src="${pageContext.request.contextPath}/js/menu.js"></script>

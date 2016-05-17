@@ -1,5 +1,9 @@
 package com.twogether.usMemo.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -7,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.twogether.usMemo.dao.CardDao;
 import com.twogether.usMemo.dto.Card;
@@ -24,16 +30,14 @@ public class CardService {
 	CardDao cardDao;
 
 	public void addCard(Card card){
-
 		cardDao.addCard(card);
-
 	}
 	
 	public ListAndCard editCardWindow(int cNum) {
 		ListAndCard listAndcard = new ListAndCard();
 		listAndcard = cardDao.getCardInfoBycNum(cNum);
 				
-		logger.info("check : card{}" , listAndcard);
+		//logger.info("check : card{}" , listAndcard);
 		return listAndcard;
 	}
 	
@@ -41,6 +45,10 @@ public class CardService {
 		cardDao.addCardContent(card);
 	}
 	
+	public void editCardName(Card card) {
+		cardDao.editCardName(card);
+		System.out.println("CardService card name: " + card.getName());
+	}
 
 	/**
 	 * 카드의 위치가 변경 되었을 때의 모델<br>
@@ -233,6 +241,48 @@ public class CardService {
 	}
 
 
+	/**
+	 * 파일 업로드
+	 */
+	public boolean fileUpload(MultipartHttpServletRequest mRequest) {
+
+		boolean isSuccess = false;
+		
+		String uploadPath = "D:\\save\\";
+		
+		File dir = new File(uploadPath);
+
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		Iterator<String> iter = mRequest.getFileNames();
+		while(iter.hasNext()) {
+			String uploadFileName = iter.next();
+			
+			MultipartFile mFile = mRequest.getFile(uploadFileName);
+			String originalFileName = mFile.getOriginalFilename();
+			String saveFileName = originalFileName;
+			
+			if(saveFileName != null && !saveFileName.equals("")) {
+				if(new File(uploadPath + saveFileName).exists()) {
+					saveFileName = saveFileName + "_" + System.currentTimeMillis();
+				}
+				
+				try {
+					mFile.transferTo(new File(uploadPath + saveFileName));
+					isSuccess = true;				
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+					isSuccess = false;
+				} catch (IOException e) {
+					e.printStackTrace();
+					isSuccess = false;
+				}
+			} // if end
+		} // while end
+		return isSuccess;
+	} // fileUpload end
 
 
 }

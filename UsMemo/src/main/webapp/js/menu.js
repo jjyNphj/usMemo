@@ -246,7 +246,6 @@ function addMemberFunc(id,bNum){
 			$("#wrapper").toggleClass("toggled");
 
 		});
-	
 		
 	/*
 	 * 버튼설정

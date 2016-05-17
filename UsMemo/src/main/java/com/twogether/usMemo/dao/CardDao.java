@@ -23,6 +23,12 @@ public class CardDao {
 		sqlMapClientTemplate.update("Card.addCardContent", card);
 	}
 	
+	public void editCardName(Card card) {
+		
+		sqlMapClientTemplate.update("Card.editCardName", card);
+		System.out.println("CardDao card name: " + card.getName());
+	}
+	
 	public ListAndCard getCardInfoBycNum(int cNum) {
 
 		ListAndCard listAndcard = new ListAndCard();
@@ -30,7 +36,7 @@ public class CardDao {
 		/*1개의 레코드(행)만을 select해서 가져 오는 경우 queryForList을 사용. Map,int,String으로만 반환 받을 수 있음*/
 		/*cardInfoView에서 가져온 cNum으로  ListAndCard 테이블의 C.num과 같으면서 card의 lnum과 list의 num과 같은 행의 정보를 찾아 전부 가져오기*/
 		listAndcard = (ListAndCard) sqlMapClientTemplate.queryForObject("Card.getCardInfoBycNum", cNum);
-		System.out.println("CardDao card= 명세:" + listAndcard);
+		//System.out.println("CardDao card= 명세:" + listAndcard);
 		return listAndcard;
 		
 	}
