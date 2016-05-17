@@ -60,10 +60,10 @@
 							<div class="col-xs-12 col-sm-12 col-md-12" >
 								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left;background-color: green;">
 									 <div class="col-md-6"  style="background-color: yellow;">  
-									 	<span id="board-header-brand-text">프로젝트 트렐로</span>
+									 	<span id="board-header-brand-text">${bName }</span>
 									 </div>
-									 <div class="col-xs-6 col-sm-6 col-md-6"  style="text-align:right;background-color: blue;">
-									 	<span>별표</span> 
+									 <div class="col-xs-6 col-sm-6 col-md-6"  style="background-color: blue;">
+									 	<span class="glyphicon glyphicon-star-empty"></span> 
 									 </div>
 								 </div>
 								 <div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;background-color: blue;"> 
