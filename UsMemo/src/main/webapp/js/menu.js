@@ -227,7 +227,7 @@ function addMemberFunc(id,bNum){
 		})*/
 
 		// 슬라이드바 클릭시
-		$("#menu-toggle").click(function(e) {
+		$(".menu-toggle").click(function(e) {
 			e.preventDefault();
 			
 			//토글클래스가 아님
