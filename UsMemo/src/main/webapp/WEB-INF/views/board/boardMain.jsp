@@ -28,25 +28,6 @@
 
 <title>Your Board</title>
 
-<style type="text/css">
-
-/* 사용자가 카드의 이름을 수정하는 부분 */
-.textarea-card-name {
-	/*사용자가 textarea 사이즈 조정 금지*/
-	resize:none;
-	/* 스크롤바 생성X */
-	overflow-y:hidden;
-	width: 90%;
-	border:0;
-	background:clear;
-	/* height:30px; */	
-	/* display:inline; */
-	/* overflow: auto;  */
-	/* height: $('card_Name').prop("scrollHeight"); */
-	
-} 
-
-</style>
 </head>
 <body>
 <!-- surface: 화면에 보이는부분 -->
@@ -178,7 +159,8 @@
 							</div>
 						</div>
 
-				</div>
+				</div><!-- /.board-canvas -->
+				</div><!-- /.board-main-content -->
 				<div id="board-menu">
 					<div id="wrapper" class="toggled" >
 		
@@ -241,14 +223,12 @@
 		                    <a href="#">Contact</a>
 		                </li>
 		            </ul>  
-		        </div>
-		        <!-- /#sidebar-wrapper -->
-						</div>
-			</div><!-- /.board-menu -->
-		</div><!-- /.board-wrapper -->
+		        </div><!-- /#sidebar-wrapper -->
+			</div><!-- /.wrapper -->
+		</div><!-- /.board-menu -->
+	</div><!-- /.board-wrapper -->
 	</div><!-- /.content  -->
 	</div><!-- /.surface: 화면에 보이는 부분  -->
-	
 	<!-- Modal -->
 	<!-- CardInfo Modal-->
    <div class="container">

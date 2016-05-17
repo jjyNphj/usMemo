@@ -88,3 +88,19 @@ li.card_unit{
 	만일 배경색을 바꿔야한다면 이것도 같은 색으로 바꿔야함.
 	background-color: white;
 }  */
+
+/* 사용자가 카드의 이름을 수정하는 부분 */
+.textarea-card-name {
+	/*사용자가 textarea 사이즈 조정 금지*/
+	resize:none;
+	/* 스크롤바 생성X */
+	overflow-y:hidden;
+	width: 90%;
+	border:0;
+	background:clear;
+	/* height:30px; */	
+	/* display:inline; */
+	/* overflow: auto;  */
+	/* height: $('card_Name').prop("scrollHeight"); */
+	
+} 
