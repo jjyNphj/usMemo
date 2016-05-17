@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Card;
@@ -104,6 +106,34 @@ public class CardController {
 		cardService.editCardName(card);
 		System.out.println("CardController card name: " + card.getName());
 		return mv;
+	}
+	
+	/* 파일 업로드 화면 이동 */
+	@RequestMapping(value="fileUploadAjax", method=RequestMethod.GET)
+	public ModelAndView fileUploadAjaxForm() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("board/FileUploadTest");
+		
+		return mav;
+	}
+	
+	/* 파일 업로드 처리 */
+	@RequestMapping(value="fileUploadAjax", method=RequestMethod.POST)
+	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		if(cardService.fileUpload(mRequest)) {
+			mav.addObject("result", "SUCCESS");
+		} else {
+			mav.addObject("result", "FAIL");
+		}
+		
+		mav.setViewName("JSON");
+		
+		return mav;
 	}
 	
 }

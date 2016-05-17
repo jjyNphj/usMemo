@@ -34,7 +34,14 @@ spring-servlet.xml이 있는 폴더에 *-servlet.xml의 이름 형식 (예를 �
      
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
     
-   <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
+   <bean name="JSON" id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
+   
+   	<!-- File Upload Resolver -->
+	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- maximum file size in bytes 50MB -->
+		<property name="maxUploadSize" value="52428800" />
+	</bean>
 <!-- json설정  
       	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		<property name="supportedMediaTypes" value="application/json" />
