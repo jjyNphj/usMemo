@@ -1607,7 +1607,7 @@ textarea.form-control {
 .navbar .navbar-brand {
   font-weight: 600;
   margin: 5px 0px;
-  padding: 20px 15px;
+/*   padding: 20px 15px; */
   font-size: 22px;
 }
 .navbar .navbar-nav > li > a {

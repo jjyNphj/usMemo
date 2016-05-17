@@ -1,6 +1,6 @@
 .row-horizon {
-  overflow-x: scroll;
-  overflow-y: hidden;
+/*   overflow-x: scroll; 이거때문에 윗부분 스크롤이 생김 
+ */  overflow-y: hidden;
   white-space: nowrap;
 }
 .row-horizon > [class*="col-lg"], .row-horizon > [class*="col-md"], .row-horizon > [class*="col-sm"], .row-horizon > [class*="col-xs"] {
