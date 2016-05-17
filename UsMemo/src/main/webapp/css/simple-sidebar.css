@@ -21,12 +21,14 @@
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    right: 40%; /* right: 250px; */
+    top: 80px;
+    right: 40%;
+/*     right: 100%; right: 250px;
     width: 0;
+    */ margin-right: -40%; /*  margin-right: -250px; */
     height: 100%;
-    margin-right: -40%; /*  margin-right: -250px; */
     overflow-y: auto;
-    background: #FF8F5E;
+    background: #EDEFF0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
