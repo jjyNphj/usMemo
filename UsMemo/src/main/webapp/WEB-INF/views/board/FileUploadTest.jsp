@@ -5,8 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="/js/jquery-1.10.2.min.js"></script>
-<script src="/js/jquery.form.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
+<!-- <script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery.form.js"></script> -->
+
 <script>
 	$(document).ready(function() {
 		$("input[type=submit]").bind("click", function() {
