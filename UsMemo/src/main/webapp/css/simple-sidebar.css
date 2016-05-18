@@ -15,17 +15,20 @@
 }
 
 #wrapper.toggled {
-    padding-right: 40%; /* padding-right: 250px; */
+    padding-right: 339px;
+ /* padding-right: 250px; */
 }
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
     top: 80px;
-    right: 40%;
+    right: 339px;
 /*     right: 100%; right: 250px;
     width: 0;
-    */ margin-right: -40%; /*  margin-right: -250px; */
+    */
+     width: 339px;
+    margin-right: -339px; /*  margin-right: -250px; */
     height: 100%;
     overflow-y: auto;
     background: #EDEFF0;
@@ -36,7 +39,9 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 40%;  /*  width: 250px; */
+    width:  0px;  /*  width: 250px; */
+/*     즉, 토글일땐 sidebar의 width가 0이고, 토글이 없을땐 339px이어야 처음 시작할때 토글이 있으므로 
+    닫혀있는 상태로 보여진다.  */
 }
 
 #page-content-wrapper {
@@ -47,7 +52,7 @@
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: -40%; /*  margin-right: -250px; */
+    margin-right: -339px; /*  margin-right: -250px; */
 }
 
 /* Sidebar Styles */
@@ -66,7 +71,7 @@
 .sidebar-nav > .basic-li {
 	/*.basic-li: 일반리스트 제목 */
     text-indent: 20px;
-    line-height: 40px;
+    line-height: 339px;
 }
 
 .sidebar-nav > .basic-li a {
@@ -102,9 +107,10 @@
     background: none;
 } 
 
+/*화면이 클때*/
 @media(min-width:768px) {
     #wrapper {
-        padding-right: 40%; /* padding-right: 250px; */
+        padding-right: 339px; /* padding-right: 250px; */
     }
 
     #wrapper.toggled {
@@ -112,7 +118,7 @@
     }
 
     #sidebar-wrapper {
-        width: 40%; /*  width: 500px; */
+        width:  339px; /*  width: 500px; */
     }
 
     #wrapper.toggled #sidebar-wrapper {

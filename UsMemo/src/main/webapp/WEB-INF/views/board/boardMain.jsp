@@ -82,7 +82,7 @@
 										type="hidden" id="memId" value="${sessionScope.id }" />
 								</form>
 								<ul class="list_all">
-									<div id="te">
+									<div>
 										<c:forEach var="l" items="${listList}" varStatus="index">
 
 											<li class="list_unit" id="${l.num}">
