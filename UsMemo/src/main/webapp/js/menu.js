@@ -244,6 +244,7 @@ function addMemberFunc(id,bNum){
 				openMenu($("#bNum").val(),$("#memId").val());
 			}
 			$("#wrapper").toggleClass("toggled");
+			$(".board-wrapper").toggleClass("is-show-menu");
 
 		});
 		

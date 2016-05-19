@@ -52,10 +52,10 @@
 </div><!-- end header -->
 		<div id="content">
 			
-			<div id="board-wrapper">
+			<div class="board-wrapper">
 				<div id="board-main-content">
-					<div class="container">
-						<div id="board-header" class="row"style="background-color: orange;" >
+					<div id="board-header" class="container">
+						<div id="board-header-wrap" class="row"style="background-color: orange;" >
 							<div class="col-xs-12 col-sm-12 col-md-12" >
 								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left;background-color: green;">
 									 <div class="col-md-6"  style="background-color: yellow;">  
@@ -75,7 +75,7 @@
 
 					<!-- board-canvas -->
 					<div id="board-canvas">
-						<div class="container-fluid">
+						<div id="board-canvas-wrap" class="container-fluid">
 							<div class="row row-horizon">
 								<form>
 									<input type="hidden" id="bNum" value="${bNum }" /> <input

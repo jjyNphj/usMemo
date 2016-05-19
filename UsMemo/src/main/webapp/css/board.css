@@ -5,10 +5,12 @@
 
 
 /*전체 색상설정*/
-body, #board-header{
+body, #board-header-wrap{
 	background-color: #B04632;
 }
-
+#board-canvas{
+	position: relative;
+}
 #header, .header-bar{
 	background-color: black;/* #963C2B; */
  	position: fixed;
@@ -20,7 +22,7 @@ body, #board-header{
 /* 	overflow: auto; */
 	z-index: 10;/* 레이어의 맨위 설정 */
  }
-#board-header{
+#board-header-wrap{
 	/*position이 releative이면, 
 	상대 위치가 지정된 엘리먼트에 top이나 right, bottom, left를 지정하면 기본 위치와 다르게 위치가 조정됩니다.
 	다른 콘텐츠는 해당 엘리먼트에서 남긴 공백에 맞춰 들어가게끔 조정되지 않을 것입니다.*/

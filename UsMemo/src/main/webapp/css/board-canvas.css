@@ -6,11 +6,12 @@
 	height: 100%; overflow: auto;
 }
 
- /* 전체화면에서 리스트가 늘어났을 때 맨 아래에 스크롤이 생기게 함.*/
-.list_all{
+ /*.list_all 전체화면에서 리스트가 늘어났을 때 맨 아래에 스크롤이 생기게 함.*/
+#board-canvas-wrap{
  height: 85%;
  top:90px;
- position: absolute; /* 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다. */
+ /* position: absolute; 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다. */
+ position: absolute;
 }
 
 /*리스트와 카드의 내용이 길어질 경우 내용을 하나의 블록으로 묶음처리해서 영역을 나가지 않게 함.*/
