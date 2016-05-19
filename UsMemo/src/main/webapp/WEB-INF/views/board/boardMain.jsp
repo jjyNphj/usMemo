@@ -76,13 +76,13 @@
 					<!-- board-canvas -->
 					<div id="board-canvas">
 						<div id="board-canvas-wrap" class="container-fluid">
-							<div class="row row-horizon">
+							<!-- <div class="row row-horizon"> -->
 								<form>
 									<input type="hidden" id="bNum" value="${bNum }" /> <input
 										type="hidden" id="memId" value="${sessionScope.id }" />
 								</form>
 								<ul class="list_all">
-									<div>
+								<!-- 	<div> -->
 										<c:forEach var="l" items="${listList}" varStatus="index">
 
 											<li class="list_unit" id="${l.num}">
@@ -149,14 +149,14 @@
 												<button class="cancelListBtn btn btn-primary">cancel</button>
 											</div>
 										</li>
-									</div>
+								<!-- 	</div> -->
 								</ul>
 
 
 								<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>
 
-							</div>
+						<!-- 	</div> -->
 						</div>
 
 				</div><!-- /.board-canvas -->

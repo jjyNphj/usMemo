@@ -6,13 +6,12 @@
 	height: 100%; overflow: auto;
 }
 
- /*.list_all 전체화면에서 리스트가 늘어났을 때 맨 아래에 스크롤이 생기게 함.*/
-#board-canvas-wrap{
+/*  .list_all 전체화면에서 리스트가 늘어났을 때 맨 아래에 스크롤이 생기게 함.*/
+/*.list_all{
  height: 85%;
  top:90px;
- /* position: absolute; 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다. */
- position: absolute;
-}
+ position: absolute; 레이어 위치는 반드시 절대값으로 설정해야 한다. 다른 것들은 안 된다.
+} */
 
 /*리스트와 카드의 내용이 길어질 경우 내용을 하나의 블록으로 묶음처리해서 영역을 나가지 않게 함.*/
 .list_unit_view, .card_unit_view{
@@ -28,17 +27,17 @@ ul.list_all, ul.card_all, li.list_unit, li.card_unit{
 	list-style-type: none;
 }
 /* 카드들이 들어갈 list_unit의 영역설정  */
-li.list_unit {
+.list_unit {
 	display:inline-block; /* Op, Saf, Moz3.0이상, IE8등 */
     height: 100%;
-    width: 270px;/*카드의 가로길이 지정*/
+    min-width: 270px;/*카드의 가로길이 지정*/
     vertical-align: top;
     background-color: #E2E4E6;
 }
-ul.card_all{
+.card_all{
 		width:236;
 }
-li.card_unit{
+.card_unit{
 		width:236;
 }
 .card_unit_name {

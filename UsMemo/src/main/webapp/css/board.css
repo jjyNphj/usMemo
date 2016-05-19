@@ -8,7 +8,7 @@
 body, #board-header-wrap{
 	background-color: #B04632;
 }
-#board-canvas{
+#board-canvas-wrap{
 	position: relative;
 }
 #header, .header-bar{
@@ -59,4 +59,16 @@ body, #board-header-wrap{
 	margin : 0 15px 0 15px;
 	padding: 0px;
 	color: #CA9D94;
+}
+
+
+.list_all{
+	display: flex;
+	flex-wrap: nowrap;
+	 top:90px;
+}
+
+#board-canvas{
+	/*리스트가 영역안에 제대로 보여지려면 메뉴바만큼 내려와야함.*/
+	margin-top:90px;
 }
