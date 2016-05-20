@@ -25,7 +25,7 @@
 <!-- 	board의 전반적인 css파일 -->
 	<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board-canvas.css" rel="stylesheet">
-
+	<link href="${pageContext.request.contextPath}/css/scrollbar.css" rel="stylesheet">
 <title>Your Board</title>
 
 </head>
