@@ -55,7 +55,7 @@
     margin-right: -339px; /*  margin-right: -250px; */
 }
 
-    .board-wrapper.is-show-menu>#board-canvas{
+   .surface.is-show-menu{
     /*슬라이딩*/
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

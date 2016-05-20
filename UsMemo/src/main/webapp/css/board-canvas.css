@@ -3,7 +3,9 @@
  
  /* 전체화면에서 리스트가 늘어났을 때 맨 아래에 스크롤이 생기게 함.*/
  html, body{
-	height: 100%; overflow: auto;
+	height: 100%;
+	overflow: hidden;
+	/*  overflow: auto; */
 }
 
 /*  .list_all 전체화면에서 리스트가 늘어났을 때 맨 아래에 스크롤이 생기게 함.*/

@@ -31,7 +31,7 @@
 </head>
 <body>
 <!-- surface: 화면에 보이는부분 -->
-<div id="surface">
+<div class="surface">
 <div id="header">
 <div class="container">
 	<div class="row header-bar">
@@ -75,12 +75,13 @@
 
 					<!-- board-canvas -->
 					<div id="board-canvas">
-						<div id="board-canvas-wrap" class="container-fluid">
+						<!-- <div id="board" > -->
 							<!-- <div class="row row-horizon"> -->
 								<form>
 									<input type="hidden" id="bNum" value="${bNum }" /> <input
 										type="hidden" id="memId" value="${sessionScope.id }" />
 								</form>
+								<div id="list-wrapper">
 								<ul class="list_all">
 								<!-- 	<div> -->
 										<c:forEach var="l" items="${listList}" varStatus="index">
@@ -151,13 +152,13 @@
 										</li>
 								<!-- 	</div> -->
 								</ul>
-
+</div>
 
 								<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>
 
 						<!-- 	</div> -->
-						</div>
+					<!-- 	</div> -->
 
 				</div><!-- /.board-canvas -->
 				</div><!-- /.board-main-content -->

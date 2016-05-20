@@ -245,6 +245,7 @@ function addMemberFunc(id,bNum){
 			}
 			$("#wrapper").toggleClass("toggled");
 			$(".board-wrapper").toggleClass("is-show-menu");
+			$(".surface").toggleClass("is-show-menu")
 
 		});
 		

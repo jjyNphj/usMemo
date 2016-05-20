@@ -8,9 +8,7 @@
 body, #board-header-wrap{
 	background-color: #B04632;
 }
-#board-canvas-wrap{
-	position: relative;
-}
+
 #header, .header-bar{
 	background-color: black;/* #963C2B; */
  	position: fixed;
@@ -22,7 +20,7 @@ body, #board-header-wrap{
 /* 	overflow: auto; */
 	z-index: 10;/* 레이어의 맨위 설정 */
  }
-#board-header-wrap{
+#board-header-wrap1{
 	/*position이 releative이면, 
 	상대 위치가 지정된 엘리먼트에 top이나 right, bottom, left를 지정하면 기본 위치와 다르게 위치가 조정됩니다.
 	다른 콘텐츠는 해당 엘리먼트에서 남긴 공백에 맞춰 들어가게끔 조정되지 않을 것입니다.*/
@@ -61,14 +59,94 @@ body, #board-header-wrap{
 	color: #CA9D94;
 }
 
+/* #list-wrapper{
+	position: flex;
+	display: block;
 
+} */
 .list_all{
-	display: flex;
-	flex-wrap: nowrap;
-	 top:90px;
+ 	display: flex; 
+/*  	overflow-x: auto; */
+ 	height: 100%; 
+ 	flex-grow:1;
+ 	position: absolute;
+/* 
+	position: relative; */
+}
+#list-wrapper{
+	position: relative;
+	height: inherit;
+	/* overflow-x: auto; */
+/* 	display: flex; */
 }
 
 #board-canvas{
 	/*리스트가 영역안에 제대로 보여지려면 메뉴바만큼 내려와야함.*/
-	margin-top:90px;
+ 	margin-top:40px; 
+flex-grow:1;
+position: relative;
+	height:98%;/*스크롤아래로*/
 }
+.surface{
+	height:100%;
+	display: flex;
+	overflow-y: hidden;
+	overflow-x:auto;
+}
+#header{
+	flex:none;
+}
+#content{
+	flex-grow:1;
+	margin-top: 40px;
+/* 	display: flex; */
+	position:relative;
+	padding-bottom: 20px;/*보드화면에서 맨아래 스크롤부분을 패딩으로 남김.*/
+	/* overflow-x: auto; *//*맨아래스크롤생기게함.*/
+	height: inherit;
+}
+.board-wrapper{
+	position: relative;
+	/*
+	position: absolute;
+	 left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0; */
+	height:inherit;/*맨 아래 스크롤생기게함.*/
+	
+	
+}
+#board-main-content{
+	display:flex;
+	flex-direction: column;
+	height:inherit;
+	position: relative;
+/* 	overflow-x:auto;  */
+}
+
+#board-header{
+	flex-basis:40px;
+	height: auto;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+/* 	flex-basis:40px;
+		left: 0px;
+	min-height: 40px;
+	position: fixed; */
+/* 		
+	top: 40px;bootstrap.css의 4171라인의 height와 맞춰야함.
+	width: 100%;
+
+	max-height: 50px; */
+}
+
+/* #list-wrapper{
+	position: relative;
+	display: block;
+	white-space: wrap;
+}
+#board{
+	position: relative;
+} */
