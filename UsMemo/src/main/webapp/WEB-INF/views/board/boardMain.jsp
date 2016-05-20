@@ -93,7 +93,7 @@
 													<div class="list_unit_name no-include-sortable">
 														<!--  style="background-color: red;"> -->
 														<h6>
-															${l.num } / 
+														<%-- 	${l.num } /  --%>
 															${l.name}
 														</h6>
 													</div>
@@ -109,7 +109,7 @@
 																		<!-- class="col-md-8" -->
 																		<div class="card_unit_name no-include-sortable">
 																			<!--  style="background-color: green;"> -->
-																			 ${c.card_num }/${c.card_name }</div>
+																			<%--  ${c.card_num }/ --%>${c.card_name }</div>
 																	</div>
 																</div>
 															</c:if>

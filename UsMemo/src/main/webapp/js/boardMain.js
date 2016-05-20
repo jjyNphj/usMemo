@@ -374,7 +374,7 @@ var before=new Object();
 		$(".list_all").sortable({
 			/*axis:"x",*/
 /*			cancel: "#addListLI" 입력을 못하게 막음,*/
-			items: ".list_unit, div:not(.no-include-sortable,.card_all)"/*"div:not(#addListLI,#addCardLI,.card_unit)"*/,
+			items: ".list_unit, div:not(.no-include-sortable,.card_all,.card_unit)"/*"div:not(#addListLI,#addCardLI,.card_unit)"*/,
 			/*움직이는 대상에서 제외*/
 			item:function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
@@ -411,7 +411,7 @@ var before=new Object();
 	            beforeStop: function( event, ui ) {console.log("item:"+ui.item.index());},
 	            change: function( event, ui ) { console.log("change: "+ui.item[0].id);}
 	            
-		});
+		}).disableSelection();
 
 		$(".card_all").sortable({
 			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
@@ -457,7 +457,7 @@ var before=new Object();
 			       //  console.log("remove:"+productOrder+" index: "+productOrder[ui.item.index()]);
 				 }, beforeStop: function( event, ui ) {console.log("item:"+ui.item.index());},
 		            //change: function( event, ui ) { console.log("change: "+ui.item.index());}
-	    });
+	    }).disableSelection();
 
 	});
 
