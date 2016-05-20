@@ -20,21 +20,21 @@ body, #board-header-wrap{
 /* 	overflow: auto; */
 	z-index: 10;/* 레이어의 맨위 설정 */
  }
-#board-header-wrap1{
-	/*position이 releative이면, 
+/* #board-header-wrap1{
+	position이 releative이면, 
 	상대 위치가 지정된 엘리먼트에 top이나 right, bottom, left를 지정하면 기본 위치와 다르게 위치가 조정됩니다.
-	다른 콘텐츠는 해당 엘리먼트에서 남긴 공백에 맞춰 들어가게끔 조정되지 않을 것입니다.*/
-	/*position은 fixed, width는 100%, 원하는 위치를 설정하면 고정바 완성됨.*/
+	다른 콘텐츠는 해당 엘리먼트에서 남긴 공백에 맞춰 들어가게끔 조정되지 않을 것입니다.
+	position은 fixed, width는 100%, 원하는 위치를 설정하면 고정바 완성됨.
 	position: fixed;
-	top: 40px;/*bootstrap.css의 4171라인의 height와 맞춰야함.*/
+	top: 40px;bootstrap.css의 4171라인의 height와 맞춰야함.
 	width: 100%;
 	left: 0px;
 	min-height: 40px;
 	max-height: 50px;
-	/*이 안에 들어가는 콘텐츠의 크기에 따라 조정되니, 나머지 요소들 크기를 맞출것 */
- /* 	padding: 8px 4px 8px 8px; 
-	margin: 8px 8px 20px 8px; */
-}
+	이 안에 들어가는 콘텐츠의 크기에 따라 조정되니, 나머지 요소들 크기를 맞출것
+ 	padding: 8px 4px 8px 8px; 
+	margin: 8px 8px 20px 8px;
+} */
 
 #board-header-brand{
 	color: white;
@@ -67,7 +67,7 @@ body, #board-header-wrap{
 .list_all{
  	display: flex; 
 /*  	overflow-x: auto; */
- 	height: 100%; 
+ 	height: 95%; 
  	flex-grow:1;
  	position: absolute;
 /* 

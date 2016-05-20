@@ -372,9 +372,9 @@ var before=new Object();
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
 		$(".list_all").sortable({
-			axis:"x",
+			/*axis:"x",*/
 /*			cancel: "#addListLI" 입력을 못하게 막음,*/
-			items: "li:not(#addListLI,#addCardLI,.card_unit)",
+			items: ".list_unit, div:not(.no-include-sortable,.card_all)"/*"div:not(#addListLI,#addCardLI,.card_unit)"*/,
 			/*움직이는 대상에서 제외*/
 			item:function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
@@ -412,13 +412,12 @@ var before=new Object();
 	            change: function( event, ui ) { console.log("change: "+ui.item[0].id);}
 	            
 		});
-		$(".list_all").disableSelection();
 
 		$(".card_all").sortable({
 			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
 		      connectWith: ".card_all",
 	/*	      cancel: "#addCardLI" addbtn은 움직일 수 없게 설정,*/
-		      items: "li:not(#addCardLI,#addListLI)",
+		      items: ".card_unit, div:not(.no-include-sortable)",
 			  start: function (event, ui) {  
 				  var productOrder = $(this).sortable("toArray");
 				  updateCardStart(productOrder,ui.item.index());
@@ -458,7 +457,7 @@ var before=new Object();
 			       //  console.log("remove:"+productOrder+" index: "+productOrder[ui.item.index()]);
 				 }, beforeStop: function( event, ui ) {console.log("item:"+ui.item.index());},
 		            //change: function( event, ui ) { console.log("change: "+ui.item.index());}
-	    }).disableSelection();
+	    });
 
 	});
 

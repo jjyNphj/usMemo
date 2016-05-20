@@ -10,5 +10,9 @@ public class TestController {
 
 		return "/board/testListView";
 	}
+	@RequestMapping("/test/sortable")
+	public String sortableTest(){
 
+		return "/board/test/sortableTest";
+	}
 }
