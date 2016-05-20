@@ -55,7 +55,7 @@
     margin-right: -339px; /*  margin-right: -250px; */
 }
 
-   .surface.is-show-menu{
+     .board-wrapper.is-show-menu>#board-main-content{
     /*슬라이딩*/
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -64,14 +64,14 @@
 	/*왼쪽으로이동*/
 	margin-right: 339px;
 	}
-	.board-wrapper.is-show-menu #board-main-content>#board-header #board-header-wrap{
+/* 	.board-wrapper.is-show-menu #board-main-content>#board-header #board-header-wrap{
 	    -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 	padding-right: 339px;
 	}
-
+ */
 /* Sidebar Styles */
 
 .sidebar-nav {
@@ -154,7 +154,7 @@
     .board-wrapper.is-show-menu>#board-main-content{
 	margin-right: 339px;
 	}
-	.board-wrapper.is-show-menu #board-main-content>#board-header #board-header-wrap{
+/* 	.board-wrapper.is-show-menu #board-main-content>#board-header #board-header-wrap{
 	padding-right: 339px;
-	}
+	} */
 }

@@ -114,6 +114,7 @@
 																</div>
 															</c:if>
 														</c:forEach>
+														</div>
 														<div class="no-include-sortable" id="addCardLI">
 															<button class="addCardBtn btn btn-primary btn-simple">add
 																card...</button>
@@ -129,25 +130,27 @@
 																<button class="cancelCardBtn btn btn-primary">cancel</button>
 															</div>
 														</div>
-													</div>
+													
 												</div>
 											</div>
 										</c:forEach>
 
-										<div id="addListLI">
-											<button class="addListBtn btn btn-primary btn-simple">add
-												list...</button>
-											<div class="addList_group hide">
-												<div class="addList_textarea form-group">
-													<!-- textarea 폼의 디자인 div -->
-													<textarea class="form-control"
-														placeholder="Here, add List name" rows="5" cols="30"
-														id="listName_textarea" style="resize: none;"></textarea>
+										<div class="list_unit no-include-sortable" id="addListLI">
+											<div class="list_unit_view no-include-sortable">
+												<button class="addListBtn btn btn-primary btn-simple">add
+													list...</button>
+												<div class="addList_group no-include-sortable hide">
+													<div class="addList_textarea no-include-sortable form-group">
+														<!-- textarea 폼의 디자인 div -->
+														<textarea class="form-control"
+															placeholder="Here, add List name" rows="5" cols="30"
+															id="listName_textarea" style="resize: none;"></textarea>
+													</div>
+													<span id="byteInfo_group"><span id="byteInfo">0</span>/100Byte</span><br>
+													<button id="addListFuncBtn" class="btn btn-primary"
+														onclick="addList(${bNum})">add</button>
+													<button class="cancelListBtn btn btn-primary">cancel</button>
 												</div>
-												<span id="byteInfo_group"><span id="byteInfo">0</span>/100Byte</span><br>
-												<button id="addListFuncBtn" class="btn btn-primary"
-													onclick="addList(${bNum})">add</button>
-												<button class="cancelListBtn btn btn-primary">cancel</button>
 											</div>
 										</div>
 								<!-- 	</div> -->

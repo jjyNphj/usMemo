@@ -22,23 +22,24 @@
 /*카드의 영역을 일관되게 맞추기 위해 패딩 0 */
 .card_all{
 	padding: 0;
+	width:236;
+	height:100%;
+	overflow-y: overlay;
 }
 
-/*ul과 li앞에 붙는 표시 지우기 */
-ul.list_all, ul.card_all, li.list_unit, li.card_unit{
-	list-style-type: none;
-}
+
 /* 카드들이 들어갈 list_unit의 영역설정  */
 .list_unit {
 	display:inline-block; /* Op, Saf, Moz3.0이상, IE8등 */
     height: 100%;
     min-width: 270px;/*카드의 가로길이 지정*/
+    max-width: 270px;
+    white-space:nowrap;
     vertical-align: top;
-    background-color: #E2E4E6;
+    margin: 0 5px 10px 5px;
+    padding-bottom: 10px;
 }
-.card_all{
-		width:236;
-}
+
 .card_unit{
 		width:236;
 }
@@ -46,6 +47,7 @@ ul.list_all, ul.card_all, li.list_unit, li.card_unit{
 	background-color: white;
  	margin: 5px 6px 5px 6px;
 	padding: 2px 6px 2px 8px; 
+	white-space: normal;
 /*     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -62,13 +64,17 @@ ul.list_all, ul.card_all, li.list_unit, li.card_unit{
 	/* padding: 2px 6px 2px 8px;  */
 }
 .list_unit_view {
-	
+	background-color: #E2E4E6;
+	display: flex;
+	flex-direction: column;
     padding: 6px 4px 2px 4px;
     margin-left: 0px;
+    max-height: 100%; 
+    /*이래야 리스트의 최대길이만큼 리스트가 잘려서 보여짐. 카드는 스크롤이 생겨야하므로 overlay사용.*/
 	
 }
 .list_unit_name{
-	
+	white-space: normal;
     padding: 0px 6px 0px 8px;
 }
 

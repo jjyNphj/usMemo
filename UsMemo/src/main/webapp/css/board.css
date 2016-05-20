@@ -65,30 +65,38 @@ body, #board-header-wrap{
 
 } */
 .list_all{
+	overflow-x:auto;
+	overflow-y:hidden;
  	display: flex; 
 /*  	overflow-x: auto; */
- 	flex-grow:1;
+ 	/* flex-grow:1; */
  	position: absolute;
+ 	left: 0;
+	right: 0;
+	top: 0; /*메뉴바때문*/
+	bottom: 0;
+	margin-bottom: 5px;
 /* 
 	position: relative; */
 }
 #list-wrapper{
-	height: 100%;
-	overflow-x: auto;
-	/*리스트가 영역안에 제대로 보여지려면 메뉴바만큼 내려와야함.*/
- 	margin-top:50px;  
+	flex-grow:1;
+	position: relative;
+	/* overflow-x: auto; */
+ 	 margin-bottom:20px;   
 }
 
 #board-canvas{
 	flex-grow:1;
+	display: flex;
 	position: relative;
 
 }
 .surface{
 	height:100%;
 	display: flex;
-	overflow-y: hidden;
-	overflow-x:auto;
+	overflow: hidden;
+	/* overflow-x:auto; */
 }
 #header{
 	flex:none;
@@ -124,9 +132,9 @@ body, #board-header-wrap{
 
 #board-header{
 	flex-basis:40px;
-	height: auto;
+/* 	height: auto; */
 	overflow: hidden;
-	position: fixed;
+/* 	position: fixed; */
 	width: 100%;
 /* 	flex-basis:40px;
 		left: 0px;
