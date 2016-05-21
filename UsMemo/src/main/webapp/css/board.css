@@ -18,7 +18,7 @@ body, #board-header-wrap{
 	min-height: 40px;
 	max-height: 50px;
 /* 	overflow: auto; */
-	z-index: 10;/* 레이어의 맨위 설정 */
+	z-index: 100;/* 레이어의 맨위 설정 */
  }
 /* #board-header-wrap1{
 	position이 releative이면, 

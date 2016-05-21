@@ -26,10 +26,15 @@
 	<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board-canvas.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/scrollbar.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/board/board-drawer.css" rel="stylesheet">
 <title>Your Board</title>
 
 </head>
 <body>
+<!-- boards-drawer -->
+	<div id="boards-drawer" class="hide">
+		<jsp:include page="board-boardDrawer.jsp"></jsp:include>
+	</div>
 <!-- surface: 화면에 보이는부분 -->
 <div class="surface">
 <div id="header">
@@ -37,7 +42,7 @@
 	<div class="row header-bar">
 		<div class="col-xs-12 col-sm-12 col-md-12 "  style="background-color: black;"> 
 			 <div class="col-xs-4 col-sm-4 col-md-4 "  style="text-align:left;background-color: green;"> 
-			 <span class="header-logo-boardmenu" style="color: white;">보드이동메뉴넣기</span>
+			 <span class="header-logo-boardmenu" style="color: white;" >보드이동메뉴넣기</span>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;background-color: yellow;"> 
 			 <span class="header-logo" style="color: white;">로고넣기</span>
@@ -186,6 +191,7 @@
 	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
 	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
 	<!-- 디자인 -->
 	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>
 

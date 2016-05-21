@@ -1,0 +1,16 @@
+#boards-drawer{
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0px;
+    bottom: 0px;
+    z-index: 10; /*헤더메뉴가 100*/
+    width: 400px;
+    padding-bottom: 20px;
+	
+}
+.boards-drawer-view{
+	background-color: yellow;
+	height: 100%;
+}
