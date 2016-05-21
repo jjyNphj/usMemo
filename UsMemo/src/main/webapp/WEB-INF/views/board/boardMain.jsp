@@ -85,7 +85,6 @@
 								<div class="list_all">
 								<!-- 	<div> -->
 										<c:forEach var="l" items="${listList}" varStatus="index">
-
 											<div class="list_unit" id="${l.num}">
 												<!-- style= "background-color: yellow;"> -->
 												<div class="list_unit_view no-include-sortable" >
@@ -135,7 +134,7 @@
 											</div>
 										</c:forEach>
 
-										<div class="list_unit no-include-sortable" id="addListLI">
+										<div class="no-include-sortable" id="addListLI">
 											<div class="list_unit_view no-include-sortable">
 												<button class="addListBtn btn btn-primary btn-simple">add
 													list...</button>
@@ -166,123 +165,15 @@
 				</div><!-- /.board-canvas -->
 				</div><!-- /.board-main-content -->
 				<div id="board-menu">
-					<div id="wrapper" class="toggled" >
-		
-		        <!-- Sidebar -->
-		        <div id="sidebar-wrapper">
-		           <ul class="sidebar-nav">
-		                <li class="sidebar-brand">
-		                    <a>Menu</a>
-		                </li>
-		                   <li>
-		            <div class="container-fluid">
-		          
-		            <div class="row">
-		              <div class="span12">    
-		              <div class="panel panel-default">
-				    	 <div id="setMember" class="panel-body"></div>
-						</div>
-		            </div>
-		             <div class="row">
-		     		 <div class="span12">
-		               <div class="panel panel-default">
-							<div class="panel-body">
-							 	<form role="form">
-							 		<!-- input상자의 설정 -->
-							 		<!-- <div class="col-xs-8"> -->
-									<!-- <input type="button" class="addMemberBtn" value="addMembers..."> -->
-									<div id="findOption"><!--  class="hide" -->
-										<label for="pwd">친구검색</label>
-										<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
-										<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
-										<div id="findMemberResult" class="list-group"></div>
-										<!-- <br> <input type="button" value="specialLink생성"/> 
-										<br><input type="button" class="cancelAddMemberBtn" value="cancel" /> -->
-									</div>
-									<!-- /end input상자의 설정-->
-								<!-- 	</div> -->
-									</form>
-								</div>
-							</div>
-		              </div>
-		            </div>
-		            <!-- /#안쪽row -->
-		         </div>
-		         <!-- /#바깥row -->
-		        </div>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Overview</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Events</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">About</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Services</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Contact</a>
-		                </li>
-		            </ul>  
-		        </div><!-- /#sidebar-wrapper -->
-			</div><!-- /.wrapper -->
-		</div><!-- /.board-menu -->
+					<jsp:include page="board-menu.jsp" flush="flase"/>
+				</div><!-- /.board-menu -->
 	</div><!-- /.board-wrapper -->
 	</div><!-- /.content  -->
 	</div><!-- /.surface: 화면에 보이는 부분  -->
 	<!-- Modal -->
-	<!-- CardInfo Modal-->
-   <div class="container">
-      <div class="modal fade" id="cardInfoView" role="dialog">
-         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <!-- span 안에 담기는 카드의 넘버를 cardInfoView.js로 넘겨주기 위함 -->
-                  <span class="hide" id="card_num"></span>
-                  
-                  <button type="button" class="close" data-dismiss="modal" onclick="clearForm(this.form)">&times;</button>
-                  
-                  <h4 class="modal-title" >
-                     <!-- <h2 class="card-name-edit" id="card_Name" dir="auto"></h2> -->
-
-                     <!-- 키를 누르는 순간마다 enterProcess로 값을 넘김. 엔터의 아스키코드값인 경우 사용자가 입력한 값 에이작스로 전달, heightResize:사용자 입력할떄마다 textarea 사이즈 자동조정 -->
-                     <textarea class="textarea-card-name" id="card_Name" maxlength="200" onkeypress="enterSaveProcess(event,this)" onkeyup="heightResize(this)" ></textarea>
-                  </h4>
-
-                  <h6 class="modal-title" >in list <span id="list_Name"></span></h6>
-               </div>
-               
-               <div class="modal-body">
-                  <p>You wrote:<br><span id="card_Date"></span></p>
-                  <p>카드 상세 내용 입력하는 부분, 수정</p>
-
-                  <!-- textarea의 내용 id변수에 저장 -->
-                  <textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요."></textarea>
-                  </br>
-                  
-                  <button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
-                  <button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
-                  </br>                  
-               
-                     <div class="form-group" >
-                        <label for="exampleInputFile" >파일 업로드</label> 
-                        <input type="file"   id="exampleInputFile"  >
-                        <p class="help-block">파일 추가, 삭제, 다운</p>
-                     </div>
-                     <button type="submit" class="btn btn-default">첨부하기</button>
-                  
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-	<!-- /#cardInfo Modal -->
+	<div class="modal-cardInfoView">
+		<jsp:include page="board-cardInfo.jsp"></jsp:include>
+	</div>
 
 	
 		<!-- js -->
