@@ -40,9 +40,14 @@
 <div id="header">
 <div class="container">
 	<div class="row header-bar">
-		<div class="col-xs-12 col-sm-12 col-md-12 "  style="background-color: black;"> 
-			 <div class="col-xs-4 col-sm-4 col-md-4 "  style="text-align:left;background-color: green;"> 
-			 <span class="header-logo-boardmenu" style="color: white;" >보드이동메뉴넣기</span>
+		<div class="col-xs-12 col-sm-12 col-md-12 "> 
+			 <div class="col-xs-4 col-sm-4 col-md-4 " >
+			 	<div>
+			 	<a class="header-btn-boardmenu" href="#" >
+			 		<span class="header-logo-boardmenu glyphicon glyphicon-object-align-top" ></span>
+			 		<span class="header-text-boardmenu">Boards</span>
+			 	</a>
+			 	</div>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;background-color: yellow;"> 
 			 <span class="header-logo" style="color: white;">로고넣기</span>

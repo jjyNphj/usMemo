@@ -1,9 +1,12 @@
 /*board의 상단 메뉴*/
 
-$(".header-logo-boardmenu").click(function(){
+$(".header-btn-boardmenu").click(function(){
 		$("#boards-drawer").toggleClass("hide");
 		if(!$("#boards-drawer").hasClass("hide")){
 			get_myAllBoard();
+		}
+		else{
+			clean_allBoards();
 		}
 	});
 	
@@ -31,8 +34,14 @@ function set_allBoards(data){
 	$.each(data,function(index,val){
 		 $(".all-boards-content").append(
 				 '<div class="all-boards-wrapper">'+
+				 '<a class="board-title-link" href="#">'+
 				 '<span id="allBoardName_'+val.bNum+'">'+val.name+'</span>'+
-				 '</div>');
+				 '</div>'+
+				 '</a>');
 	});
+}
+
+function clean_allBoards(){
+	$('.all-boards-content>*').detach();
 }
 

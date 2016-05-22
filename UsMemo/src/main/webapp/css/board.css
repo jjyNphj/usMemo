@@ -8,9 +8,11 @@
 body, #board-header-wrap{
 	background-color: #B04632;
 }
-
+body{
+	font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+}
 #header, .header-bar{
-	background-color: black;/* #963C2B; */
+	background-color: #963C2B; 
  	position: fixed;
  	width: 100%;
 	top: 0px;
@@ -101,6 +103,13 @@ body, #board-header-wrap{
 #header{
 	flex:none;
 }
+.header-bar{
+	padding: 5px 5px 5px 5px;
+}
+.header-bar>*{ /*기존의 그리드 설정이 마진과 패딩 기본값이 설정되어있음.*/
+	margin: 0;
+	padding: 0;
+}
 #content{
 	flex-grow:1;
 	margin-top: 40px;
@@ -127,31 +136,40 @@ body, #board-header-wrap{
 	flex-direction: column;
 	height:inherit;
 	position: relative;
-/* 	overflow-x:auto;  */
 }
 
 #board-header{
 	flex-basis:40px;
-/* 	height: auto; */
 	overflow: hidden;
-/* 	position: fixed; */
 	width: 100%;
-/* 	flex-basis:40px;
-		left: 0px;
-	min-height: 40px;
-	position: fixed; */
-/* 		
-	top: 40px;bootstrap.css의 4171라인의 height와 맞춰야함.
-	width: 100%;
-
-	max-height: 50px; */
 }
 
-/* #list-wrapper{
-	position: relative;
+/*헤더바의 보드메뉴 설정.*/
+.header-btn-boardmenu{
+	color: #f3f3f3;
 	display: block;
-	white-space: wrap;
+	line-height: 30px;
+	font-weight: 700;
+	min-width: 30px;
+	padding: 0;
+	margin-right: 8px;
+	
+	
+	border-radius:3px;
+	text-decoration:none;
+	float: left;
+	background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%);
 }
-#board{
+.header-logo-boardmenu{
+	width: 30px;
+	padding-left: 10px;
+/* 	line-height: 30px;
+	top: 0;
+	left: 0;
+	position: absolute; */
+}
+.header-text-boardmenu{
 	position: relative;
-} */
+    padding-right: 10px;
+	
+}

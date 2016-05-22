@@ -15,7 +15,7 @@
 }
 .boards-drawer-view{
 
-	max-height: 150px;
+	max-height: 891px;
 	
 }
 
@@ -34,4 +34,11 @@
 .all-boards-header{
 	margin: 16px 30px 10px 8px;
 	position: relative;
+}
+.board-title-link{
+	display: flex;
+	height: 36px;
+	position: relative;
+	border-radius: 3px;
+	color: #444;
 }
