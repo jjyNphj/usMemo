@@ -1,16 +1,37 @@
-#boards-drawer{
-    height: 100%;
+.boards-drawer-view{
+ /*    height: 100%; */
+ 	box-shadow:0 3px 6px rgba(0,0,0,.4);
+ 	border-radius: 0 3px 3px 0;
     position: fixed;
-    top: 0;
+    top: 45px;
     left: 0;
     right: 0px;
     bottom: 0px;
     z-index: 10; /*헤더메뉴가 100*/
-    width: 400px;
-    padding-bottom: 20px;
+    width: 280px;
+/*     padding-bottom: 65px; */
+    background-color: #FFFFFF;
 	
 }
 .boards-drawer-view{
-	background-color: yellow;
-	height: 100%;
+
+	max-height: 150px;
+	
+}
+
+.boards-drawer-content{
+	margin: 6px 4px 6px 6px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	max-height: 619px;
+}
+#find-board-name{
+	width: 98%;
+	margin: 0 0 6px;
+	padding: 6px;
+}
+
+.all-boards-header{
+	margin: 16px 30px 10px 8px;
+	position: relative;
 }

@@ -1,14 +1,13 @@
 package com.twogether.usMemo.dao;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.BoardInfo;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
@@ -93,6 +92,10 @@ public class BoardDao {
 		sqlMapClientTemplate.insert("Board.addBoard", name);
 		sqlMapClientTemplate.insert("Board.addMemberGradeBybNum", memberGrade);
 		
+	}
+
+	public List<BoardInfo> getAllBoards(String memId) {
+		return sqlMapClientTemplate.queryForList("Board.getAllBoardsById",memId);
 	}
 
 

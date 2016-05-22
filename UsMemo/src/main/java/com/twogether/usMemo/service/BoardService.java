@@ -3,7 +3,6 @@ package com.twogether.usMemo.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
-import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.BoardInfo;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
@@ -218,5 +217,9 @@ public class BoardService {
 		memberGrade.setmemId(memId);
 		
 		boardDao.addBoard(name, memberGrade);
+	}
+	
+	public List<BoardInfo> getAllBoards(String memId){
+		return boardDao.getAllBoards(memId);
 	}
 }

@@ -7,12 +7,20 @@
 <sqlMap namespace="Board">
 	<typeAlias alias="board" type="com.twogether.usMemo.dto.Board" />
 	<typeAlias alias="memberGrade" type="com.twogether.usMemo.dto.MemberGrade" />
+	<typeAlias alias="allBoards" type="com.twogether.usMemo.dto.BoardInfo"/>
 	
 	<resultMap id="getMemberGrade" class="memberGrade">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
        <result property="memId" column="memId"/>
        <result property="grade" column="grade"/>
+    </resultMap>
+    <resultMap id="getAllBoards" class="allBoards">
+		<result property="memberGrade_num" column="memberGrade_num" />
+		<result property="bNum" column="bNum" />
+		<result property="memId" column="memId" />
+		<result property="grade" column="grade" />
+		<result property="name" column="name" />
     </resultMap>
 
 	
@@ -49,7 +57,13 @@
 	    <!-- 전달받은 bNum과 같은 memberGrade.bNum 행 모두 삭제  -->
 	    delete from memberGrade where exists (select 1 from board where memberGrade.bNum = board.num and board.num=#bNum#)
 	</delete>
-
+	
+	<select id="getAllBoardsById" parameterClass="String" resultMap="getAllBoards">
+		select b.name,g.num as memberGrade_num, g.bNum, g.memId, g.grade 
+		from board b Inner Join memberGrade g
+		on b.num=g.bNum
+		where g.memId=#memId# 
+	</select>
 
 </sqlMap>
 	
