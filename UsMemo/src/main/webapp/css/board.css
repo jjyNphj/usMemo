@@ -2,6 +2,14 @@
  boardMain의 전체적인 디자인 
  */
  
+    @font-face {
+   font-family: 'logoFont'; /* 폰트 패밀리 이름 주기*/
+   src: url('fonts/JENNASUE.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
+} 
+    @font-face {
+   font-family: 'basicFont'; /* 폰트 패밀리 이름 주기*/
+   src: url('fonts/나눔고딕BOLD.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
+} 
 
 
 /*전체 색상설정*/
@@ -11,17 +19,7 @@ body, #board-header-wrap{
 body{
 	font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
 }
-#header, .header-bar{
-	background-color: #963C2B; 
- 	position: fixed;
- 	width: 100%;
-	top: 0px;
-	left: 0px;
-	min-height: 40px;
-	max-height: 50px;
-/* 	overflow: auto; */
-	z-index: 100;/* 레이어의 맨위 설정 */
- }
+
 /* #board-header-wrap1{
 	position이 releative이면, 
 	상대 위치가 지정된 엘리먼트에 top이나 right, bottom, left를 지정하면 기본 위치와 다르게 위치가 조정됩니다.
@@ -101,6 +99,15 @@ body{
 	/* overflow-x:auto; */
 }
 #header{
+	background-color: #963C2B; 
+ 	position: fixed;
+ 	width: 100%;
+	top: 0px;
+	left: 0px;
+	min-height: 40px;
+	max-height: 40px;
+/* 	overflow: auto; */
+	z-index: 100;/* 레이어의 맨위 설정 */
 	flex:none;
 }
 .header-bar{
@@ -112,7 +119,7 @@ body{
 }
 #content{
 	flex-grow:1;
-	margin-top: 40px;
+	margin-top: 50px;
 /* 	display: flex; */
 	position:relative;
 	padding-bottom: 20px;/*보드화면에서 맨아래 스크롤부분을 패딩으로 남김.*/
@@ -143,7 +150,10 @@ body{
 	overflow: hidden;
 	width: 100%;
 }
-
+#board-header>*{
+	padding: 0;
+	margin: 0;
+}
 /*헤더바의 보드메뉴 설정.*/
 .header-btn-boardmenu{
 	color: #f3f3f3;
@@ -171,5 +181,36 @@ body{
 .header-text-boardmenu{
 	position: relative;
     padding-right: 10px;
+	
+}
+.header-btn-home{
+	color: #CA9D94;
+	display: block;
+	line-height: 30px;
+	font-weight: 700;
+	min-width: 30px;
+	padding: 0;
+	margin-right: 8px;
+	
+	
+	border-radius:3px;
+	text-decoration:none;
+	/* background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%);
+	 */
+	font-family: logoFont; font-size: 18pt;
+}
+.board-header-barnd{
+	line-height: 30px;
+	font-weight: 700;
+	font-family: basicFont;
+	font-size: 18pt;
+	color: #f3f3f3;
+	
+}
+.board-header-btn-menu{
+	line-height: 30px;
+	font-family: basicFont;
+	font-size: 10pt;
+	color: #f3f3f3;
 	
 }

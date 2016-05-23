@@ -38,7 +38,6 @@
 <!-- surface: 화면에 보이는부분 -->
 <div class="surface">
 <div id="header">
-<div class="container">
 	<div class="row header-bar">
 		<div class="col-xs-12 col-sm-12 col-md-12 "> 
 			 <div class="col-xs-4 col-sm-4 col-md-4 " >
@@ -49,34 +48,36 @@
 			 	</a>
 			 	</div>
 			 </div>
-			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;background-color: yellow;"> 
-			 <span class="header-logo" style="color: white;">로고넣기</span>
+			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;"> 
+			<a class="header-btn-home" href="#">
+			 <span class="header-logo glyphicon glyphicon-object-align-top" style="color: #CA9D94;"></span>
+			 <span class="header-text" >UsMemo</span>
+			 </a>
 			 </div>
-			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;background-color: blue;">
+			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;">
 			<span class="header-logo-myinfo" style="color: white;"> 내정보넣기</span>
 			 </div>
 		 </div>
 	</div>
-</div>
 							
 </div><!-- end header -->
 		<div id="content">
 			
 			<div class="board-wrapper">
 				<div id="board-main-content">
-					<div id="board-header" class="container">
-						<div id="board-header-wrap" class="row"style="background-color: orange;" >
+					<div id="board-header">
+						<div id="board-header-wrap" class="row" >
 							<div class="col-xs-12 col-sm-12 col-md-12" >
-								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left;background-color: green;">
-									 <div class="col-md-6"  style="background-color: yellow;">  
+								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left; color: white;">
+								 <a class="board-header-barnd">
 									 	<span id="board-header-brand-text">${bName }</span>
-									 </div>
-									 <div class="col-xs-6 col-sm-6 col-md-6"  style="background-color: blue;">
-									 	<span class="glyphicon glyphicon-star-empty"></span> 
-									 </div>
+									 	<span class="board-header-starred glyphicon glyphicon-star-empty"></span>
+								 </a> 
 								 </div>
-								 <div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;background-color: blue;"> 
-									 <span id="board-header-brand-text" class="menu-toggle">menu</span>
+								 <div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right; color: white;"> 
+								 	<a class="board-header-btn-menu">
+									 <span id="board-header-btn-menu-text" class="menu-toggle">Show Menu</span>
+									 </a>
 								 </div>
 					
 				 			</div>
