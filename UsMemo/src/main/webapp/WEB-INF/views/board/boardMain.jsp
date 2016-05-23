@@ -27,6 +27,7 @@
 	<link href="${pageContext.request.contextPath}/css/board-canvas.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/scrollbar.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board/board-drawer.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/board/board-side-menu.css" rel="stylesheet">
 <title>Your Board</title>
 
 </head>
@@ -175,8 +176,8 @@
 
 				</div><!-- /.board-canvas -->
 				</div><!-- /.board-main-content -->
-				<div id="board-menu">
-					<jsp:include page="board-menu.jsp" flush="flase"/>
+				<div id="side-menu">
+					<jsp:include page="board-sideMenu.jsp" flush="flase"/>
 				</div><!-- /.board-menu -->
 	</div><!-- /.board-wrapper -->
 	</div><!-- /.content  -->
@@ -196,7 +197,7 @@
 	<script src="${pageContext.request.contextPath}/js/board/jquery.autogrowtextarea.js"></script>
 	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
-	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+	<script src="${pageContext.request.contextPath}/js/side-menu.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
 	<!-- 디자인 -->
 	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>

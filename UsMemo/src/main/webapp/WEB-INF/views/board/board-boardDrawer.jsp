@@ -11,7 +11,7 @@
 			</div>
 			<div class="all-boards">
 				<div class="all-boards-header">
-					<span class="glyphicon glyphicon-edit"></span> 
+					<span class="glyphicon glyphicon-object-align-top"></span> 
 					<span>My Boards</span>
 				</div>
 				<div class="all-boards-content">

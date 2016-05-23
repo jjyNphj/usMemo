@@ -335,8 +335,8 @@ var before=new Object();
 	            data:listLocation,
 	            contentType: 'application/json',
 	            success:function(){
-	            	alert("success!");
-	            	window.location.reload();
+	            	//alert("success!");
+	            	//window.location.reload();
 	            } ,
 		       error :function(data,status,er) { 
 		    	   alert("error: "+data+" status: "+status+" er:"+er);
@@ -357,8 +357,8 @@ var before=new Object();
 	            data: cardLocation,
 	            contentType: 'application/json',
 	            success:function(){
-	            	alert("success!");
-	            	window.location.reload();
+	            	//alert("success!");
+	            	//window.location.reload();
 	            } ,
 		       error :function(data,status,er) { 
 		    	   alert("error: "+data+" status: "+status+" er:"+er);
