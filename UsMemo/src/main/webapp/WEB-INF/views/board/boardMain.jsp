@@ -56,10 +56,15 @@
 			 </a>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;">
-			 <a class="header-btn-myInfo" href="#" >
-				 <span><img class="header-img-myInfo" src="${nowMemberInfo.profile_image }"/></span>
-				 <span class="header-text-myInfo" style="color: white;">${nowMemberInfo.nickname}</span>
-			 </a>
+			 <div class="header-myInfo-wrapper dropdown">
+				 <a class="header-btn-myInfo dropdown-toggle" data-toggle="dropdown">		
+					 <span><img class="header-img-myInfo" src="${myInfo.profile_image }"/></span>
+					 <span class="header-text-myInfo" style="color: white;">${myInfo.nickname}</span>
+				 </a>
+				 <div id="header-myInfo-dropdown" class="dropdown-menu">
+				 	<div>${myInfo.name }, ${myInfo.nickname },${myInfo.email }</div>
+				 </div>
+			 </div>
 			 </div>
 		 </div>
 	</div>
