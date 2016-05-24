@@ -19,13 +19,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.BoardInfo;
 import com.twogether.usMemo.service.BoardService;
+import com.twogether.usMemo.service.MemberService;
 
 
 @RequestMapping("/board")
 @Controller
 public class BoardController {
-	@Autowired
-	BoardService boardService;
+	@Autowired BoardService boardService;
+	@Autowired MemberService memberService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
@@ -58,12 +59,13 @@ public class BoardController {
 	}
 	
 	//ModelAttribute는 RequestParam과 비슷함. 그저 하나의 파라메터가 아닌 객체로 바인딩해서 받아오는것.
-	@RequestMapping("/index")
-	public ModelAndView boardIndex(@ModelAttribute Board board){
+	@RequestMapping("/index/{memId}")
+	public ModelAndView boardIndex(@ModelAttribute Board board, @PathVariable("memId") String id){
 		//하나의 보드 화면 
 		/*
 		 * bNum으로 해당 보드의 리스트, 카드정보 가지고와야함. 
 		 */
+		logger.info("id===>{}",id);
 		HashMap<String, List> map=boardService.getListAndCard(board);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("board/boardMain");
@@ -71,6 +73,7 @@ public class BoardController {
 		mv.addObject("cardList",map.get("cardList"));
 		mv.addObject("bNum",board.getbNum());
 		mv.addObject("bName",board.getName());
+		mv.addObject("nowMemberInfo",memberService.getMyInfo(id));
 		return mv;
 	}
 	

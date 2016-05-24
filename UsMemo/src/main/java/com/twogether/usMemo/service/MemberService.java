@@ -129,5 +129,16 @@ public class MemberService {
 	public void updateFriend(MemberGrade member) {
 		memberDao.updateFriend(member);
 	}
+	
+	/**
+	 * 현재 로그인한 사람의 정보 
+	 * @param id
+	 * @return
+	 */
+	public Member getMyInfo(String id){
+		Member member = new Member();
+		member=memberDao.getMyInfo(id);
+		return member;
+	}
 
 }

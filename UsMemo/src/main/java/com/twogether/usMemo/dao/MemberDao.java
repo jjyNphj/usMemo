@@ -74,5 +74,16 @@ public class MemberDao {
 		public void updateFriend(MemberGrade member) {
 			sqlMapClientTemplate.update("Member.updateFriend",member);
 		}
+		
+		/**
+		 * 현재 로그인한 사람의 정보 
+		 * @param id
+		 * @return
+		 */
+		public Member getMyInfo(String id) {
+			Member member= new Member();
+			member=(Member) sqlMapClientTemplate.queryForObject("Member.getMyInfo",id);
+			return member;
+		}
 
 }

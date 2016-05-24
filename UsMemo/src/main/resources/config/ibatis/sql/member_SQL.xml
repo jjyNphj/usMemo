@@ -48,6 +48,10 @@
 		<update id="updateFriend" parameterClass="memberGrade">
 			update memberGrade set grade=#grade# where bNum=#bNum# and memId=#memId#
 		</update>
+		
+		<select id="getMyInfo" parameterClass="String" resultClass="member">
+			select * from member where id=#id#
+		</select>
 	
 	</sqlMap>
 	

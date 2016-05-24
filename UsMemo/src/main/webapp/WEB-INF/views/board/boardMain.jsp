@@ -56,7 +56,10 @@
 			 </a>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;">
-			<span class="header-logo-myinfo" style="color: white;"> 내정보넣기</span>
+			 <a class="header-btn-myInfo" href="#" >
+				 <span><img class="header-img-myInfo" src="${nowMemberInfo.profile_image }"/></span>
+				 <span class="header-text-myInfo" style="color: white;">${nowMemberInfo.nickname}</span>
+			 </a>
 			 </div>
 		 </div>
 	</div>

@@ -214,3 +214,24 @@ body{
 	color: #f3f3f3;
 	
 }
+.header-btn-myInfo{
+	float: right;
+	color: #f3f3f3;
+	display: block;
+	line-height: 30px;
+	font-weight: 700;
+	min-width: 30px;
+	padding: 0;
+	margin-right: 8px;
+	
+	border-radius:3px;
+	text-decoration:none;
+	background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%);
+}
+.header-img-myInfo{
+	width: 30px;
+	height: 30px;
+}
+.header-text-myInfo{
+	padding:0 5px 0 3px;
+	}

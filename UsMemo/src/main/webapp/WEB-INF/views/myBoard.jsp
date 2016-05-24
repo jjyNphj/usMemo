@@ -21,7 +21,8 @@
 function goPage(bNum,name){
     var answer=confirm("선택하신 보드를 보러 가시겠습니까?");
         if(answer){ 
-            var url ='/usMemo/board/index?bNum='+ bNum.value+'&name='+name.value;
+        	var id=$("#memId").val();
+            var url ='/usMemo/board/index/'+id+'?bNum='+ bNum.value+'&name='+name.value;
                 window.open(url, "_self",  '');
          }   
     }
@@ -106,6 +107,7 @@ function createBoard(memId) {
 		</div>
 
 	<form>
+		<input type="hidden" id="memId" value="${sessionScope.id}" />
 		<!-- 현재 memId에 연결된 Board의 bNum들  뷰에 보여주기-->
 		<c:forEach var="list" items="${Board}" varStatus="i">
 			<!-- Board.java의 변수 bNum,name? var="변수이름",items="반복데이터가 있는 아이템(리스트or배열)", --> 
