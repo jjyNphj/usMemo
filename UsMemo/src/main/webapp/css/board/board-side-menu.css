@@ -49,9 +49,28 @@
 	flex-flow: column wrap;
 }
 #findOption{
-	padding-top: 10px;
+	padding: 10px 5px 10px 5px;
 }
 .side-menu-members{
 	padding: 0 3px 0 3px;
+}
+.side-menu-addMember-btn{
+	color: #66615B;
+    background-color: #FCFDFD;
+    height: 34px;
+    vertical-align: middle;
+    flex: none;
+    padding: 7px 7px 7px 7px;
+    border: 1px solid #e2e4e6;
+    border-bottom-color: #cdd2d4;
+    border-radius: 3px;
+	
+}
+.side-menu-addMember-btn:HOVER {
+	background-color: #337AB7;
+	color: #FCFDFD;
+}
+.side-menu-addMember-text{
+	font-weight: 700;
 }
 

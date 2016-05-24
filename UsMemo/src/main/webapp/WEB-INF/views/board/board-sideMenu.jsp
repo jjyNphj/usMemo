@@ -17,10 +17,12 @@
 		<div class="side-menu-content">
 			<div id="setMember">
 			</div>
-			 <div class="dropdown">
-			    <a class="dropdown-toggle" data-toggle="dropdown">Add Members...
-			    <span class="glyphicon glyphicon-user"></span>
-			    </a>
+			 <div class="side-menu-addMember-wrapper dropdown">
+			 	<div class="side-menu-addMember-btn dropdown-toggle" data-toggle="dropdown">
+				    <span class="glyphicon glyphicon-user"></span>
+				    <span class="side-menu-addMember-text">Add Members...
+			    </span>
+			    </div>
 			    <div id="findOption" class="dropdown-menu">
 			      <form role="form">
 					<label for="pwd">친구검색</label> 
