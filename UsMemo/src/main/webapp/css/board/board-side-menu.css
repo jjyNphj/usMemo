@@ -34,3 +34,24 @@
 	 margin-bottom: 15px;
 	 width: 90%;
 }
+
+.side-menu-profile_image{
+	width: 30px;
+	height: 30px;
+}
+#setMember{
+	display: flex;
+	padding: 0 0 10px 5px;
+}
+.side-menu-content{
+	padding: 0 10px 0 10px;
+	display: flex;
+	flex-flow: column wrap;
+}
+#findOption{
+	padding-top: 10px;
+}
+.side-menu-members{
+	padding: 0 3px 0 3px;
+}
+

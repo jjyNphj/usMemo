@@ -15,4 +15,9 @@ public class TestController {
 
 		return "/board/test/sortableTest";
 	}
+	@RequestMapping("/test/dropdown")
+	public String dropDownTest(){
+		return "/board/test/dropdown-ex";
+	}
+	
 }

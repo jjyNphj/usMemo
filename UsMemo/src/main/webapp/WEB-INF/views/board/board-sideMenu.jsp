@@ -15,11 +15,14 @@
 			<hr>
 		</div>
 		<div class="side-menu-content">
-			<div id="setMember" >
+			<div id="setMember">
 			</div>
-			<div id="findOption">
-				<form role="form">
-					<!--  class="hide" -->
+			 <div class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown">Add Members...
+			    <span class="glyphicon glyphicon-user"></span>
+			    </a>
+			    <div id="findOption" class="dropdown-menu">
+			      <form role="form">
 					<label for="pwd">친구검색</label> 
 					<input type="text" class="form-control" id="findMember"	placeholder="이름, 닉네임, email 등으로 검색해보세요."> 
 					<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
@@ -27,7 +30,8 @@
 					<div id="findMemberResult" class="list-group">
 					</div>
 				</form>
-			</div>
+			    </div>
+  			</div>
 		</div>
 		<!-- 		                </li>
 		                <li class="basic-li">
