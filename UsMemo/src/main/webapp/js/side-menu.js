@@ -277,8 +277,14 @@ function addMemberFunc(id,bNum){
 	
 	/*드롭다운 이벤트를 실행할땐 .dropdown을 가진 div의 선택자를 선택해야함.*/
 	$(".side-menu-addMember-wrapper").on('hide.bs.dropdown',function(){
-		/*드롭다운이 사라지는 이벤트가 발생하면 input상자의 입력값을 지워죠!*/
-		$("#findMember").val('');
+		/*드롭다운이 사라지는 이벤트가 발생하면 input상자, 찾은 친구 리스트의 값을 지워죠!*/
+		clean_findMembersResults();
+		
 	});
+	
+	function clean_findMembersResults(){
+		$("#findMember").val('');
+		$("#findMemberResult> *").detach();
+	}
 		
 	
