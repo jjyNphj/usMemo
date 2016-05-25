@@ -62,7 +62,7 @@
 					 <span class="header-text-myInfo" style="color: white;">${myInfo.nickname}</span>
 				 </a>
 				 <div id="header-myInfo-dropdown" class="dropdown-menu">
-				 	<div>${myInfo.name }, ${myInfo.nickname },${myInfo.email }</div>
+				 	<div>${myInfo.name }<br> ${myInfo.nickname }<br>${myInfo.email }</div>
 				 </div>
 			 </div>
 			 </div>

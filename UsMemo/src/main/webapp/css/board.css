@@ -235,3 +235,11 @@ body{
 .header-text-myInfo{
 	padding:0 5px 0 3px;
 	}
+	
+.header-img-myInfo{	
+	border-radius:3px 0 0 3px;
+	float: left;
+}
+#findMember-close-btn{
+	float: right;
+}

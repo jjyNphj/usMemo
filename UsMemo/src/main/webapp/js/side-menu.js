@@ -269,4 +269,16 @@ function addMemberFunc(id,bNum){
 	   $(this).parents("div").prev(":button").show();
 	});
 	
+	$("#findMember-close-btn").click(function(){
+		/*드롭다운의 메뉴 끄기*/
+		$(".side-menu-addMember-btn").dropdown('toggle');
+		/*끄기이벤트 요청시 이벤트헨들러 발생.*/
+	});
+	
+	/*드롭다운 이벤트를 실행할땐 .dropdown을 가진 div의 선택자를 선택해야함.*/
+	$(".side-menu-addMember-wrapper").on('hide.bs.dropdown',function(){
+		/*드롭다운이 사라지는 이벤트가 발생하면 input상자의 입력값을 지워죠!*/
+		$("#findMember").val('');
+	});
+		
 	
