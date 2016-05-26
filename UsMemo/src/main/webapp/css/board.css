@@ -75,7 +75,7 @@ body{
 	right: 0;
 	top: 0; /*메뉴바때문*/
 	bottom: 0;
-	margin-bottom: 5px;
+	margin:0 3px 15px 3px;
 /* 
 	position: relative; */
 }
