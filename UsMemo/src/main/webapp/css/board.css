@@ -8,7 +8,7 @@
 } 
     @font-face {
    font-family: 'basicFont'; /* 폰트 패밀리 이름 주기*/
-   src: url('fonts/나눔고딕BOLD.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
+   src: url('fonts/NanumGodicBOLD.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
 } 
 
 
@@ -17,7 +17,7 @@ body, #board-header-wrap{
 	background-color: #B04632;
 }
 body{
-	font: 14px "Helvetica Neue",Arial,Helvetica,sans-serif;
+	font: 14px 'basicFont',Arial,Helvetica,sans-serif;
 }
 
 /* #board-header-wrap1{
