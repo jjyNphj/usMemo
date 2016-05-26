@@ -64,4 +64,9 @@ public class CardDao {
 		
 	}
 	
+	//CardService에서 넘겨줌 saveFileName를 attach로 받음.(DTO에 있는 이름으로 맞춰주려고)
+	public void fileUploadName(Card card) {	
+		sqlMapClientTemplate.insert("Card.fileUploadName", card);
+	}
+	
 }

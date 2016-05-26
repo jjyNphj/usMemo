@@ -229,6 +229,7 @@
 	</div><!-- /.board-wrapper -->
 	</div><!-- /.content  -->
 	</div><!-- /.surface: 화면에 보이는 부분  -->
+	
 	<!-- Modal -->
 	<!-- CardInfo Modal-->
    <div class="container">
@@ -261,15 +262,20 @@
                   
                   <button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
                   <button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
-                  </br>                  
-               
+                  <br>                  
+               		
+               		<%-- <input type="text"  value="${#card_num}"/> --%>
+				  <form action="/usMemo/card/fileUploadAjax" id="formUpload" name="formUpload"  method="post" enctype="multipart/form-data">
+				  <!-- <form method="post" enctype="multipart/form-data"> -->
                      <div class="form-group" >
-                        <label for="exampleInputFile" >파일 업로드</label> 
-                        <input type="file"   id="exampleInputFile"  >
-                        <p class="help-block">파일 추가, 삭제, 다운</p>
+                        <label for="exampleInputFile">파일 업로드</label> 
+                        <input type="file" name="file1" id="exampleInputFile"  />
+                        <input type="text" class="hide" id="card_num" name="" /><!-- value="${card_num}" -->
+                        <!-- <p class="help-block">파일 추가, 삭제, 다운</p> -->
                      </div>
-                     <button type="submit" class="btn btn-default">첨부하기</button>
-                  
+                     <!-- <button type="submit" class="btn btn-default" onclick="fileUpload(card_num)">첨부하기</button> -->
+                     <input type="submit" class="btn btn-default" value="첨부하기"/>
+                  </form>
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>

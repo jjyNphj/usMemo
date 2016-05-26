@@ -18,6 +18,7 @@
 //				dataType : "json",
 				success : function(data) {
 					alert(data.result);
+					console.log(data);
 				},
 				error : function(error) {
 					alert("요청 처리 중 오류가 발생하였습니다.");
@@ -40,5 +41,7 @@
 		<br />
 		<input type="submit" value="upload" />
 	</form>
+	
+	
 </body>
 </html>

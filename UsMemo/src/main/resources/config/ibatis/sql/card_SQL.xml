@@ -106,5 +106,9 @@
 	    <!-- 전달받은 card 안에 cardInfoView에서 넘겨준 num값고 name값이 존재 -->
 	    update card set name=#name# where num=#num#
 	</update>
+	
+	<update id="fileUploadName" parameterClass="card">
+		update card set attach=#attach# where num=#num#
+	</update>
 </sqlMap>
 	

@@ -11,6 +11,71 @@
 		);
 	});
 });*/
+
+/*function fileUpload(card_num) {
+	var num = document.getElementById('card_num').innerHTML;
+	console.log(num);
+	var url='/usMemo/card/fileUploadAjax?num='+num;
+	$("form").ajaxSubmit({
+//		dataType : "json",
+		url : url,
+
+		success : function() {
+			console.log(data);
+			console.log($(this).serialize());
+			alert(data.result);
+			alert(num);
+		},
+		error : function(xhr, status, error) {
+			alert("요청 처리 중 오류가 발생하였습니다.");
+		}
+	});
+}*/
+$(document).ready(function() {
+		$("input[type=submit]").bind("click", function() {
+			var num = document.getElementById('card_num').innerHTML;
+			console.log(num);
+			/*var url='/usMemo/card/fileUploadAjax?num='+num;*/
+			/*var queryString = $("form[name=formUpload]").serialize() ;*/
+			/*var formData = $("#formUpload").serialize();*/
+			/*var formData = JSON.parse(JSON.stringify(jQuery('#formUpload').serializeArray()));*/
+			/*var formData = new FormData(); 			
+    	    formData.append("file1", $(":file"));*/
+			/*var formData = new FormData($('#formUpload'));*/
+			/*var formData = new FormData($('#formUpload').serialize());*/
+			/*formData = formData.serialize();
+			formData = JSON.stringify(formData);*/
+			var formData = $("#formUpload").val();
+			/*var formData = $("form[name=formUpload]").serialize();*/
+			$("form").ajaxSubmit({
+				/*url : url,*/
+				//dataType : "json",
+				//type : 'post',
+				/*type : 'post',
+	            data : queryString,
+	            dataType : 'json',*/
+				/*data : {formData:formData,num:num},*/
+				/*data : "formData=formData&num=num",*/
+				
+				//processData: false,  // tell jQuery not to process the data
+		        //contentType: false ,  // tell jQuery not to set contentType,
+		        
+		        beforeSerialize: function() {
+		        	$("#card_num").attr("name",num);
+		        	console.log("처리전");
+		        },
+				success : function(data) {
+					alert(data.result);
+					//console.log(data);
+				},
+				error : function(error) {
+					alert("요청 처리 중 오류가 발생하였습니다.");
+				}
+			});
+			return false;
+		});
+	});
+
 function heightResize(obj) {
 	//textarea에 입력된 크기만큼 세로 길이 조정
 	obj.style.height = "1px";

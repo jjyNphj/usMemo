@@ -112,28 +112,40 @@ public class CardController {
 	@RequestMapping(value="fileUploadAjax", method=RequestMethod.GET)
 	public ModelAndView fileUploadAjaxForm() {
 		
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 		
-		mav.setViewName("board/FileUploadTest");
+		mv.setViewName("board/boardMain");
 		
-		return mav;
+		return mv;
 	}
 	
 	/* 파일 업로드 처리 */
 	@RequestMapping(value="fileUploadAjax", method=RequestMethod.POST)
-	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest) {
+	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest, @RequestParam int cNum) {
 		
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mv = new ModelAndView();
 		
-		if(cardService.fileUpload(mRequest)) {
-			mav.addObject("result", "SUCCESS");
+		if(cardService.fileUpload(mRequest,cNum)) {
+			mv.addObject("result", "SUCCESS");
+			System.out.println("success");
 		} else {
-			mav.addObject("result", "FAIL");
+			mv.addObject("result", "FAIL");
 		}
 		
-		mav.setViewName("JSON");
+		mv.setViewName("JSON");
 		
-		return mav;
+		return mv;
+	}
+	
+	/* 파일 다운로드 화면 이동 */
+	@RequestMapping(value="fileListShow", method=RequestMethod.GET)
+	public ModelAndView fileListShow() {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("board/FileUploadTest");
+		
+		return mv;
 	}
 	
 }
