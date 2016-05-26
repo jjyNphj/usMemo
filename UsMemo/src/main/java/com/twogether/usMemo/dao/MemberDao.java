@@ -85,5 +85,12 @@ public class MemberDao {
 			member=(Member) sqlMapClientTemplate.queryForObject("Member.getMyInfo",id);
 			return member;
 		}
+		/**
+		 * 현재 사용자가 이 보드를 즐겨찾기 선택 및 해제.
+		 * @param boardInfo
+		 */
+		public void updateStar(MemberGrade boardInfo) {
+			sqlMapClientTemplate.update("Member.updateStar",boardInfo);
+		}
 
 }

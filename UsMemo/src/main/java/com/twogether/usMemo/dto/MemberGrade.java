@@ -10,6 +10,7 @@ public class MemberGrade {
 	private String memId;
 	//회원 등급
 	private int grade;
+	private String star;
 	
 	public int getNum() {
 		return num;
@@ -34,6 +35,12 @@ public class MemberGrade {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
+	}
+	public String getStar() {
+		return star;
+	}
+	public void setStar(String star) {
+		this.star = star;
 	}
 
 	

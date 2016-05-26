@@ -65,7 +65,6 @@ public class BoardController {
 		/*
 		 * bNum으로 해당 보드의 리스트, 카드정보 가지고와야함. 
 		 */
-		logger.info("id===>{}",id);
 		HashMap<String, List> map=boardService.getListAndCard(board);
 		ModelAndView mv= new ModelAndView();
 		mv.setViewName("board/boardMain");
@@ -97,7 +96,6 @@ public class BoardController {
 	
 	@RequestMapping("/createBoard")
 	public ModelAndView boardCreate(@RequestParam String name, @RequestParam String memId) throws SQLException{
-		logger.info("memId: {}",memId);
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -110,7 +108,6 @@ public class BoardController {
 	
 	@RequestMapping("/allBoards/{memId}")
 	public @ResponseBody List<BoardInfo> getAllBoards(@PathVariable("memId") String memId ){
-		logger.info("memId: {}",memId);
 		List<BoardInfo> boardInfo= new ArrayList<BoardInfo>();
 		boardInfo=boardService.getAllBoards(memId);
 

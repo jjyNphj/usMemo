@@ -82,6 +82,13 @@ public class MemberController {
 		memberService.updateFriend(member);
 		return "/board/menu";
 	}
+	
+	@RequestMapping("/updateStar")
+	public void updateStar(@ModelAttribute MemberGrade boardInfo){
+		
+		memberService.updateStar(boardInfo);
+		
+	}
 
 
 }

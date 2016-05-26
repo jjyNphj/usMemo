@@ -140,5 +140,13 @@ public class MemberService {
 		member=memberDao.getMyInfo(id);
 		return member;
 	}
+	
+	/**
+	 * 현재 사용자가 이 보드를 즐겨찾기 선택 및 해제.
+	 * @param boardInfo
+	 */
+	public void updateStar(MemberGrade boardInfo) {
+		memberDao.updateStar(boardInfo);
+	}
 
 }

@@ -157,14 +157,13 @@ function addMemberFunc(id,bNum){
 			//이미지 설정함
 			$("#setMember").append('<div class="dropdown side-menu-members">'+
 						'<div class="dropdown-toggle" type="button" data-toggle="dropdown">'+
-							'<img id="profile_image'+index+'" data-toggle="popover" data-trigger="hover" title="" data-content="" data-placement="bottom" class="side-menu-profile_image">'+
+							'<img id="profile_image'+index+'" title="" class="side-menu-profile_image">'+
 						'</div>'+
 						'<ul id="ul'+index+'" class="dropdown-menu" role="menu" aria-labelledby="dLabel">'+
 						'</ul>'+
 					'</div>');
 
 			$(img_id).attr("src",val.profile_image);
-			$(img_id).attr("data-content",val.email);
 				//권한에 따라 타이틀만 변경해야함.
 				//적으려는 멤버가 현재로그인한 멤버가 아닐경우
 				if(val.id!=sessionId){

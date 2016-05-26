@@ -466,7 +466,35 @@ var before=new Object();
         $('[type=text], select, textarea', o).val('');
     } 
     
-    
-	 
+    $("#board-header-starred").click(function(){
+    	if($(this).hasClass("glyphicon glyphicon-star-empty")){
+    		//즐겨찾기로 해줘야함.
+    		$(this).removeClass("glyphicon glyphicon-star-empty");
+    		$(this).addClass("glyphicon glyphicon-star");
+    		updateStarBoard('Y');
+    	}else if(!$(this).hasClass("glyphicon glyphicon-star-empty")){
+    		$(this).removeClass("glyphicon glyphicon-star");
+    		$(this).addClass("glyphicon glyphicon-star-empty");
+    		updateStarBoard('N');
+    	}
+    });
+	
+    function updateStarBoard(star){
+    	var bNum=$('#bNum').val();
+    	var memId=$('#memId').val();
+    	
+    	var url='/usMemo/member/updateStar?bNum='+bNum+'&memId='+memId+'&star='+star;
+    	 $.ajax({
+	            url: url,
+	            type :'post',
+	            success:function(){
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+    	 });
+    	
+    }
 	 
 
