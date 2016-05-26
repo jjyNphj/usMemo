@@ -2,7 +2,14 @@ package com.twogether.usMemo.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.Iterator;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+
+import oracle.sql.BLOB;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -239,12 +246,14 @@ public class CardService {
 
 		return Integer.parseInt(object.toString());
 	}
-
+	
 
 	/**
 	 * 파일 업로드와 해당 카드 넘버에 파일 이름 넣기
+	 * @throws SQLException 
+	 * @throws SerialException 
 	 */
-	public boolean fileUpload(MultipartHttpServletRequest mRequest) {
+	public boolean fileUpload(MultipartHttpServletRequest mRequest, int cNum) throws SerialException, SQLException {
 
 		boolean isSuccess = false;
 		
@@ -279,16 +288,23 @@ public class CardService {
 			if(saveFileName != null && !saveFileName.equals("")) {
 				if(new File(uploadPath + saveFileName).exists()) {
 					saveFileName = saveFileName + "_" + System.currentTimeMillis();
-					
-					//Card DTO에 첨부파일 이름과, 카드의 넘버를 넣어줌.
-					Card card = new Card();
-					card.setAttach(saveFileName);
-					//card.setNum(cNum);
-					cardDao.fileUploadName(card);
+
+					System.out.println(saveFileName);
+					System.out.println(originalFileName);
 				}
 				
 				try {
 					mFile.transferTo(new File(uploadPath + saveFileName));
+					//Card DTO에 첨부파일 이름과, 카드의 넘버를 넣어줌.
+					Card card = new Card();
+					
+					byte[] byteSaveFile = saveFileName.getBytes();
+					/*Blob blobSaveFile = new SerialBlob(byteSaveFile);
+					*/
+					card.setAttach(byteSaveFile);
+					card.setNum(cNum);
+					cardDao.fileUploadName(card);
+					
 					isSuccess = true;				
 				} catch (IllegalStateException e) {
 					e.printStackTrace();

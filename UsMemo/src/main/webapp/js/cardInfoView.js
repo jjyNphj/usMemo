@@ -38,7 +38,6 @@ $(document).ready(function() {
 			var file_data=$('#exampleInputFile').val();
 			console.log(file_data);
 			$('#formUpload').ajaxSubmit({
-		        
 		        beforeSerialize: function() {
 		        	/*$("#uploadFile_card_num").attr("name",num);*/
 		        	$("#uploadFile_card_num").attr("value",num);

@@ -1,6 +1,9 @@
 package com.twogether.usMemo;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
+
+import javax.sql.rowset.serial.SerialException;
 
 import org.codehaus.jackson.JsonParser;
 import org.json.simple.JSONObject;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.ParameterizedSingleColumnRowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -121,11 +125,11 @@ public class CardController {
 	
 	/* 파일 업로드 처리 */
 	@RequestMapping(value="fileUploadAjax", method=RequestMethod.POST)
-	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest) {
+	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest, @RequestParam("cNum") int cNum) throws SerialException, SQLException {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		if(cardService.fileUpload(mRequest)) {
+		if(cardService.fileUpload(mRequest,cNum)) {
 			mv.addObject("result", "SUCCESS");
 			System.out.println("success");
 		} else {
