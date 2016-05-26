@@ -244,7 +244,7 @@ public class CardService {
 	/**
 	 * 파일 업로드와 해당 카드 넘버에 파일 이름 넣기
 	 */
-	public boolean fileUpload(MultipartHttpServletRequest mRequest, int cNum) {
+	public boolean fileUpload(MultipartHttpServletRequest mRequest) {
 
 		boolean isSuccess = false;
 		
@@ -271,6 +271,7 @@ public class CardService {
 		while(iter.hasNext()) {
 			String uploadFileName = iter.next();
 			
+			/*MultipartFile mFile = mRequest.getFile(uploadFileName);*/
 			MultipartFile mFile = mRequest.getFile(uploadFileName);
 			String originalFileName = mFile.getOriginalFilename();
 			String saveFileName = originalFileName;
@@ -282,7 +283,7 @@ public class CardService {
 					//Card DTO에 첨부파일 이름과, 카드의 넘버를 넣어줌.
 					Card card = new Card();
 					card.setAttach(saveFileName);
-					card.setNum(cNum);
+					//card.setNum(cNum);
 					cardDao.fileUploadName(card);
 				}
 				

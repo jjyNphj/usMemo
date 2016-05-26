@@ -270,7 +270,7 @@
                      <div class="form-group" >
                         <label for="exampleInputFile">파일 업로드</label> 
                         <input type="file" name="file1" id="exampleInputFile"  />
-                        <input type="text" class="hide" id="card_num" name="" /><!-- value="${card_num}" -->
+                        <input type="text"  name="cNum" id="uploadFile_card_num" /><!-- value="${card_num}" -->
                         <!-- <p class="help-block">파일 추가, 삭제, 다운</p> -->
                      </div>
                      <!-- <button type="submit" class="btn btn-default" onclick="fileUpload(card_num)">첨부하기</button> -->
@@ -290,6 +290,7 @@
 		<!-- js -->
 	
 	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/bootstrap.js"></script>

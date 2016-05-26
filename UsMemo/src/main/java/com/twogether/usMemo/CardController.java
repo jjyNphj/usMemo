@@ -121,11 +121,11 @@ public class CardController {
 	
 	/* 파일 업로드 처리 */
 	@RequestMapping(value="fileUploadAjax", method=RequestMethod.POST)
-	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest, @RequestParam int cNum) {
+	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest) {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		if(cardService.fileUpload(mRequest,cNum)) {
+		if(cardService.fileUpload(mRequest)) {
 			mv.addObject("result", "SUCCESS");
 			System.out.println("success");
 		} else {
