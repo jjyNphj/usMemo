@@ -92,5 +92,14 @@ public class MemberDao {
 		public void updateStar(MemberGrade boardInfo) {
 			sqlMapClientTemplate.update("Member.updateStar",boardInfo);
 		}
+		/**
+		 * 현재 사용자가 현재의 보드를 즐겨찾기로 설정했는지 여부 확인.
+		 * @param memberGrade
+		 * @return
+		 */
+		public String getThisBoardStar(MemberGrade memberGrade) {
+			String result= (String)sqlMapClientTemplate.queryForObject("Member.getThisBoardStar", memberGrade);
+			return result;
+		}
 
 }

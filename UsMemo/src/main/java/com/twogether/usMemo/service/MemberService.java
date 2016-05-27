@@ -148,5 +148,19 @@ public class MemberService {
 	public void updateStar(MemberGrade boardInfo) {
 		memberDao.updateStar(boardInfo);
 	}
+	/**
+	 * 현재 이 보드를 사용자가 즐겨찾기로 설정했는지 여부 확인.
+	 * @param getbNum
+	 * @param id
+	 * @return
+	 */
+	public String getThisBoardStar(int getbNum, String id) {
+		
+		MemberGrade memberGrade= new MemberGrade();
+		memberGrade.setbNum(getbNum);
+		memberGrade.setmemId(id);
+		String result= memberDao.getThisBoardStar(memberGrade);
+		return result;
+	}
 
 }

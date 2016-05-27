@@ -52,8 +52,11 @@
 		<select id="getMyInfo" parameterClass="String" resultClass="member">
 			select * from member where id=#id#
 		</select>
-		<update id="updateStar" parameterClass="memberGrade">
-			update memberGrade set star=#star# where memId=#memId and bNum=#bNum#
-		</update>
+ 		<update id="updateStar" parameterClass="memberGrade">
+			update memberGrade set star=#star# where memId=#memId# and bNum=#bNum#
+		</update> 
+		<select id="getThisBoardStar" parameterClass="memberGrade" resultClass="String">
+			select star from memberGrade where bNum=#bNum# and memId=#memId#
+		</select>
 	</sqlMap>
 	

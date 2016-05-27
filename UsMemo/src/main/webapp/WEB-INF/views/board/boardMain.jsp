@@ -80,7 +80,8 @@
 								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left; color: white;">
 								 <a class="board-header-barnd">
 									 	<span id="board-header-brand-text">${bName }</span>
-									 	<span id="board-header-starred" class="glyphicon glyphicon-star-empty"></span>
+									 	<c:if test="${star eq 'Y' }"><span id="board-header-starred" class="glyphicon glyphicon-star"></span></c:if>
+									 	<c:if test="${star eq 'N' }"><span id="board-header-starred" class="glyphicon glyphicon-star-empty"></span></c:if>
 								 </a> 
 								 </div>
 								 <div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right; color: white;"> 

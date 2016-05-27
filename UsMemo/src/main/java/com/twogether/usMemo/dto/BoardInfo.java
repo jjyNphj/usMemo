@@ -7,6 +7,7 @@ public class BoardInfo{
 	private int	memberGrade_num;
 	private String memId;
 	private int grade;
+	private String star;
 	
 	public int getbNum() {
 		return bNum;
@@ -37,6 +38,12 @@ public class BoardInfo{
 	}
 	public void setMemberGrade_num(int memberGrade_num) {
 		this.memberGrade_num = memberGrade_num;
+	}
+	public String getStar() {
+		return star;
+	}
+	public void setStar(String star) {
+		this.star = star;
 	}
 	
 	

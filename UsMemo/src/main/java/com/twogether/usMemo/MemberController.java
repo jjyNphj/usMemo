@@ -84,10 +84,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/updateStar")
-	public void updateStar(@ModelAttribute MemberGrade boardInfo){
+	public String updateStar(@ModelAttribute MemberGrade boardInfo){
 		
 		memberService.updateStar(boardInfo);
-		
+	
+		return "board/boardMain";
 	}
 
 

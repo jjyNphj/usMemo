@@ -73,6 +73,7 @@ public class BoardController {
 		mv.addObject("bNum",board.getbNum());
 		mv.addObject("bName",board.getName());
 		mv.addObject("myInfo",memberService.getMyInfo(id));
+		mv.addObject("star",memberService.getThisBoardStar(board.getbNum(),id));
 		return mv;
 	}
 	

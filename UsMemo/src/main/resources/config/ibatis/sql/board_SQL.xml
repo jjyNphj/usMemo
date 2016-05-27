@@ -14,13 +14,15 @@
        <result property="bNum" column="bNum"/>
        <result property="memId" column="memId"/>
        <result property="grade" column="grade"/>
+       <result property="star" column="star"/>
     </resultMap>
     <resultMap id="getAllBoards" class="allBoards">
 		<result property="memberGrade_num" column="memberGrade_num" />
 		<result property="bNum" column="bNum" />
 		<result property="memId" column="memId" />
 		<result property="grade" column="grade" />
-		<result property="name" column="name" />
+		<result property="name" column="name" />    
+		<result property="star" column="star"/>
     </resultMap>
 
 	
@@ -59,7 +61,7 @@
 	</delete>
 	
 	<select id="getAllBoardsById" parameterClass="String" resultMap="getAllBoards">
-		select b.name,g.num as memberGrade_num, g.bNum, g.memId, g.grade 
+		select b.name,g.num as memberGrade_num, g.bNum, g.memId, g.grade, g.star  
 		from board b Inner Join memberGrade g
 		on b.num=g.bNum
 		where g.memId=#memId# 
