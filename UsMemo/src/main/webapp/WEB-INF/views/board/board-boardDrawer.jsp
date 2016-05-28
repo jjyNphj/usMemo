@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="boards-drawer-view" >
+<div class="boards-drawer-view dropdown-menu" >
 	<div class="boards-drawer-content">
 		<div class="find-board form-group">
 			<input type="text" class="form-control" id="find-board-name" placeholder="Find boards by name...">

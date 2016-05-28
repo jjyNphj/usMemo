@@ -32,22 +32,21 @@
 
 </head>
 <body>
-<!-- boards-drawer -->
-	<div id="boards-drawer" class="hide">
-		<jsp:include page="board-boardDrawer.jsp"></jsp:include>
-	</div>
+
 <!-- surface: 화면에 보이는부분 -->
 <div class="surface">
 <div id="header">
 	<div class="row header-bar">
 		<div class="col-xs-12 col-sm-12 col-md-12 "> 
 			 <div class="col-xs-4 col-sm-4 col-md-4 " >
-			 	<div>
-			 	<a class="header-btn-boardmenu" href="#" >
-			 		<span class="header-logo-boardmenu glyphicon glyphicon-object-align-top" ></span>
-			 		<span class="header-text-boardmenu">Boards</span>
-			 	</a>
-			 	</div>
+							 	<!-- boards-drawer -->
+				<div id="header-boardmenu" class="dropdown">
+					<div class="header-btn-boardmenu dropdown-toggle" data-toggle="dropdown">
+				 		<span class="header-logo-boardmenu glyphicon glyphicon-object-align-top" ></span>
+				 		<span class="header-text-boardmenu">Boards</span>
+				 	</div>
+							<jsp:include page="board-boardDrawer.jsp"></jsp:include>
+				 </div>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;"> 
 			<a class="header-btn-home" href="#">

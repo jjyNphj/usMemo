@@ -1,15 +1,13 @@
 /*board의 상단 메뉴*/
 
-$(".header-btn-boardmenu").click(function(){
-		$("#boards-drawer").toggleClass("hide");
-		if(!$("#boards-drawer").hasClass("hide")){
-			get_myAllBoard();
-		}
-		else{
-			clean_allBoards();
-		}
-	});
-	
+/*boardmenu의 보드목록 불러오는 이벤트, 즐겨찾기클릭의 중복을 막기 위해 바꿈. */
+$('#header-boardmenu').on('show.bs.dropdown',function(){
+	get_myAllBoard();
+});
+$('#header-boardmenu').on('hide.bs.dropdown',function(){
+	clean_allBoards();
+});
+
 	
 function get_myAllBoard(){
 	
