@@ -8,6 +8,12 @@
 		</div>
 		<div class="board-drawer-boards">
 			<div class="starred-boards">
+				<div class="starred-boards-header">
+					<span class="glyphicon glyphicon-star"></span>
+					<span>Starred Boards</span>
+				</div>
+				<div class="starred-boards-content">
+				</div>
 			</div>
 			<div class="all-boards">
 				<div class="all-boards-header">

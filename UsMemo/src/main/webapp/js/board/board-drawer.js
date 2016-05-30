@@ -21,6 +21,7 @@ function get_myAllBoard(){
 			contentType: 'application/json',
          success:function(data){
         	set_allBoards(data);
+        	set_starredBoards(data);
          } ,
 	       error :function(data,status,er) { 
 	    	   alert("error: "+data+" status: "+status+" er:"+er);
@@ -31,11 +32,39 @@ function get_myAllBoard(){
 function set_allBoards(data){
 	$.each(data,function(index,val){
 		 $(".all-boards-content").append(
-				 '<div class="all-boards-wrapper">'+
-				 '<a class="board-title-link" href="#">'+
-				 '<span id="allBoardName_'+val.bNum+'">'+val.name+'</span>'+
-				 '</div>'+
-				 '</a>');
+				 '<div class="drawer-boardsList-wrapper">'+
+				 	'<span class="drawer-boardsList-title-background"></span>'+
+					'<span class="drawer-boardsList-title-fade"></span>'+
+					 '<a class="drawer-boardsList-title-link" href="#">'+
+						 '<span class="drawer-boardsList-title-link-thumbnail"></span>'+
+						 '<span class="drawer-boardsList-title-details">'+
+						 '<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
+						 '</span>'+
+					 '</a>'+
+				 '</div>');
+	});
+}
+function set_starredBoards(data){
+	var result;
+	$.each(data,function(index,val){
+		
+		if(val.star == 'Y'){
+	
+		$('.starred-boards-content').append(
+				
+				'<div class="starrd-boards-wrapper">'+
+					'<span class="drawer-boardsList-title-background"></span>'+
+					'<a class="drawer-boardsList-title-link" href="#">'+
+						'<span class="drawer-boardsList-title-link-thumbnail"></span>'+
+						'<span class="drawer-boardsList-title-details">'+
+						'<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
+						'<span class="glyphicon glyphicon-star"></span>'+
+						'</span>'+
+					'</a>'+
+					'</div>'
+				
+			);
+		}
 	});
 }
 

@@ -31,14 +31,70 @@
 	padding: 6px;
 }
 
-.all-boards-header{
+.all-boards-header, .starred-boards-header{
 	margin: 16px 30px 10px 8px;
 	position: relative;
 }
-.board-title-link{
+.all-boards-header > span, .starred-boards-header > span{
+	color: #8c8c8c;
+}
+.all-boards-content,.starred-boards-content{
+	position: relative;
+}
+.drawer-boardsList-wrapper{
+	position: relative;
+	margin: 3px 0 3px 0;
+	
+}
+.drawer-boardsList-wrapper:hover{
+	opacity: initial;
+}
+.drawer-boardsList-title-background{
+	background-color: #B04632;
+	opacity: 0.13;
+	background-size: cover;
+	background-position: center center;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+	
+}
+.drawer-boardsList-title-fade{
+	background-color: rgba(255, 255, 255, 0.882353);
+	 
+}
+.drawer-boardsList-title-link{
 	display: flex;
 	height: 36px;
+	font-weight: 700;
 	position: relative;
 	border-radius: 3px;
 	color: #444;
+	background-color: transparent;
 }
+.drawer-boardsList-title-link-thumbnail{
+	background-color: #B04632;
+	flex: 0 0 auto;
+	background-size: cover;
+	border-radius: 3px 0 0 3px;
+	display: inline-block;
+	height: 36px;
+	opacity: .7;
+	width: 36px;
+	
+}
+.drawer-boardsList-title-details{
+	padding: 9px 0 9px 10px;
+	flex: 1 1 auto;
+	overflow: hidden;
+}
+.drawer-boardsList-name{
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	font-weight: 700;
+	color: #444;
+}
+
