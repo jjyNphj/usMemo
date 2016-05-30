@@ -88,13 +88,24 @@
 	padding: 9px 0 9px 10px;
 	flex: 1 1 auto;
 	overflow: hidden;
+ 	display: flex; 
 }
 .drawer-boardsList-name{
-	display: block;
+ 	display: block; 
 	overflow: hidden;
 	white-space: nowrap;
-	text-overflow:ellipsis;
+	text-overflow:ellipsis; /*overflow시 알아서 표시*/
 	font-weight: 700;
 	color: #444;
+	position: relative;
+	flex: 1 1 auto;
+}
+.drawer-boardsList-title-star{
+	padding: 2px 5px 0 5px;
+	float: right;
+	flex: 0 0 auto;
+} 
+.glyphicon-star{
+	color: #f2d600;
 }
 

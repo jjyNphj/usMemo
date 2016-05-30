@@ -6,6 +6,7 @@ $('#header-boardmenu').on('show.bs.dropdown',function(){
 });
 $('#header-boardmenu').on('hide.bs.dropdown',function(){
 	clean_allBoards();
+	clean_starredBoards();
 });
 
 	
@@ -31,6 +32,9 @@ function get_myAllBoard(){
 }
 function set_allBoards(data){
 	$.each(data,function(index,val){
+		var starred_boards_vlaue;
+		if(val.star == 'Y') starred_boards_vlaue='glyphicon-star'; 
+		else if(val.star=='N') starred_boards_vlaue='glyphicon-star-empty'; 
 		 $(".all-boards-content").append(
 				 '<div class="drawer-boardsList-wrapper">'+
 				 	'<span class="drawer-boardsList-title-background"></span>'+
@@ -39,6 +43,7 @@ function set_allBoards(data){
 						 '<span class="drawer-boardsList-title-link-thumbnail"></span>'+
 						 '<span class="drawer-boardsList-title-details">'+
 						 '<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
+						 '<span class="drawer-boardsList-title-star glyphicon '+starred_boards_vlaue+'"></span>'+
 						 '</span>'+
 					 '</a>'+
 				 '</div>');
@@ -58,7 +63,7 @@ function set_starredBoards(data){
 						'<span class="drawer-boardsList-title-link-thumbnail"></span>'+
 						'<span class="drawer-boardsList-title-details">'+
 						'<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
-						'<span class="glyphicon glyphicon-star"></span>'+
+						'<span class="drawer-boardsList-title-star glyphicon glyphicon-star"></span>'+
 						'</span>'+
 					'</a>'+
 					'</div>'
@@ -70,5 +75,8 @@ function set_starredBoards(data){
 
 function clean_allBoards(){
 	$('.all-boards-content>*').detach();
+}
+function clean_starredBoards(){
+	$('.starred-boards-content>*').detach();
 }
 
