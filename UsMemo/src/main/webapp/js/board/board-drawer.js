@@ -39,7 +39,7 @@ function set_allBoards(data){
 				 '<div class="all-boards-wrapper">'+
 				 	'<span class="drawer-boardsList-title-background"></span>'+
 					'<span class="drawer-boardsList-title-fade"></span>'+
-					 '<a class="drawer-boardsList-title-link" href="#">'+
+					 '<a class="drawer-boardsList-title-link" onclick="goBoard('+val.bNum+','+'\''+val.name+'\''+')">'+
 						 '<span class="drawer-boardsList-title-link-thumbnail"></span>'+
 						 '<span class="drawer-boardsList-title-details">'+
 						 '<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
@@ -60,8 +60,8 @@ function set_starredBoards(data){
 				'<div class="starrd-boards-wrapper">'+
 					'<span class="drawer-boardsList-title-background"></span>'+
 					'<span class="drawer-boardsList-title-fade"></span>'+
-					'<a class="drawer-boardsList-title-link" href="#">'+
-						'<span class="drawer-boardsList-title-link-thumbnail"></span>'+
+					 '<a class="drawer-boardsList-title-link" onclick="goBoard('+val.bNum+','+'\''+val.name+'\''+')">'+
+					 	'<span class="drawer-boardsList-title-link-thumbnail"></span>'+
 						'<span class="drawer-boardsList-title-details">'+
 						'<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
 						'<span id="drawer-boardsList-title-star" class="glyphicon glyphicon-star"></span>'+

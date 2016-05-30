@@ -207,6 +207,7 @@
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
 	<script src="${pageContext.request.contextPath}/js/side-menu.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/board-setting.js"></script>
 	<!-- 디자인 -->
 	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>
 
