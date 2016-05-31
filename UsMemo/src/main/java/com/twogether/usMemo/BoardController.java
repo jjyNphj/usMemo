@@ -52,7 +52,7 @@ public class BoardController {
 		//myBoard.jsp 부름
 		mv.setViewName("myBoard");	
 		mv.addObject("Board",boardService.myBoardList(memId));
-		
+		mv.addObject("myInfo",memberService.getMyInfo(memId));
 	//	logger.info("보드리스트이다.{}",boardService.myBoardList(mNum));
 		
 		return mv;

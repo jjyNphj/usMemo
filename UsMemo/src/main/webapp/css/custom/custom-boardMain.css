@@ -1,0 +1,45 @@
+
+/*전체 색상설정*/
+body, #board-header-wrap{
+	background-color: #B04632;
+}
+#header{
+	background-color: #963C2B; 
+}
+
+.list_all{
+	overflow-x:auto;
+	overflow-y:hidden;
+ 	display: flex; 
+/*  	overflow-x: auto; */
+ 	/* flex-grow:1; */
+ 	position: absolute;
+ 	left: 0;
+	right: 0;
+	top: 0; /*메뉴바때문*/
+	bottom: 0;
+	margin:0 3px 15px 3px;
+/* 
+	position: relative; */
+}
+#list-wrapper{
+	flex-grow:1;
+	position: relative;
+	/* overflow-x: auto; */
+ 	 margin-bottom:20px;   
+}
+
+#board-canvas{
+	flex-grow:1;
+	display: flex;
+	position: relative;
+
+}
+
+#findMember-close-btn{
+	float: right;
+}
+
+.header-btn-home{
+	color: #CA9D94;
+	}

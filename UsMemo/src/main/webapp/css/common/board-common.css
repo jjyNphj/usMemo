@@ -1,0 +1,208 @@
+ /**
+ boardMain의 전체적인 디자인 
+ */
+ 
+    @font-face {
+   font-family: 'logoFont'; /* 폰트 패밀리 이름 주기*/
+   src: url('../fonts/JENNASUE.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
+} 
+    @font-face {
+   font-family: 'basicFont'; /* 폰트 패밀리 이름 주기*/
+   src: url('../fonts/NanumGodicBOLD.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
+} 
+
+body{
+	font: 14px 'basicFont',Arial,Helvetica,sans-serif;
+}
+
+/* #board-header-wrap1{
+	position이 releative이면, 
+	상대 위치가 지정된 엘리먼트에 top이나 right, bottom, left를 지정하면 기본 위치와 다르게 위치가 조정됩니다.
+	다른 콘텐츠는 해당 엘리먼트에서 남긴 공백에 맞춰 들어가게끔 조정되지 않을 것입니다.
+	position은 fixed, width는 100%, 원하는 위치를 설정하면 고정바 완성됨.
+	position: fixed;
+	top: 40px;bootstrap.css의 4171라인의 height와 맞춰야함.
+	width: 100%;
+	left: 0px;
+	min-height: 40px;
+	max-height: 50px;
+	이 안에 들어가는 콘텐츠의 크기에 따라 조정되니, 나머지 요소들 크기를 맞출것
+ 	padding: 8px 4px 8px 8px; 
+	margin: 8px 8px 20px 8px;
+} */
+
+#board-header-brand{
+	color: white;
+	height: 30px;
+	overflow: hidden;/*보드이름 길어져도 쭉 나감 */
+	margin: 0 4px 0 0;
+	float: left;
+}
+
+
+
+/*리스트추가, 카드추가할때 버튼클릭시 입력창 숨기고 열기 관련*/
+.hide {	display: none;}
+
+
+/*메뉴의 멤버사진 가로정렬*/
+.dropdown{ display:inline}
+
+.navbar-brand{/*crpaper에서도 수정*/
+	margin : 0 15px 0 15px;
+	padding: 0px;
+	color: #CA9D94;
+}
+
+/* #list-wrapper{
+	position: flex;
+	display: block;
+
+} */
+
+.surface{
+	height:100%;
+	display: flex;
+	overflow: hidden;
+	/* overflow-x:auto; */
+}
+#header{
+ 	position: fixed;
+ 	width: 100%;
+	top: 0px;
+	left: 0px;
+	min-height: 40px;
+	max-height: 40px;
+/* 	overflow: auto; */
+	z-index: 100;/* 레이어의 맨위 설정 */
+	flex:none;
+}
+.header-bar{
+	padding: 5px 5px 5px 5px;
+}
+.header-bar>*{ /*기존의 그리드 설정이 마진과 패딩 기본값이 설정되어있음.*/
+	margin: 0;
+	padding: 0;
+}
+#content{
+	flex-grow:1;
+	margin-top: 50px;
+/* 	display: flex; */
+	position:relative;
+	padding-bottom: 20px;/*보드화면에서 맨아래 스크롤부분을 패딩으로 남김.*/
+	/* overflow-x: auto; *//*맨아래스크롤생기게함.*/
+	height: inherit;
+}
+.board-wrapper{
+	position: relative;
+	/*
+	position: absolute;
+	 left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0; */
+	height:inherit;/*맨 아래 스크롤생기게함.*/
+	
+	
+}
+#board-main-content{
+	display:flex;
+	flex-direction: column;
+	height:inherit;
+	position: relative;
+}
+
+#board-header{
+	flex-basis:40px;
+	overflow: hidden;
+	width: 100%;
+}
+#board-header>*{
+	padding: 0;
+	margin: 0;
+}
+/*헤더바의 보드메뉴 설정.*/
+.header-btn-boardmenu{
+	color: #f3f3f3;
+	display: block;
+	line-height: 30px;
+	font-weight: 700;
+	min-width: 30px;
+	padding: 0;
+	margin-right: 8px;
+	
+	
+	border-radius:3px;
+	text-decoration:none;
+	float: left;
+	background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%);
+}
+.header-logo-boardmenu{
+	width: 30px;
+	padding-left: 10px;
+/* 	line-height: 30px;
+	top: 0;
+	left: 0;
+	position: absolute; */
+}
+.header-text-boardmenu{
+	position: relative;
+    padding-right: 10px;
+	
+}
+.header-btn-home{
+	display: block;
+	line-height: 30px;
+	font-weight: 700;
+	min-width: 30px;
+	padding: 0;
+	margin-right: 8px;
+	
+	
+	border-radius:3px;
+	text-decoration:none;
+	/* background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%);
+	 */
+	font-family: logoFont; font-size: 18pt;
+}
+.board-header-barnd{
+	line-height: 30px;
+	font-weight: 700;
+	font-family: basicFont;
+	font-size: 18pt;
+	color: #f3f3f3;
+	
+}
+.board-header-btn-menu{
+	line-height: 30px;
+	font-family: basicFont;
+	font-size: 10pt;
+	color: #f3f3f3;
+	
+}
+.header-btn-myInfo{
+	float: right;
+	color: #f3f3f3;
+	display: block;
+	line-height: 30px;
+	font-weight: 700;
+	min-width: 30px;
+	padding: 0;
+	margin-right: 8px;
+	
+	border-radius:3px;
+	text-decoration:none;
+	background: linear-gradient(to bottom,rgba(255,255,255,.3) 0,rgba(255,255,255,.2) 100%);
+}
+.header-img-myInfo{
+	width: 30px;
+	height: 30px;
+}
+.header-text-myInfo{
+	padding:0 5px 0 3px;
+	}
+	
+.header-img-myInfo{	
+	border-radius:3px 0 0 3px;
+	float: left;
+}

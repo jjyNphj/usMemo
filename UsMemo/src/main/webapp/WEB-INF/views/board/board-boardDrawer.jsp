@@ -25,8 +25,22 @@
 			</div>
 		</div>
 		
-		<div class="board-drawer-buttons">
-			<a class="board-add-btn">Create new board...</a>
+		<div id="board-drawer-newBoard">
+			<div class="new-board-btn">
+				<span class="new-board-btn-text">Create new board...</span>
+			</div>
+			<div id="new-board-content " class="dropdown-menu">
+			<div class=" form-group">
+				<div class="new-board-header">Create Board
+				</div>
+				<div class="new-board-form-title">
+				 	<label for="exampleInputName2">title</label>
+    				<input type="text" class="form-control" id="new-board-title" placeholder="">	
+				</div>
+				<div class="new-board-btn-submit">
+				</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

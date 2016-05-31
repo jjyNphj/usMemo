@@ -23,11 +23,13 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
 <!-- 	board의 전반적인 css파일 -->
-	<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/common/board-common.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/custom/custom-boardMain.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board-canvas.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/scrollbar.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board/board-drawer.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board/board-side-menu.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/bootstrap-submenu.css" rel="stylesheet">
 <title>Your Board</title>
 
 </head>
@@ -36,38 +38,7 @@
 <!-- surface: 화면에 보이는부분 -->
 <div class="surface">
 <div id="header">
-	<div class="row header-bar">
-		<div class="col-xs-12 col-sm-12 col-md-12 "> 
-			 <div class="col-xs-4 col-sm-4 col-md-4 " >
-							 	<!-- boards-drawer -->
-				<div id="header-boardmenu" class="dropdown">
-					<div class="header-btn-boardmenu dropdown-toggle" data-toggle="dropdown">
-				 		<span class="header-logo-boardmenu glyphicon glyphicon-object-align-top" ></span>
-				 		<span class="header-text-boardmenu">Boards</span>
-				 	</div>
-							<jsp:include page="board-boardDrawer.jsp"></jsp:include>
-				 </div>
-			 </div>
-			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;"> 
-			<a class="header-btn-home" href="#">
-			 <span class="header-logo glyphicon glyphicon-object-align-top" style="color: #CA9D94;"></span>
-			 <span class="header-text" >UsMemo</span>
-			 </a>
-			 </div>
-			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;">
-			 <div class="header-myInfo-wrapper dropdown">
-				 <a class="header-btn-myInfo dropdown-toggle" data-toggle="dropdown">		
-					 <span><img class="header-img-myInfo" src="${myInfo.profile_image }"/></span>
-					 <span class="header-text-myInfo" style="color: white;">${myInfo.nickname}</span>
-				 </a>
-				 <div id="header-myInfo-dropdown" class="dropdown-menu">
-				 	<div>${myInfo.name }<br> ${myInfo.nickname }<br>${myInfo.email }</div>
-				 </div>
-			 </div>
-			 </div>
-		 </div>
-	</div>
-							
+	<jsp:include page="board-header.jsp"></jsp:include>				
 </div><!-- end header -->
 		<div id="content">
 			
@@ -208,6 +179,7 @@
 	<script src="${pageContext.request.contextPath}/js/side-menu.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-setting.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap-submenu.js"></script>
 	<!-- 디자인 -->
 	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>
 

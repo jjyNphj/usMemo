@@ -9,6 +9,9 @@ $('#header-boardmenu').on('hide.bs.dropdown',function(){
 	clean_starredBoards();
 });
 
+/*board drawer의 내용을 클릭할때 dropdown의 특성상 창이 꺼지는 것을 방지.*/
+$('.boards-drawer-view').bind('click', function (e) { e.stopPropagation() });
+
 	
 function get_myAllBoard(){
 	

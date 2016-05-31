@@ -1,0 +1,11 @@
+
+/*전체 색상설정*/
+body, #board-header-wrap{
+	background-color: #f3f3f3;
+}
+#header{
+	background-color: #026AA7; 
+	}
+.header-btn-home{
+	color: #f3f3f3;
+	}

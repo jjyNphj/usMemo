@@ -5,22 +5,28 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!-- 부트스트랩 CDN -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link href="${pageContext.request.contextPath}/css/board/bootstrap.css" rel="stylesheet">
 
-<title>Insert title here</title>
-
-<!-- 부트스트랩 CDN -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+	<!-- 	board의 전반적인 css파일 -->
+	<link href="${pageContext.request.contextPath}/css/board/board-drawer.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/common/board-common.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/custom/custom-myBoard.css" rel="stylesheet">
 </head>
 
 <body>
-
+	
+<!-- surface: 화면에 보이는부분 -->
+<div class="surface">
+	<div id="header">
+		<jsp:include page="board/board-header.jsp"></jsp:include>				
+	</div><!-- end header -->
+			
+	<div id="content">
+	</div>
+</div>
 	<!-- 보드 추가 부분 -->
 		<div class="dropdown">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -65,11 +71,17 @@
 			</br>
 		</c:forEach>
 	</form>
-	<a onclick="goBoard(s,1)">dd</a>
 	
 	
 	<!-- js -->
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/bootstrap.js"></script>
+	
+	
 	<script src="${pageContext.request.contextPath}/js/board/board-setting.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
 	
 </body>
 </html>
