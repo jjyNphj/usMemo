@@ -50,7 +50,7 @@ public class BoardService {
 			
 			resultBoard.setbNum(i.getbNum());
 			resultBoard.setName(boardDao.getBoardNameBybNum(i.getbNum()));
-			
+			resultBoard.setStar(i.getStar());
 			System.out.println("º¸µå: "+resultBoard.getName());
 			
 			resultList.add(resultBoard);			

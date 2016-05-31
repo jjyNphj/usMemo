@@ -1,11 +1,69 @@
-
+ html, body{
+	height: 100%;
+	}
 /*전체 색상설정*/
 body, #board-header-wrap{
 	background-color: #f3f3f3;
 }
 #header{
 	background-color: #026AA7; 
-	}
+}
 .header-btn-home{
 	color: #f3f3f3;
-	}
+}
+	
+.member-boards-view{
+	
+	margin: 1pc auto;
+	padding: 1pc;
+	max-width: 1250px;
+}
+
+.member-boards-starred-header, .member-boards-myBoards-header{
+	position: relative;
+}
+
+/* .member-boards-starred-header-icon, .member-boards-myBoards-header-icon {
+	position: absolute;
+	left: -38px;
+	top: 0;
+} */
+
+.member-boards-starred-header-text, .member-boards-myBoards-header-text {
+	display: inline-block;
+	line-height: 24px;
+	margin: 3px 0 0;
+	font-size: 1pc;
+	font-weight: 700;
+}
+
+.member-boards-starred-content, .member-boards-myBoards-content{
+	display: flex;
+	flex-wrap: wrap;
+	-webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+	
+}
+
+.member-boards-wrapper{
+	box-sizing: border-box;
+	padding: 0 1pc 8px 0;
+	position: relative;
+	width: 25%;
+	transform:translate3d(0,0,0);
+}
+.member-boards-background{
+	background-color: #B04632;
+	background-position: center center;
+	background-size: cover;
+	color: #fff;
+	display: block;
+	line-height: 20px;
+	margin-bottom: 8px;
+	padding: 8px 9pt;
+	position: relative;
+	text-decoration: none;
+}

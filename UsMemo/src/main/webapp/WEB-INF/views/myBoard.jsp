@@ -17,7 +17,7 @@
 </head>
 
 <body>
-	
+	<input type="hidden" id="memId" value="${sessionScope.id}" />
 <!-- surface: 화면에 보이는부분 -->
 <div class="surface">
 	<div id="header">
@@ -25,6 +25,42 @@
 	</div><!-- end header -->
 			
 	<div id="content">
+	<div class="member-boards-view">
+		<div class="member-boards-starred">
+			<div class="member-boards-starred-header">
+				<span class="member-boards-starred-header-icon glyphicon glyphicon-star"></span>
+				<span class="member-boards-starred-header-text">Starred Boards</span>
+			</div>
+			<div class="member-boards-starred-content">
+				<c:forEach var="list" items="${Board}" varStatus="i">
+					<c:if test="${list.star=='Y' }">
+						<div class="member-boards-wrapper">
+							<a class="member-boards-background"  onclick="goBoard(${list.bNum},'${list.name}')">
+								<span class="member-boards-title">${list.name }</span>
+								<span class="member-boards-star"></span>
+							</a>
+						</div>
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
+		<div class="member-boards-myBoards">
+			<div class="member-boards-myBoards-header">
+				<span class="member-boards-myBoards-header-icon glyphicon glyphicon-user"></span>
+				<span class="member-boards-myBoards-header-text">My Boards</span>
+			</div>
+			<div class="member-boards-myBoards-content">
+				<c:forEach var="list" items="${Board}" varStatus="i">
+				<div class="member-boards-wrapper">
+					<a class="member-boards-background" onclick="goBoard(${list.bNum},'${list.name}')">
+						<span class="member-boards-title">${list.name }</span>
+						<span class="member-boards-star"></span>
+					</a>
+				</div>
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 	</div>
 </div>
 	<!-- 보드 추가 부분 -->
@@ -55,7 +91,7 @@
 			</ul>
 		</div>
 
-	<form>
+<%-- 	<form>
 		<input type="hidden" id="memId" value="${sessionScope.id}" />
 		<!-- 현재 memId에 연결된 Board의 bNum들  뷰에 보여주기-->
 		<c:forEach var="list" items="${Board}" varStatus="i">
@@ -64,13 +100,13 @@
 			<input type="hidden" name=bNum${i.index} value="${list.bNum}" />
 			<input type="hidden" name=name${i.index} value="${list.name}" />
 
-			<h1><%-- ${list.bNum},  --%>${list.name} </h1>
+			<h1>${list.bNum}, ${list.name} </h1>
 			<input type="button" value="보러가기" onclick="goBoard(${list.bNum},'${list.name}')" />
 			<input type="button" value="삭제하기" class="deleteBoardBtn" onclick="deleteBoard(bNum${i.index},name${i.index })" />
-			<%-- <input type="button" value="삭제하기" onclick="goDeletePage(bNum${i.index},name${i.index })" /> --%>
+			<input type="button" value="삭제하기" onclick="goDeletePage(bNum${i.index},name${i.index })" />
 			</br>
 		</c:forEach>
-	</form>
+	</form> --%>
 	
 	
 	<!-- js -->
