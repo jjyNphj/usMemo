@@ -37,7 +37,7 @@
 						<div class="member-boards-wrapper">
 							<a class="member-boards-background"  onclick="goBoard(${list.bNum},'${list.name}')">
 								<span class="member-boards-title">${list.name }</span>
-								<span class="member-boards-star"></span>
+								<span class="member-boards-star glyphicon glyphicon-star"></span>
 							</a>
 						</div>
 					</c:if>
@@ -54,7 +54,8 @@
 				<div class="member-boards-wrapper">
 					<a class="member-boards-background" onclick="goBoard(${list.bNum},'${list.name}')">
 						<span class="member-boards-title">${list.name }</span>
-						<span class="member-boards-star"></span>
+							<c:if test="${list.star=='Y' }"> <span class="member-boards-star glyphicon glyphicon-star"></span></c:if>
+							<c:if test="${list.star=='N' }"> <span class="member-boards-star glyphicon glyphicon-star-empty"></span></c:if>
 					</a>
 				</div>
 				</c:forEach>
