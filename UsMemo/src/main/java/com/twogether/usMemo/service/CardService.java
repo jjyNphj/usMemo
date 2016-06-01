@@ -286,6 +286,7 @@ public class CardService {
 			String saveFileName = originalFileName;
 			
 			if(saveFileName != null && !saveFileName.equals("")) {
+				//똑같은 이름의 파일이 local 폴더에 있을경우 currentTimeMillis로 시간에 따른 값을 쪼개서 이름 뒤에 붙임 
 				if(new File(uploadPath + saveFileName).exists()) {
 					saveFileName = saveFileName + "_" + System.currentTimeMillis();
 
@@ -298,10 +299,12 @@ public class CardService {
 					//Card DTO에 첨부파일 이름과, 카드의 넘버를 넣어줌.
 					Card card = new Card();
 					
-					byte[] byteSaveFile = saveFileName.getBytes();
+					/*byte[] byteSaveFile = saveFileName.getBytes();*/
 					/*Blob blobSaveFile = new SerialBlob(byteSaveFile);
 					*/
-					card.setAttach(byteSaveFile);
+					/*card.setAttach(byteSaveFile);*/
+					//card.setAttach(saveFileName);
+					card.setAttach(originalFileName);
 					card.setNum(cNum);
 					cardDao.fileUploadName(card);
 					

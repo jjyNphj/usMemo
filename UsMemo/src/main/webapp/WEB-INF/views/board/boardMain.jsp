@@ -258,7 +258,7 @@
 
                   <!-- textarea의 내용 id변수에 저장 -->
                   <textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요."></textarea>
-                  </br>
+                  <br>
                   
                   <button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
                   <button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
@@ -270,12 +270,14 @@
                      <div class="form-group" >
                         <label for="exampleInputFile">파일 업로드</label> 
                         <input type="file" name="file1" id="exampleInputFile"  />
-                        <input type="text"  name="cNum" id="uploadFile_card_num" /><!-- value="${card_num}" -->
+                        <input type="text" class="hide" name="cNum" id="uploadFile_card_num" /><!-- value="${card_num}" -->
                         <!-- <p class="help-block">파일 추가, 삭제, 다운</p> -->
                      </div>
                      <!-- <button type="submit" class="btn btn-default" onclick="fileUpload(card_num)">첨부하기</button> -->
                      <input type="submit" class="btn btn-default" value="첨부하기"/>
                   </form>
+                  <div id="card_fileName"></div>
+                  <!-- <a href="fileDown?fileName=$(#card_fileName)">$(#card_fileName) download</a> -->
                </div>
                <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>

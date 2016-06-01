@@ -46,6 +46,11 @@ $(document).ready(function() {
 				success : function(data) {
 					/*alert(data.result);*/
 					console.log(data);
+					
+					//$("#card_fileName").append(setCardInfo.getCardFileName());
+					//$("#card_fileName").append(setCardInfo.getCardFileName);
+					//setCardInfo.getCardFileName();
+					//output(data); //받은 정보를 화면 출력하는 함수 호출
 				},
 				error : function(error) {
 					alert("요청 처리 중 오류가 발생하였습니다.");
@@ -54,6 +59,30 @@ $(document).ready(function() {
 			return false;
 		});
 	});
+
+//전달받은 정보를 가지고 화면에 보기 좋게 출력
+function output(data) {
+	//업로드한 파일을 다운로드할수있도록 화면 구성
+    if(data.file1){
+        $("#card_fileName").append("첨부된 파일:<br/>");           
+        $.each(data.file1, function(index, item){
+        	var link = "fileDown?fileName="+$("#card_fileName");
+     	  /* var link = "fileListShow?f="+item.uploadedFileName+"&of="+item.fileName;*/
+     	  /*<a href='rest/controller/get/"+index+"'>Click</a>*/
+     	   $("#card_fileName").append("<a href='"+ link +"' download>"+$("#card_fileName")+"</a>");
+           $("#card_fileName").append("<br/>");	               
+        });
+    }           
+	 /*
+ 	if(data.file){
+        var link = "FileDownload?f="+data.file.uploadedFileName+"&of="+data.file.fileName;
+        $("#result").append("파일 :<a href='"+ link +"' download>"+data.file.fileName+"</a>");
+        $("#result").append("<br/>");
+    } */
+    
+    //$('#multiform')[0].reset(); //폼 초기화(리셋); 
+    //$('#multiform input:file').MultiFile('reset'); //멀티파일 초기화        
+}
 
 function heightResize(obj) {
 	//textarea에 입력된 크기만큼 세로 길이 조정
@@ -125,6 +154,7 @@ function editCard(cNum) {
 			/* var card=JSON.parse(JSON.stringify(data)); 
 			   setCardInfo(card) */
 			setCardInfo(data);
+			
 		   /* $('#card_Name').autoGrow();*/
 			console.log(data);
 		} ,
@@ -172,12 +202,20 @@ function addCardDescription(card_num,cardDescription){
 		}
 	})
 }
- 
- function setCardInfo(cardInfo){
+
+function setCardInfo(cardInfo){
+	 //this.cardFileName = cardInfo.attach;
 	 /* ListAndCard dto의 card 정보와 list 정보를 html에서 쓰기위해 세팅하는 부분  */
 	 $("#card_Name").val(cardInfo.card_name);
 	 $("#list_Name").text(cardInfo.list_name);
 	 $("#card_num").text(cardInfo.card_num);
+	 
+	 $("#card_fileName").append(cardInfo.attach);
+	 var link = "/usMemo/card/fileDown?fileName="+cardInfo.attach;
+	 $("#card_fileName").html("<br><a href='"+ link +"'>"+cardInfo.attach+" download </a>");
+	 /*var link = "fileDown?fileName="+$("#card_fileName");
+	 $("#card_fileName").html("<a href='"+ link +"'>"+$("#card_fileName")+" download </a>");*/
+	 
 	 
 	 if(cardInfo.content != null) {
 		 //조건문으로 체크 안해주면 replace 할게 없다고 오류남
@@ -194,5 +232,9 @@ function addCardDescription(card_num,cardDescription){
 	 /* 2016. 4. 30. 오후 8:31:18 형태로 바꿔줌*/
 	 var card_date = date.toLocaleString();
 	$("#card_Date").text(card_date);
-
  }
+ 
+/*setCardInfo.prototype.getCardFileName = function() {
+	return this.cardFileName;
+}*/
+//setCardInfo.prototype.getCardFileName = this.cardInfo.attach;

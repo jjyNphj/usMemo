@@ -5,8 +5,8 @@ import java.util.Date;
 public class Card {
 	
 	private int num,lNum;
-	private String name,content,memId;
-	private byte[] attach;
+	private String name,content,memId,attach;
+	/*private byte[] attach;*/
 	private Date n_date;
 	private Integer llink, rlink;
 	
@@ -59,14 +59,11 @@ public class Card {
 	public void setLlink(Integer llink) {
 		this.llink = llink;
 	}
-	public byte[] getAttach() {
+	public String getAttach() {
 		return attach;
 	}
-	public void setAttach(byte[] attach) {
+	public void setAttach(String attach) {
 		this.attach = attach;
 	}
-	
-	
-	
-	
+
 }

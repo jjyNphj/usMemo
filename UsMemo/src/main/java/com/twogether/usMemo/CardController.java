@@ -1,21 +1,18 @@
 package com.twogether.usMemo;
 
+import java.io.File;
 import java.sql.SQLException;
-import java.text.DateFormat;
 
 import javax.sql.rowset.serial.SerialException;
 
-import org.codehaus.jackson.JsonParser;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.simple.ParameterizedSingleColumnRowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -113,7 +110,7 @@ public class CardController {
 	}
 	
 	/* 파일 업로드 화면 이동 */
-	@RequestMapping(value="fileUploadAjax", method=RequestMethod.GET)
+	@RequestMapping(value="/fileUploadAjax", method=RequestMethod.GET)
 	public ModelAndView fileUploadAjaxForm() {
 		
 		ModelAndView mv = new ModelAndView();
@@ -124,7 +121,10 @@ public class CardController {
 	}
 	
 	/* 파일 업로드 처리 */
-	@RequestMapping(value="fileUploadAjax", method=RequestMethod.POST)
+	@RequestMapping(value="/fileUploadAjax", method=RequestMethod.POST)
+	//boardMain.jsp form 안의 multipart/form-data의 경우 
+	//input 안의 type이 file일 경우 MultipartHttpServletRequest로
+	//그 외의 type은 파라미터를 따로 받아줘야함. 
 	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest, @RequestParam("cNum") int cNum) throws SerialException, SQLException {
 		
 		ModelAndView mv = new ModelAndView();
@@ -142,14 +142,28 @@ public class CardController {
 	}
 	
 	/* 파일 다운로드 화면 이동 */
-	@RequestMapping(value="fileListShow", method=RequestMethod.GET)
+	@RequestMapping(value="/fileDown", method=RequestMethod.GET)
+	public ModelAndView fileDown(@RequestParam("fileName") String fileName) {
+		String fullPath = "D:/save/" + fileName ;
+		File downloadFile = new File(fullPath);
+		return new ModelAndView("download", "downloadFile", downloadFile);
+	}
+	
+	/* 파일 다운로드 화면 이동 */
+	/*@RequestMapping(value="fileListShow", method=RequestMethod.GET)
 	public ModelAndView fileListShow() {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("board/FileUploadTest");
+		mv.setViewName("board/boardMain");
+		
+		public ModelAndView fileDown(@RequestParam("fileName") String fileName) {
+			String fullPath = "C:/images/" + fileName ;
+			File downloadFile = new File(fullPath);
+			return new ModelAndView("download", "downloadFile", downloadFile);
+		}
 		
 		return mv;
-	}
+	}*/
 	
 }
