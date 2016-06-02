@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.DownLoadDTO;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.service.CardService;
 
@@ -128,9 +129,11 @@ public class CardController {
 	public ModelAndView fileUploadAjax(MultipartHttpServletRequest mRequest, @RequestParam("cNum") int cNum) throws SerialException, SQLException {
 		
 		ModelAndView mv = new ModelAndView();
-		
-		if(cardService.fileUpload(mRequest,cNum)) {
+		DownLoadDTO downLoadDTO= new DownLoadDTO(); 
+		downLoadDTO=cardService.fileUpload(mRequest,cNum);
+		if(downLoadDTO.isSuccess()) {
 			mv.addObject("result", "SUCCESS");
+			mv.addObject("attach",downLoadDTO.getAttach());
 			System.out.println("success");
 		} else {
 			mv.addObject("result", "FAIL");

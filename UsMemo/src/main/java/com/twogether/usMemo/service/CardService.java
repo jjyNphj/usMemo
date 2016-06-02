@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.twogether.usMemo.dao.CardDao;
 import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.DownLoadDTO;
 import com.twogether.usMemo.dto.ListAndCard;
 /**
  * card¿« model
@@ -253,8 +254,8 @@ public class CardService {
 	 * @throws SQLException 
 	 * @throws SerialException 
 	 */
-	public boolean fileUpload(MultipartHttpServletRequest mRequest, int cNum) throws SerialException, SQLException {
-
+	public DownLoadDTO fileUpload(MultipartHttpServletRequest mRequest, int cNum) throws SerialException, SQLException {
+		DownLoadDTO result= new DownLoadDTO();
 		boolean isSuccess = false;
 		
 		String uploadPath = "D:\\save\\";
@@ -307,7 +308,7 @@ public class CardService {
 					card.setAttach(originalFileName);
 					card.setNum(cNum);
 					cardDao.fileUploadName(card);
-					
+					result.setAttach(originalFileName);
 					isSuccess = true;				
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
@@ -318,7 +319,11 @@ public class CardService {
 				}
 			} // if end
 		} // while end
-		return isSuccess;
+		
+	
+		
+		result.setSuccess(isSuccess);
+		return result;
 	} // fileUpload end
 
 

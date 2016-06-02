@@ -3,34 +3,6 @@
  * 카드의 정보창과 관련한 js
  * 
  */
-/*$(document).ready(function(){
-	$("#card_Name").mousedown(function(){
-		$('#card_Name').detach();
-		$('#card_Name_attach').append(
-				'<textarea class="textarea-card-name" id="card_Name" cols=45 rows=1 onkeypress="enterProcess(event, this)"></textarea>'
-		);
-	});
-});*/
-
-/*function fileUpload(card_num) {
-	var num = document.getElementById('card_num').innerHTML;
-	console.log(num);
-	var url='/usMemo/card/fileUploadAjax?num='+num;
-	$("form").ajaxSubmit({
-//		dataType : "json",
-		url : url,
-
-		success : function() {
-			console.log(data);
-			console.log($(this).serialize());
-			alert(data.result);
-			alert(num);
-		},
-		error : function(xhr, status, error) {
-			alert("요청 처리 중 오류가 발생하였습니다.");
-		}
-	});
-}*/
 $(document).ready(function() {
 		$("input[type=submit]").bind("click", function() {
 			var num = document.getElementById('card_num').innerHTML;
@@ -39,18 +11,13 @@ $(document).ready(function() {
 			console.log(file_data);
 			$('#formUpload').ajaxSubmit({
 		        beforeSerialize: function() {
-		        	/*$("#uploadFile_card_num").attr("name",num);*/
 		        	$("#uploadFile_card_num").attr("value",num);
 		        	console.log("처리전");
 		        },
 				success : function(data) {
 					/*alert(data.result);*/
 					console.log(data);
-					
-					//$("#card_fileName").append(setCardInfo.getCardFileName());
-					//$("#card_fileName").append(setCardInfo.getCardFileName);
-					//setCardInfo.getCardFileName();
-					//output(data); //받은 정보를 화면 출력하는 함수 호출
+					output(data); //받은 정보를 화면 출력하는 함수 호출
 				},
 				error : function(error) {
 					alert("요청 처리 중 오류가 발생하였습니다.");
@@ -63,34 +30,20 @@ $(document).ready(function() {
 //전달받은 정보를 가지고 화면에 보기 좋게 출력
 function output(data) {
 	//업로드한 파일을 다운로드할수있도록 화면 구성
-    if(data.file1){
-        $("#card_fileName").append("첨부된 파일:<br/>");           
-        $.each(data.file1, function(index, item){
-        	var link = "fileDown?fileName="+$("#card_fileName");
-     	  /* var link = "fileListShow?f="+item.uploadedFileName+"&of="+item.fileName;*/
-     	  /*<a href='rest/controller/get/"+index+"'>Click</a>*/
-     	   $("#card_fileName").append("<a href='"+ link +"' download>"+$("#card_fileName")+"</a>");
-           $("#card_fileName").append("<br/>");	               
-        });
-    }           
-	 /*
- 	if(data.file){
-        var link = "FileDownload?f="+data.file.uploadedFileName+"&of="+data.file.fileName;
-        $("#result").append("파일 :<a href='"+ link +"' download>"+data.file.fileName+"</a>");
-        $("#result").append("<br/>");
-    } */
-    
-    //$('#multiform')[0].reset(); //폼 초기화(리셋); 
-    //$('#multiform input:file').MultiFile('reset'); //멀티파일 초기화        
+    if(data.attach){
+        $("#card_fileName").html("<br>첨부된 파일:<br>");
+        
+        var link = "/usMemo/card/fileDown?fileName=" + data.attach;
+        
+     	$("#card_fileName").append("<a href='"+ link +"'>"+data.attach+" download </a>");
+        $("#card_fileName").append("<br>");	               
+    }              
 }
 
 function heightResize(obj) {
 	//textarea에 입력된 크기만큼 세로 길이 조정
 	obj.style.height = "1px";
 	obj.style.height = (10+obj.scrollHeight)+"px";
-	/*$("#card_Name").attr('rows',''); */
-//	cardHeight = obj.style.height;
-//	console.log(cardHeight);
 }
 
 function enterSaveProcess(e) {
@@ -203,18 +156,16 @@ function addCardDescription(card_num,cardDescription){
 	})
 }
 
+
 function setCardInfo(cardInfo){
-	 //this.cardFileName = cardInfo.attach;
 	 /* ListAndCard dto의 card 정보와 list 정보를 html에서 쓰기위해 세팅하는 부분  */
 	 $("#card_Name").val(cardInfo.card_name);
 	 $("#list_Name").text(cardInfo.list_name);
 	 $("#card_num").text(cardInfo.card_num);
 	 
 	 $("#card_fileName").append(cardInfo.attach);
-	 var link = "/usMemo/card/fileDown?fileName="+cardInfo.attach;
+	 var link = "/usMemo/card/fileDown?fileName=" + cardInfo.attach;
 	 $("#card_fileName").html("<br><a href='"+ link +"'>"+cardInfo.attach+" download </a>");
-	 /*var link = "fileDown?fileName="+$("#card_fileName");
-	 $("#card_fileName").html("<a href='"+ link +"'>"+$("#card_fileName")+" download </a>");*/
 	 
 	 
 	 if(cardInfo.content != null) {
@@ -234,7 +185,3 @@ function setCardInfo(cardInfo){
 	$("#card_Date").text(card_date);
  }
  
-/*setCardInfo.prototype.getCardFileName = function() {
-	return this.cardFileName;
-}*/
-//setCardInfo.prototype.getCardFileName = this.cardInfo.attach;
