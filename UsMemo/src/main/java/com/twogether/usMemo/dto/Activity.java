@@ -6,6 +6,7 @@ public class Activity {
 	private int num,activity_num,bNum,value_num,to_num,from_num;
 	private String memId,value_string;
 	private Date write_time;
+	
 	public int getNum() {
 		return num;
 	}

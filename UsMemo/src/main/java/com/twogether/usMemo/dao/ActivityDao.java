@@ -1,5 +1,7 @@
 package com.twogether.usMemo.dao;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,10 @@ public class ActivityDao {
 	public void create_board(Activity requestInfo) {
 		sqlMapClientTemplate.insert("Activity.createBoard",requestInfo);
 		
+	}
+
+	public List<Activity> getAllActivity(Activity activity) {
+		return sqlMapClientTemplate.queryForList("Activity.getAllActivity",activity.getbNum());
 	}
 	
 	

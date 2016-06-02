@@ -35,6 +35,8 @@
 				</form>
 			    </div>
   			</div>
+  			<div class="side-menu-activity-wrapper">
+  			</div>
 		</div>
 		<!-- 		                </li>
 		                <li class="basic-li">

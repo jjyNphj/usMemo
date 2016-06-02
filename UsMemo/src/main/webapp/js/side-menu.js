@@ -130,7 +130,28 @@ function addMemberFunc(id,bNum){
 				error : function(xhr, status, error) {
 				alert(error);
 				}
-			}) 
+			}); 
+	}
+	/**
+	 * activity 불러오기
+	 * @param bNum
+	 */
+	function openActivity(bNum){
+		  var url='/usMemo/activity/getAllActivity/'+bNum;
+		  
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				success:function(data){
+					console.log(data);
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
 	}
 
 	/**
@@ -227,7 +248,8 @@ function addMemberFunc(id,bNum){
 		// 슬라이드바 클릭시
 		$(".menu-toggle,.side-menu-header-closeBtn").click(function(e) {
 			e.preventDefault();
-			
+			var memId=$("#memId").val();
+			var bNum=$("#bNum").val();
 			//토글클래스가 아님
 			if(!$("#wrapper").hasClass('toggled')) {
 			
@@ -239,7 +261,8 @@ function addMemberFunc(id,bNum){
 				//토글클래스일 때 
 			}else if($("#wrapper").hasClass('toggled')){
 			 //화면그림
-				openMenu($("#bNum").val(),$("#memId").val());
+				openMenu(bNum,memId);
+				//openActivity(bNum);
 			}
 			$("#wrapper").toggleClass("toggled");
 			$(".board-wrapper").toggleClass("is-show-menu");

@@ -1,5 +1,7 @@
 package com.twogether.usMemo.service;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,15 @@ public class ActivityService {
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(bNum);
 		activityDao.create_board(requestInfo);		
+	}
+
+
+	public List<Activity> getAllActivity(int bNum) {
+		Activity activity= new Activity();
+		activity.setbNum(bNum);
+		
+		List<Activity> result= activityDao.getAllActivity(activity);
+		return result;
 	}
 	
 	
