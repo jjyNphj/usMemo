@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.BoardInfo;
+import com.twogether.usMemo.service.ActivityService;
 import com.twogether.usMemo.service.BoardService;
 import com.twogether.usMemo.service.MemberService;
 
@@ -27,7 +28,7 @@ import com.twogether.usMemo.service.MemberService;
 public class BoardController {
 	@Autowired BoardService boardService;
 	@Autowired MemberService memberService;
-	
+	@Autowired ActivityService activityService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	/*
@@ -102,8 +103,8 @@ public class BoardController {
 		
 		mv.addObject("sucess","y");
 		mv.setViewName("myBoard");
-		boardService.boardCreate(name, memId);
-		
+		int nowBNum=boardService.boardCreate(name, memId);
+		activityService.create_board(memId,nowBNum);
 		return mv;	
 	}
 	

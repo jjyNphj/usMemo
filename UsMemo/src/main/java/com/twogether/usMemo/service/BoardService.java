@@ -208,7 +208,7 @@ public class BoardService {
 		boardDao.deleteBoardBybNum(bNum);
 	}
 	
-	public void boardCreate(String name, String memId) throws SQLException {
+	public int boardCreate(String name, String memId) throws SQLException {
 		/*
 		 * board 생성과  추가한 bNum과 회원 id 넣은 memberGrade 생성
 		 * */
@@ -216,7 +216,12 @@ public class BoardService {
 		MemberGrade memberGrade = new MemberGrade();
 		memberGrade.setmemId(memId);
 		
-		boardDao.addBoard(name, memberGrade);
+		Board board= new Board();
+		board.setName(name);
+		
+		int nowBNum=boardDao.addBoard(board, memberGrade);
+		
+		return nowBNum;
 	}
 	
 	public List<BoardInfo> getAllBoards(String memId){

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.BoardInfo;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
@@ -88,16 +89,16 @@ public class BoardDao {
 	}	
 	
 	//board와 memberGarde 데이터 추가 관련 부분
-	public void addBoard(String name, MemberGrade memberGrade) {
-		sqlMapClientTemplate.insert("Board.addBoard", name);
+	public int addBoard(Board board, MemberGrade memberGrade) {
+		int nowBNum=(Integer)sqlMapClientTemplate.insert("Board.addBoard", board);
 		sqlMapClientTemplate.insert("Board.addMemberGradeBybNum", memberGrade);
 		
+		return nowBNum;
 	}
 
 	public List<BoardInfo> getAllBoards(String memId) {
 		return sqlMapClientTemplate.queryForList("Board.getAllBoardsById",memId);
 	}
-
 
 	
 //	public int getBoardNumById(String id){

@@ -61,9 +61,6 @@
 				</c:forEach>
 			</div>
 		</div>
-	</div>
-	</div>
-</div>
 	<!-- 보드 추가 부분 -->
 		<div class="dropdown">
 			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -91,6 +88,9 @@
 			</div>			
 			</ul>
 		</div>
+	</div>
+	</div>
+</div>
 
 <%-- 	<form>
 		<input type="hidden" id="memId" value="${sessionScope.id}" />

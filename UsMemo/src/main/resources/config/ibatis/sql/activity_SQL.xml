@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+	<sqlMap namespace="Activity">
+		<typeAlias alias="member" type="com.twogether.usMemo.dto.Member"/>
+		<typeAlias alias="activity" type="com.twogether.usMemo.dto.Activity"/>
+		
+		
+		<insert id="createBoard" parameterClass="activity">
+			<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='create_board'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,null,null,null,null)
+		</insert>
+
+
+	</sqlMap>
+	

@@ -43,18 +43,34 @@ create table reply(
 );
 
 create table activity(
-	num number primary key
+	num number primary key,
+	activity_num number not null,
+	memId varchar(100),
+	bNum number,
+	write_time date,
+	value_num number,
+	value_string varchar(200),
+	to_num number,
+	from_num number
+);
+
+create table activity_format (
+	num number primary key,
+	activity_name varchar2(80),
+	format varchar2(4000)
 );
 
 create table memberGrade(
 	num number primary key,
 	bNum number,
 	memId varchar(100),
-	grade number
-
+	grade number,
+    star varchar(2)
 );
 
 create sequence board_num_seq start with 1; 
 create sequence list_num_seq start with 1;
 create sequence card_num_seq start with 1;
 create sequence memberGrade_num_seq start with 1; 
+create sequence activity_format_num_seq start with 1; 
+create sequence activity_num_seq start with 1; 

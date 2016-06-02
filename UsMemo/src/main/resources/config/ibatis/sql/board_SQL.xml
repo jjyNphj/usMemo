@@ -35,9 +35,12 @@
 		select name from board where num=#bNum#
 	</select>
 	
-	<insert id="addBoard" parameterClass="String">
+	<insert id="addBoard" parameterClass="board">
 			<!-- insert into board values(#bNum#,#name#) -->
-			insert into board values(board_num_seq.nextval,#name#)			
+			insert into board values(board_num_seq.nextval,#name#)
+			<selectKey keyProperty="bNum" resultClass="int" type="post">
+				select BOARD_NUM_SEQ.CURRVAL from dual
+			</selectKey>	
 	</insert>
 	
 	<insert id="addMemberGradeBybNum" parameterClass="memberGrade">

@@ -82,3 +82,9 @@ insert into Card values(card_num_seq.nextval ,'20160314.hwp','<회의내용>
          -----------------------------
          select * from list;
          -----------------------------
+         
+         
+         
+         
+         <Activity>
+insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval, 'create_board','#who# created this board');
