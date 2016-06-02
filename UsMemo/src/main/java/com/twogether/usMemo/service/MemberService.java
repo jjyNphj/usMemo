@@ -129,5 +129,38 @@ public class MemberService {
 	public void updateFriend(MemberGrade member) {
 		memberDao.updateFriend(member);
 	}
+	
+	/**
+	 * 현재 로그인한 사람의 정보 
+	 * @param id
+	 * @return
+	 */
+	public Member getMyInfo(String id){
+		Member member = new Member();
+		member=memberDao.getMyInfo(id);
+		return member;
+	}
+	
+	/**
+	 * 현재 사용자가 이 보드를 즐겨찾기 선택 및 해제.
+	 * @param boardInfo
+	 */
+	public void updateStar(MemberGrade boardInfo) {
+		memberDao.updateStar(boardInfo);
+	}
+	/**
+	 * 현재 이 보드를 사용자가 즐겨찾기로 설정했는지 여부 확인.
+	 * @param getbNum
+	 * @param id
+	 * @return
+	 */
+	public String getThisBoardStar(int getbNum, String id) {
+		
+		MemberGrade memberGrade= new MemberGrade();
+		memberGrade.setbNum(getbNum);
+		memberGrade.setmemId(id);
+		String result= memberDao.getThisBoardStar(memberGrade);
+		return result;
+	}
 
 }

@@ -7,12 +7,22 @@
 <sqlMap namespace="Board">
 	<typeAlias alias="board" type="com.twogether.usMemo.dto.Board" />
 	<typeAlias alias="memberGrade" type="com.twogether.usMemo.dto.MemberGrade" />
+	<typeAlias alias="allBoards" type="com.twogether.usMemo.dto.BoardInfo"/>
 	
 	<resultMap id="getMemberGrade" class="memberGrade">
        <result property="num" column="num"/>
        <result property="bNum" column="bNum"/>
        <result property="memId" column="memId"/>
        <result property="grade" column="grade"/>
+       <result property="star" column="star"/>
+    </resultMap>
+    <resultMap id="getAllBoards" class="allBoards">
+		<result property="memberGrade_num" column="memberGrade_num" />
+		<result property="bNum" column="bNum" />
+		<result property="memId" column="memId" />
+		<result property="grade" column="grade" />
+		<result property="name" column="name" />    
+		<result property="star" column="star"/>
     </resultMap>
 
 	
@@ -25,9 +35,12 @@
 		select name from board where num=#bNum#
 	</select>
 	
-	<insert id="addBoard" parameterClass="String">
+	<insert id="addBoard" parameterClass="board">
 			<!-- insert into board values(#bNum#,#name#) -->
-			insert into board values(board_num_seq.nextval,#name#)			
+			insert into board values(board_num_seq.nextval,#name#)
+			<selectKey keyProperty="bNum" resultClass="int" type="post">
+				select BOARD_NUM_SEQ.CURRVAL from dual
+			</selectKey>	
 	</insert>
 	
 	<insert id="addMemberGradeBybNum" parameterClass="memberGrade">
@@ -37,7 +50,7 @@
 	    </selectKey>
 	    <!-- memberGarde_num_seq.nextval=자동으로 +1되면서 데이터 추가, selectKey에서 넘겨받은 bNum추가-->
 	    <!-- 세션에서 넘겨받은 memId추가, 회원 등급 1고정(친구 공유시에만 바꾸면 되므로) -->
-		insert into memberGrade values (memberGrade_num_seq.nextval,#bNum#,#memId#,'1')
+		insert into memberGrade values (memberGrade_num_seq.nextval,#bNum#,#memId#,'1','N')
 	</insert>
 	
 	<delete id="deleteBoardBybNum" parameterClass="int">
@@ -49,7 +62,13 @@
 	    <!-- 전달받은 bNum과 같은 memberGrade.bNum 행 모두 삭제  -->
 	    delete from memberGrade where exists (select 1 from board where memberGrade.bNum = board.num and board.num=#bNum#)
 	</delete>
-
+	
+	<select id="getAllBoardsById" parameterClass="String" resultMap="getAllBoards">
+		select b.name,g.num as memberGrade_num, g.bNum, g.memId, g.grade, g.star  
+		from board b Inner Join memberGrade g
+		on b.num=g.bNum
+		where g.memId=#memId# 
+	</select>
 
 </sqlMap>
 	

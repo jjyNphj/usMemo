@@ -74,5 +74,32 @@ public class MemberDao {
 		public void updateFriend(MemberGrade member) {
 			sqlMapClientTemplate.update("Member.updateFriend",member);
 		}
+		
+		/**
+		 * 현재 로그인한 사람의 정보 
+		 * @param id
+		 * @return
+		 */
+		public Member getMyInfo(String id) {
+			Member member= new Member();
+			member=(Member) sqlMapClientTemplate.queryForObject("Member.getMyInfo",id);
+			return member;
+		}
+		/**
+		 * 현재 사용자가 이 보드를 즐겨찾기 선택 및 해제.
+		 * @param boardInfo
+		 */
+		public void updateStar(MemberGrade boardInfo) {
+			sqlMapClientTemplate.update("Member.updateStar",boardInfo);
+		}
+		/**
+		 * 현재 사용자가 현재의 보드를 즐겨찾기로 설정했는지 여부 확인.
+		 * @param memberGrade
+		 * @return
+		 */
+		public String getThisBoardStar(MemberGrade memberGrade) {
+			String result= (String)sqlMapClientTemplate.queryForObject("Member.getThisBoardStar", memberGrade);
+			return result;
+		}
 
 }

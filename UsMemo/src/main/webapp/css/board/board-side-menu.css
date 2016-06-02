@@ -1,0 +1,76 @@
+.side-menu-container{
+	display: flex;
+ 	flex-flow: column wrap;
+}
+
+.side-menu-header-wrapper{
+	width: 100%;
+	position: relative;
+	height: 46px;
+	flex: 0 0 auto; 
+	vertical-align:middle;
+	text-align: center;
+	display: flex;
+	margin-bottom: 3px;
+}
+.side-menu-header-text{
+	line-height: 20px;
+	margin: 10px 15px 3px 30px ;
+	padding-top: 5px;
+	font-weight: 700;
+	font-size: 12pt;
+	flex-grow:1;
+}
+.side-menu-header-closeBtn{
+ /* 	float: right; */
+	margin: 10px 5px 3px 0;
+	padding-top: 5px;
+	
+}
+
+.side-menu-header > hr {
+	 border-color: #D6DADC;
+	 margin-top: 0;
+	 margin-bottom: 15px;
+	 width: 90%;
+}
+
+.side-menu-profile_image{
+	width: 30px;
+	height: 30px;
+}
+#setMember{
+	display: flex;
+	padding: 0 0 10px 5px;
+}
+.side-menu-content{
+	padding: 0 10px 0 10px;
+	display: flex;
+	flex-flow: column wrap;
+}
+#findOption{
+	padding: 10px 5px 10px 5px;
+}
+.side-menu-members{
+	padding: 0 3px 0 3px;
+}
+.side-menu-addMember-btn{
+	color: #66615B;
+    background-color: #FCFDFD;
+    height: 34px;
+    vertical-align: middle;
+    flex: none;
+    padding: 7px 7px 7px 7px;
+    border: 1px solid #e2e4e6;
+    border-bottom-color: #cdd2d4;
+    border-radius: 3px;
+	
+}
+.side-menu-addMember-btn:HOVER {
+	background-color: #337AB7;
+	color: #FCFDFD;
+}
+.side-menu-addMember-text{
+	font-weight: 700;
+}
+

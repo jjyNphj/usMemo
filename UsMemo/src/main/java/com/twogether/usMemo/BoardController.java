@@ -1,6 +1,7 @@
 package com.twogether.usMemo;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,21 +10,25 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
-import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.BoardInfo;
+import com.twogether.usMemo.service.ActivityService;
 import com.twogether.usMemo.service.BoardService;
+import com.twogether.usMemo.service.MemberService;
 
 
 @RequestMapping("/board")
 @Controller
 public class BoardController {
-	@Autowired
-	BoardService boardService;
-	
+	@Autowired BoardService boardService;
+	@Autowired MemberService memberService;
+	@Autowired ActivityService activityService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	/*
@@ -48,15 +53,15 @@ public class BoardController {
 		//myBoard.jsp 부름
 		mv.setViewName("myBoard");	
 		mv.addObject("Board",boardService.myBoardList(memId));
-		
+		mv.addObject("myInfo",memberService.getMyInfo(memId));
 	//	logger.info("보드리스트이다.{}",boardService.myBoardList(mNum));
 		
 		return mv;
 	}
 	
 	//ModelAttribute는 RequestParam과 비슷함. 그저 하나의 파라메터가 아닌 객체로 바인딩해서 받아오는것.
-	@RequestMapping("/index")
-	public ModelAndView boardIndex(@ModelAttribute Board board){
+	@RequestMapping("/index/{memId}")
+	public ModelAndView boardIndex(@ModelAttribute Board board, @PathVariable("memId") String id){
 		//하나의 보드 화면 
 		/*
 		 * bNum으로 해당 보드의 리스트, 카드정보 가지고와야함. 
@@ -68,6 +73,8 @@ public class BoardController {
 		mv.addObject("cardList",map.get("cardList"));
 		mv.addObject("bNum",board.getbNum());
 		mv.addObject("bName",board.getName());
+		mv.addObject("myInfo",memberService.getMyInfo(id));
+		mv.addObject("star",memberService.getThisBoardStar(board.getbNum(),id));
 		return mv;
 	}
 	
@@ -91,15 +98,22 @@ public class BoardController {
 	
 	@RequestMapping("/createBoard")
 	public ModelAndView boardCreate(@RequestParam String name, @RequestParam String memId) throws SQLException{
-		logger.info("memId: {}",memId);
 		
 		ModelAndView mv = new ModelAndView();
 		
 		mv.addObject("sucess","y");
 		mv.setViewName("myBoard");
-		boardService.boardCreate(name, memId);
-		
+		int nowBNum=boardService.boardCreate(name, memId);
+		activityService.create_board(memId,nowBNum);
 		return mv;	
+	}
+	
+	@RequestMapping("/allBoards/{memId}")
+	public @ResponseBody List<BoardInfo> getAllBoards(@PathVariable("memId") String memId ){
+		List<BoardInfo> boardInfo= new ArrayList<BoardInfo>();
+		boardInfo=boardService.getAllBoards(memId);
+
+		return boardInfo;
 	}
 
 }

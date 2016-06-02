@@ -34,7 +34,7 @@ spring-servlet.xml이 있는 폴더에 *-servlet.xml의 이름 형식 (예를 �
      
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="0" />
     
-    <bean id="download" class="com.twogether.usMemo.DownloadView" />
+    <bean id="download" class="com.twogether.usMemo.service.DownloadService" />
     
     <bean name="JSON" id="jsonView" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />    
    

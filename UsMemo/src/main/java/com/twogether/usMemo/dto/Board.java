@@ -4,6 +4,7 @@ public class Board {
 	
 	private int bNum;
 	private String name;
+	private String star;
 	
 	public int getbNum() {
 		return bNum;
@@ -16,6 +17,12 @@ public class Board {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getStar() {
+		return star;
+	}
+	public void setStar(String star) {
+		this.star = star;
 	}
 	
 	

@@ -80,7 +80,7 @@ function addMemberFunc(id,bNum){
 		               		'<a class="list-group-item">'+
 			               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+bNum+')">'+
 				               		'<div class="col-md-2">'+
-				               			'<img src="'+val.profile_image+'" class="img-rounded" />'+
+				               			'<img src="'+val.profile_image+'" class="side-menu-profile_image" />'+
 				               		'</div>'+
 				               		'<div class="col-md-4">'+
 				               			'<span>'+val.name+'<br>('+val.nickname+')<br>'+val.email+'</span>'+
@@ -130,7 +130,28 @@ function addMemberFunc(id,bNum){
 				error : function(xhr, status, error) {
 				alert(error);
 				}
-			}) 
+			}); 
+	}
+	/**
+	 * activity 불러오기
+	 * @param bNum
+	 */
+	function openActivity(bNum){
+		  var url='/usMemo/activity/getAllActivity/'+bNum;
+		  
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				success:function(data){
+					console.log(data);
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
 	}
 
 	/**
@@ -155,17 +176,15 @@ function addMemberFunc(id,bNum){
 			var img_id='#profile_image'+index;
 			var ul_id='#ul'+index;
 			//이미지 설정함
-			$("#setMember").append(
-					'<div class="dropdown">'+
-						'<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">'+
-							'<img id="profile_image'+index+'" data-toggle="popover" data-trigger="hover" title="" data-content="" data-placement="bottom" class="img-circle" width="80px" height="80px">'+
-						'<span class="caret"></span>'+
-						'</button>'+
+			$("#setMember").append('<div class="dropdown side-menu-members">'+
+						'<div class="dropdown-toggle" type="button" data-toggle="dropdown">'+
+							'<img id="profile_image'+index+'" title="" class="side-menu-profile_image">'+
+						'</div>'+
 						'<ul id="ul'+index+'" class="dropdown-menu" role="menu" aria-labelledby="dLabel">'+
 						'</ul>'+
 					'</div>');
+
 			$(img_id).attr("src",val.profile_image);
-			$(img_id).attr("data-content",val.email);
 				//권한에 따라 타이틀만 변경해야함.
 				//적으려는 멤버가 현재로그인한 멤버가 아닐경우
 				if(val.id!=sessionId){
@@ -227,9 +246,10 @@ function addMemberFunc(id,bNum){
 		})*/
 
 		// 슬라이드바 클릭시
-		$(".menu-toggle").click(function(e) {
+		$(".menu-toggle,.side-menu-header-closeBtn").click(function(e) {
 			e.preventDefault();
-			
+			var memId=$("#memId").val();
+			var bNum=$("#bNum").val();
 			//토글클래스가 아님
 			if(!$("#wrapper").hasClass('toggled')) {
 			
@@ -241,9 +261,12 @@ function addMemberFunc(id,bNum){
 				//토글클래스일 때 
 			}else if($("#wrapper").hasClass('toggled')){
 			 //화면그림
-				openMenu($("#bNum").val(),$("#memId").val());
+				openMenu(bNum,memId);
+				//openActivity(bNum);
 			}
 			$("#wrapper").toggleClass("toggled");
+			$(".board-wrapper").toggleClass("is-show-menu");
+			$(".surface").toggleClass("is-show-menu")
 
 		});
 		
@@ -268,4 +291,22 @@ function addMemberFunc(id,bNum){
 	   $(this).parents("div").prev(":button").show();
 	});
 	
+	$("#findMember-close-btn").click(function(){
+		/*드롭다운의 메뉴 끄기*/
+		$(".side-menu-addMember-btn").dropdown('toggle');
+		/*끄기이벤트 요청시 이벤트헨들러 발생.*/
+	});
+	
+	/*드롭다운 이벤트를 실행할땐 .dropdown을 가진 div의 선택자를 선택해야함.*/
+	$(".side-menu-addMember-wrapper").on('hide.bs.dropdown',function(){
+		/*드롭다운이 사라지는 이벤트가 발생하면 input상자, 찾은 친구 리스트의 값을 지워죠!*/
+		clean_findMembersResults();
+		
+	});
+	
+	function clean_findMembersResults(){
+		$("#findMember").val('');
+		$("#findMemberResult> *").detach();
+	}
+		
 	

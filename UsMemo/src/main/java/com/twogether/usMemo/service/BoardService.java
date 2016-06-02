@@ -3,7 +3,6 @@ package com.twogether.usMemo.service;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.BoardDao;
 import com.twogether.usMemo.dto.Board;
-import com.twogether.usMemo.dto.Card;
+import com.twogether.usMemo.dto.BoardInfo;
 import com.twogether.usMemo.dto.ListAndCard;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.MemberGrade;
@@ -51,7 +50,7 @@ public class BoardService {
 			
 			resultBoard.setbNum(i.getbNum());
 			resultBoard.setName(boardDao.getBoardNameBybNum(i.getbNum()));
-			
+			resultBoard.setStar(i.getStar());
 			System.out.println("보드: "+resultBoard.getName());
 			
 			resultList.add(resultBoard);			
@@ -209,7 +208,7 @@ public class BoardService {
 		boardDao.deleteBoardBybNum(bNum);
 	}
 	
-	public void boardCreate(String name, String memId) throws SQLException {
+	public int boardCreate(String name, String memId) throws SQLException {
 		/*
 		 * board 생성과  추가한 bNum과 회원 id 넣은 memberGrade 생성
 		 * */
@@ -217,6 +216,15 @@ public class BoardService {
 		MemberGrade memberGrade = new MemberGrade();
 		memberGrade.setmemId(memId);
 		
-		boardDao.addBoard(name, memberGrade);
+		Board board= new Board();
+		board.setName(name);
+		
+		int nowBNum=boardDao.addBoard(board, memberGrade);
+		
+		return nowBNum;
+	}
+	
+	public List<BoardInfo> getAllBoards(String memId){
+		return boardDao.getAllBoards(memId);
 	}
 }

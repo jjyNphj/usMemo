@@ -1,33 +1,30 @@
 package com.twogether.usMemo.dto;
 
-public class MemberGrade {
+public class BoardInfo{
 	
-	//멤버등급 프라이머리키
-	private int	num;
-	//보드 넘버
-	private int	bNum;
-	//회원 아이디
+	private int bNum;
+	private String name;
+	private int	memberGrade_num;
 	private String memId;
-	//회원 등급
 	private int grade;
 	private String star;
 	
-	public int getNum() {
-		return num;
-	}
-	public void setNum(int num) {
-		this.num = num;
-	}
 	public int getbNum() {
 		return bNum;
 	}
 	public void setbNum(int bNum) {
 		this.bNum = bNum;
 	}
-	public String getmemId() {
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMemId() {
 		return memId;
 	}
-	public void setmemId(String memId) {
+	public void setMemId(String memId) {
 		this.memId = memId;
 	}
 	public int getGrade() {
@@ -36,14 +33,18 @@ public class MemberGrade {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
+	public int getMemberGrade_num() {
+		return memberGrade_num;
+	}
+	public void setMemberGrade_num(int memberGrade_num) {
+		this.memberGrade_num = memberGrade_num;
+	}
 	public String getStar() {
 		return star;
 	}
 	public void setStar(String star) {
 		this.star = star;
 	}
-
-	
 	
 	
 

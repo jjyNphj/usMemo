@@ -23,50 +23,41 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
 <!-- 	board의 전반적인 css파일 -->
-	<link href="${pageContext.request.contextPath}/css/board.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/common/board-common.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/custom/custom-boardMain.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/board-canvas.css" rel="stylesheet">
-
+	<link href="${pageContext.request.contextPath}/css/scrollbar.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/board/board-drawer.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/board/board-side-menu.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/bootstrap-submenu.css" rel="stylesheet">
 <title>Your Board</title>
 
 </head>
 <body>
+
 <!-- surface: 화면에 보이는부분 -->
-<div id="surface">
+<div class="surface">
 <div id="header">
-<div class="container">
-	<div class="row header-bar">
-		<div class="col-xs-12 col-sm-12 col-md-12 "  style="background-color: black;"> 
-			 <div class="col-xs-4 col-sm-4 col-md-4 "  style="text-align:left;background-color: green;"> 
-			 <span class="header-logo-boardmenu" style="color: white;">보드이동메뉴넣기</span>
-			 </div>
-			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;background-color: yellow;"> 
-			 <span class="header-logo" style="color: white;">로고넣기</span>
-			 </div>
-			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;background-color: blue;">
-			<span class="header-logo-myinfo" style="color: white;"> 내정보넣기</span>
-			 </div>
-		 </div>
-	</div>
-</div>
-							
+	<jsp:include page="board-header.jsp"></jsp:include>				
 </div><!-- end header -->
 		<div id="content">
 			
-			<div id="board-wrapper">
+			<div class="board-wrapper">
 				<div id="board-main-content">
-					<div class="container">
-						<div id="board-header" class="row"style="background-color: orange;" >
+					<div id="board-header">
+						<div id="board-header-wrap" class="row" >
 							<div class="col-xs-12 col-sm-12 col-md-12" >
-								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left;background-color: green;">
-									 <div class="col-md-6"  style="background-color: yellow;">  
+								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left; color: white;">
+								 <a class="board-header-barnd">
 									 	<span id="board-header-brand-text">${bName }</span>
-									 </div>
-									 <div class="col-xs-6 col-sm-6 col-md-6"  style="background-color: blue;">
-									 	<span class="glyphicon glyphicon-star-empty"></span> 
-									 </div>
+									 	<c:if test="${star eq 'Y' }"><span id="board-header-starred" class="glyphicon glyphicon-star"></span></c:if>
+									 	<c:if test="${star eq 'N' }"><span id="board-header-starred" class="glyphicon glyphicon-star-empty"></span></c:if>
+								 </a> 
 								 </div>
-								 <div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;background-color: blue;"> 
-									 <span id="board-header-brand-text" class="menu-toggle">menu</span>
+								 <div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right; color: white;"> 
+								 	<a class="board-header-btn-menu">
+									 <span id="board-header-btn-menu-text" class="menu-toggle">Show Menu</span>
+									 </a>
 								 </div>
 					
 				 			</div>
@@ -75,49 +66,50 @@
 
 					<!-- board-canvas -->
 					<div id="board-canvas">
-						<div class="container-fluid">
-							<div class="row row-horizon">
+						<!-- <div id="board" > -->
+							<!-- <div class="row row-horizon"> -->
 								<form>
 									<input type="hidden" id="bNum" value="${bNum }" /> <input
 										type="hidden" id="memId" value="${sessionScope.id }" />
 								</form>
-								<ul class="list_all">
-									<div id="te">
+								<div id="list-wrapper">
+								<div class="list_all">
+								<!-- 	<div> -->
 										<c:forEach var="l" items="${listList}" varStatus="index">
-
-											<li class="list_unit" id="${l.num}">
+											<div class="list_unit" id="${l.num}">
 												<!-- style= "background-color: yellow;"> -->
-												<div class="list_unit_view">
+												<div class="list_unit_view no-include-sortable" >
 													<!-- style= "background-color: blue;"> -->
-													<div class="list_unit_name">
+													<div class="list_unit_name no-include-sortable">
 														<!--  style="background-color: red;"> -->
 														<h6>
-															<%-- ${l.num } / --%>
+														<%-- 	${l.num } /  --%>
 															${l.name}
 														</h6>
 													</div>
-													<ul class="card_all" id="${l.num }">
+													<div class="card_all" id="${l.num }">
 														<c:forEach var="c" items="${cardList}">
 															<c:if test="${l.num == c.lNum }">
 
 																<!-- 카드수정버튼만 생성해 놓았으며, 아래의 주석 Modal에서 창뜨는 부분을 구현함. 참고>스페이스기호:&nbsp -->
-																<li class="card_unit" id="${l.num}_${c.card_num }">
-																	<div class="card_unit_view"
+																<div class="card_unit" id="${l.num}_${c.card_num }">
+																	<div class="card_unit_view no-include-sortable"
 																		onclick="editCard(${c.card_num})" data-toggle="modal"
 																		data-target="#cardInfoView">
 																		<!-- class="col-md-8" -->
-																		<div class="card_unit_name">
+																		<div class="card_unit_name no-include-sortable">
 																			<!--  style="background-color: green;"> -->
-																			<%-- ${c.card_num }/ --%>${c.card_name }</div>
+																			<%--  ${c.card_num }/ --%>${c.card_name }</div>
 																	</div>
-																</li>
+																</div>
 															</c:if>
 														</c:forEach>
-														<li id="addCardLI">
+														</div>
+														<div class="no-include-sortable" id="addCardLI">
 															<button class="addCardBtn btn btn-primary btn-simple">add
 																card...</button>
-															<div class="addCard_group hide">
-																<div class="form-group">
+															<div class="addCard_group no-include-sortable hide">
+																<div class="form-group no-include-sortable">
 																	<!-- textarea 폼의 디자인 div -->
 																	<textarea class="form-control"
 																		placeholder="Here, add Card's name" rows="5"
@@ -127,166 +119,53 @@
 																	onclick="addCard(${l.num},cardName${l.num})">add</button>
 																<button class="cancelCardBtn btn btn-primary">cancel</button>
 															</div>
-														</li>
-													</ul>
+														</div>
+													
 												</div>
-											</li>
+											</div>
 										</c:forEach>
 
-										<li class="list_unit" id="addListLI">
-											<button class="addListBtn btn btn-primary btn-simple">add
-												list...</button>
-											<div class="addList_group hide">
-												<div class="addList_textarea form-group">
-													<!-- textarea 폼의 디자인 div -->
-													<textarea class="form-control"
-														placeholder="Here, add List name" rows="5" cols="30"
-														id="listName_textarea" style="resize: none;"></textarea>
+										<div class="no-include-sortable" id="addListLI">
+											<div class="list_unit_view no-include-sortable">
+												<button class="addListBtn btn btn-primary btn-simple">add
+													list...</button>
+												<div class="addList_group no-include-sortable hide">
+													<div class="addList_textarea no-include-sortable form-group">
+														<!-- textarea 폼의 디자인 div -->
+														<textarea class="form-control"
+															placeholder="Here, add List name" rows="5" cols="30"
+															id="listName_textarea" style="resize: none;"></textarea>
+													</div>
+													<span id="byteInfo_group"><span id="byteInfo">0</span>/100Byte</span><br>
+													<button id="addListFuncBtn" class="btn btn-primary"
+														onclick="addList(${bNum})">add</button>
+													<button class="cancelListBtn btn btn-primary">cancel</button>
 												</div>
-												<span id="byteInfo_group"><span id="byteInfo">0</span>/100Byte</span><br>
-												<button id="addListFuncBtn" class="btn btn-primary"
-													onclick="addList(${bNum})">add</button>
-												<button class="cancelListBtn btn btn-primary">cancel</button>
 											</div>
-										</li>
-									</div>
-								</ul>
-
+										</div>
+								<!-- 	</div> -->
+								</div>
+</div>
 
 								<%-- <input type="button" value="Menu" onClick="openMenu(${bNum},${sessionScope.id})"/>
  --%>
 
-							</div>
-						</div>
+						<!-- 	</div> -->
+					<!-- 	</div> -->
 
 				</div><!-- /.board-canvas -->
 				</div><!-- /.board-main-content -->
-				<div id="board-menu">
-					<div id="wrapper" class="toggled" >
-		
-		        <!-- Sidebar -->
-		        <div id="sidebar-wrapper">
-		           <ul class="sidebar-nav">
-		                <li class="sidebar-brand">
-		                    <a>Menu</a>
-		                </li>
-		                   <li>
-		            <div class="container-fluid">
-		          
-		            <div class="row">
-		              <div class="span12">    
-		              <div class="panel panel-default">
-				    	 <div id="setMember" class="panel-body"></div>
-						</div>
-		            </div>
-		             <div class="row">
-		     		 <div class="span12">
-		               <div class="panel panel-default">
-							<div class="panel-body">
-							 	<form role="form">
-							 		<!-- input상자의 설정 -->
-							 		<!-- <div class="col-xs-8"> -->
-									<!-- <input type="button" class="addMemberBtn" value="addMembers..."> -->
-									<div id="findOption"><!--  class="hide" -->
-										<label for="pwd">친구검색</label>
-										<input type="text" class="form-control" id="findMember" placeholder="이름, 닉네임, email 등으로 검색해보세요.">
-										<span class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </span>
-										<div id="findMemberResult" class="list-group"></div>
-										<!-- <br> <input type="button" value="specialLink생성"/> 
-										<br><input type="button" class="cancelAddMemberBtn" value="cancel" /> -->
-									</div>
-									<!-- /end input상자의 설정-->
-								<!-- 	</div> -->
-									</form>
-								</div>
-							</div>
-		              </div>
-		            </div>
-		            <!-- /#안쪽row -->
-		         </div>
-		         <!-- /#바깥row -->
-		        </div>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Overview</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Events</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">About</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Services</a>
-		                </li>
-		                <li class="basic-li">
-		                    <a href="#">Contact</a>
-		                </li>
-		            </ul>  
-		        </div><!-- /#sidebar-wrapper -->
-			</div><!-- /.wrapper -->
-		</div><!-- /.board-menu -->
+				<div id="side-menu">
+					<jsp:include page="board-sideMenu.jsp" flush="flase"/>
+				</div><!-- /.board-menu -->
 	</div><!-- /.board-wrapper -->
 	</div><!-- /.content  -->
 	</div><!-- /.surface: 화면에 보이는 부분  -->
 	
 	<!-- Modal -->
-	<!-- CardInfo Modal-->
-   <div class="container">
-      <div class="modal fade" id="cardInfoView" role="dialog">
-         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <!-- span 안에 담기는 카드의 넘버를 cardInfoView.js로 넘겨주기 위함 -->
-                  <span class="hide" id="card_num"></span>
-                  
-                  <button type="button" class="close" data-dismiss="modal" onclick="clearForm(this.form)">&times;</button>
-                  
-                  <h4 class="modal-title" >
-                     <!-- <h2 class="card-name-edit" id="card_Name" dir="auto"></h2> -->
-
-                     <!-- 키를 누르는 순간마다 enterProcess로 값을 넘김. 엔터의 아스키코드값인 경우 사용자가 입력한 값 에이작스로 전달, heightResize:사용자 입력할떄마다 textarea 사이즈 자동조정 -->
-                     <textarea class="textarea-card-name" id="card_Name" maxlength="200" onkeypress="enterSaveProcess(event,this)" onkeyup="heightResize(this)" ></textarea>
-                  </h4>
-
-                  <h6 class="modal-title" >in list <span id="list_Name"></span></h6>
-               </div>
-               
-               <div class="modal-body">
-                  <p>You wrote:<br><span id="card_Date"></span></p>
-                  <p>카드 상세 내용 입력하는 부분, 수정</p>
-
-                  <!-- textarea의 내용 id변수에 저장 -->
-                  <textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요."></textarea>
-                  <br>
-                  
-                  <button type="button" class="btn btn-primary" style="float:right;" onclick="addCardDescription(card_num,cardDescription)">&nbsp;Save&nbsp;</button>
-                  <button type="button" class="btn btn-default" style="float:right;margin-right:5px" onclick="clearForm(this.form)">&nbsp;Clear&nbsp;</button>
-                  <br>                  
-               		
-               		<%-- <input type="text"  value="${#card_num}"/> --%>
-				  <form action="/usMemo/card/fileUploadAjax" id="formUpload" name="formUpload"  method="post" enctype="multipart/form-data">
-				  <!-- <form method="post" enctype="multipart/form-data"> -->
-                     <div class="form-group" >
-                        <label for="exampleInputFile">파일 업로드</label> 
-                        <input type="file" name="file1" id="exampleInputFile"  />
-                        <input type="text" class="hide" name="cNum" id="uploadFile_card_num" /><!-- value="${card_num}" -->
-                        <!-- <p class="help-block">파일 추가, 삭제, 다운</p> -->
-                     </div>
-                     <!-- <button type="submit" class="btn btn-default" onclick="fileUpload(card_num)">첨부하기</button> -->
-                     <input type="submit" class="btn btn-default" value="첨부하기"/>
-                  </form>
-                  <div id="card_fileName"></div>
-                  <!-- <a href="fileDown?fileName=$(#card_fileName)">$(#card_fileName) download</a> -->
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-	<!-- /#cardInfo Modal -->
+	<div class="modal-cardInfoView">
+		<jsp:include page="board-cardInfo.jsp"></jsp:include>
+	</div>
 
 	
 		<!-- js -->
@@ -299,7 +178,10 @@
 	<script src="${pageContext.request.contextPath}/js/board/jquery.autogrowtextarea.js"></script>
 	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
-	<script src="${pageContext.request.contextPath}/js/menu.js"></script>
+	<script src="${pageContext.request.contextPath}/js/side-menu.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
+	<script src="${pageContext.request.contextPath}/js/board/board-setting.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap-submenu.js"></script>
 	<!-- 디자인 -->
 	<script src="${pageContext.request.contextPath}/js/ct-paper.js"></script>
 

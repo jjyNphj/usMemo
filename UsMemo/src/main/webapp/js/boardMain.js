@@ -335,8 +335,8 @@ var before=new Object();
 	            data:listLocation,
 	            contentType: 'application/json',
 	            success:function(){
-	            	alert("success!");
-	            	window.location.reload();
+	            	//alert("success!");
+	            	//window.location.reload();
 	            } ,
 		       error :function(data,status,er) { 
 		    	   alert("error: "+data+" status: "+status+" er:"+er);
@@ -357,8 +357,8 @@ var before=new Object();
 	            data: cardLocation,
 	            contentType: 'application/json',
 	            success:function(){
-	            	alert("success!");
-	            	window.location.reload();
+	            	//alert("success!");
+	            	//window.location.reload();
 	            } ,
 		       error :function(data,status,er) { 
 		    	   alert("error: "+data+" status: "+status+" er:"+er);
@@ -372,9 +372,9 @@ var before=new Object();
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
 		$(".list_all").sortable({
-			axis:"x",
+			/*axis:"x",*/
 /*			cancel: "#addListLI" 입력을 못하게 막음,*/
-			items: "li:not(#addListLI,#addCardLI,.card_unit)",
+			items: ".list_unit, div:not(.no-include-sortable,.card_all,.card_unit)"/*"div:not(#addListLI,#addCardLI,.card_unit)"*/,
 			/*움직이는 대상에서 제외*/
 			item:function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
@@ -411,14 +411,13 @@ var before=new Object();
 	            beforeStop: function( event, ui ) {console.log("item:"+ui.item.index());},
 	            change: function( event, ui ) { console.log("change: "+ui.item[0].id);}
 	            
-		});
-		$(".list_all").disableSelection();
+		}).disableSelection();
 
 		$(".card_all").sortable({
 			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
 		      connectWith: ".card_all",
 	/*	      cancel: "#addCardLI" addbtn은 움직일 수 없게 설정,*/
-		      items: "li:not(#addCardLI,#addListLI)",
+		      items: ".card_unit, div:not(.no-include-sortable)",
 			  start: function (event, ui) {  
 				  var productOrder = $(this).sortable("toArray");
 				  updateCardStart(productOrder,ui.item.index());
@@ -467,7 +466,37 @@ var before=new Object();
         $('[type=text], select, textarea', o).val('');
     } 
     
+
     
-	 
+    $("#board-header-starred").click(function(){
+    	if($(this).hasClass("glyphicon glyphicon-star-empty")){
+    		//즐겨찾기로 해줘야함.
+    		$(this).removeClass("glyphicon glyphicon-star-empty");
+    		$(this).addClass("glyphicon glyphicon-star");
+    		updateStarBoard('Y');
+    	}else if(!$(this).hasClass("glyphicon glyphicon-star-empty")){
+    		$(this).removeClass("glyphicon glyphicon-star");
+    		$(this).addClass("glyphicon glyphicon-star-empty");
+    		updateStarBoard('N');
+    	}
+    });
+	
+    function updateStarBoard(star){
+    	var bNum=$('#bNum').val();
+    	var memId=$('#memId').val();
+    	
+    	var url='/usMemo/member/updateStar?bNum='+bNum+'&memId='+memId+'&star='+star;
+    	 $.ajax({
+	            url: url,
+	            type :'post',
+	            success:function(){
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+    	 });
+    	
+    }
 	 
 
