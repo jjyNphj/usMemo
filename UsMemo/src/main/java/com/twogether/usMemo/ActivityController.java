@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twogether.usMemo.dto.Activity;
 import com.twogether.usMemo.service.ActivityService;
@@ -21,9 +22,10 @@ public class ActivityController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@RequestMapping("/getAllActivity/{bNum}")
-	public void getAllActivity(@PathVariable("bNum") int bNum){
+	@ResponseBody
+	public List<Activity> getAllActivity(@PathVariable("bNum") int bNum){
 		List<Activity> activity=new ArrayList<Activity>();
-			//	activity=activityService.getAllActivity(bNum);
-				
+				activity=activityService.getAllActivity(bNum);
+			return activity;	
 	}
 }

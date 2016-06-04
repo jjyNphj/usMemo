@@ -3,8 +3,8 @@ package com.twogether.usMemo.dto;
 import java.sql.Date;
 
 public class Activity {
-	private int num,activity_num,bNum,value_num,to_num,from_num;
-	private String memId,value_string;
+	private int num,format_num,activity_num,bNum,value_num,to_num,from_num;
+	private String memId,value_string,activity_name,format,name,nickname;
 	private Date write_time;
 	
 	public int getNum() {
@@ -60,6 +60,36 @@ public class Activity {
 	}
 	public void setWrite_time(Date write_time) {
 		this.write_time = write_time;
+	}
+	public int getFormat_num() {
+		return format_num;
+	}
+	public void setFormat_num(int format_num) {
+		this.format_num = format_num;
+	}
+	public String getActivity_name() {
+		return activity_name;
+	}
+	public void setActivity_name(String activity_name) {
+		this.activity_name = activity_name;
+	}
+	public String getFormat() {
+		return format;
+	}
+	public void setFormat(String format) {
+		this.format = format;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	

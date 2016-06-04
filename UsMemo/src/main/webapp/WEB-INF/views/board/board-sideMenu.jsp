@@ -36,6 +36,12 @@
 			    </div>
   			</div>
   			<div class="side-menu-activity-wrapper">
+  				<div class="side-menu-activity-header">
+  					<span class="side-menu-activity-header-text">Activity</span>
+  				</div>
+  				<div class="side-menu-activity-content">
+  				
+  				</div>
   			</div>
 		</div>
 		<!-- 		                </li>

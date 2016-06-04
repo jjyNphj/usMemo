@@ -3,6 +3,7 @@
  * 카드의 정보창과 관련한 js
  * 
  */
+//파일 첨부 누를 순간 파일 이름과 cNum 카드 컨트롤러로 넘기기
 $(document).ready(function() {
 		$("input[type=submit]").bind("click", function() {
 			var num = document.getElementById('card_num').innerHTML;

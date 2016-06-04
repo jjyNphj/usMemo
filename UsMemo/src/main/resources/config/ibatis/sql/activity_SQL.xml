@@ -13,10 +13,15 @@
 			<result property="memId" column="memId"/>
 			<result property="bNum" column="bNum"/>
 			<result property="write_time" column="write_time"/>
-			<result property="value_num" column="value_num"/>
-			<result property="value_string" column="value_string"/>
-			<result property="to_num" column="to_num"/>
-			<result property="from_num" column="from_num"/>
+			<result property="value_num" column="value_num" nullValue="-1"/>
+			<result property="value_string" column="value_string" nullValue="-1"/>
+			<result property="to_num" column="to_num" nullValue="-1"/>
+			<result property="from_num" column="from_num" nullValue="-1"/>
+			<result property="format_num" column="format_num"/>
+			<result property="activity_name" column="activity_name"/>
+			<result property="format" column="format"/>
+			<result property="name" column="name"/>
+			<result property="nickname" column="nickname"/>
 		</resultMap>
 		
 		<insert id="createBoard" parameterClass="activity">
@@ -27,7 +32,16 @@
 		</insert>
 		
 		<select id="getAllActivity" parameterClass="int" resultMap="activityMap">
-			select * from activity where bNum=#bNum# order by write_time
+			select a.num, a.activity_num, a.bNum, a.value_num, a.to_num, a.from_num,
+					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
+					m.name,m.nickname
+			from activity a
+			inner join activity_format f 
+			on a.activity_num=f.num
+			inner join member m 
+			on a.memId=m.id 
+			where bNum=#bNum# 
+			order by write_time
 		</select>
 
 

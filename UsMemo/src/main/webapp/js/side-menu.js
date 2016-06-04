@@ -147,12 +147,44 @@ function addMemberFunc(id,bNum){
 				contentType: 'application/json',
 				success:function(data){
 					console.log(data);
+					setActivity(data);
 				} ,
 				error : function(xhr, status, error) {
 				alert(error);
 				}
 			});
 	}
+	
+	/**
+	 * activity의 내용을 html에 setting하기.
+	 * @param data
+	 */
+	function setActivity(data){
+		var result='';
+		$.each(data,function(index,val){
+			var format=val.format;
+			result+='<div class="activity-unit">';
+			
+			//me 부분을 nickname으로 치환하는 과정.
+
+			if(format.indexOf('#me#')!=-1){
+				format= format.replace('#me#','<me>#me#')
+				var arr=format.split('#me#');
+				
+				for(var i=0; i<arr.length; i++){
+					if(arr[i]=='<me>'){
+						result+='<span class="memberInfo-dropdown-view">'+val.nickname+'</span>';
+					}
+					else{
+						result+=arr[i];
+					}
+				}
+			}
+			result+='</div>'; //end of div, activity-unit
+		});
+		$('.side-menu-activity-content').append(result);
+	}
+
 
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
@@ -262,7 +294,7 @@ function addMemberFunc(id,bNum){
 			}else if($("#wrapper").hasClass('toggled')){
 			 //화면그림
 				openMenu(bNum,memId);
-				//openActivity(bNum);
+				openActivity(bNum);
 			}
 			$("#wrapper").toggleClass("toggled");
 			$(".board-wrapper").toggleClass("is-show-menu");

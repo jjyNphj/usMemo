@@ -3,17 +3,19 @@
  	flex-flow: column wrap;
 }
 
-.side-menu-header-wrapper{
+.side-menu-header-wrapper,.side-menu-activity-header{
 	width: 100%;
 	position: relative;
+	vertical-align:middle;
 	height: 46px;
 	flex: 0 0 auto; 
-	vertical-align:middle;
-	text-align: center;
 	display: flex;
 	margin-bottom: 3px;
 }
-.side-menu-header-text{
+.side-menu-header-wrapper{
+	text-align: center;
+}
+.side-menu-header-text,.side-menu-activity-header-text{
 	line-height: 20px;
 	margin: 10px 15px 3px 30px ;
 	padding-top: 5px;
@@ -28,7 +30,7 @@
 	
 }
 
-.side-menu-header > hr {
+.side-menu-header > hr{
 	 border-color: #D6DADC;
 	 margin-top: 0;
 	 margin-bottom: 15px;
