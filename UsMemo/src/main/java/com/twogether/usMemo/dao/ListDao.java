@@ -1,8 +1,5 @@
 package com.twogether.usMemo.dao;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,11 +13,12 @@ public class ListDao {
 	private SqlMapClientTemplate sqlMapClientTemplate;
 	
 	
-	public void addList(ListDTO listDTO){
-//		Map<String, Object> map=new HashMap<String, Object>();
-//		map.put("name", listDTO.getName());
-//		map.put("bNum", listDTO.getbNum());
-		sqlMapClientTemplate.update("List.addListProc",listDTO);
+	public ListDTO addList(ListDTO listDTO){
+		//프로시저의 out변수에 담긴 num값이 별다른 설정이 없어도 매개변수로 넣었던 listDTO에 저장된 상태로 반환된다. 
+		//굳이 객체를 다시 생성하여 ListDTO result= sqlMappClientTemplate.queryForObject("List.addListProc",listDTO); 이런식으로 반환할 필요가 없다. 
+		//이때는 null 이 반환되니 참고할것. 
+		sqlMapClientTemplate.queryForObject("List.addListProc",listDTO);
+		return listDTO;
 	}
 
 	public void update_rlink(ListDTO listDTO) {

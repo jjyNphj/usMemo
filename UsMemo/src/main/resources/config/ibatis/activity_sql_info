@@ -1,0 +1,3 @@
+insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'create_board','#me# created this board')
+
+insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addList','#me# added #listName# to this board')

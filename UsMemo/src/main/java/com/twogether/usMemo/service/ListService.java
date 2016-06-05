@@ -18,9 +18,10 @@ public class ListService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void addList(ListDTO listDTO){
+	public ListDTO addList(ListDTO listDTO){
 		
 		listDao.addList(listDTO);
+		return listDTO;
 	}
 
 	public int parseObjToInt(Object object){

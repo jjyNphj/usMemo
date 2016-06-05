@@ -41,8 +41,17 @@
 			inner join member m 
 			on a.memId=m.id 
 			where bNum=#bNum# 
-			order by write_time
+			order by write_time desc
 		</select>
+		
+		<insert id="addList" parameterClass="activity">
+			<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='addList'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
+		</insert>
+		
+		
 
 
 	</sqlMap>

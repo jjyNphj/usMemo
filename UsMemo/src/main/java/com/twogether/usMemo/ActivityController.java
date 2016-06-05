@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.service.ActivityService;
 
 @RequestMapping("/activity")
@@ -27,5 +28,14 @@ public class ActivityController {
 		List<Activity> activity=new ArrayList<Activity>();
 				activity=activityService.getAllActivity(bNum);
 			return activity;	
+	}
+	
+	@RequestMapping("/getListInfo/{listNum}")
+	@ResponseBody
+	public ListDTO getListInfo(@PathVariable("listNum") int listNum){
+		
+		ListDTO result = new ListDTO();
+		result=activityService.getListInfo(listNum);
+		return result; 
 	}
 }

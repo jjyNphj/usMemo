@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.ActivityDao;
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.ListDTO;
 
 @Service
 public class ActivityService {
@@ -33,6 +34,22 @@ public class ActivityService {
 		
 		List<Activity> result= activityDao.getAllActivity(activity);
 		return result;
+	}
+
+
+	public void addList(ListDTO listDTO,String memId) {
+		Activity requestInfo= new Activity();
+		requestInfo.setMemId(memId);
+		requestInfo.setbNum(listDTO.getbNum());
+		requestInfo.setValue_num(listDTO.getNum());
+		
+		activityDao.addList(requestInfo);
+	}
+
+
+	public ListDTO getListInfo(int listNum) {
+		
+	return activityDao.getListInfo(listNum);
 	}
 	
 	

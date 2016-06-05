@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.ListDTO;
 
 @Repository
 public class ActivityDao {
@@ -23,6 +24,15 @@ public class ActivityDao {
 
 	public List<Activity> getAllActivity(Activity activity) {
 		return sqlMapClientTemplate.queryForList("Activity.getAllActivity",activity.getbNum());
+	}
+
+	public void addList(Activity requestInfo) {
+		sqlMapClientTemplate.insert("Activity.addList",requestInfo);
+	}
+
+	public ListDTO getListInfo(int num) {
+		// TODO Auto-generated method stub
+		return (ListDTO) sqlMapClientTemplate.queryForObject("List.getListByLNum",num);
 	}
 	
 	

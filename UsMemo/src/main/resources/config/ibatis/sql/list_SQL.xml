@@ -10,6 +10,7 @@
 	<parameterMap id="listParamMap" class="listDTO">
 		<parameter property="name" jdbcType="varchar" javaType="java.lang.String" mode="IN"/>
   		<parameter property="bNum" jdbcType="NUMBER" javaType="java.lang.Integer" mode="IN"/>
+  	 	<parameter property="num" jdbcType="DECIMAL" javaType="long"  mode="OUT"/>
  	</parameterMap> 
  	
 
@@ -32,7 +33,7 @@
 	</delete>
 
 	<procedure id="addListProc" parameterMap="listParamMap">
-	{ call addListProcedure(?,?) }
+	{ call addListProcedure(?,?,?) }
 	</procedure>
 	
 	<update id="update_rlink" parameterClass="listDTO">
@@ -44,7 +45,9 @@
 	<update id="update_allLink" parameterClass="listDTO">
 		update list set llink=#llink#, rlink=#rlink# where num=#num#
 	</update>
-	
+	<select id="getListByLNum" parameterClass="int" resultClass="listDTO">
+		select * from list where num=#num#
+	</select>
 	
 
 </sqlMap>

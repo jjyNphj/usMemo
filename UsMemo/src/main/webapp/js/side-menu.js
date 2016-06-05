@@ -165,10 +165,30 @@ function addMemberFunc(id,bNum){
 			var format=val.format;
 			result+='<div class="activity-unit">';
 			
+			switch (val.activity_name) {
+			case 'create_board':
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
+				//result+=format;
+				break;
+			case 'addList':
+				var get_list_name=activity_getListInfo(val.value_num);
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
+				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
+				//result+=format;
+				break;
+				
+
+/*			default:
+				break;*/
+			}
+			result+=format;
+			result+='</div>'; //end of div, activity-unit
+			
+			
 			//me 부분을 nickname으로 치환하는 과정.
 
-			if(format.indexOf('#me#')!=-1){
-				format= format.replace('#me#','<me>#me#')
+		/*	if(format.indexOf('#me#')!=-1){
+				format= format.replace('#me#','<me>#me#');
 				var arr=format.split('#me#');
 				
 				for(var i=0; i<arr.length; i++){
@@ -180,12 +200,45 @@ function addMemberFunc(id,bNum){
 					}
 				}
 			}
+			if(format.indexOf('#listName#')!=-1){
+				format= format.replace('#listName#','<listName>#listName#');
+				var arr=format.split('#listName#');
+				
+				for(var i=0; i<arr.length; i++){
+					if(arr[i]=='<listName>'){
+						var get_list_name=activity_getListInfo(val.value_num);
+						result+='<span class="listInfo-dropdown-view">'+get_list_name+'</span>';
+					}
+					else{
+						result+=arr[i];
+					}
+				}
+			}
 			result+='</div>'; //end of div, activity-unit
-		});
+*/		});
 		$('.side-menu-activity-content').append(result);
 	}
 
-
+	function activity_getListInfo(listNum){
+		  var url='/usMemo/activity/getListInfo/'+listNum;
+		  var list_name;
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				async: false,
+				success:function(data){
+					console.log(data);
+					list_name=data.name;
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
+			return list_name;
+	}
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
 	 * @param data
@@ -289,6 +342,7 @@ function addMemberFunc(id,bNum){
 				cleanMemberListView();
 				cleanFindMemberListView();
 				cleanFindeMemberText();
+				clean_activitys();
 				
 				//토글클래스일 때 
 			}else if($("#wrapper").hasClass('toggled')){
@@ -339,6 +393,11 @@ function addMemberFunc(id,bNum){
 	function clean_findMembersResults(){
 		$("#findMember").val('');
 		$("#findMemberResult> *").detach();
+	}
+	
+	
+	function clean_activitys(){
+		$('.side-menu-activity-content>*').detach();
 	}
 		
 	
