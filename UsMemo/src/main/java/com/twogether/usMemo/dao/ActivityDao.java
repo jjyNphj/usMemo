@@ -46,6 +46,12 @@ public class ActivityDao {
 		// TODO Auto-generated method stub
 		return (Card) sqlMapClientTemplate.queryForObject("Card.getCardBycNum",cardNum);
 	}
+
+	public void updateCardLocation(Activity requestInfo) {
+		
+		sqlMapClientTemplate.insert("Activity.updateCardLocation",requestInfo);
+		
+	}
 	
 	
 }

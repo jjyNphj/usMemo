@@ -183,6 +183,15 @@ function addMemberFunc(id,bNum){
 				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
 				format=format.replace('#cardName#','<span class="cardInfo-dropdown-view">'+get_card_name+'</span>');
 				break;
+			case 'updateCardLocation':
+				var get_to_list_name=activity_getListInfo(val.to_num);
+				var get_from_list_name=activity_getListInfo(val.from_num);
+				var get_card_name=activity_getCardInfo(val.value_num);
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
+				format=format.replace('#toListName#','<span class="listInfo-dropdown-view">'+get_to_list_name+'</span>');
+				format=format.replace('#fromListName#','<span class="listInfo-dropdown-view">'+get_from_list_name+'</span>');
+				format=format.replace('#cardName#','<span class="cardInfo-dropdown-view">'+get_card_name+'</span>');
+				break;
 
 /*			default:
 				break;*/

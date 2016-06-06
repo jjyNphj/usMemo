@@ -3,3 +3,5 @@ insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'create_board
 insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addList','#me# added #listName# to this board')
 
 insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addCard','#me# added #cardName# to #listName#')
+
+insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'updateCardLocation','#me# moved #cardName# from #fromListName# to #toListName#')

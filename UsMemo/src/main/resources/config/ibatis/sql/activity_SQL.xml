@@ -57,6 +57,12 @@
 			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,null)
 		</insert>
 		
+		<insert id="updateCardLocation">
+		<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='updateCardLocation'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,#from_num#)
+		</insert>
 
 
 	</sqlMap>

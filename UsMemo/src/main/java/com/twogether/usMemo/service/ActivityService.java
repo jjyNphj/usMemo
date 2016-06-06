@@ -2,6 +2,9 @@ package com.twogether.usMemo.service;
 
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +70,28 @@ public class ActivityService {
 	public Card getCardInfo(int cardNum) {
 		// TODO Auto-generated method stub
 		return activityDao.getCardInfo(cardNum);
+	}
+
+
+	public void updateCardLocation(String cardLocation) throws ParseException {
+		
+		JSONParser jsonPaser=new JSONParser();
+		//string¿ª json¿∏∑Œ ∆ƒΩÃΩ√≈¥.
+		JSONObject obj=(JSONObject)jsonPaser.parse(cardLocation);
+		
+		Activity requestInfo= new Activity();
+		requestInfo.setMemId((String) obj.get("memId"));
+		requestInfo.setbNum(parseObjToInt(obj.get("bNum")));
+		requestInfo.setValue_num(parseObjToInt(obj.get("currentNum")));
+		requestInfo.setTo_num(parseObjToInt(obj.get("afterLNum")));
+		requestInfo.setFrom_num(parseObjToInt(obj.get("beforeLNum")));
+		
+		activityDao.updateCardLocation(requestInfo);
+	}
+	
+	public int parseObjToInt(Object object){
+
+		return Integer.parseInt(object.toString());
 	}
 	
 	

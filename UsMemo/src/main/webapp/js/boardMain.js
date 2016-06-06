@@ -348,6 +348,8 @@ var before=new Object();
 	 }
 	 
 	 function updateCardChange(){
+		 updateCard.memId=$('#memId').val();
+		 updateCard.bNum=$('#bNum').val();
 		 //json타입으로 변환
 		 var cardLocation=JSON.stringify(updateCard);
 		 console.log("card의 결과 JSON정보: "+cardLocation);
