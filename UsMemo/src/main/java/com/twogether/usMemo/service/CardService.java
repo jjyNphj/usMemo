@@ -37,8 +37,9 @@ public class CardService {
 	@Autowired
 	CardDao cardDao;
 
-	public void addCard(Card card){
+	public Card addCard(Card card){
 		cardDao.addCard(card);
+		return card;
 	}
 	
 	public ListAndCard editCardWindow(int cNum) {

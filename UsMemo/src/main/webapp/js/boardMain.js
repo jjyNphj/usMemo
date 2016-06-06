@@ -116,7 +116,8 @@ var before=new Object();
 		 //console.log(u);
 		 var name=nameNum.value;
 		 var memId=$("#memId").val();
-		 var url='/usMemo/card/add?lNum='+lNum+'&name='+name+'&memId='+memId;
+		 var bNum=$('#bNum').val();
+		 var url='/usMemo/card/add/'+bNum+'?lNum='+lNum+'&name='+name+'&memId='+memId;
 		  $.ajax({
             url: url,
            

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.service.ActivityService;
 
@@ -36,6 +37,15 @@ public class ActivityController {
 		
 		ListDTO result = new ListDTO();
 		result=activityService.getListInfo(listNum);
+		return result; 
+	}
+	
+	@RequestMapping("/getCardInfo/{cardNum}")
+	@ResponseBody
+	public Card getCardInfo(@PathVariable("cardNum") int cardNum){
+		
+		Card result = new Card();
+		result=activityService.getCardInfo(cardNum);
 		return result; 
 	}
 }

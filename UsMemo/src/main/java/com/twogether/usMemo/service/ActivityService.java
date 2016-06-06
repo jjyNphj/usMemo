@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.ActivityDao;
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 
 @Service
@@ -50,6 +51,22 @@ public class ActivityService {
 	public ListDTO getListInfo(int listNum) {
 		
 	return activityDao.getListInfo(listNum);
+	}
+
+
+	public void addCard(Card card, int bNum) {
+		Activity requestInfo= new Activity();
+			requestInfo.setMemId(card.getMemId());
+			requestInfo.setbNum(bNum);
+			requestInfo.setValue_num(card.getNum());
+			requestInfo.setTo_num(card.getlNum());
+		activityDao.addCard(requestInfo);
+	}
+
+
+	public Card getCardInfo(int cardNum) {
+		// TODO Auto-generated method stub
+		return activityDao.getCardInfo(cardNum);
 	}
 	
 	

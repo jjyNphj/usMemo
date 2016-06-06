@@ -50,7 +50,12 @@
 			</selectKey>
 			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
 		</insert>
-		
+		<insert id="addCard" parameterClass="activity">
+			<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='addCard'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,null)
+		</insert>
 		
 
 

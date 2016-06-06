@@ -13,9 +13,10 @@ public class CardDao {
 	@Autowired
 	private SqlMapClientTemplate sqlMapClientTemplate;
 
-	public void addCard(Card card) {
+	public Card addCard(Card card) {
 	
 		sqlMapClientTemplate.insert("Card.addCard", card);
+		return card;
 	}
 	
 	public void addCardContent(Card card) {

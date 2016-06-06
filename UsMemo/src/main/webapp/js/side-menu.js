@@ -176,7 +176,13 @@ function addMemberFunc(id,bNum){
 				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
 				//result+=format;
 				break;
-				
+			case 'addCard':
+				var get_list_name=activity_getListInfo(val.to_num);
+				var get_card_name=activity_getCardInfo(val.value_num);
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
+				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
+				format=format.replace('#cardName#','<span class="cardInfo-dropdown-view">'+get_card_name+'</span>');
+				break;
 
 /*			default:
 				break;*/
@@ -238,6 +244,26 @@ function addMemberFunc(id,bNum){
 				}
 			});
 			return list_name;
+	}
+	function activity_getCardInfo(cardNum){
+		var url='/usMemo/activity/getCardInfo/'+cardNum;
+		  var card_name;
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				async: false,
+				success:function(data){
+					console.log(data);
+					card_name=data.name;
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
+			return card_name;
 	}
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
