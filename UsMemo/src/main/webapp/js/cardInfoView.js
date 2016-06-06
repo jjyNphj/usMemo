@@ -5,11 +5,14 @@
  */
 //파일 첨부 누를 순간 파일 이름과 cNum 카드 컨트롤러로 넘기기
 $(document).ready(function() {
+		//파일 첨부 누르는 순간 처리하는 부분
 		$("input[type=submit]").bind("click", function() {
+			
 			var num = document.getElementById('card_num').innerHTML;
 			console.log(num);
 			var file_data=$('#exampleInputFile').val();
 			console.log(file_data);
+			
 			$('#formUpload').ajaxSubmit({
 		        beforeSerialize: function() {
 		        	$("#uploadFile_card_num").attr("value",num);
@@ -17,7 +20,7 @@ $(document).ready(function() {
 		        },
 				success : function(data) {
 					/*alert(data.result);*/
-					console.log(data);
+					//console.log(data);
 					output(data); //받은 정보를 화면 출력하는 함수 호출
 				},
 				error : function(error) {
@@ -25,6 +28,36 @@ $(document).ready(function() {
 				}
 			});
 			return false;
+		});
+		
+		//카드 수정창에서 카드 이름쓰는 부분에서 포커스가 벗어나면 카드이름 저장하는 부분
+		$("textarea#card_Name").blur(function()
+			{
+				var name = document.getElementById('card_Name').value;
+				var num = document.getElementById('card_num').innerHTML;
+				var url='/usMemo/card/edit/CardName?num='+num+'&name='+name;
+				
+				$.ajax({
+					url: url,
+					type:'post',
+					success:function(){
+						alert("CardName edit!");
+	
+						//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
+						//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
+						var lnum = document.getElementById('card_lnum').innerHTML;
+						//lnum과 cnum 조합해서 card_unit id 값 만들어 주기.
+						var card_unit_id = lnum + '_' + num;
+	
+						console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
+	
+						//카드 이름 뜨는 부분 태그의 클래스 찾아서, 자식의 자식 div 태그의 card_unit_name 클래스의 내용을 바꾼 카드 이름으로 바꿔치기 하기.
+						$('div.card_unit#'+card_unit_id + '> div > div.card_unit_name').html(name);
+					} ,
+					error : function(xhr, status, error) {
+						alert(error);
+					}
+				})
 		});
 	});
 
@@ -47,18 +80,23 @@ function heightResize(obj) {
 	obj.style.height = (10+obj.scrollHeight)+"px";
 }
 
+//카드 이름 수정시 엔터치면 바로 이름 저장 되는 부분
 function enterSaveProcess(e) {
 	/*
 	 * boardMain에서 키가 눌릴때마다 키코드를 찾음
 	 * keyCode가 0이면  which 리턴, 엔터의 키코드 13이므로 엔터 치는 순간 if문으로 넘어감
 	 * keyCode와 which는 ie,firefox 브라우저의 차이떄문에...?
 	 * */
+	
     var code = (e.keyCode ? e.keyCode : e.which);
-    if (code == 13) { //Enter keycode
+    if (code == 13 ) { //Enter keycode
+    	
     	//value는 현재 이벤트가 일어난 textarea의 id의 값(사용자가 입력한 내용)을 가져옴
         var name = document.getElementById('card_Name').value;
         //innerHTML은 전체 html 소스에서 card_num이라는 id를 가진 태그 안의 내용을 가져옴
+        //setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
         var num = document.getElementById('card_num').innerHTML;
+        
         //이벤트(엔터) 사용을 금지하는 함수. 엔터 눌러도 포커스가 다음줄로 넘어가지 않도록 하기 위함.
         e.preventDefault();
         //엔터 친후 textarea에서 커서 제거하기
@@ -71,8 +109,16 @@ function enterSaveProcess(e) {
     		success:function(){
     			alert("CardName edit!");
     			
-    			console.log(name);
-    			console.log(num);    		
+    			//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
+    			//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
+    			var lnum = document.getElementById('card_lnum').innerHTML;
+    			//lnum과 cnum 조합해서 card_unit id 값 만들어 주기.
+    			var card_unit_id = lnum + '_' + num;
+    			
+    	        console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
+    	        
+    			//카드 이름 뜨는 부분 태그의 클래스 찾아서, 자식의 자식 div 태그의 card_unit_name 클래스의 내용을 바꾼 카드 이름으로 바꿔치기 하기.
+    			$('div.card_unit#'+card_unit_id + '> div > div.card_unit_name').html(name);
     		} ,
     		error : function(xhr, status, error) {
     			alert(error);
@@ -82,6 +128,7 @@ function enterSaveProcess(e) {
     }
 }
 
+//카드 수정창 뜨는 부분(해당 num에 따른 listAndCard에 있는 데이터 값 다 가져오기)
 function editCard(cNum) {
 	var url='/usMemo/card/edit';
 	var listAndcard = new Object();
@@ -115,16 +162,10 @@ function editCard(cNum) {
 		error : function(xhr, status, error) {
 		alert(error);
 		}
-	});/*.done(function( data ) {			
-		var card_name_y = document.getElementById("card_Name");
-		heightResize(card_name_y);
-		 var card_name_y = document.getElementById("card_Name");
-		 var y_height = card_name_y.scrollHeight;
-		 console.log(y_height);
-		 $(".textarea-card-name").css("height",y_height+"px");
-			 })*/
+	});
 }
 
+//카드 세부정보 저장하는 부분
 function addCardDescription(card_num,cardDescription){
 	/*
 	 * <span id="card_num"> 내용 </span>
@@ -157,17 +198,25 @@ function addCardDescription(card_num,cardDescription){
 	})
 }
 
-
+//listAndCard에 있는 데이터 뿌려주는 부분
 function setCardInfo(cardInfo){
 	 /* ListAndCard dto의 card 정보와 list 정보를 html에서 쓰기위해 세팅하는 부분  */
 	 $("#card_Name").val(cardInfo.card_name);
 	 $("#list_Name").text(cardInfo.list_name);
 	 $("#card_num").text(cardInfo.card_num);
+	 $('#card_lnum').text(cardInfo.lNum);
 	 
-	 $("#card_fileName").append(cardInfo.attach);
+	 //카드 수정창 뜨는 동시에 해당 파일 첨부 다운로드 이름 붙여주기
+	 $("#card_fileName").html("<br>첨부된 파일:<br>");
+	 //$("#card_fileName").append(cardInfo.attach);
+	 //다운로드를 위한 링크
 	 var link = "/usMemo/card/fileDown?fileName=" + cardInfo.attach;
-	 $("#card_fileName").html("<br><a href='"+ link +"'>"+cardInfo.attach+" download </a>");
-	 
+	 //파일 첨부에 아무것도 안들어가있으면 아무 값도 넣어주지 말기
+	 if( cardInfo.attach != null) {
+		 $("#card_fileName").append("<br><a href='"+ link +"'>"+cardInfo.attach+" download </a>");
+	 } else {
+		 $("#card_fileName").append("<br>");
+	 }	 
 	 
 	 if(cardInfo.content != null) {
 		 //조건문으로 체크 안해주면 replace 할게 없다고 오류남

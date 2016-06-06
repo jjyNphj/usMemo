@@ -9,6 +9,7 @@
                <div class="modal-header">
                   <!-- span 안에 담기는 카드의 넘버를 cardInfoView.js로 넘겨주기 위함 -->
                   <span class="hide" id="card_num"></span>
+                  <span class="hide" id="card_lnum"></span>
                   
                   <button type="button" class="close" data-dismiss="modal" onclick="clearForm(this.form)">&times;</button>
                   

@@ -464,7 +464,7 @@ var before=new Object();
 
  	//clear,close나 X버튼 누르면 textarea 내용 초기화 시키기.
     function clearForm(o){
-        $('[type=text], select, textarea', o).val('');
+        $('[type=text], select, textarea#cardDescription', o).val('');
     } 
     
 
