@@ -20,7 +20,7 @@
                      <textarea class="textarea-card-name" id="card_Name" maxlength="200" onkeypress="enterSaveProcess(event,this)" onkeyup="heightResize(this)" ></textarea>
                   </h4>
 
-                  <h6 class="modal-title" >in list <span id="list_Name"></span></h6>
+                  <h6 class="modal-title" style="float:left;margin-left:25px;" >in list <span id="list_Name"></span></h6>
                </div>
                
                <div class="modal-body">
@@ -50,8 +50,8 @@
                   <div id="card_fileName"></div>
                   <!-- <a href="fileDown?fileName=$(#card_fileName)">$(#card_fileName) download</a> -->
                </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="clearForm(this.form)">Close</button>
+               <div class="modal-footer" style="padding:15px;">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteCardInfo()">Card Delete</button>
                </div>
             </div>
          </div>

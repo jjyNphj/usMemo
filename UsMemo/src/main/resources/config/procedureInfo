@@ -51,3 +51,45 @@ begin
 	commit;
 end;
 /
+
+================card delete procedure======================
+create or replace procedure deleteCardProcedure
+(card_num IN number)
+is
+card_llink number;
+card_rlink number;
+
+BEGIN
+	select llink, rlink into card_llink, card_rlink from card where num = card_num;
+
+	--한 리스트 안에 카드가 딱 한개 존재하는 경우
+  	--그냥 해당 카드 삭제하기
+	IF (card_llink = -1 AND card_rlink = -1)
+	THEN	
+	delete from card where num = card_num;
+
+	--가장 맨 위의 카드가 삭제되는 경우
+  	--update:삭제되는 카드넘버의 rlink와 연결된 카드넘버의 llink를 -1로 변경
+	ELSIF (card_llink = -1 AND card_rlink != -1)
+	THEN	
+	update card set llink = -1 where num = card_rlink;
+	delete from card where num=card_num;
+
+	--가장 마지막 카드가 삭제되는 경우
+	ELSIF (card_rlink = -1 AND card_llink != -1)
+	THEN
+	update card set rlink = -1 where num = card_llink;
+	delete from card where num=card_num;
+
+	--가운데 끼어있는 카드가 삭제되는 경우
+  	--update 1번째:삭제되는 카드넘버의 llink와 연결된 카드넘버의 rlink를 알맞게 변경
+  	--update 2번째:삭제되는 카드넘버의 rlink와 연결된 카드넘버의 llink를 알맞게 변경
+	ELSIF (card_llink != -1 AND card_rlink != -1)
+	THEN	
+	update card set rlink = card_rlink where num = card_llink;	
+	update card set llink = card_llink where num = card_rlink;
+	delete from card where num=card_num;
+  
+	END IF;
+  COMMIT;
+END;

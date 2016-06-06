@@ -29,6 +29,11 @@ public class CardDao {
 		System.out.println("CardDao card name: " + card.getName());
 	}
 	
+	public void deleteCardInfo(Card card) {
+		
+		sqlMapClientTemplate.delete("Card.deleteCardInfo", card);
+	}
+	
 	public ListAndCard getCardInfoBycNum(int cNum) {
 
 		ListAndCard listAndcard = new ListAndCard();

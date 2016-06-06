@@ -5,63 +5,65 @@
  */
 //파일 첨부 누를 순간 파일 이름과 cNum 카드 컨트롤러로 넘기기
 $(document).ready(function() {
-		//파일 첨부 누르는 순간 처리하는 부분
-		$("input[type=submit]").bind("click", function() {
-			
-			var num = document.getElementById('card_num').innerHTML;
-			console.log(num);
-			var file_data=$('#exampleInputFile').val();
-			console.log(file_data);
-			
-			$('#formUpload').ajaxSubmit({
-		        beforeSerialize: function() {
-		        	$("#uploadFile_card_num").attr("value",num);
-		        	console.log("처리전");
-		        },
-				success : function(data) {
-					/*alert(data.result);*/
-					//console.log(data);
-					output(data); //받은 정보를 화면 출력하는 함수 호출
-				},
-				error : function(error) {
-					alert("요청 처리 중 오류가 발생하였습니다.");
-				}
-			});
-			return false;
+	//파일 첨부 누르는 순간 처리하는 부분
+	$("input[type=submit]").bind("click", function() {
+
+		var num = document.getElementById('card_num').innerHTML;
+		console.log(num);
+		var file_data=$('#exampleInputFile').val();
+		console.log(file_data);
+
+		$('#formUpload').ajaxSubmit({
+			beforeSerialize: function() {
+				$("#uploadFile_card_num").attr("value",num);
+				console.log("처리전");
+			},
+			success : function(data) {
+				/*alert(data.result);*/
+				//console.log(data);
+				output(data); //받은 정보를 화면 출력하는 함수 호출
+			},
+			error : function(error) {
+				alert("요청 처리 중 오류가 발생하였습니다. 화면을 새로고침 합니다.");
+				//오류나고 나서 다시 파일 첨부하려고 하면 계속 오류난 상태이므로 새로고침 해줘야함.
+				location.reload();
+			}
 		});
-		
-		//카드 수정창에서 카드 이름쓰는 부분에서 포커스가 벗어나면 카드이름 저장하는 부분
-		$("textarea#card_Name").blur(function()
-			{
-				var name = document.getElementById('card_Name').value;
-				var num = document.getElementById('card_num').innerHTML;
-				var url='/usMemo/card/edit/CardName?num='+num+'&name='+name;
-				
-				$.ajax({
-					url: url,
-					type:'post',
-					success:function(){
-						alert("CardName edit!");
-	
-						//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
-						//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
-						var lnum = document.getElementById('card_lnum').innerHTML;
-						//lnum과 cnum 조합해서 card_unit id 값 만들어 주기.
-						var card_unit_id = lnum + '_' + num;
-	
-						console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
-	
-						//카드 이름 뜨는 부분 태그의 클래스 찾아서, 자식의 자식 div 태그의 card_unit_name 클래스의 내용을 바꾼 카드 이름으로 바꿔치기 하기.
-						$('div.card_unit#'+card_unit_id + '> div > div.card_unit_name').html(name);
-					} ,
-					error : function(xhr, status, error) {
-						alert(error);
-					}
-				})
-		});
+		return false;
 	});
 
-//전달받은 정보를 가지고 화면에 보기 좋게 출력
+	//카드 수정창에서 카드 이름쓰는 부분에서 포커스가 벗어나면 카드이름 저장하는 부분
+	$("textarea#card_Name").blur(function()
+		{
+			var name = document.getElementById('card_Name').value;
+			var num = document.getElementById('card_num').innerHTML;
+			var url='/usMemo/card/edit/CardName?num='+num+'&name='+name;
+	
+			$.ajax({
+				url: url,
+				type:'post',
+				success:function(){
+					alert("CardName edit!");
+	
+					//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
+					//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
+					var lnum = document.getElementById('card_lnum').innerHTML;
+					//lnum과 cnum 조합해서 card_unit id 값 만들어 주기.
+					var card_unit_id = lnum + '_' + num;
+	
+					console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
+	
+					//카드 이름 뜨는 부분 태그의 클래스 찾아서, 자식의 자식 div 태그의 card_unit_name 클래스의 내용을 바꾼 카드 이름으로 바꿔치기 하기.
+					$('div.card_unit#'+card_unit_id + '> div > div.card_unit_name').html(name);
+				} ,
+				error : function(xhr, status, error) {
+					alert(error);
+				}
+			})
+		});
+});
+
+//전달받은 파일첨부 이름을  화면에 보기 좋게 출력
 function output(data) {
 	//업로드한 파일을 다운로드할수있도록 화면 구성
     if(data.attach){
@@ -69,7 +71,7 @@ function output(data) {
         
         var link = "/usMemo/card/fileDown?fileName=" + data.attach;
         
-     	$("#card_fileName").append("<a href='"+ link +"'>"+data.attach+" download </a>");
+     	$("#card_fileName").append("<br><a href='"+ link +"'>"+data.attach+" download </a>");
         $("#card_fileName").append("<br>");	               
     }              
 }
@@ -112,7 +114,7 @@ function enterSaveProcess(e) {
     			//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
     			//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
     			var lnum = document.getElementById('card_lnum').innerHTML;
-    			//lnum과 cnum 조합해서 card_unit id 값 만들어 주기.
+    			//lnum과 cnum 조합해서 card_unit의 id 값 만들어 주기.
     			var card_unit_id = lnum + '_' + num;
     			
     	        console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
@@ -198,6 +200,39 @@ function addCardDescription(card_num,cardDescription){
 	})
 }
 
+//카드 삭제 버튼 누르면 데이터 삭제되는 부분
+function deleteCardInfo() {
+	
+	var deleteChoice = window.confirm('정말로 이 카드 정보를 삭제하시겠습니까?');	
+	
+	if(deleteChoice) {
+		var num = document.getElementById('card_num').innerHTML;
+		var url='/usMemo/card/delete/CardInfo?num='+num;
+
+		$.ajax({
+			url: url,
+			type:'post',
+
+			success:function(){
+				alert("카드정보 삭제!");
+				//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
+				//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
+				var lnum = document.getElementById('card_lnum').innerHTML;
+				//lnum과 cnum 조합해서 card_unit의 id 값 만들어 주기.
+				var card_unit_id = lnum + '_' + num;
+
+				console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
+
+				//$()안에있는 조건에 해당하는 태그를 포함한 하위 요소, 이벤트, 데이터 모두 제거
+				$('div.card_unit#'+card_unit_id).remove();
+			} ,
+			error : function(xhr, status, error) {
+				alert(error);
+			}
+		})
+	} 
+}
+
 //listAndCard에 있는 데이터 뿌려주는 부분
 function setCardInfo(cardInfo){
 	 /* ListAndCard dto의 card 정보와 list 정보를 html에서 쓰기위해 세팅하는 부분  */
@@ -208,7 +243,6 @@ function setCardInfo(cardInfo){
 	 
 	 //카드 수정창 뜨는 동시에 해당 파일 첨부 다운로드 이름 붙여주기
 	 $("#card_fileName").html("<br>첨부된 파일:<br>");
-	 //$("#card_fileName").append(cardInfo.attach);
 	 //다운로드를 위한 링크
 	 var link = "/usMemo/card/fileDown?fileName=" + cardInfo.attach;
 	 //파일 첨부에 아무것도 안들어가있으면 아무 값도 넣어주지 말기

@@ -57,6 +57,10 @@ public class CardService {
 		cardDao.editCardName(card);
 		System.out.println("CardService card name: " + card.getName());
 	}
+	
+	public void deleteCardInfo(Card card) {
+		cardDao.deleteCardInfo(card);
+	}
 
 	/**
 	 * 카드의 위치가 변경 되었을 때의 모델<br>

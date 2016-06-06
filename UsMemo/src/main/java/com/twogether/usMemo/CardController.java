@@ -110,6 +110,17 @@ public class CardController {
 		return mv;
 	}
 	
+	@RequestMapping("/delete/CardInfo")
+	public ModelAndView deleteCardInfo(@ModelAttribute Card card){
+		
+		//카드 수정하기 창에서 카드 이름을 수정하고 엔터를 칠 경우 저장하는 부분
+		ModelAndView mv= new ModelAndView();
+
+		mv.setViewName("board/boardMain");
+		cardService.deleteCardInfo(card);
+		return mv;
+	}	
+	
 	/* 파일 업로드 화면 이동 */
 	@RequestMapping(value="/fileUploadAjax", method=RequestMethod.GET)
 	public ModelAndView fileUploadAjaxForm() {
@@ -151,22 +162,5 @@ public class CardController {
 		File downloadFile = new File(fullPath);
 		return new ModelAndView("download", "downloadFile", downloadFile);
 	}
-	
-	/* 파일 다운로드 화면 이동 */
-	/*@RequestMapping(value="fileListShow", method=RequestMethod.GET)
-	public ModelAndView fileListShow() {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("board/boardMain");
-		
-		public ModelAndView fileDown(@RequestParam("fileName") String fileName) {
-			String fullPath = "C:/images/" + fileName ;
-			File downloadFile = new File(fullPath);
-			return new ModelAndView("download", "downloadFile", downloadFile);
-		}
-		
-		return mv;
-	}*/
 	
 }
