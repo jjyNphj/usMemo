@@ -14,6 +14,8 @@ import com.twogether.usMemo.dao.ActivityDao;
 import com.twogether.usMemo.dto.Activity;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
+import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.dto.MemberGrade;
 
 @Service
 public class ActivityService {
@@ -21,11 +23,11 @@ public class ActivityService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ActivityDao activityDao;
-	
+	//@Autowired Activity requestInfo;
 	
 	public void create_board(String memId,int bNum){
 		
-		Activity requestInfo= new Activity();
+	Activity requestInfo= new Activity();
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(bNum);
 		activityDao.create_board(requestInfo);		
@@ -33,10 +35,10 @@ public class ActivityService {
 
 
 	public List<Activity> getAllActivity(int bNum) {
-		Activity activity= new Activity();
-		activity.setbNum(bNum);
+		Activity requestInfo= new Activity();
+		requestInfo.setbNum(bNum);
 		
-		List<Activity> result= activityDao.getAllActivity(activity);
+		List<Activity> result= activityDao.getAllActivity(requestInfo);
 		return result;
 	}
 
@@ -92,6 +94,22 @@ public class ActivityService {
 	public int parseObjToInt(Object object){
 
 		return Integer.parseInt(object.toString());
+	}
+
+
+	public void addFriend(MemberGrade addMemberInfo, String memId) {
+		
+		Activity requestInfo= new Activity();
+		requestInfo.setMemId(memId);
+		requestInfo.setbNum(addMemberInfo.getbNum());
+		requestInfo.setValue_string(addMemberInfo.getmemId());
+		activityDao.addFriend(requestInfo);
+	}
+
+
+	public Member getFriendInfo(MemberGrade memberInfo) {
+		
+		return activityDao.getFriendInfo(memberInfo);
 	}
 	
 	

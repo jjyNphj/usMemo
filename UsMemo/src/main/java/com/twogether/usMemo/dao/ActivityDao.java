@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import com.twogether.usMemo.dto.Activity;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
+import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.dto.MemberGrade;
 
 @Repository
 public class ActivityDao {
@@ -50,6 +52,18 @@ public class ActivityDao {
 	public void updateCardLocation(Activity requestInfo) {
 		
 		sqlMapClientTemplate.insert("Activity.updateCardLocation",requestInfo);
+		
+	}
+
+	public void addFriend(Activity requestInfo) {
+		sqlMapClientTemplate.insert("Activity.addFriend",requestInfo);
+		
+	}
+
+	public Member getFriendInfo(MemberGrade memberInfo) {
+		Member result= new Member();
+		result = (Member) sqlMapClientTemplate.queryForObject("Member.getFriendInfo",memberInfo);
+		return result;
 		
 	}
 	

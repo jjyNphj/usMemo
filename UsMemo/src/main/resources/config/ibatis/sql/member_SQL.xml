@@ -38,7 +38,10 @@
 		</select>
 		
 		<insert id="addFriend" parameterClass="memberGrade">
-			insert into memberGrade values(memberGrade_num_seq.nextval,#bNum#,#memId#,2)
+			insert into memberGrade values(memberGrade_num_seq.nextval,#bNum#,#memId#,2,'N')
+			<selectKey keyProperty="num" resultClass="int" type="post">
+				select MEMBERGRADE_NUM_SEQ.CURRVAL from dual
+			</selectKey>	
 		</insert>
 		
 		<delete id="deleteFriend" parameterClass="memberGrade">
@@ -57,6 +60,11 @@
 		</update> 
 		<select id="getThisBoardStar" parameterClass="memberGrade" resultClass="String">
 			select star from memberGrade where bNum=#bNum# and memId=#memId#
+		</select>
+		<select id="getFriendInfo" parameterClass="memberGrade" resultClass="member">
+		select * from member m inner join memberGrade g 
+		on m.id=g.memId 
+		where bNum=#bNum# and memId=#memId#
 		</select>
 	</sqlMap>
 	

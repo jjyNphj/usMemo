@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.twogether.usMemo.dto.Activity;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
+import com.twogether.usMemo.dto.Member;
+import com.twogether.usMemo.dto.MemberGrade;
 import com.twogether.usMemo.service.ActivityService;
 
 @RequestMapping("/activity")
@@ -48,4 +51,14 @@ public class ActivityController {
 		result=activityService.getCardInfo(cardNum);
 		return result; 
 	}
+	
+	@RequestMapping("/getFriendInfo/{bNum}/{memId}")
+	@ResponseBody
+	public Member getFriendInfo(@ModelAttribute MemberGrade memberInfo){
+		Member result = new Member();
+		result = activityService.getFriendInfo(memberInfo);
+		return result; 
+	}
+	
+	
 }

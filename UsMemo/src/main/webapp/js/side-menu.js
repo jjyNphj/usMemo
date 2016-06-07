@@ -1,18 +1,18 @@
-var bNum=$("#bNum").val();
+var static_bNum=$('#bNum').val();
+var static_memId=$('#memId').val();
 
 function addMemberFunc(id,bNum){
 		//보드에 member를 추가 
 		var answer=confirm("이 보드의 멤버로 추가하시겠습니까?");
 		if(answer){ 
 			 $.ajax({
-		            url: '/usMemo/member/friend/add?memId='+id+'&bNum='+bNum,
+		            url: '/usMemo/member/friend/add/'+static_memId+'?memId='+id+'&bNum='+bNum,
 		            type :'post',
 		            success:function(){
 		            	var memId=$("#memId").val();
 		            	cleanMemberListView();
 		            	cleanFindMemberListView(id);
 		            	openMenu(bNum, memId);
-		            	
 		            	
 		            } ,
 			       error :function(data,status,er) { 
@@ -65,7 +65,7 @@ function addMemberFunc(id,bNum){
 
 	$("#findMember").keyup(function(){
 		
-		 var url='/usMemo/member/friend/find/'+$(this).val()+'/'+bNum;
+		 var url='/usMemo/member/friend/find/'+$(this).val()+'/'+static_bNum;
 			 
 			  $.ajax({
 		            url: url,
@@ -78,7 +78,7 @@ function addMemberFunc(id,bNum){
 		               		result+=
 		               		'<br>'+
 		               		'<a class="list-group-item">'+
-			               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+bNum+')">'+
+			               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+static_bNum+')">'+
 				               		'<div class="col-md-2">'+
 				               			'<img src="'+val.profile_image+'" class="side-menu-profile_image" />'+
 				               		'</div>'+
@@ -192,6 +192,12 @@ function addMemberFunc(id,bNum){
 				format=format.replace('#fromListName#','<span class="listInfo-dropdown-view">'+get_from_list_name+'</span>');
 				format=format.replace('#cardName#','<span class="cardInfo-dropdown-view">'+get_card_name+'</span>');
 				break;
+			case 'addFriend':
+				var get_friend_info=activity_getFriendInfo(val.value_string);
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
+				format=format.replace('#firendName#','<span class="friendInfo-dropdown-view">'+get_friend_info.nickname+'</span>');
+				format=format.replace('#authority#','<span class="friendInfo-auth-dropdown-view">'+get_friend_info.grade+'</span>');
+				break;
 
 /*			default:
 				break;*/
@@ -273,6 +279,29 @@ function addMemberFunc(id,bNum){
 				}
 			});
 			return card_name;
+	}
+	function activity_getFriendInfo(friendNum){
+		var url='/usMemo/activity/getFriendInfo/'+static_bNum+'/'+friendNum;
+		  var friendInfo;
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				async: false,
+				success:function(data){
+					console.log(data);
+					friendInfo=data;
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
+			
+			if(friendInfo.grade==1){friendInfo.grade='admin';}
+			else if(friendInfo.grade==2){friendInfo.grade='member';}
+			return friendInfo;
 	}
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
