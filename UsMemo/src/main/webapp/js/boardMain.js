@@ -502,5 +502,11 @@ var before=new Object();
     	 });
     	
     }
-	 
+    
+    $('.boards-drawer-view').bind('click', function (e) { e.stopPropagation() });
+    
+
+    $('.header-myInfo-dropdown-closeBtn').click(function(){
+    	$('.header-btn-myInfo').dropdown('toggle');
+    });
 
