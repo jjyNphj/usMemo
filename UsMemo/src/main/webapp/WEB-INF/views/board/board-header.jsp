@@ -37,7 +37,7 @@
 				 		</div>
 				 			<hr>
 				 		<div class="header-myInfo-dropdown-content">
-				 			<div class="logout-btn"  onclick="location.href='/usMemo/index.do'">Log Out</div>
+				 			<div class="logout-btn hover-blue"  onclick="location.href='/usMemo/index.do'">Log Out</div>
 				 		</div>
 				 	</div>
 				 </div>

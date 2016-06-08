@@ -44,6 +44,11 @@ body{
 /*리스트추가, 카드추가할때 버튼클릭시 입력창 숨기고 열기 관련*/
 .hide {	display: none;}
 
+/*horver시 색 바꾸기 */
+.hover-blue:hover{
+	background-color: #298FCA;
+ 	color: #fff;
+}
 
 /*메뉴의 멤버사진 가로정렬*/
 .dropdown{ display:inline}
@@ -234,10 +239,10 @@ body{
 .logout-btn{
 	line-height: 30px;
 }
-.logout-btn:hover{
+/* .logout-btn:hover{
  background-color: #298FCA;
  color: #fff;
- }
+ } */
 #header-myInfo-dropdown{
 
     height: 0px;
@@ -266,3 +271,4 @@ body{
 .header-myInfo-dropdown-header-text{
 	flex:1;
 }
+
