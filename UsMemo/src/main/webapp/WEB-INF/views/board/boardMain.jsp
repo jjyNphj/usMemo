@@ -85,6 +85,7 @@
 														<h6>
 														<%-- 	${l.num } /  --%>
 															${l.name}
+															<button type="button" class="btn btn-default" style="float:right;" onclick="deleteListInfo(${l.num})">delete</button>
 														</h6>
 													</div>
 													<div class="card_all" id="${l.num }">

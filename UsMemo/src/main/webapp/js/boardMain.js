@@ -499,5 +499,32 @@ var before=new Object();
     	 });
     	
     }
+    
+    
+    //리스트 삭제시 하위의 카드까지 모두 삭제
+    function deleteListInfo(num){
+    	var deleteChoice = window.confirm('정말로 이 리스트를 삭제하시겠습니까?(하위 카드 내용도 전부 삭제 됩니다.)');	
+    	
+    	if(deleteChoice) {
+    		var url='/usMemo/list/delete/ListInfo?num='+num;
+
+    		$.ajax({
+    			url: url,
+    			type:'post',
+
+    			success:function(){
+    				alert("리스트와 카드 정보 삭제!");
+
+    				console.log("num:"+num);		
+
+    				//$()안에있는 조건에 해당하는 태그를 포함한 하위 요소, 이벤트, 데이터 모두 제거
+    				$('div.list_unit#'+num).remove();
+    			} ,
+    			error : function(xhr, status, error) {
+    				alert(error);
+    			}
+    		})
+    	} 
+    }
 	 
 

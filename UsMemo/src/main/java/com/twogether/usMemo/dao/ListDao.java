@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 
 @Repository
@@ -19,6 +20,11 @@ public class ListDao {
 		//이때는 null 이 반환되니 참고할것. 
 		sqlMapClientTemplate.queryForObject("List.addListProc",listDTO);
 		return listDTO;
+	}
+	
+	public void deleteListInfo(ListDTO listDTO) {
+		
+		sqlMapClientTemplate.delete("List.deleteListInfo", listDTO);
 	}
 
 	public void update_rlink(ListDTO listDTO) {

@@ -7,6 +7,10 @@
 <sqlMap namespace="List">
 	<typeAlias alias="listDTO" type="com.twogether.usMemo.dto.ListDTO" />
 	
+	<parameterMap id="listDeleteParamMap" class="listDTO">
+  		<parameter property="num" jdbcType="NUMBER" javaType="java.lang.Integer" mode="IN"/>
+ 	</parameterMap> 
+	
 	<parameterMap id="listParamMap" class="listDTO">
 		<parameter property="name" jdbcType="varchar" javaType="java.lang.String" mode="IN"/>
   		<parameter property="bNum" jdbcType="NUMBER" javaType="java.lang.Integer" mode="IN"/>
@@ -49,6 +53,10 @@
 		select * from list where num=#num#
 	</select>
 	
+	<procedure id="deleteListInfo" parameterMap="listDeleteParamMap">
+	    <!-- list 삭제시 하위 카드 내용까지 전부 삭제  -->
+		{ call deleteListProcedure(?) }
+	</procedure>
 
 </sqlMap>
 	
