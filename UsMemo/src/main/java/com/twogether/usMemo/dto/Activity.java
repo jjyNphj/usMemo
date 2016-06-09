@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Activity {
 	private int num,format_num,activity_num,bNum,value_num,to_num,from_num;
-	private String memId,value_string,activity_name,format,name,nickname;
+	private String memId,value_string,activity_name,format,name,nickname,profile_image,email;
 	private Date write_time;
 	
 	public int getNum() {
@@ -90,6 +90,18 @@ public class Activity {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getProfile_image() {
+		return profile_image;
+	}
+	public void setProfile_image(String profile_image) {
+		this.profile_image = profile_image;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

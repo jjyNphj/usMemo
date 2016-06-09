@@ -56,7 +56,8 @@ public class MemberDao {
 		 */
 		public void addFriend(MemberGrade addMemberInfo) {
 			
-			sqlMapClientTemplate.insert("Member.addFriend",addMemberInfo);			
+			sqlMapClientTemplate.insert("Member.addFriend",addMemberInfo);	
+			
 		}
 		/**
 		 * 친구 삭제 

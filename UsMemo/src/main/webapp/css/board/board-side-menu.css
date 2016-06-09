@@ -75,4 +75,43 @@
 .side-menu-addMember-text{
 	font-weight: 700;
 }
+.side-menu-members-info-img-wrapper,.my-members-info-img-wrapper,.activity-members-info-img-wrapper{
+	padding-right: 10px;
+}
+
+.side-menu-members-info-img,.my-members-info-img,.activity-members-info-img{
+	height:50px;
+	width: 50px;
+}
+.side-menu-members-info-wrapper,.my-members-info-wrapper,.activity-members-info-wrapper{
+	display: flex;
+}
+.side-menu-members-info-text-wrapper,.my-members-info-text-wrapper,.activity-members-info-text-wrapper{
+	flex: 1;
+}
+
+.side-menu-members-info,.my-members-info,.activity-members-info{
+	background-color:#fff;
+  /*   position: absolute;
+    left: 10px; */
+    padding: 15px;
+}
+
+.my-img{
+	width:30px;
+	height: 30px;
+}
+.activity-unit{
+	display: flex;
+    padding: 3px 2px 3px 3px;
+	
+}
+.my-img-wrapper{
+	flex: none;
+	padding-right: 3px;
+}
+.activity-unit-contents-wrapper{
+	flex: 1 1 auto;
+	padding-left: 3px;
+}
 

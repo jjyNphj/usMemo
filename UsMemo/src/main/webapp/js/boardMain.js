@@ -116,7 +116,8 @@ var before=new Object();
 		 //console.log(u);
 		 var name=nameNum.value;
 		 var memId=$("#memId").val();
-		 var url='/usMemo/card/add?lNum='+lNum+'&name='+name+'&memId='+memId;
+		 var bNum=$('#bNum').val();
+		 var url='/usMemo/card/add/'+bNum+'?lNum='+lNum+'&name='+name+'&memId='+memId;
 		  $.ajax({
             url: url,
            
@@ -347,6 +348,8 @@ var before=new Object();
 	 }
 	 
 	 function updateCardChange(){
+		 updateCard.memId=$('#memId').val();
+		 updateCard.bNum=$('#bNum').val();
 		 //json타입으로 변환
 		 var cardLocation=JSON.stringify(updateCard);
 		 console.log("card의 결과 JSON정보: "+cardLocation);
@@ -500,7 +503,6 @@ var before=new Object();
     	
     }
     
-    
     //리스트 삭제시 하위의 카드까지 모두 삭제
     function deleteListInfo(num){
     	var deleteChoice = window.confirm('정말로 이 리스트를 삭제하시겠습니까?(하위 카드 내용도 전부 삭제 됩니다.)');	
@@ -527,4 +529,3 @@ var before=new Object();
     	} 
     }
 	 
-

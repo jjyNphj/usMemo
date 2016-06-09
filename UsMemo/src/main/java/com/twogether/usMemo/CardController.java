@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.DownLoadDTO;
 import com.twogether.usMemo.dto.ListAndCard;
+import com.twogether.usMemo.service.ActivityService;
 import com.twogether.usMemo.service.CardService;
 
 @RequestMapping("/card")
@@ -33,15 +35,17 @@ public class CardController {
 	
 	@Autowired
 	CardService cardService;
+	@Autowired ActivityService activityService;
 	
 	
-	@RequestMapping("/add")
-	public ModelAndView addCard(@ModelAttribute Card card){
+	@RequestMapping("/add/{bNum}")
+	public ModelAndView addCard(@ModelAttribute Card card,@PathVariable("bNum") int bNum ){
 		
 		ModelAndView mv= new ModelAndView();
 		mv.addObject("sucess","y");
 		mv.setViewName("board/boardMain");
 		cardService.addCard(card);
+		activityService.addCard(card,bNum);
 		return mv;
 		
 	}
@@ -52,6 +56,7 @@ public class CardController {
 		
 		logger.info("check change location: {}",cardLocation.toString());
 		cardService.updateLocation(cardLocation);
+		activityService.updateCardLocation(cardLocation);
 		return "/board/boardMain";
 	}
 	

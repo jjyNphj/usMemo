@@ -9,9 +9,16 @@ $('#header-boardmenu').on('hide.bs.dropdown',function(){
 	clean_starredBoards();
 });
 
-/*board drawer의 내용을 클릭할때 dropdown의 특성상 창이 꺼지는 것을 방지.*/
-$('.boards-drawer-view').bind('click', function (e) { e.stopPropagation() });
+/* 내정보보기 의 내용을 클릭할때 dropdown의 특성상 창이 꺼지는 것을 방지.*/
+$('#header-myInfo-dropdown').bind('click', function (e) { e.stopPropagation() });
 
+$('.header-myInfo-dropdown-closeBtn').click(function(){
+	$('.header-btn-myInfo').dropdown('toggle');
+});
+
+
+/*보드보기 메뉴의 드롭다운 설정.*/
+$('.boards-drawer-view').bind('click', function (e) { e.stopPropagation() });
 	
 function get_myAllBoard(){
 	

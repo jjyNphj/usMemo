@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Member;
 import com.twogether.usMemo.dto.MemberGrade;
+import com.twogether.usMemo.service.ActivityService;
 import com.twogether.usMemo.service.MemberService;
 
 @RequestMapping("/member")
@@ -31,7 +32,7 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
-	
+	@Autowired ActivityService activityService;
 	
 	@RequestMapping("/friend/index")
 	public @ResponseBody List<Member> friendIndex(@RequestBody MemberGrade memberInfo){
@@ -62,11 +63,13 @@ public class MemberController {
 	/**
 	 * 친구추가
 	 */
-	@RequestMapping("/friend/add")
-	public String addFriend(@ModelAttribute MemberGrade addMemberInfo){
+	@RequestMapping("/friend/add/{request_memId}")
+	public String addFriend(@ModelAttribute MemberGrade addMemberInfo, @PathVariable("request_memId") String request_memId){
 		
 		memberService.addFriend(addMemberInfo);
-		
+		//addMemberInfo 를 반환받아서 가지고오지 않아도 이 객체에는 selectKey로 받은 값이 저장되어있음. 
+		//그러니 현재 addMemberInfo를 activity로 가지고가면됨.
+		activityService.addFriend(addMemberInfo,request_memId);
 		return "/board/menu";
 	}
 	

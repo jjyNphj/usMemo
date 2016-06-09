@@ -22,6 +22,8 @@
 			<result property="format" column="format"/>
 			<result property="name" column="name"/>
 			<result property="nickname" column="nickname"/>
+			<result property="profile_image" column="profile_image"/>
+			<result property="email" column="email"/>
 		</resultMap>
 		
 		<insert id="createBoard" parameterClass="activity">
@@ -34,7 +36,7 @@
 		<select id="getAllActivity" parameterClass="int" resultMap="activityMap">
 			select a.num, a.activity_num, a.bNum, a.value_num, a.to_num, a.from_num,
 					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
-					m.name,m.nickname
+					m.name,m.nickname,m.profile_image,m.email
 			from activity a
 			inner join activity_format f 
 			on a.activity_num=f.num
@@ -50,9 +52,25 @@
 			</selectKey>
 			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
 		</insert>
+		<insert id="addCard" parameterClass="activity">
+			<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='addCard'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,null)
+		</insert>
 		
-		
-
+		<insert id="updateCardLocation">
+			<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='updateCardLocation'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,#from_num#)
+		</insert>
+		<insert id="addFriend">
+			<selectKey keyProperty="activity_num" resultClass="int">
+				select num from activity_format where activity_name='addFriend'
+			</selectKey>
+			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,null,#value_string#,null,null)
+		</insert>
 
 	</sqlMap>
 	

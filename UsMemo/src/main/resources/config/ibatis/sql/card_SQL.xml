@@ -13,6 +13,7 @@
 		<parameter property="name" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
   		<parameter property="memId" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN"/>
   		<parameter property="lNum" jdbcType="NUMBER" javaType="java.lang.Integer" mode="IN"/>
+  		<parameter property="num"  jdbcType="DECIMAL" javaType="long"  mode="OUT"/>
  	</parameterMap> 
  	
 	<parameterMap id="cardDeleteParamMap" class="card">
@@ -61,7 +62,7 @@
 	</select>
 	
 	<procedure id="addCard" parameterMap="cardParamMap">
-		{ call addCardProcedure(?,?,?) }
+		{ call addCardProcedure(?,?,?,?) }
 	</procedure>
 
 	<update id="update_rlink" parameterClass="card">
@@ -119,5 +120,9 @@
 	<update id="fileUploadName" parameterClass="card">
 		update card set attach=#attach# where num=#num#
 	</update>
+	
+	<select id="getCardBycNum" parameterClass="int" resultClass="card">
+		select * from card where num=#num#
+	</select>
 </sqlMap>
 	

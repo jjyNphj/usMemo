@@ -26,7 +26,20 @@
 					 <span class="header-text-myInfo" style="color: white;">${myInfo.nickname}</span>
 				 </a>
 				 <div id="header-myInfo-dropdown" class="dropdown-menu">
-				 	<div>${myInfo.name }<br> ${myInfo.nickname }<br>${myInfo.email }</div>
+				 	<div id="header-myInfo-dropdown-wrapper">
+				 		<div class="header-myInfo-dropdown-header">
+					 		<div class="header-myInfo-dropdown-header-text">
+						 		${myInfo.name }( ${myInfo.nickname } )
+						 		<br>
+						 		${myInfo.email }
+						 	</div>
+					 		<span class="header-myInfo-dropdown-closeBtn glyphicon glyphicon-remove" ></span>
+				 		</div>
+				 			<hr>
+				 		<div class="header-myInfo-dropdown-content">
+				 			<div class="logout-btn hover-blue"  onclick="location.href='/usMemo/index.do'">Log Out</div>
+				 		</div>
+				 	</div>
 				 </div>
 			 </div>
 			 </div>
