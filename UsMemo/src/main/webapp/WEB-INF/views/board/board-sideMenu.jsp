@@ -35,6 +35,14 @@
 				</form>
 			    </div>
   			</div>
+  			<div id="side-menu-delete-board-wrapper">
+  			<hr>
+  				<div class="side-menu-delete-board-btn">
+  					<span class="glyphicon glyphicon-trash"></span>
+  					<span>delete Board...</span>
+  				</div>
+  			<hr>
+  			</div>
   			<div class="side-menu-activity-wrapper">
   				<div class="side-menu-activity-header">
   					<span class="side-menu-activity-header-text">Activity</span>

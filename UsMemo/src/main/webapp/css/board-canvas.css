@@ -112,3 +112,8 @@
 	/* height: $('card_Name').prop("scrollHeight"); */
 	
 } 
+
+.delete-list-btn {
+	color: red;
+	float: right; 
+}

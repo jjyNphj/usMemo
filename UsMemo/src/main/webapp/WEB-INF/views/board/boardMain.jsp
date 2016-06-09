@@ -13,7 +13,7 @@
 	 
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
- 	<link href="${pageContext.request.contextPath}/css/ct-paper/ct-paper.css" rel="stylesheet"/>
+ 	<link href="${pageContext.request.contextPath}/css/ct-paper/ct-paper.css" rel="stylesheet"/> 
 <%--  	<link href="${pageContext.request.contextPath}/css/gsdk-base.css" rel="stylesheet"/> --%>
     <link href="${pageContext.request.contextPath}/css/bootstrap-horizon.css" rel="stylesheet"/>
    
@@ -85,7 +85,8 @@
 														<h6>
 														<%-- 	${l.num } /  --%>
 															${l.name}
-															<button type="button" class="btn btn-default" style="float:right;" onclick="deleteListInfo(${l.num})">delete</button>
+															<span class="delete-list-btn glyphicon glyphicon-trash" onclick="deleteListInfo(${l.num})">
+															</span>
 														</h6>
 													</div>
 													<div class="card_all" id="${l.num }">

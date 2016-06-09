@@ -10,13 +10,7 @@ function goBoard(bNum,name){
                 window.open(url, "_self",  '');
         /* } */  
     }
-/* function goDeletePage(bNum,name) {
-	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
-		if(answer){ 
-	        var url ='/usMemo/board/deleteBoard?bNum='+ bNum.value+'&name='+name.value;
-	            window.open(url, "_self",  '');
-	     }
-} */
+
 function deleteBoard(bNum,name){
 	console.log(bNum);
 	var answer=confirm("보드의 하위 내용도 전부 사라집니다. 정말로 삭제 하시겠습니까?");

@@ -30,13 +30,15 @@
 	
 }
 
-.side-menu-header > hr{
-	 border-color: #D6DADC;
-	 margin-top: 0;
-	 margin-bottom: 15px;
-	 width: 90%;
+hr{
+	border-color: #D6DADC;
+    margin-bottom: 7px;
+    margin-top: 7px;
+	width: 90%;
 }
-
+#side-menu-delete-board-wrapper>hr{
+	width:98%;
+}
 .side-menu-profile_image{
 	width: 30px;
 	height: 30px;
@@ -113,5 +115,11 @@
 .activity-unit-contents-wrapper{
 	flex: 1 1 auto;
 	padding-left: 3px;
+}
+
+.side-menu-delete-board-btn{
+	padding-left: 15px;
+	line-height: 30px;
+	color: red;
 }
 

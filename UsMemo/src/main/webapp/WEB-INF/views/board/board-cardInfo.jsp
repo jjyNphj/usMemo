@@ -51,7 +51,7 @@
                   <!-- <a href="fileDown?fileName=$(#card_fileName)">$(#card_fileName) download</a> -->
                </div>
                <div class="modal-footer" style="padding:15px;">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="deleteCardInfo()">Card Delete</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteCardInfo()">Card Delete</button>
                </div>
             </div>
          </div>

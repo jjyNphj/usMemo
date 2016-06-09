@@ -56,6 +56,19 @@ $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.s
 
 }
 
+$('.side-menu-delete-board-btn').click(function(){
+	// 보드 삭제 버튼 이벤트 
+	goDeletePage(static_bNum);
+});
+
+function goDeletePage(bNum) {
+	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
+		if(answer){ 
+	        var url ='/usMemo/board/deleteBoard?bNum='+bNum;
+	            window.open(url, "_self",  '');
+	     }
+} 
+
 function addMemberFunc(id,bNum){
 		//보드에 member를 추가 
 		var answer=confirm("이 보드의 멤버로 추가하시겠습니까?");
