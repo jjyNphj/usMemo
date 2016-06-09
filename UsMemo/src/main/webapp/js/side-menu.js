@@ -1,21 +1,47 @@
 var static_bNum=$('#bNum').val();
 var static_memId=$('#memId').val();
 
+function bind_memberInfo_dropdown_setMember(){
+	/*
+	 * 사이드메뉴의 사람이름 클릭시 보여지는 회원정보 창 끄기버튼 설정
+	 * .dropdown-toggle의 명확한 클래스를 적어주어야 x버튼 클릭시 토글이 제대로됨. 
+	 * 이 보드의 회원 이미지 클릭시 생성되는 회원정보 드롭다운임.
+	 * 
+	 * 각각의 클래스는 여러가지 노드이므로 따로 바인딩해주어야함. 
+	 * */
+	$('.side-menu-members-close-btn').click(function(){
+		var select=$(this).parents($('.dropdown.side-menu-members.open')).children('.side-menu-members-btn');
+		select.dropdown('toggle');
+		//$('.side-menu-members-btn').dropdown('toggle');
+	});
+	
+	/*
+	 * 드롭다운
+	 * 창이 꺼지는 것을 방지함. 
+	 * dropdown-menu클래스의 명확한 id를 적어주어야함.(반드시 id로 표기할것.) 
+	 */
+	
+	$('#memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
-/*사이드메뉴의 사람이름 클릭시 보여지는 회원정보 창 끄기버튼 설정
+}
+function bind_memberInfo_dropdown_activityMember(){
+
+/*
+ * 사이드메뉴의 사람이름 클릭시 보여지는 회원정보 창 끄기버튼 설정
  * .dropdown-toggle의 명확한 클래스를 적어주어야 x버튼 클릭시 토글이 제대로됨. 
  * 차례로 액티비티의 사진클릭시 생성되는 회원정보 드롭다운
  * 액티비티의 회원 이름클릭시 생성되는 회원정보 드롭다운
- * 이 보드의 회원 이미지 클릭시 생성되는 회원정보 드롭다운임.
+ * 
+ * 클래스로 선언하긴하였지만, 각각의 요소가 다 다르므로 바인딩을 따로 해주어야만 현재 열려있는 창이 닫힘. 
+ * 
  * */
 $('.my-members-close-btn').click(function(){
-	$('.my-img-wrapper').dropdown('toggle');
+	var select=$(this).parents($('.dropdown.activity-unit-my.open')).children('.my-img-wrapper');
+	select.dropdown('toggle');
 });
 $('.activity-members-close-btn').click(function(){
-	$('.activity-memberInfo-dropdown-view-btn').dropdown('toggle');
-});
-$('.side-menu-members-close-btn').click(function(){
-	$('.memberInfo-dropdown-view-btn').dropdown('toggle');
+	var select=$(this).parents($('.dropdown.activity-memberInfo-dropdown-view.open')).children('.activity-memberInfo-dropdown-view-btn');
+	select.dropdown('toggle');
 });
 
 /*
@@ -24,13 +50,11 @@ $('.side-menu-members-close-btn').click(function(){
  * dropdown-menu클래스의 명확한 id를 적어주어야함.(반드시 id로 표기할것.) 
  * 차례로 액티비티의 사진클릭시 생성되는 회원정보 드롭다운
  * 액티비티의 회원 이름클릭시 생성되는 회원정보 드롭다운
- * 이 보드의 회원 이미지 클릭시 생성되는 회원정보 드롭다운임. 
  * */
 $('#my-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
-$('#memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
-
+}
 
 function addMemberFunc(id,bNum){
 		//보드에 member를 추가 
@@ -291,6 +315,7 @@ function addMemberFunc(id,bNum){
 			result+='</div>'; //end of div, activity-unit
 */		});
 		$('.side-menu-activity-content').append(result);
+		bind_memberInfo_dropdown_activityMember();//이벤트 바인드
 	}
 	
 	function activity_memberInfo_setting_dropdown(val){
@@ -466,6 +491,7 @@ function addMemberFunc(id,bNum){
 					}
 					}*/
 		});
+		bind_memberInfo_dropdown_setMember();//이벤트 바인드
 	}
 	
 	

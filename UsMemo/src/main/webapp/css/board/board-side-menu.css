@@ -75,22 +75,22 @@
 .side-menu-addMember-text{
 	font-weight: 700;
 }
-.side-menu-members-info-img-wrapper{
+.side-menu-members-info-img-wrapper,.my-members-info-img-wrapper,.activity-members-info-img-wrapper{
 	padding-right: 10px;
 }
 
-.side-menu-members-info-img{
+.side-menu-members-info-img,.my-members-info-img,.activity-members-info-img{
 	height:50px;
 	width: 50px;
 }
-.side-menu-members-info-wrapper{
+.side-menu-members-info-wrapper,.my-members-info-wrapper,.activity-members-info-wrapper{
 	display: flex;
 }
-.side-menu-members-info-text-wrapper{
+.side-menu-members-info-text-wrapper,.my-members-info-text-wrapper,.activity-members-info-text-wrapper{
 	flex: 1;
 }
 
-.side-menu-members-info{
+.side-menu-members-info,.my-members-info,.activity-members-info{
 	background-color:#fff;
   /*   position: absolute;
     left: 10px; */
