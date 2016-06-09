@@ -104,7 +104,7 @@ function enterSaveProcess(e) {
         //엔터 친후 textarea에서 커서 제거하기
         document.getElementById('card_Name').blur();
 
-        var url='/usMemo/card/edit/CardName?num='+num+'&name='+name;
+/*        var url='/usMemo/card/edit/CardName?num='+num+'&name='+name;
     	$.ajax({
     		url: url,
     		type:'post',
@@ -125,7 +125,7 @@ function enterSaveProcess(e) {
     		error : function(xhr, status, error) {
     			alert(error);
     		}
-    	})
+    	})*/
        
     }
 }
