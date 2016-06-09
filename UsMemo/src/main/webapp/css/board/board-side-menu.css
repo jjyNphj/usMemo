@@ -1,6 +1,10 @@
 .side-menu-container{
-	display: flex;
- 	flex-flow: column wrap;
+	/* display: flex;
+ 	flex-flow: column wrap; */
+}
+#sidebar-wrapper{
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .side-menu-header-wrapper,.side-menu-activity-header{
@@ -121,5 +125,10 @@ hr{
 	padding-left: 15px;
 	line-height: 30px;
 	color: red;
+}
+
+.side-menu-activity-content{
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 

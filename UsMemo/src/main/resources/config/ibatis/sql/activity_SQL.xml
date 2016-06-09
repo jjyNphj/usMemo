@@ -33,6 +33,19 @@
 			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,null,null,null,null)
 		</insert>
 		
+		<select id="getSomeActivity" parameterClass="int" resultMap="activityMap">
+			select a.num, a.activity_num, a.bNum, a.value_num, a.to_num, a.from_num,
+					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
+					m.name,m.nickname,m.profile_image,m.email
+			from activity a
+			inner join activity_format f 
+			on a.activity_num=f.num
+			inner join member m 
+			on a.memId=m.id 
+			where bNum=#bNum# and rownum <![CDATA[<=]]> 8
+			order by write_time desc
+		</select>
+		
 		<select id="getAllActivity" parameterClass="int" resultMap="activityMap">
 			select a.num, a.activity_num, a.bNum, a.value_num, a.to_num, a.from_num,
 					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
@@ -42,7 +55,7 @@
 			on a.activity_num=f.num
 			inner join member m 
 			on a.memId=m.id 
-			where bNum=#bNum# 
+			where bNum=#bNum#
 			order by write_time desc
 		</select>
 		

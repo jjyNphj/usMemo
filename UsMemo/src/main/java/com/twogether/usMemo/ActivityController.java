@@ -26,6 +26,13 @@ public class ActivityController {
 	@Autowired ActivityService activityService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
+	@RequestMapping("/getSomeActivity/{bNum}")
+	@ResponseBody
+	public List<Activity> getSomeActivity(@PathVariable("bNum") int bNum){
+		List<Activity> activity=new ArrayList<Activity>();
+				activity=activityService.getSomeActivity(bNum);
+			return activity;	
+	}
 	@RequestMapping("/getAllActivity/{bNum}")
 	@ResponseBody
 	public List<Activity> getAllActivity(@PathVariable("bNum") int bNum){

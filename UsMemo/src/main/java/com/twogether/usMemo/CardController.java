@@ -55,8 +55,8 @@ public class CardController {
 		
 		
 		logger.info("check change location: {}",cardLocation.toString());
-		cardService.updateLocation(cardLocation);
-		activityService.updateCardLocation(cardLocation);
+		boolean activity_check=cardService.updateLocation(cardLocation);
+		if(activity_check) activityService.updateCardLocation(cardLocation);
 		return "/board/boardMain";
 	}
 	

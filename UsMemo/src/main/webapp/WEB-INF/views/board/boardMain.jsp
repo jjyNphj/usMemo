@@ -168,6 +168,9 @@
 	<div class="modal-cardInfoView">
 		<jsp:include page="board-cardInfo.jsp"></jsp:include>
 	</div>
+	<div class="modal-allActivity">
+		<jsp:include page="board-allActivity.jsp"></jsp:include>
+	</div>
 
 	
 		<!-- js -->

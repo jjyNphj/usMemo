@@ -75,8 +75,8 @@ public class CardService {
 	 * @throws ParseException json의 parsing의 예외
 	 * 
 	 */
-	public void updateLocation(String cardLocation) throws ParseException {
-
+	public boolean updateLocation(String cardLocation) throws ParseException {
+		boolean activity_check=true;
 		//만든 함수임. String을 JSON으로 바꿔줌. 
 		JSONObject obj = parsingJson(cardLocation);
 		
@@ -87,9 +87,12 @@ public class CardService {
 		if(parseObjToInt(obj.get("beforeLNum"))!=parseObjToInt(obj.get("afterLNum"))){
 			//옮기는 카드의 lNum을 바뀐 afterLNum으로 변경 
 			afterlNumUpdate(parseObjToInt(obj.get("currentNum")),parseObjToInt(obj.get("afterLNum")));
+		}else{
+			activity_check=false;
 		}
 		afterCardUpdate(parseObjToInt(obj.get("afterPreNum")),parseObjToInt(obj.get("afterPostNum")),parseObjToInt(obj.get("currentNum")));
-
+		
+		return activity_check;
 	}
 	
 	/**

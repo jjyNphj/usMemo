@@ -1,6 +1,11 @@
 var static_bNum=$('#bNum').val();
 var static_memId=$('#memId').val();
 
+/*
+$('.all-activity-btn').click(function(){
+	openAllActivity(static_bNum);
+});*/
+
 function bind_memberInfo_dropdown_setMember(){
 	/*
 	 * 사이드메뉴의 사람이름 클릭시 보여지는 회원정보 창 끄기버튼 설정
@@ -185,6 +190,7 @@ function addMemberFunc(id,bNum){
 				dataType:'json',
 				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
 				contentType: 'application/json',
+				async:true,
 				success:function(data){
 					console.log(data);
 					/*var ch=$('#setMember > *').length;
@@ -193,6 +199,7 @@ function addMemberFunc(id,bNum){
 					var bNum=$("#bNum").val();
 					var grade=menu_checkSessionId(data,memId);
 					menu_setMemberList(data,memId,grade,bNum);
+					openActivity(bNum);
 					//}
 				} ,
 				error : function(xhr, status, error) {
@@ -201,10 +208,34 @@ function addMemberFunc(id,bNum){
 			}); 
 	}
 	/**
-	 * activity 불러오기
+	 * 일부분의 activity 불러오기
 	 * @param bNum
 	 */
 	function openActivity(bNum){
+		  var url='/usMemo/activity/getSomeActivity/'+bNum;
+		  
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				success:function(data){
+					console.log(data);
+					setActivity(data,'someActivity');
+					setAllActivityBtn();
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
+	}
+	
+	/**
+	 * 모든 activity 불러오기
+	 * @param bNum
+	 */
+	function openAllActivity(bNum){
 		  var url='/usMemo/activity/getAllActivity/'+bNum;
 		  
 			$.ajax({
@@ -215,7 +246,7 @@ function addMemberFunc(id,bNum){
 				contentType: 'application/json',
 				success:function(data){
 					console.log(data);
-					setActivity(data);
+					setActivity(data,'allActivity');
 				} ,
 				error : function(xhr, status, error) {
 				alert(error);
@@ -223,11 +254,15 @@ function addMemberFunc(id,bNum){
 			});
 	}
 	
+	function setAllActivityBtn(){
+		var modalString='<a class="all-activity-btn" data-toggle="modal" data-target="#allActivityModal" onclick="openAllActivity('+static_bNum+')">View all activity...</a>';
+		$('.side-menu-activity-content').append(modalString);
+	}
 	/**
 	 * activity의 내용을 html에 setting하기.
 	 * @param data
 	 */
-	function setActivity(data){
+	function setActivity(data,type){
 		var result='';
 		$.each(data,function(index,val){
 			var format=val.format;
@@ -292,46 +327,12 @@ function addMemberFunc(id,bNum){
 				format=format.replace('#firendName#',activity_memberInfo_setting_dropdown(get_friend_info));
 				format=format.replace('#authority#','<span class="friendInfo-auth-dropdown-view">'+get_friend_info.grade+'</span>');
 				break;
-
-/*			default:
-				break;*/
 			}
 			result+=format;
 			result+='</div></div>'; //end of div, activity-unit
-			
-			
-			//me 부분을 nickname으로 치환하는 과정.
-
-		/*	if(format.indexOf('#me#')!=-1){
-				format= format.replace('#me#','<me>#me#');
-				var arr=format.split('#me#');
-				
-				for(var i=0; i<arr.length; i++){
-					if(arr[i]=='<me>'){
-						result+='<span class="memberInfo-dropdown-view">'+val.nickname+'</span>';
-					}
-					else{
-						result+=arr[i];
-					}
-				}
-			}
-			if(format.indexOf('#listName#')!=-1){
-				format= format.replace('#listName#','<listName>#listName#');
-				var arr=format.split('#listName#');
-				
-				for(var i=0; i<arr.length; i++){
-					if(arr[i]=='<listName>'){
-						var get_list_name=activity_getListInfo(val.value_num);
-						result+='<span class="listInfo-dropdown-view">'+get_list_name+'</span>';
-					}
-					else{
-						result+=arr[i];
-					}
-				}
-			}
-			result+='</div>'; //end of div, activity-unit
-*/		});
-		$('.side-menu-activity-content').append(result);
+		});
+		if(type=='someActivity'){$('.side-menu-activity-content').append(result);}
+		else if(type='allActivity'){$('#all-activity-modal-content-wrapper').append(result);}
 		bind_memberInfo_dropdown_activityMember();//이벤트 바인드
 	}
 	
@@ -554,7 +555,7 @@ function addMemberFunc(id,bNum){
 			}else if($("#wrapper").hasClass('toggled')){
 			 //화면그림
 				openMenu(bNum,memId);
-				openActivity(bNum);
+				
 			}
 			$("#wrapper").toggleClass("toggled");
 			$(".board-wrapper").toggleClass("is-show-menu");

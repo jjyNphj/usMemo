@@ -25,6 +25,10 @@ public class ActivityDao {
 		
 	}
 
+	public List<Activity> getSomeActivity(Activity activity) {
+		return sqlMapClientTemplate.queryForList("Activity.getSomeActivity",activity.getbNum());
+	}
+	
 	public List<Activity> getAllActivity(Activity activity) {
 		return sqlMapClientTemplate.queryForList("Activity.getAllActivity",activity.getbNum());
 	}

@@ -34,6 +34,14 @@ public class ActivityService {
 	}
 
 
+	public List<Activity> getSomeActivity(int bNum) {
+		Activity requestInfo= new Activity();
+		requestInfo.setbNum(bNum);
+		
+		List<Activity> result= activityDao.getSomeActivity(requestInfo);
+		return result;
+	}
+	
 	public List<Activity> getAllActivity(int bNum) {
 		Activity requestInfo= new Activity();
 		requestInfo.setbNum(bNum);
