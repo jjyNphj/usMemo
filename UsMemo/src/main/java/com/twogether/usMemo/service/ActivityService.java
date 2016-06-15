@@ -61,8 +61,11 @@ public class ActivityService {
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(listDTO.getbNum());
 		requestInfo.setValue_num(listDTO.getNum());
-		
+		requestInfo.setActivity_name("addList");
+		requestInfo.setActivity_name_num(activityDao.getActivityNumByActivityName(requestInfo.getActivity_name()));
 		activityDao.addList(requestInfo);
+		
+		addActivity(requestInfo);
 	}
 
 
@@ -158,16 +161,18 @@ public class ActivityService {
 		
 			switch(requestInfo.getActivity_name()){
 			case "create_board":
-				format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getName()+"</span>");
+				format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
 				//result+=format;
 				break;
-		/*case "addList":
-			var get_list_name=activity_getListInfo(val.value_num);
-			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
-			format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+get_list_name+"</span>");
+		case "addList":
+			ListDTO listInfo = new ListDTO();
+			listInfo=getListInfo(requestInfo.getValue_num());
+			//var get_list_name=activity_getListInfo(requestInfo.getValue_num());
+			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
+			format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
 			//result+=format;
 			break;
-		case "addCard":
+		/*case "addCard":
 			var get_list_name=activity_getListInfo(val.to_num);
 			var get_card_name=activity_getCardInfo(val.value_num);
 			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");

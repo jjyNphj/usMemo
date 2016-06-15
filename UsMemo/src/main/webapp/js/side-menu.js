@@ -265,7 +265,7 @@ function addMemberFunc(id,bNum){
 	function setActivity(data,type){
 		var result='';
 		$.each(data,function(index,val){
-			result=val.last_activity;
+			result+=val.last_activity;
 		});
 /*		$.each(data,function(index,val){
 			var format=val.format;

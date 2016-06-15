@@ -79,10 +79,11 @@
 		</select>
 		
 		<insert id="addList" parameterClass="activityData">
-			<selectKey keyProperty="activity_name_num" resultClass="int">
-				select num from activity_format where activity_name='addList'
-			</selectKey>
 			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
+			<selectKey keyProperty="num" resultClass="int" type="post">
+				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
+				<!-- select BOARD_NUM_SEQ.CURRVAL from dual -->
+			</selectKey>
 		</insert>
 		<insert id="addCard" parameterClass="activityData">
 			<selectKey keyProperty="activity_name_num" resultClass="int">
