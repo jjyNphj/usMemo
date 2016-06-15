@@ -105,6 +105,7 @@ public class BoardController {
 		mv.setViewName("myBoard");
 		int nowBNum=boardService.boardCreate(name, memId);
 		activityService.create_board(memId,nowBNum);
+		
 		return mv;	
 	}
 	

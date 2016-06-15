@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.ActivityData;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.Member;
@@ -20,7 +21,7 @@ public class ActivityDao {
 	
 	@Autowired SqlMapClientTemplate sqlMapClientTemplate;
 
-	public void create_board(Activity requestInfo) {
+	public void create_board(ActivityData requestInfo) {
 		sqlMapClientTemplate.insert("Activity.createBoard",requestInfo);
 		
 	}
@@ -33,7 +34,7 @@ public class ActivityDao {
 		return sqlMapClientTemplate.queryForList("Activity.getAllActivity",activity.getbNum());
 	}
 
-	public void addList(Activity requestInfo) {
+	public void addList(ActivityData requestInfo) {
 		sqlMapClientTemplate.insert("Activity.addList",requestInfo);
 	}
 
@@ -42,7 +43,7 @@ public class ActivityDao {
 		return (ListDTO) sqlMapClientTemplate.queryForObject("List.getListByLNum",num);
 	}
 
-	public void addCard(Activity requestInfo) {
+	public void addCard(ActivityData requestInfo) {
 		
 		sqlMapClientTemplate.insert("Activity.addCard",requestInfo);
 		
@@ -53,13 +54,13 @@ public class ActivityDao {
 		return (Card) sqlMapClientTemplate.queryForObject("Card.getCardBycNum",cardNum);
 	}
 
-	public void updateCardLocation(Activity requestInfo) {
+	public void updateCardLocation(ActivityData requestInfo) {
 		
 		sqlMapClientTemplate.insert("Activity.updateCardLocation",requestInfo);
 		
 	}
 
-	public void addFriend(Activity requestInfo) {
+	public void addFriend(ActivityData requestInfo) {
 		sqlMapClientTemplate.insert("Activity.addFriend",requestInfo);
 		
 	}
@@ -68,6 +69,22 @@ public class ActivityDao {
 		Member result= new Member();
 		result = (Member) sqlMapClientTemplate.queryForObject("Member.getFriendInfo",memberInfo);
 		return result;
+		
+	}
+
+	public int getActivityNumByActivityName(String activity_name) {
+		return (int) sqlMapClientTemplate.queryForObject("Activity.getActivityNumByActivityName",activity_name);
+	}
+
+	public ActivityData getActivityDataByNum(ActivityData requestInfo) {
+		
+		return (ActivityData) sqlMapClientTemplate.queryForObject("Activity.getActivityDataByNum",requestInfo);
+		
+	}
+
+	public void addActivity(Activity result) {
+		
+		sqlMapClientTemplate.insert("Activity.addActivity",result);
 		
 	}
 	

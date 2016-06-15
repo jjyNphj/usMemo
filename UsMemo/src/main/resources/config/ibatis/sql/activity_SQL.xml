@@ -5,11 +5,12 @@
 	
 	<sqlMap namespace="Activity">
 		<typeAlias alias="member" type="com.twogether.usMemo.dto.Member"/>
+		<typeAlias alias="activityData" type="com.twogether.usMemo.dto.ActivityData"/>
 		<typeAlias alias="activity" type="com.twogether.usMemo.dto.Activity"/>
 		
-		<resultMap id="activityMap" class="activity">
+		<resultMap id="activityDataMap" class="activityData">
 			<result property="num" column="num"/>
-			<result property="activity_num" column="activity_num"/>
+			<result property="activity_name_num" column="activity_name_num"/>
 			<result property="memId" column="memId"/>
 			<result property="bNum" column="bNum"/>
 			<result property="write_time" column="write_time"/>
@@ -25,64 +26,86 @@
 			<result property="profile_image" column="profile_image"/>
 			<result property="email" column="email"/>
 		</resultMap>
+		<resultMap id="activityMap" class="activity">
+			<result property="num" column="num"/>
+			<result property="activity_data_num" column="activity_data_num"/>
+			<result property="last_activity" column="last_activity"/>
+			<result property="bNum" column="bNum"/>
+		</resultMap>
 		
-		<insert id="createBoard" parameterClass="activity">
-			<selectKey keyProperty="activity_num" resultClass="int">
-				select num from activity_format where activity_name='create_board'
+		
+		<insert id="createBoard" parameterClass="activityData">
+<!-- 			<selectKey keyProperty="activity_name_num" resultClass="int" type="pre">
+			</selectKey> -->
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,null,null,null,null)
+			<selectKey keyProperty="num" resultClass="int" type="post">
+				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
+				<!-- select BOARD_NUM_SEQ.CURRVAL from dual -->
 			</selectKey>
-			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,null,null,null,null)
 		</insert>
 		
-		<select id="getSomeActivity" parameterClass="int" resultMap="activityMap">
-			select a.num, a.activity_num, a.bNum, a.value_num, a.to_num, a.from_num,
+		<select id="getActivityNumByActivityName" parameterClass="String" resultClass="int">
+				select num from activity_format where activity_name=#activity_name#
+		</select>
+		
+		<select id="getActivityDataByNum" parameterClass="activityData" resultMap="activityDataMap">
+			select a.num, a.activity_name_num, a.bNum, a.value_num, a.to_num, a.from_num,
 					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
 					m.name,m.nickname,m.profile_image,m.email
-			from activity a
+			from activity_data a
 			inner join activity_format f 
-			on a.activity_num=f.num
+			on a.activity_name_num=f.num
 			inner join member m 
 			on a.memId=m.id 
+			where a.num=#num#
+		</select>
+		
+		<select id="getSomeActivity" parameterClass="int" resultMap="activityMap">
+			select a.num, a.activity_data_num, a.last_activity, d.bNum, d.write_time
+			from activity a
+			inner join activity_data d 
+			on d.num=a.activity_data_num
 			where bNum=#bNum# and rownum <![CDATA[<=]]> 8
-			order by write_time desc
+			order by d.write_time desc
 		</select>
 		
 		<select id="getAllActivity" parameterClass="int" resultMap="activityMap">
-			select a.num, a.activity_num, a.bNum, a.value_num, a.to_num, a.from_num,
-					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
-					m.name,m.nickname,m.profile_image,m.email
+			select a.num, a.activity_data_num, a.last_activity, d.bNum, d.write_time
 			from activity a
-			inner join activity_format f 
-			on a.activity_num=f.num
-			inner join member m 
-			on a.memId=m.id 
+			inner join activity_data d 
+			on d.num=a.activity_data_num
 			where bNum=#bNum#
-			order by write_time desc
+			order by d.write_time desc
 		</select>
 		
-		<insert id="addList" parameterClass="activity">
-			<selectKey keyProperty="activity_num" resultClass="int">
+		<insert id="addList" parameterClass="activityData">
+			<selectKey keyProperty="activity_name_num" resultClass="int">
 				select num from activity_format where activity_name='addList'
 			</selectKey>
-			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
 		</insert>
-		<insert id="addCard" parameterClass="activity">
-			<selectKey keyProperty="activity_num" resultClass="int">
+		<insert id="addCard" parameterClass="activityData">
+			<selectKey keyProperty="activity_name_num" resultClass="int">
 				select num from activity_format where activity_name='addCard'
 			</selectKey>
-			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,null)
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,null)
 		</insert>
 		
 		<insert id="updateCardLocation">
-			<selectKey keyProperty="activity_num" resultClass="int">
+			<selectKey keyProperty="activity_name_num" resultClass="int">
 				select num from activity_format where activity_name='updateCardLocation'
 			</selectKey>
-			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,#from_num#)
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,#from_num#)
 		</insert>
 		<insert id="addFriend">
-			<selectKey keyProperty="activity_num" resultClass="int">
+			<selectKey keyProperty="activity_name_num" resultClass="int">
 				select num from activity_format where activity_name='addFriend'
 			</selectKey>
-			insert into activity values(activity_num_seq.nextval,#activity_num#,#memId#,#bNum#,sysdate,null,#value_string#,null,null)
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,null,#value_string#,null,null)
+		</insert>
+		
+		<insert id="addActivity" parameterClass="activity">
+			insert into activity values(activity_num_seq.nextval,#activity_data_num#,#last_activity#)
 		</insert>
 
 	</sqlMap>

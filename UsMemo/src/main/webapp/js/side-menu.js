@@ -265,6 +265,9 @@ function addMemberFunc(id,bNum){
 	function setActivity(data,type){
 		var result='';
 		$.each(data,function(index,val){
+			result=val.last_activity;
+		});
+/*		$.each(data,function(index,val){
 			var format=val.format;
 			result+='<div class="activity-unit">'+
 						'<div class="dropdown activity-unit-my">'+
@@ -292,19 +295,19 @@ function addMemberFunc(id,bNum){
 			
 			switch (val.activity_name) {
 			case 'create_board':
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
 				//result+=format;
 				break;
 			case 'addList':
 				var get_list_name=activity_getListInfo(val.value_num);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
 				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
 				//result+=format;
 				break;
 			case 'addCard':
 				var get_list_name=activity_getListInfo(val.to_num);
 				var get_card_name=activity_getCardInfo(val.value_num);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
 				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
 				format=format.replace('#cardName#',
 						'<a class="cardInfo-dropdown-view"  onclick="editCard('+val.value_num+')" data-toggle="modal" data-target="#cardInfoView">'+get_card_name+'</a>'
@@ -314,7 +317,7 @@ function addMemberFunc(id,bNum){
 				var get_to_list_name=activity_getListInfo(val.to_num);
 				var get_from_list_name=activity_getListInfo(val.from_num);
 				var get_card_name=activity_getCardInfo(val.value_num);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
 				format=format.replace('#toListName#','<span class="listInfo-dropdown-view">'+get_to_list_name+'</span>');
 				format=format.replace('#fromListName#','<span class="listInfo-dropdown-view">'+get_from_list_name+'</span>');
 				format=format.replace('#cardName#',
@@ -323,14 +326,14 @@ function addMemberFunc(id,bNum){
 				break;
 			case 'addFriend':
 				var get_friend_info=activity_getFriendInfo(val.value_string);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
+				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
 				format=format.replace('#firendName#',activity_memberInfo_setting_dropdown(get_friend_info));
 				format=format.replace('#authority#','<span class="friendInfo-auth-dropdown-view">'+get_friend_info.grade+'</span>');
 				break;
 			}
 			result+=format;
 			result+='</div></div>'; //end of div, activity-unit
-		});
+		});*/
 		if(type=='someActivity'){$('.side-menu-activity-content').append(result);}
 		else if(type='allActivity'){$('#all-activity-modal-content-wrapper').append(result);}
 		bind_memberInfo_dropdown_activityMember();//이벤트 바인드

@@ -42,9 +42,9 @@ create table reply(
 	attach BLOB
 );
 
-create table activity(
+create table activity_data(
 	num number primary key,
-	activity_num number not null,
+	activity_name_num number not null,
 	memId varchar(100),
 	bNum number,
 	write_time date,
@@ -68,9 +68,16 @@ create table memberGrade(
     star varchar(2)
 );
 
+create table activity(
+	num number primary key,
+	activity_data_num number not null,
+	last_activity varchar2(4000)
+);
+
 create sequence board_num_seq start with 1; 
 create sequence list_num_seq start with 1;
 create sequence card_num_seq start with 1;
 create sequence memberGrade_num_seq start with 1; 
 create sequence activity_format_num_seq start with 1; 
+create sequence activity_data_num_seq start with 1; 
 create sequence activity_num_seq start with 1; 
