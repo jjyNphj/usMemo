@@ -81,7 +81,11 @@ public class ActivityService {
 			requestInfo.setbNum(bNum);
 			requestInfo.setValue_num(card.getNum());
 			requestInfo.setTo_num(card.getlNum());
+			requestInfo.setActivity_name("addCard");
+			requestInfo.setActivity_name_num(activityDao.getActivityNumByActivityName(requestInfo.getActivity_name()));
 		activityDao.addCard(requestInfo);
+		
+		addActivity(requestInfo);
 	}
 
 
@@ -132,6 +136,9 @@ public class ActivityService {
 	public void addActivity(ActivityData requestInfo) {
 		requestInfo=activityDao.getActivityDataByNum(requestInfo);
 		
+		ListDTO listInfo = new ListDTO();
+		Card cardInfo = new Card();
+		
 		String result="";
 		String format=requestInfo.getFormat();
 		
@@ -161,27 +168,27 @@ public class ActivityService {
 		
 			switch(requestInfo.getActivity_name()){
 			case "create_board":
-				format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
+				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
 				//result+=format;
 				break;
-		case "addList":
-			ListDTO listInfo = new ListDTO();
-			listInfo=getListInfo(requestInfo.getValue_num());
-			//var get_list_name=activity_getListInfo(requestInfo.getValue_num());
-			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
-			format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
-			//result+=format;
-			break;
-		/*case "addCard":
-			var get_list_name=activity_getListInfo(val.to_num);
-			var get_card_name=activity_getCardInfo(val.value_num);
-			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
-			format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+get_list_name+"</span>");
-			format=format.replace("#cardName#",
-					"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+val.value_num+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+get_card_name+"</a>"
-					);
-			break;
-		case "updateCardLocation":
+			case "addList":
+				listInfo=getListInfo(requestInfo.getValue_num());
+				//var get_list_name=activity_getListInfo(requestInfo.getValue_num());
+				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
+				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
+				//result+=format;
+				break;
+			case "addCard":
+				listInfo=getListInfo(requestInfo.getTo_num());
+				//var get_list_name=activity_getListInfo(val.to_num);
+				cardInfo=getCardInfo(requestInfo.getValue_num());
+				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
+				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
+				format=format.replace("#cardName#",
+						"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
+						);
+				break;
+			/*case "updateCardLocation":
 			var get_to_list_name=activity_getListInfo(val.to_num);
 			var get_from_list_name=activity_getListInfo(val.from_num);
 			var get_card_name=activity_getCardInfo(val.value_num);
