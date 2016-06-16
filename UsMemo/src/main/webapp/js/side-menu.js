@@ -362,14 +362,14 @@ function addMemberFunc(id,bNum){
 	'</div>';
 	}
 
-	function activity_getListInfo(listNum){
+	/*function activity_getListInfo(listNum){
 		  var url='/usMemo/activity/getListInfo/'+listNum;
 		  var list_name;
 			$.ajax({
 				url: url,	      
 				type:'post',
 				dataType:'json',
-				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				 Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 
 				contentType: 'application/json',
 				async: false,
 				success:function(data){
@@ -389,7 +389,7 @@ function addMemberFunc(id,bNum){
 				url: url,	      
 				type:'post',
 				dataType:'json',
-				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				 Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 
 				contentType: 'application/json',
 				async: false,
 				success:function(data){
@@ -409,7 +409,7 @@ function addMemberFunc(id,bNum){
 				url: url,	      
 				type:'post',
 				dataType:'json',
-				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				 Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 
 				contentType: 'application/json',
 				async: false,
 				success:function(data){
@@ -424,7 +424,7 @@ function addMemberFunc(id,bNum){
 			if(friendInfo.grade==1){friendInfo.grade='admin';}
 			else if(friendInfo.grade==2){friendInfo.grade='member';}
 			return friendInfo;
-	}
+	}*/
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
 	 * @param data

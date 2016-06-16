@@ -42,7 +42,7 @@ public class ActivityController {
 			return activity;	
 	}
 	
-	@RequestMapping("/getListInfo/{listNum}")
+/*	@RequestMapping("/getListInfo/{listNum}")
 	@ResponseBody
 	public ListDTO getListInfo(@PathVariable("listNum") int listNum){
 		
@@ -66,7 +66,7 @@ public class ActivityController {
 		Member result = new Member();
 		result = activityService.getFriendInfo(memberInfo);
 		return result; 
-	}
+	}*/
 	
 	
 }

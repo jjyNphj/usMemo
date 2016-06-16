@@ -126,7 +126,11 @@ public class ActivityService {
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(addMemberInfo.getbNum());
 		requestInfo.setValue_string(addMemberInfo.getmemId());
+		requestInfo.setActivity_name("addFriend");
+		requestInfo.setActivity_name_num(activityDao.getActivityNumByActivityName(requestInfo.getActivity_name()));
+		
 		activityDao.addFriend(requestInfo);
+		addActivity(requestInfo);
 	}
 
 
@@ -141,6 +145,8 @@ public class ActivityService {
 		
 		ListDTO listInfo,toListInfo,fromListInfo = new ListDTO();
 		Card cardInfo = new Card();
+		MemberGrade memberGradeInfo=new MemberGrade();
+		Member memberInfo= new Member();
 		
 		String result="";
 		String format=requestInfo.getFormat();
@@ -167,25 +173,19 @@ public class ActivityService {
 					"</div>"+
 				"</div>"+
 				"<div class=\"activity-unit-contents-wrapper\">";
-		format=format.replace("#me#",activity_memberInfo_setting_dropdown(requestInfo));
+			
+			format=format.replace("#me#",activity_memberInfo_setting_dropdown(requestInfo));
 		
 			switch(requestInfo.getActivity_name()){
 			case "create_board":
-				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
-				//result+=format;
 				break;
 			case "addList":
 				listInfo=getListInfo(requestInfo.getValue_num());
-				//var get_list_name=activity_getListInfo(requestInfo.getValue_num());
-				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+requestInfo.getNickname()+"</span>");
 				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
-				//result+=format;
 				break;
 			case "addCard":
 				toListInfo=getListInfo(requestInfo.getTo_num());
-				//var get_list_name=activity_getListInfo(val.to_num);
 				cardInfo=getCardInfo(requestInfo.getValue_num());
-				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
 				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
 				format=format.replace("#cardName#",
 						"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
@@ -195,99 +195,36 @@ public class ActivityService {
 				toListInfo=getListInfo(requestInfo.getTo_num());
 				fromListInfo=getListInfo(requestInfo.getFrom_num());
 				cardInfo=getCardInfo(requestInfo.getValue_num());
-/*			var get_to_list_name=activity_getListInfo(val.to_num);
-			var get_from_list_name=activity_getListInfo(val.from_num);
-			var get_card_name=activity_getCardInfo(val.value_num);*/
-			//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
 			format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
 			format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+fromListInfo.getName()+"</span>");
 			format=format.replace("#cardName#",
 					"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
 					);
 			break;
-			/*case "addFriend":
-			var get_friend_info=activity_getFriendInfo(val.value_string);
-			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
-			format=format.replace("#firendName#",activity_memberInfo_setting_dropdown(get_friend_info));
-			format=format.replace("#authority#","<span class=\"friendInfo-auth-dropdown-view\">"+get_friend_info.grade+"</span>");
-			break;
-		}*/
+			case "addFriend":
+				memberGradeInfo.setbNum(requestInfo.getbNum());
+				memberGradeInfo.setmemId(requestInfo.getValue_string());
+				/*getFriendInfo의 매개변수는 memberGrade, 리턴타입은 member임. */
+				memberInfo=getFriendInfo(memberGradeInfo);
+				/*dto형식 바꾸기*/
+				ActivityData memberInfoToActivityData= new ActivityData();
+				memberInfoToActivityData.setName(memberInfo.getName());
+				memberInfoToActivityData.setNickname(memberInfo.getNickname());
+				memberInfoToActivityData.setEmail(memberInfo.getEmail());
+				memberInfoToActivityData.setProfile_image(memberInfo.getProfile_image());
+				String grade="";
+				if(memberInfo.getGrade()==1){grade="an admin";}
+				else if(memberInfo.getGrade()==2){grade="a member";}
+				//var get_friend_info=activity_getFriendInfo(val.value_string);
+				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
+				format=format.replace("#friendName#",activity_memberInfo_setting_dropdown(memberInfoToActivityData));
+				format=format.replace("#authority#","<span class=\"friendInfo-auth-dropdown-view\">"+grade+"</span>");
+				break;
+		
 			}
 		result+=format;
 		result+="</div></div>";
 
-		
-		
-		
-	/*	
-		$.each(data,function(index,val){
-			var format=val.format;
-			result+="<div class="activity-unit">"+
-						"<div class="dropdown activity-unit-my">"+
-							"<div class="my-img-wrapper dropdown-toggle" data-toggle="dropdown">"+
-								"<span><img id="my-img_"+val.memId+"" class="my-img" src="+val.profile_image+"><span>"+
-							"</div>"+
-							"<div id="my-dropdown-view-content" class="dropdown-menu" >"+
-								"<div class="my-members-info">"+
-									"<div class="my-members-info-wrapper">"+
-										"<div class="my-members-info-img-wrapper">"+
-											"<img class="my-members-info-img" src=""+val.profile_image+"">"+
-										"</div>"+
-										"<div class="my-members-info-text-wrapper">"+
-											"<span class="my-member-name">"+val.name+"</span>"+
-											"<span class="my-member-nickname">("+val.nickname+")</span>"+
-											"<br><span class="my-member-email">"+val.email+"</span>"+
-										"</div>"+
-										"<div class="my-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>"+
-									"</div>"+
-								"</div>"+
-							"</div>"+
-						"</div>"+
-						"<div class="activity-unit-contents-wrapper">";
-			format=format.replace("#me#",activity_memberInfo_setting_dropdown(val));
-			
-			switch (val.activity_name) {
-			case "create_board":
-				format=format.replace("#me#","<span class="memberInfo-dropdown-view">"+val.nickname+"</span>");
-				//result+=format;
-				break;
-			case "addList":
-				var get_list_name=activity_getListInfo(val.value_num);
-				format=format.replace("#me#","<span class="memberInfo-dropdown-view">"+val.nickname+"</span>");
-				format=format.replace("#listName#","<span class="listInfo-dropdown-view">"+get_list_name+"</span>");
-				//result+=format;
-				break;
-			case "addCard":
-				var get_list_name=activity_getListInfo(val.to_num);
-				var get_card_name=activity_getCardInfo(val.value_num);
-				format=format.replace("#me#","<span class="memberInfo-dropdown-view">"+val.nickname+"</span>");
-				format=format.replace("#listName#","<span class="listInfo-dropdown-view">"+get_list_name+"</span>");
-				format=format.replace("#cardName#",
-						"<a class="cardInfo-dropdown-view"  onclick="editCard("+val.value_num+")" data-toggle="modal" data-target="#cardInfoView">"+get_card_name+"</a>"
-						);
-				break;
-			case "updateCardLocation":
-				var get_to_list_name=activity_getListInfo(val.to_num);
-				var get_from_list_name=activity_getListInfo(val.from_num);
-				var get_card_name=activity_getCardInfo(val.value_num);
-				format=format.replace("#me#","<span class="memberInfo-dropdown-view">"+val.nickname+"</span>");
-				format=format.replace("#toListName#","<span class="listInfo-dropdown-view">"+get_to_list_name+"</span>");
-				format=format.replace("#fromListName#","<span class="listInfo-dropdown-view">"+get_from_list_name+"</span>");
-				format=format.replace("#cardName#",
-						"<a class="cardInfo-dropdown-view"  onclick="editCard("+val.value_num+")" data-toggle="modal" data-target="#cardInfoView">"+get_card_name+"</a>"
-						);
-				break;
-			case "addFriend":
-				var get_friend_info=activity_getFriendInfo(val.value_string);
-				format=format.replace("#me#","<span class="memberInfo-dropdown-view">"+val.nickname+"</span>");
-				format=format.replace("#firendName#",activity_memberInfo_setting_dropdown(get_friend_info));
-				format=format.replace("#authority#","<span class="friendInfo-auth-dropdown-view">"+get_friend_info.grade+"</span>");
-				break;
-			}
-			result+=format;
-			result+="</div></div>"; //end of div, activity-unit
-		});
-*/	
 		Activity activityInfo=new Activity();
 		activityInfo.setActivity_data_num(requestInfo.getNum());
 		activityInfo.setLast_activity(result);

@@ -6,4 +6,4 @@ insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addCard','#m
 
 insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'updateCardLocation','#me# moved #cardName# from #fromListName# to #toListName#')
 
-insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addFriend','#me# added #firendName# to this board ad an #authority#')
+insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addFriend','#me# added #friendName# to this board as #authority#')

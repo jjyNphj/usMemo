@@ -98,10 +98,10 @@
 			</selectKey>
 		</insert>
 		<insert id="addFriend">
-			<selectKey keyProperty="activity_name_num" resultClass="int">
-				select num from activity_format where activity_name='addFriend'
-			</selectKey>
 			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,null,#value_string#,null,null)
+			<selectKey keyProperty="num" resultClass="int" type="post">
+				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
+			</selectKey>			
 		</insert>
 		
 		<insert id="addActivity" parameterClass="activity">
