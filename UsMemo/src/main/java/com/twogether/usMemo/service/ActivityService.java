@@ -107,8 +107,11 @@ public class ActivityService {
 		requestInfo.setValue_num(parseObjToInt(obj.get("currentNum")));
 		requestInfo.setTo_num(parseObjToInt(obj.get("afterLNum")));
 		requestInfo.setFrom_num(parseObjToInt(obj.get("beforeLNum")));
+		requestInfo.setActivity_name("updateCardLocation");
+		requestInfo.setActivity_name_num(activityDao.getActivityNumByActivityName(requestInfo.getActivity_name()));
 		
 		activityDao.updateCardLocation(requestInfo);
+		addActivity(requestInfo);
 	}
 	
 	public int parseObjToInt(Object object){
@@ -136,7 +139,7 @@ public class ActivityService {
 	public void addActivity(ActivityData requestInfo) {
 		requestInfo=activityDao.getActivityDataByNum(requestInfo);
 		
-		ListDTO listInfo = new ListDTO();
+		ListDTO listInfo,toListInfo,fromListInfo = new ListDTO();
 		Card cardInfo = new Card();
 		
 		String result="";
@@ -179,27 +182,30 @@ public class ActivityService {
 				//result+=format;
 				break;
 			case "addCard":
-				listInfo=getListInfo(requestInfo.getTo_num());
+				toListInfo=getListInfo(requestInfo.getTo_num());
 				//var get_list_name=activity_getListInfo(val.to_num);
 				cardInfo=getCardInfo(requestInfo.getValue_num());
 				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
-				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
+				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
 				format=format.replace("#cardName#",
 						"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
 						);
 				break;
-			/*case "updateCardLocation":
-			var get_to_list_name=activity_getListInfo(val.to_num);
+			case "updateCardLocation":
+				toListInfo=getListInfo(requestInfo.getTo_num());
+				fromListInfo=getListInfo(requestInfo.getFrom_num());
+				cardInfo=getCardInfo(requestInfo.getValue_num());
+/*			var get_to_list_name=activity_getListInfo(val.to_num);
 			var get_from_list_name=activity_getListInfo(val.from_num);
-			var get_card_name=activity_getCardInfo(val.value_num);
-			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
-			format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+get_to_list_name+"</span>");
-			format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+get_from_list_name+"</span>");
+			var get_card_name=activity_getCardInfo(val.value_num);*/
+			//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
+			format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
+			format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+fromListInfo.getName()+"</span>");
 			format=format.replace("#cardName#",
-					"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+val.value_num+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+get_card_name+"</a>"
+					"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
 					);
 			break;
-		case "addFriend":
+			/*case "addFriend":
 			var get_friend_info=activity_getFriendInfo(val.value_string);
 			format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
 			format=format.replace("#firendName#",activity_memberInfo_setting_dropdown(get_friend_info));
