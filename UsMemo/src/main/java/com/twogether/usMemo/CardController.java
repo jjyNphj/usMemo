@@ -123,6 +123,7 @@ public class CardController {
 
 		mv.setViewName("board/boardMain");
 		cardService.deleteCardInfo(card);
+		activityService.deleteCard(card);
 		return mv;
 	}	
 	

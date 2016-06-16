@@ -107,6 +107,18 @@
 		<insert id="addActivity" parameterClass="activity">
 			insert into activity values(activity_num_seq.nextval,#activity_data_num#,#last_activity#)
 		</insert>
+		
+		<select id="getActivityDataByCardNum" parameterClass="int" resultMap="activityMap">
+			select a.num, a.activity_data_num, a.last_activity, d.bNum 
+			from activity_data d 
+			inner join activity a 
+			on d.num=a.activity_data_num 
+			where d.value_num=#num#
+		</select>
+		
+		<update id="updateDeletedCards" parameterClass="activity">
+			update Activity set last_activity=#last_activity# where num=#num#
+		</update>
 
 	</sqlMap>
 	

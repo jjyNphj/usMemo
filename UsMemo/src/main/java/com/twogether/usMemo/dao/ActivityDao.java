@@ -1,5 +1,6 @@
 package com.twogether.usMemo.dao;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -85,6 +86,25 @@ public class ActivityDao {
 	public void addActivity(Activity result) {
 		
 		sqlMapClientTemplate.insert("Activity.addActivity",result);
+		
+	}
+	
+	/*
+	 * 카드의 번호를 value_num에 가지고 있는 모든 액티비티의 정보를 가지고옴. 
+	 */
+	public List<Activity> getActivityDataByCardNum(Card card) {
+		
+		return sqlMapClientTemplate.queryForList("Activity.getActivityDataByCardNum",card.getNum());
+		
+	}
+
+	public void updateDeletedCards(List<Activity> allCardActivity) {
+		
+		Iterator<Activity> it = allCardActivity.iterator();
+		
+		while(it.hasNext()){
+			sqlMapClientTemplate.update("Activity.updateDeletedCards",it.next());
+		}
 		
 	}
 	

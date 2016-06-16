@@ -1,5 +1,7 @@
 package com.twogether.usMemo.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -253,6 +255,36 @@ public class ActivityService {
 			"</div>"+
 		"</div>";
 		}
+
+
+	public void deleteCard(Card card) {
+		
+		List<Activity> allCardActivity= new ArrayList<Activity>();
+		allCardActivity=activityDao.getActivityDataByCardNum(card);
+		
+		Iterator<Activity> it = allCardActivity.iterator();
+		while(it.hasNext()){
+			Activity tempActivity=new Activity();
+			tempActivity=it.next();
+			String last_activity= tempActivity.getLast_activity();
+			String [] value=last_activity.split("onclick=\"editCard\\(");
+			int start=value[1].indexOf("data-target=\"#cardInfoView\"");
+			String subStringResult=value[1].substring(start+27);
+			
+			String result= value[0]+subStringResult;
+			tempActivity.setLast_activity(result);
+			
+		}
+		
+		updateDeletedCards(allCardActivity);
+	}
+
+
+	private void updateDeletedCards(List<Activity> allCardActivity) {
+		
+		activityDao.updateDeletedCards(allCardActivity);
+		
+	}
 	
 	
 }
