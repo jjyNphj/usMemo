@@ -6,7 +6,7 @@ function goBoard(bNum,name){
 /*    var answer=confirm("선택하신 보드를 보러 가시겠습니까?");
         if(answer){ */
         	var id=$("#memId").val();
-            var url ='/usMemo/board/index/'+id+'?bNum='+bNum+'&name='+name;
+            var url ='/usMemo/board/index/'+id+'?bNum='+bNum;
                 window.open(url, "_self",  '');
         /* } */  
     }

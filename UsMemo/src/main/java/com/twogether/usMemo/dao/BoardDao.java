@@ -106,6 +106,10 @@ public class BoardDao {
 		
 	}
 
+	public String getBoardName(int bNum) {
+		return (String) sqlMapClientTemplate.queryForObject("Board.getBoardName",bNum);
+	}
+
 	
 //	public int getBoardNumById(String id){
 //		//회원 id로 보드의 bNum 구하기

@@ -73,7 +73,7 @@ public class BoardController {
 		mv.addObject("listList", map.get("listList"));
 		mv.addObject("cardList",map.get("cardList"));
 		mv.addObject("bNum",board.getbNum());
-		mv.addObject("bName",board.getName());
+		mv.addObject("bName",boardService.getBoardName(board.getbNum()));
 		mv.addObject("myInfo",memberService.getMyInfo(id));
 		mv.addObject("star",memberService.getThisBoardStar(board.getbNum(),id));
 		return mv;

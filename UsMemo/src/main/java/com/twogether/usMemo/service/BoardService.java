@@ -233,4 +233,8 @@ public class BoardService {
 		boardDao.editBoardName(board);
 		
 	}
+
+	public String getBoardName(int bNum) {
+		return boardDao.getBoardName(bNum);
+	}
 }

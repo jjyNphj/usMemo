@@ -4,7 +4,7 @@ var updateCard =new Object();
 var sameListFlag=true;
 var before=new Object();
 	 
-
+widthResize($('.board-name')[0]);
 
 		/*
 		 * body영역 설정
@@ -528,8 +528,11 @@ var before=new Object();
     		})
     	} 
     }
-    
-    
+    function widthResize(obj) {
+    	//textarea에 입력된 크기만큼 세로 길이 조정
+    	obj.style.width = "1px";
+    	obj.style.width = (10+obj.scrollWidth)+"px";
+    }
   //이름 수정시 엔터치면 바로 이름 저장 되는 부분
     function enterSave(e,thisElement) {
     	/*
@@ -546,6 +549,7 @@ var before=new Object();
            /* var className=thisElement.className;
             var type=thisElement.type;
             $(type+'.'+className).blur();*/
+            thisElement.blur();
             var className=thisElement.className;
             if (className=='list-name'){
             editListName(thisElement);	}

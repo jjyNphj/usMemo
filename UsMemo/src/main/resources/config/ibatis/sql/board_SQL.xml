@@ -72,6 +72,9 @@
 	<update id="editBoardName" parameterClass="board">
 		update board set name=#name# where num=#bNum#
 	</update>
+	<select id="getBoardName" parameterClass="int" resultClass="String">
+		select name from board where num=#bNum#
+	</select>
 
 </sqlMap>
 	

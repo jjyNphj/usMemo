@@ -50,7 +50,7 @@
 								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left; color: white;">
 								 <a class="board-header-barnd">
 									 	<span id="board-header-brand-text">
-									 	<input type="text" value="${bName }" class="board-name" id="board-name-text_${bNum }"  onkeypress="enterSave(event,this)" onkeyup="heightResize(this)">
+									 	<input type="text" value="${bName }" class="board-name" id="board-name-text_${bNum }"  onkeypress="enterSave(event,this)" onkeyup="widthResize(this)">
 									 	</span>
 									 	<c:if test="${star eq 'Y' }"><span id="board-header-starred" class="glyphicon glyphicon-star"></span></c:if>
 									 	<c:if test="${star eq 'N' }"><span id="board-header-starred" class="glyphicon glyphicon-star-empty"></span></c:if>
