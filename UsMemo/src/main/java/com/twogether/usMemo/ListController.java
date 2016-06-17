@@ -51,5 +51,17 @@ public class ListController {
 		listService.deleteListInfo(listDTO);
 		return mv;
 	}
+	
+	@RequestMapping("/edit/listName")
+	public ModelAndView editListName(@ModelAttribute ListDTO list){
+		
+		//카드 수정하기 창에서 카드 이름을 수정하고 엔터를 칠 경우 저장하는 부분
+		ModelAndView mv= new ModelAndView();
+
+		mv.setViewName("board/boardMain");
+		listService.editListName(list);
+		activityService.updateActivity("changeListName",list.getNum());
+		return mv;
+	}
 
 }

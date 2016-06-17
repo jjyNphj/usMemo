@@ -57,6 +57,9 @@
 	    <!-- list 삭제시 하위 카드 내용까지 전부 삭제  -->
 		{ call deleteListProcedure(?) }
 	</procedure>
+	<update id="editListName" parameterClass="listDTO">
+		update list set name=#name# where num=#num#
+	</update>
 
 </sqlMap>
 	

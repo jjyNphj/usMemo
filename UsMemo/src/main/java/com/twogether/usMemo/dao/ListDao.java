@@ -45,5 +45,11 @@ public class ListDao {
 		
 	}
 
+	public void editListName(ListDTO list) {
+		
+		sqlMapClientTemplate.update("List.editListName",list);
+		
+	}
+
 
 }

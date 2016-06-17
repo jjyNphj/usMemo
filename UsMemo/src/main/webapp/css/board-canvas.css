@@ -98,7 +98,7 @@
 }  */
 
 /* 사용자가 카드의 이름을 수정하는 부분 */
-.textarea-card-name {
+.textarea-card-name ,.list-name{
 	/*사용자가 textarea 사이즈 조정 금지*/
 	resize:none;
 	/* 스크롤바 생성X */
@@ -116,4 +116,11 @@
 .delete-list-btn {
 	color: red;
 	float: right; 
+}
+
+.list-name{
+	background-color: rgba( 255, 255, 255, 0 );
+}
+.list-name:FOCUS{
+	background-color: rgba( 255, 255, 255, 1 );
 }

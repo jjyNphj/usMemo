@@ -84,7 +84,8 @@
 														<!--  style="background-color: red;"> -->
 														<h6>
 														<%-- 	${l.num } /  --%>
-															${l.name}
+															<textarea class="list-name" id="list-name-text_${l.num }"  onkeypress="enterSaveListNameProcess(event,this)" onkeyup="heightResize(this)">
+															${l.name}</textarea>
 															<span class="delete-list-btn glyphicon glyphicon-trash" onclick="deleteListInfo(${l.num})">
 															</span>
 														</h6>
