@@ -4,7 +4,8 @@ body, #board-header-wrap{
 	background-color: #B04632;
 }
 #header{
-	background-color: #963C2B; 
+	/* background-color: #963C2B;  */
+	background-color: rgba( 0, 0, 0, 0.15 );
 }
 
 .list_all{
@@ -41,5 +42,6 @@ body, #board-header-wrap{
 }
 
 .header-btn-home{
-	color: #CA9D94;
+	/* color: #CA9D94; */
+	color: rgba( 225, 225, 225, 0.75);
 	}
