@@ -531,7 +531,7 @@ var before=new Object();
     
     
   //이름 수정시 엔터치면 바로 이름 저장 되는 부분
-    function enterSaveListNameProcess(e,thisList) {
+    function enterSave(e,thisElement) {
     	/*
     	 * boardMain에서 키가 눌릴때마다 키코드를 찾음
     	 * keyCode가 0이면  which 리턴, 엔터의 키코드 13이므로 엔터 치는 순간 if문으로 넘어감
@@ -543,19 +543,35 @@ var before=new Object();
         	
             e.preventDefault();
             //엔터 친후 textarea에서 커서 제거하기
-            thisList.blur();
+           /* var className=thisElement.className;
+            var type=thisElement.type;
+            $(type+'.'+className).blur();*/
+            var className=thisElement.className;
+            if (className=='list-name'){
+            editListName(thisElement);	}
+            else if(className=='board-name'){
+            	editBoardName(thisElement);
+            }
+            
 
         }
     }
     
 	//카드 수정창에서 카드 이름쓰는 부분에서 포커스가 벗어나면 카드이름 저장하는 부분
 	$("textarea.list-name").blur(function()
-		{
-		  var listId = this.id;
+		{editListName(this);		});
+	
+	$("input.board-name").blur(function()
+				{editBoardName(this);
+			});
+
+	
+	function editListName(thisElement){
+		  var listId = thisElement.id;
           listId=listId.split('_');
          
           var num=listId[1];
-          var name=this.value;
+          var name=thisElement.value;
 
           var url='/usMemo/list/edit/listName?num='+num+'&name='+name;
 	
@@ -563,22 +579,32 @@ var before=new Object();
 				url: url,
 				type:'post',
 				success:function(){
-					/*//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
-					//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
-					var lnum = document.getElementById('card_lnum').innerHTML;
-					//lnum과 cnum 조합해서 card_unit id 값 만들어 주기.
-					var card_unit_id = lnum + '_' + num;
-	
-					console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
-	
-					//카드 이름 뜨는 부분 태그의 클래스 찾아서, 자식의 자식 div 태그의 card_unit_name 클래스의 내용을 바꾼 카드 이름으로 바꿔치기 하기.
-					$('div.card_unit#'+card_unit_id + '> div > div.card_unit_name').html(name);*/
 				} ,
 				error : function(xhr, status, error) {
 					alert(error);
 				}
 			})
-		});
+			
+	}
+	
+	function editBoardName(thisElement){
+		 var boardId = thisElement.id;
+		  boardId=boardId.split('_');
+        
+         var num=boardId[1];
+         var name=thisElement.value;
 
+         var url='/usMemo/board/edit/boardName?bNum='+num+'&name='+name;
+	
+			$.ajax({
+				url: url,
+				type:'post',
+				success:function(){
+				} ,
+				error : function(xhr, status, error) {
+					alert(error);
+				}
+			})
+	}
 
 	 

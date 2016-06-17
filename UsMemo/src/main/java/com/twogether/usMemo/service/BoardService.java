@@ -227,4 +227,10 @@ public class BoardService {
 	public List<BoardInfo> getAllBoards(String memId){
 		return boardDao.getAllBoards(memId);
 	}
+
+	public void editBoardName(Board board) {
+		
+		boardDao.editBoardName(board);
+		
+	}
 }

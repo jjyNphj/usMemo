@@ -100,6 +100,12 @@ public class BoardDao {
 		return sqlMapClientTemplate.queryForList("Board.getAllBoardsById",memId);
 	}
 
+	public void editBoardName(Board board) {
+		
+		sqlMapClientTemplate.update("Board.editBoardName",board);
+		
+	}
+
 	
 //	public int getBoardNumById(String id){
 //		//회원 id로 보드의 bNum 구하기

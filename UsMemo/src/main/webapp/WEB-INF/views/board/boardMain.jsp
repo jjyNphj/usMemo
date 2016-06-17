@@ -49,7 +49,9 @@
 							<div class="col-xs-12 col-sm-12 col-md-12" >
 								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left; color: white;">
 								 <a class="board-header-barnd">
-									 	<span id="board-header-brand-text">${bName }</span>
+									 	<span id="board-header-brand-text">
+									 	<input type="text" value="${bName }" class="board-name" id="board-name-text_${bNum }"  onkeypress="enterSave(event,this)" onkeyup="heightResize(this)">
+									 	</span>
 									 	<c:if test="${star eq 'Y' }"><span id="board-header-starred" class="glyphicon glyphicon-star"></span></c:if>
 									 	<c:if test="${star eq 'N' }"><span id="board-header-starred" class="glyphicon glyphicon-star-empty"></span></c:if>
 								 </a> 
@@ -84,7 +86,7 @@
 														<!--  style="background-color: red;"> -->
 														<h6>
 														<%-- 	${l.num } /  --%>
-															<textarea class="list-name" id="list-name-text_${l.num }"  onkeypress="enterSaveListNameProcess(event,this)" onkeyup="heightResize(this)">
+															<textarea class="list-name" id="list-name-text_${l.num }"  onkeypress="enterSave(event,this)" onkeyup="heightResize(this)">
 															${l.name}</textarea>
 															<span class="delete-list-btn glyphicon glyphicon-trash" onclick="deleteListInfo(${l.num})">
 															</span>
