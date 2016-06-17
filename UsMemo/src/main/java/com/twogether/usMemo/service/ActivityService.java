@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.twogether.usMemo.dao.ActivityDao;
 import com.twogether.usMemo.dto.Activity;
-import com.twogether.usMemo.dto.ActivityData;
+import com.twogether.usMemo.dto.ActivityDataMember;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.Member;
@@ -30,7 +30,7 @@ public class ActivityService {
 	
 	public void create_board(String memId,int bNum){
 		
-	ActivityData requestInfo= new ActivityData();
+	ActivityDataMember requestInfo= new ActivityDataMember();
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(bNum);
 		requestInfo.setActivity_name("create_board");
@@ -59,7 +59,7 @@ public class ActivityService {
 
 
 	public void addList(ListDTO listDTO,String memId) {
-		ActivityData requestInfo= new ActivityData();
+		ActivityDataMember requestInfo= new ActivityDataMember();
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(listDTO.getbNum());
 		requestInfo.setValue_num(listDTO.getNum());
@@ -78,7 +78,7 @@ public class ActivityService {
 
 
 	public void addCard(Card card, int bNum) {
-		ActivityData requestInfo= new ActivityData();
+		ActivityDataMember requestInfo= new ActivityDataMember();
 			requestInfo.setMemId(card.getMemId());
 			requestInfo.setbNum(bNum);
 			requestInfo.setValue_num(card.getNum());
@@ -103,7 +103,7 @@ public class ActivityService {
 		//string을 json으로 파싱시킴.
 		JSONObject obj=(JSONObject)jsonPaser.parse(cardLocation);
 		
-		ActivityData requestInfo= new ActivityData();
+		ActivityDataMember requestInfo= new ActivityDataMember();
 		requestInfo.setMemId((String) obj.get("memId"));
 		requestInfo.setbNum(parseObjToInt(obj.get("bNum")));
 		requestInfo.setValue_num(parseObjToInt(obj.get("currentNum")));
@@ -124,7 +124,7 @@ public class ActivityService {
 
 	public void addFriend(MemberGrade addMemberInfo, String memId) {
 		
-		ActivityData requestInfo= new ActivityData();
+		ActivityDataMember requestInfo= new ActivityDataMember();
 		requestInfo.setMemId(memId);
 		requestInfo.setbNum(addMemberInfo.getbNum());
 		requestInfo.setValue_string(addMemberInfo.getmemId());
@@ -142,8 +142,21 @@ public class ActivityService {
 	}
 
 
-	public void addActivity(ActivityData requestInfo) {
+	public void addActivity(ActivityDataMember requestInfo) {
 		requestInfo=activityDao.getActivityDataByNum(requestInfo);
+		String result=makeActivityString(requestInfo);
+		Activity activityInfo=new Activity();
+		activityInfo.setActivity_data_num(requestInfo.getNum());
+		activityInfo.setLast_activity(result);
+		activityDao.addActivity(activityInfo);
+	}
+	
+	/**
+	 * 액티비티 html 문서를 생성하는 함수
+	 * @param requestInfo
+	 * @return
+	 */
+	public String makeActivityString(ActivityDataMember requestInfo){
 		
 		ListDTO listInfo,toListInfo,fromListInfo = new ListDTO();
 		Card cardInfo = new Card();
@@ -209,7 +222,7 @@ public class ActivityService {
 				/*getFriendInfo의 매개변수는 memberGrade, 리턴타입은 member임. */
 				memberInfo=getFriendInfo(memberGradeInfo);
 				/*dto형식 바꾸기*/
-				ActivityData memberInfoToActivityData= new ActivityData();
+				ActivityDataMember memberInfoToActivityData= new ActivityDataMember();
 				memberInfoToActivityData.setName(memberInfo.getName());
 				memberInfoToActivityData.setNickname(memberInfo.getNickname());
 				memberInfoToActivityData.setEmail(memberInfo.getEmail());
@@ -226,14 +239,12 @@ public class ActivityService {
 			}
 		result+=format;
 		result+="</div></div>";
+		
+		return result;
 
-		Activity activityInfo=new Activity();
-		activityInfo.setActivity_data_num(requestInfo.getNum());
-		activityInfo.setLast_activity(result);
-		activityDao.addActivity(activityInfo);
 	}
 	
-	public String activity_memberInfo_setting_dropdown(ActivityData val){
+	public String activity_memberInfo_setting_dropdown(ActivityDataMember val){
 		return "<div class=\"dropdown activity-memberInfo-dropdown-view\">"+
 			"<a class=\"activity-memberInfo-dropdown-view-btn dropdown-toggle\" data-toggle=\"dropdown\">"+
 				"<span>"+val.getNickname()+"</span>"+
@@ -260,7 +271,7 @@ public class ActivityService {
 	public void deleteCard(Card card) {
 		
 		List<Activity> allCardActivity= new ArrayList<Activity>();
-		allCardActivity=activityDao.getActivityDataByCardNum(card);
+		allCardActivity=activityDao.getActivityByCardNum(card);
 		
 		Iterator<Activity> it = allCardActivity.iterator();
 		while(it.hasNext()){
@@ -283,6 +294,45 @@ public class ActivityService {
 	private void updateDeletedCards(List<Activity> allCardActivity) {
 		
 		activityDao.updateDeletedCards(allCardActivity);
+		
+	}
+
+	/**
+	 * 카드이름을 바꿨을 때 액티비티에서도 모든 이름을 바꿔주어야함.
+	 * @param card
+	 */
+	public void updateActivity(String type,int num) {
+		/**
+		 * 1) num으로 value_num에 있는 모든 액티비티데이터 불러오기
+		 * 2) 다시 html string 으로 작성
+		 * 3) activity에 update시키기
+		 * 
+		 *  1) num이 to_num, from_num, value_num에 있는 모든 액티비티데이터 불러오기
+		 *  2) 다시 html String으로 작성
+		 *  3) activity에 update시키기 
+		 */
+		List<ActivityDataMember> allActivityData= new ArrayList<ActivityDataMember>();
+		
+		switch (type){
+		case "changeCardName":
+			allActivityData=activityDao.getActivityDataByCardNum(num);
+			break;
+		case "changeListName":
+			allActivityData=activityDao.getActivityDataByListNum(num);
+			break;
+		}
+		
+		Iterator<ActivityDataMember> it = allActivityData.iterator();
+		while(it.hasNext()){
+			ActivityDataMember requestInfo= it.next();
+			String result=makeActivityString(requestInfo);
+			
+			Activity activityInfo=new Activity();
+			activityInfo.setActivity_data_num(requestInfo.getNum());
+			activityInfo.setLast_activity(result);
+			
+			activityDao.updateActivity(activityInfo);
+		}
 		
 	}
 	

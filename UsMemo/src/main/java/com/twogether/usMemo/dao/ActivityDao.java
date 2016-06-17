@@ -10,7 +10,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.twogether.usMemo.dto.Activity;
-import com.twogether.usMemo.dto.ActivityData;
+import com.twogether.usMemo.dto.ActivityDataMember;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.Member;
@@ -22,7 +22,7 @@ public class ActivityDao {
 	
 	@Autowired SqlMapClientTemplate sqlMapClientTemplate;
 
-	public void create_board(ActivityData requestInfo) {
+	public void create_board(ActivityDataMember requestInfo) {
 		sqlMapClientTemplate.insert("Activity.createBoard",requestInfo);
 		
 	}
@@ -35,7 +35,7 @@ public class ActivityDao {
 		return sqlMapClientTemplate.queryForList("Activity.getAllActivity",activity.getbNum());
 	}
 
-	public void addList(ActivityData requestInfo) {
+	public void addList(ActivityDataMember requestInfo) {
 		sqlMapClientTemplate.insert("Activity.addList",requestInfo);
 	}
 
@@ -44,7 +44,7 @@ public class ActivityDao {
 		return (ListDTO) sqlMapClientTemplate.queryForObject("List.getListByLNum",num);
 	}
 
-	public void addCard(ActivityData requestInfo) {
+	public void addCard(ActivityDataMember requestInfo) {
 		
 		sqlMapClientTemplate.insert("Activity.addCard",requestInfo);
 		
@@ -55,13 +55,13 @@ public class ActivityDao {
 		return (Card) sqlMapClientTemplate.queryForObject("Card.getCardBycNum",cardNum);
 	}
 
-	public void updateCardLocation(ActivityData requestInfo) {
+	public void updateCardLocation(ActivityDataMember requestInfo) {
 		
 		sqlMapClientTemplate.insert("Activity.updateCardLocation",requestInfo);
 		
 	}
 
-	public void addFriend(ActivityData requestInfo) {
+	public void addFriend(ActivityDataMember requestInfo) {
 		sqlMapClientTemplate.insert("Activity.addFriend",requestInfo);
 		
 	}
@@ -77,9 +77,9 @@ public class ActivityDao {
 		return (int) sqlMapClientTemplate.queryForObject("Activity.getActivityNumByActivityName",activity_name);
 	}
 
-	public ActivityData getActivityDataByNum(ActivityData requestInfo) {
+	public ActivityDataMember getActivityDataByNum(ActivityDataMember requestInfo) {
 		
-		return (ActivityData) sqlMapClientTemplate.queryForObject("Activity.getActivityDataByNum",requestInfo);
+		return (ActivityDataMember) sqlMapClientTemplate.queryForObject("Activity.getActivityDataByNum",requestInfo);
 		
 	}
 
@@ -92,9 +92,9 @@ public class ActivityDao {
 	/*
 	 * 카드의 번호를 value_num에 가지고 있는 모든 액티비티의 정보를 가지고옴. 
 	 */
-	public List<Activity> getActivityDataByCardNum(Card card) {
+	public List<Activity> getActivityByCardNum(Card card) {
 		
-		return sqlMapClientTemplate.queryForList("Activity.getActivityDataByCardNum",card.getNum());
+		return sqlMapClientTemplate.queryForList("Activity.getActivityByCardNum",card.getNum());
 		
 	}
 
@@ -106,6 +106,20 @@ public class ActivityDao {
 			sqlMapClientTemplate.update("Activity.updateDeletedCards",it.next());
 		}
 		
+	}
+
+	public List<ActivityDataMember> getActivityDataByCardNum(int num) {
+		
+		return sqlMapClientTemplate.queryForList("Activity.getActivityDataByCardNum",num);
+	}
+
+	public List<ActivityDataMember> getActivityDataByListNum(int num) {
+		return sqlMapClientTemplate.queryForList("Activity.getActivityDataByListNum",num);
+	}
+
+	public void updateActivity(Activity activityInfo) {
+		
+		sqlMapClientTemplate.update("Activity.updateActivity",activityInfo);
 	}
 	
 	

@@ -5,10 +5,11 @@
 	
 	<sqlMap namespace="Activity">
 		<typeAlias alias="member" type="com.twogether.usMemo.dto.Member"/>
+		<typeAlias alias="activityDataMember" type="com.twogether.usMemo.dto.ActivityDataMember"/>
 		<typeAlias alias="activityData" type="com.twogether.usMemo.dto.ActivityData"/>
 		<typeAlias alias="activity" type="com.twogether.usMemo.dto.Activity"/>
-		
-		<resultMap id="activityDataMap" class="activityData">
+
+		<resultMap id="activityDataMemberMap" class="activityDataMember">
 			<result property="num" column="num"/>
 			<result property="activity_name_num" column="activity_name_num"/>
 			<result property="memId" column="memId"/>
@@ -34,7 +35,7 @@
 		</resultMap>
 		
 		
-		<insert id="createBoard" parameterClass="activityData">
+		<insert id="createBoard" parameterClass="activityDataMember">
 <!-- 			<selectKey keyProperty="activity_name_num" resultClass="int" type="pre">
 			</selectKey> -->
 			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,null,null,null,null)
@@ -48,7 +49,7 @@
 				select num from activity_format where activity_name=#activity_name#
 		</select>
 		
-		<select id="getActivityDataByNum" parameterClass="activityData" resultMap="activityDataMap">
+		<select id="getActivityDataByNum" parameterClass="activityDataMember" resultMap="activityDataMemberMap">
 			select a.num, a.activity_name_num, a.bNum, a.value_num, a.to_num, a.from_num,
 					a.memId,a.value_string,a.write_time,f.num as format_num,f.activity_name,f.format,
 					m.name,m.nickname,m.profile_image,m.email
@@ -78,20 +79,20 @@
 			order by d.write_time desc
 		</select>
 		
-		<insert id="addList" parameterClass="activityData">
+		<insert id="addList" parameterClass="activityDataMember">
 			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,null)
 			<selectKey keyProperty="num" resultClass="int" type="post">
 				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
 			</selectKey>
 		</insert>
-		<insert id="addCard" parameterClass="activityData">
+		<insert id="addCard" parameterClass="activityDataMember">
 			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,null)
 			<selectKey keyProperty="num" resultClass="int" type="post">
 				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
 			</selectKey>
 		</insert>
 		
-		<insert id="updateCardLocation" parameterClass="activityData">
+		<insert id="updateCardLocation" parameterClass="activityDataMember">
 			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,#to_num#,#from_num#)
 			<selectKey keyProperty="num" resultClass="int" type="post">
 				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
@@ -108,7 +109,7 @@
 			insert into activity values(activity_num_seq.nextval,#activity_data_num#,#last_activity#)
 		</insert>
 		
-		<select id="getActivityDataByCardNum" parameterClass="int" resultMap="activityMap">
+		<select id="getActivityByCardNum" parameterClass="int" resultMap="activityMap">
 			select a.num, a.activity_data_num, a.last_activity, d.bNum 
 			from activity_data d 
 			inner join activity a 
@@ -118,6 +119,32 @@
 		
 		<update id="updateDeletedCards" parameterClass="activity">
 			update Activity set last_activity=#last_activity# where num=#num#
+		</update>
+		
+		<select id="getActivityDataByCardNum" parameterClass="int" resultMap="activityDataMemberMap">
+			select d.num, d.activity_name_num, d.bNum, d.value_num, d.to_num, d.from_num,
+					d.memId,d.value_string,d.write_time,f.num as format_num,f.activity_name,f.format,
+					m.name,m.nickname,m.profile_image,m.email
+			from activity_data d
+			inner join activity_format f 
+			on d.activity_name_num=f.num
+			inner join member m 
+			on d.memId=m.id 
+			where d.value_num=#num#
+		</select>
+		<select id="getActivityDataByListNum" parameterClass="int" resultMap="activityDataMemberMap">
+			select d.num, d.activity_name_num, d.bNum, d.value_num, d.to_num, d.from_num,
+					d.memId,d.value_string,d.write_time,f.num as format_num,f.activity_name,f.format,
+					m.name,m.nickname,m.profile_image,m.email
+			from activity_data d
+			inner join activity_format f 
+			on d.activity_name_num=f.num
+			inner join member m 
+			on d.memId=m.id 
+			where d.value_num=#num# OR d.to_num=#num# OR d.from_num=#num#
+		</select>
+		<update id="updateActivity" parameterClass="activity">
+			update activity set last_activity=#last_activity# where activity_data_num=#activity_data_num#
 		</update>
 
 	</sqlMap>

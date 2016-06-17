@@ -111,6 +111,7 @@ public class CardController {
 
 		mv.setViewName("board/boardMain");
 		cardService.editCardName(card);
+		activityService.updateActivity("changeCardName",card.getNum());
 		System.out.println("CardController card name: " + card.getName());
 		return mv;
 	}

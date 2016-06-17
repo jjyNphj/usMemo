@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twogether.usMemo.dto.Activity;
-import com.twogether.usMemo.dto.ActivityData;
+import com.twogether.usMemo.dto.ActivityDataMember;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.Member;
