@@ -59,15 +59,20 @@
 					</a>
 				</div>
 				</c:forEach>
-			</div>
-		</div>
 	<!-- 보드 추가 부분 -->
-		<div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+		<div class="add-board-wrapper dropdown">
+			<!-- <div id="add-board"> -->
+				<div class="add-board-background dropdown-toggle" data-toggle="dropdown">
+					<div class="add-board-text">
+						board create
+					</div>
+				</div>
+		<!-- 	</div> -->
+<!-- 			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 				  board create   <span class="caret"></span>
-			</button>
+			</button> -->
 			
-			<ul class="dropdown-menu">
+			<div class="dropdown-menu">
 			<div class="modal-body">
 				<p>Create Board</p>
 				
@@ -86,7 +91,9 @@
 					</div>
 				</form>
 			</div>			
-			</ul>
+			</div>
+		</div>
+			</div>
 		</div>
 	</div>
 	</div>

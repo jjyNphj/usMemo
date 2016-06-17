@@ -48,14 +48,14 @@ body, #board-header-wrap{
 	
 }
 
-.member-boards-wrapper{
+.member-boards-wrapper,.add-board-wrapper{
 	box-sizing: border-box;
 	padding: 0 1pc 8px 0;
 	position: relative;
 	width: 25%;
 	transform:translate3d(0,0,0);
 }
-.member-boards-background{
+.member-boards-background,.add-board-background{
 	background-color: #B04632;
 	background-position: center center;
 	background-size: cover;
@@ -66,4 +66,12 @@ body, #board-header-wrap{
 	padding: 8px 9pt;
 	position: relative;
 	text-decoration: none;
+}
+.add-board-background{
+	background-color: #E2E4E6;
+	color: #8C8C8C;
+}
+.add-board-background:HOVER{
+	background-color: #D6DADC;
+	color: #505050;
 }
