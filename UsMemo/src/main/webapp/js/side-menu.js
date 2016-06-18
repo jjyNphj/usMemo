@@ -65,6 +65,9 @@ $('.side-menu-delete-board-btn').click(function(){
 	// 보드 삭제 버튼 이벤트 
 	goDeletePage(static_bNum);
 });
+$('.side-menu-change-color-btn').click(function(){
+	//보드색 바꾸기 이벤트 
+})
 
 function goDeletePage(bNum) {
 	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
@@ -267,164 +270,13 @@ function addMemberFunc(id,bNum){
 		$.each(data,function(index,val){
 			result+=val.last_activity;
 		});
-/*		$.each(data,function(index,val){
-			var format=val.format;
-			result+='<div class="activity-unit">'+
-						'<div class="dropdown activity-unit-my">'+
-							'<div class="my-img-wrapper dropdown-toggle" data-toggle="dropdown">'+
-								'<span><img id="my-img_'+val.memId+'" class="my-img" src='+val.profile_image+'><span>'+
-							'</div>'+
-							'<div id="my-dropdown-view-content" class="dropdown-menu" >'+
-								'<div class="my-members-info">'+
-									'<div class="my-members-info-wrapper">'+
-										'<div class="my-members-info-img-wrapper">'+
-											'<img class="my-members-info-img" src="'+val.profile_image+'">'+
-										'</div>'+
-										'<div class="my-members-info-text-wrapper">'+
-											'<span class="my-member-name">'+val.name+'</span>'+
-											'<span class="my-member-nickname">('+val.nickname+')</span>'+
-											'<br><span class="my-member-email">'+val.email+'</span>'+
-										'</div>'+
-										'<div class="my-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
-									'</div>'+
-								'</div>'+
-							'</div>'+
-						'</div>'+
-						'<div class="activity-unit-contents-wrapper">';
-			format=format.replace('#me#',activity_memberInfo_setting_dropdown(val));
-			
-			switch (val.activity_name) {
-			case 'create_board':
-				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
-				//result+=format;
-				break;
-			case 'addList':
-				var get_list_name=activity_getListInfo(val.value_num);
-				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
-				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
-				//result+=format;
-				break;
-			case 'addCard':
-				var get_list_name=activity_getListInfo(val.to_num);
-				var get_card_name=activity_getCardInfo(val.value_num);
-				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
-				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
-				format=format.replace('#cardName#',
-						'<a class="cardInfo-dropdown-view"  onclick="editCard('+val.value_num+')" data-toggle="modal" data-target="#cardInfoView">'+get_card_name+'</a>'
-						);
-				break;
-			case 'updateCardLocation':
-				var get_to_list_name=activity_getListInfo(val.to_num);
-				var get_from_list_name=activity_getListInfo(val.from_num);
-				var get_card_name=activity_getCardInfo(val.value_num);
-				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
-				format=format.replace('#toListName#','<span class="listInfo-dropdown-view">'+get_to_list_name+'</span>');
-				format=format.replace('#fromListName#','<span class="listInfo-dropdown-view">'+get_from_list_name+'</span>');
-				format=format.replace('#cardName#',
-						'<a class="cardInfo-dropdown-view"  onclick="editCard('+val.value_num+')" data-toggle="modal" data-target="#cardInfoView">'+get_card_name+'</a>'
-						);
-				break;
-			case 'addFriend':
-				var get_friend_info=activity_getFriendInfo(val.value_string);
-				format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');
-				format=format.replace('#firendName#',activity_memberInfo_setting_dropdown(get_friend_info));
-				format=format.replace('#authority#','<span class="friendInfo-auth-dropdown-view">'+get_friend_info.grade+'</span>');
-				break;
-			}
-			result+=format;
-			result+='</div></div>'; //end of div, activity-unit
-		});*/
+
 		if(type=='someActivity'){$('.side-menu-activity-content').append(result);}
 		else if(type='allActivity'){$('#all-activity-modal-content-wrapper').append(result);}
 		bind_memberInfo_dropdown_activityMember();//이벤트 바인드
 	}
 	
-	function activity_memberInfo_setting_dropdown(val){
-	return '<div class="dropdown activity-memberInfo-dropdown-view">'+
-		'<a class="activity-memberInfo-dropdown-view-btn dropdown-toggle" data-toggle="dropdown">'+
-			'<span>'+val.nickname+'</span>'+
-		'</a>'+
-		'<div id="activity-memberInfo-dropdown-view-content" class="dropdown-menu" >'+
-			'<div class="activity-members-info">'+
-				'<div class="activity-members-info-wrapper">'+
-					'<div class="activity-members-info-img-wrapper">'+
-						'<img class="activity-members-info-img" src="'+val.profile_image+'">'+
-					'</div>'+
-					'<div class="activity-members-info-text-wrapper">'+
-						'<span class="activity-member-name">'+val.name+'</span>'+
-						'<span class="activity-member-nickname">('+val.nickname+')</span>'+
-						'<br><span class="activity-member-email">'+val.email+'</span>'+
-					'</div>'+
-					'<div class="activity-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
-				'</div>'+
-			'</div>'+
-		'</div>'+
-	'</div>';
-	}
 
-	/*function activity_getListInfo(listNum){
-		  var url='/usMemo/activity/getListInfo/'+listNum;
-		  var list_name;
-			$.ajax({
-				url: url,	      
-				type:'post',
-				dataType:'json',
-				 Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 
-				contentType: 'application/json',
-				async: false,
-				success:function(data){
-					console.log(data);
-					list_name=data.name;
-				} ,
-				error : function(xhr, status, error) {
-				alert(error);
-				}
-			});
-			return list_name;
-	}
-	function activity_getCardInfo(cardNum){
-		var url='/usMemo/activity/getCardInfo/'+cardNum;
-		  var card_name;
-			$.ajax({
-				url: url,	      
-				type:'post',
-				dataType:'json',
-				 Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 
-				contentType: 'application/json',
-				async: false,
-				success:function(data){
-					console.log(data);
-					card_name=data.name;
-				} ,
-				error : function(xhr, status, error) {
-				alert(error);
-				}
-			});
-			return card_name;
-	}
-	function activity_getFriendInfo(friendNum){
-		var url='/usMemo/activity/getFriendInfo/'+static_bNum+'/'+friendNum;
-		  var friendInfo;
-			$.ajax({
-				url: url,	      
-				type:'post',
-				dataType:'json',
-				 Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 
-				contentType: 'application/json',
-				async: false,
-				success:function(data){
-					console.log(data);
-					friendInfo=data;
-				} ,
-				error : function(xhr, status, error) {
-				alert(error);
-				}
-			});
-			
-			if(friendInfo.grade==1){friendInfo.grade='admin';}
-			else if(friendInfo.grade==2){friendInfo.grade='member';}
-			return friendInfo;
-	}*/
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
 	 * @param data

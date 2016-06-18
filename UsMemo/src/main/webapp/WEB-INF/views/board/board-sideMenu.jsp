@@ -35,14 +35,27 @@
 				</form>
 			    </div>
   			</div>
-  			<div id="side-menu-delete-board-wrapper">
   			<hr>
-  				<div class="side-menu-delete-board-btn">
-  					<span class="glyphicon glyphicon-trash"></span>
-  					<span>delete Board...</span>
-  				</div>
+  				<div class="side-menu-option-menu">
+		  			<div id="side-menu-delete-board-wrapper">
+		  				<div class="side-menu-delete-board-btn">
+		  					<span class="glyphicon glyphicon-trash"></span>
+		  					<span>delete Board...</span>
+		  				</div>
+		  			</div>
+		  			<div id="side-menu-change-color-wrapper" class="dropdown">
+		  				<div class="side-menu-change-color-btn dropdown-toggle" data-toggle="dropdown">
+		  					<span class="glyphicon glyphicon-cog"></span>
+		  					<span>Change Background</span>
+		  				</div>
+		  				<div class="dropdown-menu">
+		  					<div class="background-color-list">
+		  						<div id="color-list-green" class="color-list-item"></div>
+		  					</div>
+		  				</div>
+		  			</div>
+	  			</div>
   			<hr>
-  			</div>
   			<div class="side-menu-activity-wrapper">
   				<div class="side-menu-activity-header">
   					<span class="side-menu-activity-header-text">Activity</span>
