@@ -29,19 +29,21 @@ end;
 
 ================card procedure======================
 create or replace procedure addCardProcedure
-(in_name IN varchar, in_memId IN number,in_lNum In number)
+(in_name IN varchar, in_memId IN number,in_lNum In number,cur_seq OUT number)
 is 
 preNum number;
 countNum number;
-cur_seq number;
+
 begin
 	select count(num) into countNum from card where lNum=in_lNum;
 	
 	IF countNum=0 THEN
-	insert into card values(card_num_seq.nextval,in_name,null,null,in_memId,sysdate,in_lNum,-1,-1 );
+	insert into card values	(card_num_seq.nextval,in_name,null,null,in_memId,sysdate,in_lNum,-1,-1 );
+	select card_num_seq.currval into cur_seq from DUAL;
+
 	ELSE
 	select num into preNum from card where lNum=in_lNum and rlink=-1;
-	insert into card values(card_num_seq.nextval,in_name,null,null,in_memId,sysdate,in_lNum,preNum,-1 );
+	insert into card values		(card_num_seq.nextval,in_name,null,null,in_memId,sysdate,in_lNum,preNum,-1 );
 	select card_num_seq.currval into cur_seq from DUAL;
 	--현재 시퀀스값을 cur_seq에 저장하고 사용! 
 	update card set rlink = cur_seq where num=preNum;
