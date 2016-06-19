@@ -36,6 +36,10 @@ function bind_change_permission(){
 		$(this).parent().parent('.side-menu-change-permission').prev('.side-menu-members-info').toggle(); //.side-menu-members-info을 토글
 		//$('.side-menu-members-info').toggle();
 	});
+	$('.side-menu-members').on('hidden.bs.dropdown', function () {
+		$('.side-menu-change-permission').css("display","none");
+		$('.side-menu-members-info').css("display","");
+	});
 }
 /*
 $('.all-activity-btn').click(function(){
