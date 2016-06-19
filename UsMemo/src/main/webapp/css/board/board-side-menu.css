@@ -96,7 +96,7 @@ hr{
 	flex: 1;
 }
 
-.side-menu-members-info,.my-members-info,.activity-members-info{
+.side-menu-members-info,.my-members-info,.activity-members-info,.side-menu-change-permission {
 	background-color:#fff;
   /*   position: absolute;
     left: 10px; */
@@ -143,4 +143,26 @@ hr{
 
 #color-list-green{
 	background-color: #519839;
+}
+.can-not-click{
+	color:#8C8C8C;
+}
+.side-menu-change-permission-header{
+	display: flex;
+	padding: 5px;
+}
+.side-menu-change-permission-header-text{
+	flex: 1 1 auto;
+    text-align: center;
+}
+.side-menu-members-info,.side-menu-change-permission {
+	width: 320px;
+}
+
+.side-menu-change-permission-wrapper{
+    white-space: initial;
+}
+
+.change-permission-admin,.change-permission-member{
+	padding:5px;
 }

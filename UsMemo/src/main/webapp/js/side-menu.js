@@ -1,6 +1,42 @@
 var static_bNum=$('#bNum').val();
 var static_memId=$('#memId').val();
 
+/**
+ * 이벤트 
+ */
+
+$('.side-menu-delete-board-btn').click(function(){
+	// 보드 삭제 버튼 이벤트 
+	goDeletePage(static_bNum);
+});
+$('.side-menu-change-color-btn').click(function(){
+	//보드색 바꾸기 이벤트 
+});
+function bind_change_permission(){
+	/**
+	 * 	바인딩을 클릭한 버튼의 드롭다운으로 연결을 해야함. 그렇지 않으면 엉뚱한 창이 열림.
+	 * 
+	 */
+	$('.side-menu-change-permission-btn').click(function(){
+		//권한바꾸기 버튼 클릭시 이벤트
+		$(this).parent().next().toggle("slow"); //.side-menu-change-permission 을 토글시켜야함.
+		$(this).parent().toggle("slow");//.side-menu-members-info을 토글
+	});
+	$('.side-menu-return-memberInfo-btn').click(function(){
+		//회원정보로 되돌아가기 버튼 클릭
+		$('.side-menu-change-permission').toggle("slow");
+		$('.side-menu-members-info').toggle("slow");
+	});
+	$('.side-menu-change-permission-close-btn').click(function(){
+		//권한바꾸기에서 창을 끌때 이벤트, 다시 프로필을 클릭하면 회원정보가 뜨게 바꿔놓아야함.
+		var select=$(this).parents($('.dropdown.side-menu-members.open')).children('.side-menu-members-btn');
+		select.dropdown('toggle');
+		$(this).parent().parent('.side-menu-change-permission').toggle();//.side-menu-change-permission을 토글
+		//$('.side-menu-change-permission').toggle();
+		$(this).parent().parent('.side-menu-change-permission').prev('.side-menu-members-info').toggle(); //.side-menu-members-info을 토글
+		//$('.side-menu-members-info').toggle();
+	});
+}
 /*
 $('.all-activity-btn').click(function(){
 	openAllActivity(static_bNum);
@@ -25,8 +61,9 @@ function bind_memberInfo_dropdown_setMember(){
 	 * 창이 꺼지는 것을 방지함. 
 	 * dropdown-menu클래스의 명확한 id를 적어주어야함.(반드시 id로 표기할것.) 
 	 */
+	var temp=$('.memberInfo-dropdown-view-content');
 	
-	$('#memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
+	$('.memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
 }
 function bind_memberInfo_dropdown_activityMember(){
@@ -60,14 +97,6 @@ $('#my-dropdown-view-content').bind('click', function (e) { e.stopPropagation() 
 $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
 }
-
-$('.side-menu-delete-board-btn').click(function(){
-	// 보드 삭제 버튼 이벤트 
-	goDeletePage(static_bNum);
-});
-$('.side-menu-change-color-btn').click(function(){
-	//보드색 바꾸기 이벤트 
-})
 
 function goDeletePage(bNum) {
 	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
@@ -111,6 +140,7 @@ function addMemberFunc(id,bNum){
 	            	///window.location.reload();
 	            	var memId=$("#memId").val();
 	            	cleanMemberListView();
+	            	clean_activitys();
 	            	openMenu(bNum, memId);
 	            	cleanFindeMemberText();
 	            } ,
@@ -299,36 +329,133 @@ function addMemberFunc(id,bNum){
 			//var img_id='#profile_image'+index;
 			var member_select_id='#memberInfo'+index;
 			//이미지 설정함
-			
+			var change_permission_html;
 			var grade_string;
 			if(val.grade==1){grade_string='admin';}
 			else if(val.grade==2){grade_string='normal';}
 			
-			$("#setMember").append(
-					'<div class="dropdown side-menu-members">'+
-						'<a class="side-menu-members-btn dropdown-toggle" data-toggle="dropdown">'+
-							'<span><img id="profile_image'+index+'" src="'+val.profile_image+'" title="" class="side-menu-profile_image"></span>'+
-						'</a>'+
-						'<div id="memberInfo-dropdown-view-content" class="dropdown-menu">'+
-							'<div class="side-menu-members-info">'+
-								'<div class="side-menu-members-info-wrapper">'+
-									'<div class="side-menu-members-info-img-wrapper">'+
-										'<img class="side-menu-members-info-img" src="'+val.profile_image+'">'+
-									'</div>'+
-									'<div class="side-menu-members-info-text-wrapper">'+
-										'<span class="side-menu-member-name">'+val.name+'</span>'+
-										'<span class="side-menu-member-nickname">('+val.nickname+')</span>'+
-										'<br><span class="side-menu-member-email">'+val.email+'</span>'+
-									'</div>'+
-									'<div class="side-menu-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
-								'</div>'+
-								'<hr>'+
-								'<div class="side-menu-change-permission-btn hover-blue">'+
-									'<span>Change permissions...('+grade_string+')</span>'+
-								'</div>'+
-							'</div>'+
+			if(sessionId==val.id){
+				//현재 로그인한 사용자의 프로필을 열었을 경우  
+				change_permission_html=
+					'<div class="side-menu-change-permission-wrapper can-not-click">'+
+						'<div class="change-permission-admin">'+
+							'<span class="permission-bold">Admin</span>'+
+							'<span class="glyphicon glyphicon-ok"></span>'+
+							'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
 						'</div>'+
-					'</div>');
+						'<div class="change-permission-member can-not-click">'+
+							'<span class="permission-bold">Nomal</span>'+
+							'<div>can view and edit cards. Can\'t changes settings.</div>'+
+						'</div>'+
+					'</div>';
+			}
+			else if(sessionId!=val.id){
+				//현재로그인한 사람이 아닌 다른사람의 프로필을 열었을 경우
+				if(grade==1){
+					//현재 로그인한 사람이 관리자일경우만 바꿀 수 있음. 
+				
+					if(val.grade==1){
+						//현재 열람중인 프로필이 관리자일 경우 -> 일반으로만 바꿀 수 있게 
+					change_permission_html=
+						'<div class="side-menu-change-permission-wrapper">'+
+							'<div class="change-permission-admin can-not-click">'+
+								'<span class="permission-bold">Admin</span>'+
+								'<span class="glyphicon glyphicon-ok"></span>'+
+								'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+							'</div>'+
+							'<div class="change-permission-member hover-blue" onclick="updateMemberGrade('+val.id+','+bNum+',2)">'+
+								'<span class="permission-bold">Nomal</span>'+
+								'<div>can view and edit cards. Can\'t changes settings.</div>'+
+							'</div>'+
+						'</div>';
+					}
+					else if(val.grade==2){
+						//현재 열람중인 프로필이 일반일 경우 -> 관리자로만 바꿀 수 있게 
+						change_permission_html=
+							'<div class="side-menu-change-permission-wrapper">'+
+								'<div class="change-permission-admin hover-blue" onclick="updateMemberGrade('+val.id+','+bNum+',1)">'+
+									'<span class="permission-bold">Admin</span>'+
+									'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+								'</div>'+
+								'<div class="change-permission-member can-not-click">'+
+									'<span class="permission-bold">Nomal</span>'+
+									'<span class="glyphicon glyphicon-ok"></span>'+
+									'<div>can view and edit cards. Can\'t changes settings.</div>'+
+								'</div>'+
+							'</div>';
+					}
+				}
+				else if(grade==2){
+
+					if(val.grade==1){
+						//현재 열람중인 프로필이 관리자일 경우
+					change_permission_html=
+						'<div class="side-menu-change-permission-wrapper">'+
+							'<div class="change-permission-admin">'+
+								'<span class="permission-bold">Admin</span>'+
+								'<span class="glyphicon glyphicon-ok"></span>'+
+								'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+							'</div>'+
+							'<div class="change-permission-member">'+
+								'<span class="permission-bold">Nomal</span>'+
+								'<div>can view and edit cards. Can\'t changes settings.</div>'+
+							'</div>'+
+						'</div>';
+					}
+					else if(val.grade==2){
+						change_permission_html=
+							'<div class="side-menu-change-permission-wrapper">'+
+								'<div class="change-permission-admin">'+
+									'<span class="permission-bold">Admin</span>'+
+									'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+								'</div>'+
+								'<div class="change-permission-member">'+
+									'<span class="permission-bold">Nomal</span>'+
+									'<span class="glyphicon glyphicon-ok"></span>'+
+									'<div>can view and edit cards. Can\'t changes settings.</div>'+
+								'</div>'+
+							'</div>';
+						
+					}
+				}
+			}
+			
+			var result=	
+			'<div class="dropdown side-menu-members">'+
+					'<a class="side-menu-members-btn dropdown-toggle" data-toggle="dropdown">'+
+					'<span><img id="profile_image'+index+'" src="'+val.profile_image+'" title="" class="side-menu-profile_image"></span>'+
+					'</a>'+
+				'<div class="memberInfo-dropdown-view-content dropdown-menu">'+
+					'<div class="side-menu-members-info">'+
+						'<div class="side-menu-members-info-wrapper">'+
+							'<div class="side-menu-members-info-img-wrapper">'+
+								'<img class="side-menu-members-info-img" src="'+val.profile_image+'">'+
+							'</div>'+
+							'<div class="side-menu-members-info-text-wrapper">'+
+								'<span class="side-menu-member-name">'+val.name+'</span>'+
+								'<span class="side-menu-member-nickname">('+val.nickname+')</span>'+
+								'<br><span class="side-menu-member-email">'+val.email+'</span>'+
+							'</div>'+
+							'<div class="side-menu-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
+						'</div>'+
+						'<hr>'+
+						'<div class="side-menu-change-permission-btn hover-blue">'+
+							'<span>Change permissions...('+grade_string+')</span>'+
+						'</div>'+
+					'</div>'+
+					'<div class="side-menu-change-permission " style="display:none;">'+
+					'<div class="side-menu-change-permission-header">'+
+						'<div class="side-menu-return-memberInfo-btn"><span class="glyphicon glyphicon-menu-left"></span></div>'+
+						'<span class="side-menu-change-permission-header-text">Change Permissions</span>'+
+						'<div class="side-menu-change-permission-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
+					'</div>'+
+					'<hr>'+
+					change_permission_html+
+				'</div>'+
+				'</div>'+
+			'</div>';
+			
+			$("#setMember").append(result);
 
 			//$(img_id).attr("src",val.profile_image);
 				//권한에 따라 타이틀만 변경해야함.
@@ -365,6 +492,7 @@ function addMemberFunc(id,bNum){
 					}*/
 		});
 		bind_memberInfo_dropdown_setMember();//이벤트 바인드
+		bind_change_permission();
 	}
 	
 	
