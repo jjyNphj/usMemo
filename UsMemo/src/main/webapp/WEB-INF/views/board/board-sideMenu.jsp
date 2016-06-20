@@ -50,15 +50,22 @@
 		  				</div>
 		  				<div class="dropdown-menu">
 		  					<div class="background-color-list">
-		  						<div id="color-list-blue" class="color-list-item"></div>
-		  						<div id="color-list-orange" class="color-list-item"></div>
-		  						<div id="color-list-green" class="color-list-item"></div>
-		  						<div id="color-list-red" class="color-list-item"></div>
-		  						<div id="color-list-purple" class="color-list-item"></div>
-		  						<div id="color-list-pink" class="color-list-item"></div>
-		  						<div id="color-list-lightGreen" class="color-list-item"></div>
-		  						<div id="color-list-sykBlue" class="color-list-item"></div>
-		  						<div id="color-list-gray" class="color-list-item"></div>
+		  						<div class="background-color-list-header">
+		  							<span class="background-color-list-header-text">Change Background</span>
+		  							<span class="background-color-list-close-btn glyphicon glyphicon-remove"></span>
+		  						</div>
+		  						<hr>
+		  						<div class="background-color-list-select">
+				  						<div id="color-list-blue" class="color-list-item"></div>
+				  						<div id="color-list-orange" class="color-list-item"></div>
+				  						<div id="color-list-green" class="color-list-item"></div>
+				  						<div id="color-list-red" class="color-list-item"></div>
+				  						<div id="color-list-purple" class="color-list-item"></div>
+				  						<div id="color-list-pink" class="color-list-item"></div>
+				  						<div id="color-list-lightGreen" class="color-list-item"></div>
+				  						<div id="color-list-sykBlue" class="color-list-item"></div>
+				  						<div id="color-list-gray" class="color-list-item"></div>
+		  						</div>
 		  					</div>
 		  				</div>
 		  			</div>

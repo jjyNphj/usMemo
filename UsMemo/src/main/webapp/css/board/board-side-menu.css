@@ -134,14 +134,41 @@ hr{
     overflow-x: hidden;
 }
 .background-color-list{
-	width: 90%;
+	/* width: 90%; */
+	width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e2e4e6;
+}
+.background-color-list-select{
+/* 	display: flex;
+	flex-direction:column;
+	flex-wrap: wrap; */
+	display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;
+    flex-wrap: wrap;
+}
+.background-color-list-header{
+	padding: 10px;
+	display: flex;
+	
+}
+.background-color-list-header-text{
+	flex: 1 1 auto;
+	text-align: center;
 }
 .color-list-item{
-	width: 33%;
-	height: 60px;
+	width: 100px;/* 33% */
+	height: 100px;
+	
+    margin: 3px;
+	border-radius: 3px;
 }
-
-
+.color-list-item:HOVER{
+	background-color: rgba( 0, 0, 0, 0.15 );
+}
 /*---------------»ö»ó css------------------*/
 
 #color-list-blue{
