@@ -87,7 +87,7 @@
 						<!-- submit 누르면 form에 적힌 action 주소로 넘어감. -->
 						<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 						<button type="button" class="btn btn-primary" onclick="createBoard(memId)">Submit</button>
-						<button type="button" class="btn btn-default" data-toggle="dropdown">Close</button>
+						<button type="button" class="btn btn-default" data-toggle="dropdown" onclick="clearForm(this.form)">Close</button>
 					</div>
 				</form>
 			</div>			

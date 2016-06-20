@@ -85,10 +85,9 @@
 													<!-- style= "background-color: blue;"> -->
 													<div class="list_unit_name no-include-sortable">
 														<!--  style="background-color: red;"> -->
-														<h6>
+														<h6 style="margin-bottom: 0px;">
 														<%-- 	${l.num } /  --%>
-															<textarea class="list-name" id="list-name-text_${l.num }"  onkeypress="enterSave(event,this)" onkeyup="heightResize(this)">
-															${l.name}</textarea>
+															<textarea class="list-name" id="list-name-text_${l.num }"  onkeypress="enterSave(event,this)" onkeyup="heightResize(this)">${l.name}</textarea>
 															<span class="delete-list-btn glyphicon glyphicon-trash" onclick="deleteListInfo(${l.num})">
 															</span>
 														</h6>
@@ -117,7 +116,7 @@
 															<div class="addCard_group no-include-sortable hide">
 																<div class="form-group no-include-sortable">
 																	<!-- textarea 폼의 디자인 div -->
-																	<textarea class="form-control"
+																	<textarea class="form-control cardName_textarea"
 																		placeholder="Here, add Card's name" rows="5"
 																		id="cardName${l.num}" style="resize: none;"></textarea>
 																</div>
@@ -185,8 +184,8 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/jquery.autogrowtextarea.js"></script>
-	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
+	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/side-menu.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-setting.js"></script>

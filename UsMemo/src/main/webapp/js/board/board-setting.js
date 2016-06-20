@@ -50,3 +50,8 @@ function createBoard(memId) {
 	    }
 	   })
 }
+
+//clear,close나 X버튼 누르면 textarea 내용 초기화 시키기.
+function clearForm(o){
+    $('textarea#cardDescription, textarea#boardComment', o).val('');
+} 

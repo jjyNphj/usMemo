@@ -48,6 +48,7 @@
  	margin: 5px 6px 5px 6px;
 	padding: 2px 6px 2px 8px; 
 	white-space: normal;
+	word-wrap: break-word;
 /*     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
