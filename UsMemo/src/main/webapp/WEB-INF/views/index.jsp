@@ -77,7 +77,7 @@
                     <li>
                         <a class="page-scroll" href="#portfolio">Portfolio</a>
                     </li>                    
-                    <hr>
+                    <hr style="border-color:#d3d3d3">
                 </ul>
                 <ul class="nav navbar-nav navbar-right ">
 	        		<c:if test="${sessionScope.id == null }">
@@ -118,10 +118,10 @@
                 <!-- <h4 class="koreanfont">UsMemo와 지금 시작하세요</h4> -->
                 <hr class="hrsize">
                 <!-- <a href="#video-background" id="toggleVideo" data-toggle="collapse" class="btn btn-primary btn-xl">Toggle Video</a>  -->
-                <a href="#video-background" data-toggle="modal" data-target="#myModal" class="btn btn-primary-fix btn-xl-size">
+                <a href="#video-background" data-toggle="modal" data-target="#myModal" class="btn btn-primary-fix btn-xl-size" onclick="video_controller();">
                 	<span class="glyphicon glyphicon-expand"></span>&nbsp;&nbsp;Guide Video
                 </a>
-                <a href="#video-background" data-toggle="collapse" class="btn btn-primary-fix btn-xl-size">
+                <a href="#video-background" data-toggle="collapse" class="btn btn-primary-fix btn-xl-size" onclick="video_controller();">
                 	<span class="glyphicon glyphicon-pause"></span>&nbsp;&nbsp;Video Stop
                 </a>  
                <!--  &nbsp; &nbsp;&nbsp; -->
@@ -191,12 +191,13 @@
             <div class="row">
 				 <div class="col-md-2">&nbsp;</div>
 		
-				 <div class="col-md-4 col-sm-6">
-		            <div class="card-container manual-flip">
+				 <div class="col-md-4 col-sm-6" style="margin:0 20px 0 0">
+		            <!-- <div class="card-container manual-flip"> -->
+		            <div class="card-container">
 		               <div class="card">
 		                   <div class="front">
 		                       <div class="cover" >
-		                           <img src="${pageContext.request.contextPath}/img/team/2.jpg"/>
+		                           <%-- <img src="${pageContext.request.contextPath}/img/team/2.jpg"/> --%>
 		                       </div>
 		                       <div class="user">
 		                           <img class="img-circle" src="${pageContext.request.contextPath}/img/team/2.jpg"/>
@@ -229,9 +230,9 @@
 		                       </div>
 		                       
 		                       <div class="footer">
-		                       	<button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+		                       	<!-- <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
 		                               <i class="fa fa-reply"></i> Back
-		                           </button>                       
+		                         </button>  -->                      
 		                       	<div class="social-links text-center">
 		                               <a href="#" class="twitter" style="color:#F05B42;"><i class="fa fa-twitter fa-fw"></i></a>
 		                           </div>
@@ -249,11 +250,12 @@
 		       <!-- <div class="col-md-1">&nbsp;</div> -->
 		       
 		       <div class="col-md-4 col-sm-6">
-		            <div class="card-container manual-flip">
+		            <!-- <div class="card-container manual-flip"> -->
+		            <div class="card-container">
 		               <div class="card">
 		                   <div class="front">
 		                       <div class="cover" >
-		                           <img src="${pageContext.request.contextPath}/img/team/1.jpg"/>
+		                           <%-- <img src="${pageContext.request.contextPath}/img/team/1.jpg"/> --%>
 		                       </div>
 		                       <div class="user">
 		                           <img class="img-circle" src="${pageContext.request.contextPath}/img/team/1.jpg"/>
@@ -286,9 +288,9 @@
 		                       </div>
 		                       
 		                       <div class="footer">
-		                       	<button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
+		                       	<!-- <button class="btn btn-simple" rel="tooltip" title="Flip Card" onclick="rotateCard(this)">
 		                               <i class="fa fa-reply"></i> Back
-		                           </button>                       
+		                        </button>  -->                      
 		                       	<div class="social-links text-center">
 		                               <a href="#" class="twitter" style="color:#F05B42;"><i class="fa fa-twitter fa-fw"></i></a>
 		                           </div>
@@ -535,6 +537,48 @@
                         <p class="text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design)</p>
                     </div>
                 </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal7" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="${pageContext.request.contextPath}/img/main/portfolio_jquery.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4 class="h3color">Jquery</h4>
+                        <p class="text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design)</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal8" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="${pageContext.request.contextPath}/img/main/portfolio_git.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4 class="h3color">Git</h4>
+                        <p class="text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design)</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal9" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="${pageContext.request.contextPath}/img/main/portfolio_naver.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4 class="h3color">Naver Login API</h4>
+                        <p class="text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design)</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -710,6 +754,86 @@
         </div>
     </div>
 
+	<!-- Portfolio Modal 7 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Jquery</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_jquery.png" alt="">
+                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Portfolio Modal 8 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Git</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_git.png"" alt="">
+                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Portfolio Modal 9 -->
+    <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Naver Login API</h2>
+                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_naver.png" alt="">
+                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
+                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
 		
     <footer>

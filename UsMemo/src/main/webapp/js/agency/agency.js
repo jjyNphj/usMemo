@@ -24,3 +24,13 @@ $('body').scrollspy({
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle:visible').click();
 });
+
+
+function video_controller() {
+	var video = document.getElementById("video-background");
+	if (video.paused) {
+        video.play();
+     } else {
+        video.pause();
+     }	
+}

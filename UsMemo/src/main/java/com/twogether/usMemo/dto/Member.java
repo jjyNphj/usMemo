@@ -1,7 +1,5 @@
 package com.twogether.usMemo.dto;
 
-import oracle.sql.BLOB;
-
 public class Member {
 	private String id;
 	private String nickname;
