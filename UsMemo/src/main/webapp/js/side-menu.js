@@ -593,4 +593,26 @@ function addMemberFunc(id,bNum){
 	function clean_activitys(){
 		$('.side-menu-activity-content>*').detach();
 	}
+	
+	$('.color-list-item').click(function(){
+		var change_color=$(this).css("background-color");
+		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+		.css("background-color",change_color);
+		update_background_color(change_color);
+				});
+	
+	function update_background_color(change_color){
+		 $.ajax({
+	            url: '/usMemo/board/update/backgroundColor?memId='+static_memId+'+&bNum='+static_bNum+'&background_color='+change_color,
+	            type :'post',
+	            success:function(){
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        }); 
+	
+		
+	}
 

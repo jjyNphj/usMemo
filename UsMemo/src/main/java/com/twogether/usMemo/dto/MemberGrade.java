@@ -11,6 +11,7 @@ public class MemberGrade {
 	//회원 등급
 	private int grade;
 	private String star;
+	private String background_color;
 	
 	public int getNum() {
 		return num;
@@ -41,6 +42,12 @@ public class MemberGrade {
 	}
 	public void setStar(String star) {
 		this.star = star;
+	}
+	public String getBackground_color() {
+		return background_color;
+	}
+	public void setBackground_color(String background_color) {
+		this.background_color = background_color;
 	}
 
 	

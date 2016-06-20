@@ -5,7 +5,7 @@ var sameListFlag=true;
 var before=new Object();
 	 
 widthResize($('.board-name')[0]);
-
+initBoard();//보드색 설정
 		/*
 		 * body영역 설정
 		 * */
@@ -109,7 +109,11 @@ widthResize($('.board-name')[0]);
 
 	        	}
 	        	});
-	        
+	 function initBoard(){
+		var boardColor= $('#boardColor').val();
+		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+		.css("background-color",boardColor);
+	 }
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;

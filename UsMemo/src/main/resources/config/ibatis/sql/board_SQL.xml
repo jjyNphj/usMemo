@@ -15,6 +15,7 @@
        <result property="memId" column="memId"/>
        <result property="grade" column="grade"/>
        <result property="star" column="star"/>
+       <result property="background_color" column="background_color"/>
     </resultMap>
     <resultMap id="getAllBoards" class="allBoards">
 		<result property="memberGrade_num" column="memberGrade_num" />
@@ -50,7 +51,7 @@
 	    </selectKey>
 	    <!-- memberGarde_num_seq.nextval=자동으로 +1되면서 데이터 추가, selectKey에서 넘겨받은 bNum추가-->
 	    <!-- 세션에서 넘겨받은 memId추가, 회원 등급 1고정(친구 공유시에만 바꾸면 되므로) -->
-		insert into memberGrade values (memberGrade_num_seq.nextval,#bNum#,#memId#,'1','N')
+		insert into memberGrade values (memberGrade_num_seq.nextval,#bNum#,#memId#,'1','N','rgb(176, 70, 50)')
 	</insert>
 	
 	<delete id="deleteBoardBybNum" parameterClass="int">
@@ -74,6 +75,12 @@
 	</update>
 	<select id="getBoardName" parameterClass="int" resultClass="String">
 		select name from board where num=#bNum#
+	</select>
+	<update id="updateBackgroundColor" parameterClass="memberGrade">
+		update memberGrade set background_color=#background_color# where memId=#memId# and bNum=#bNum#
+	</update>
+	<select id="getThisBoardColor" parameterClass="memberGrade" resultClass="String">
+		select background_color from memberGrade where memId=#memId# and bNum=#bNum#
 	</select>
 
 </sqlMap>

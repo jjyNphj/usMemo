@@ -110,6 +110,15 @@ public class BoardDao {
 		return (String) sqlMapClientTemplate.queryForObject("Board.getBoardName",bNum);
 	}
 
+	public void updateBackgroundColor(MemberGrade memberGrade) {
+		sqlMapClientTemplate.update("Board.updateBackgroundColor",memberGrade);
+		
+	}
+
+	public String getThisBoardColor(MemberGrade memberGrade) {
+		return (String) sqlMapClientTemplate.queryForObject("Board.getThisBoardColor",memberGrade);
+	}
+
 	
 //	public int getBoardNumById(String id){
 //		//회원 id로 보드의 bNum 구하기

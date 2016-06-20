@@ -31,7 +31,7 @@ public class Board {
 	public void setBackground_color(String background_color) {
 		this.background_color = background_color;
 	}
-	
+
 	
 	
 

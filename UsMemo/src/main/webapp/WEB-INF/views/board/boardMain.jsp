@@ -73,6 +73,7 @@
 								<form>
 									<input type="hidden" id="bNum" value="${bNum }" /> <input
 										type="hidden" id="memId" value="${sessionScope.id }" />
+										<input type="hidden" id="boardColor" value="${boardColor }">
 								</form>
 								<div id="list-wrapper">
 								<div class="list_all">

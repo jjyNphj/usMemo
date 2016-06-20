@@ -141,9 +141,38 @@ hr{
 	height: 60px;
 }
 
-#color-list-green{
-	background-color: #519839;
+
+/*---------------»ö»ó css------------------*/
+
+#color-list-blue{
+	background-color: #0079BF;
+}				
+#color-list-orange{
+	background-color: #D29034;
 }
+#color-list-green{
+	background-color: #519839;	
+}
+#color-list-red{
+	background-color: #B04632;	
+}
+#color-list-purple{
+	background-color: #89609E;	
+}
+#color-list-pink{
+	background-color: #CD5A91;	
+}
+#color-list-lightGreen{
+	background-color: #4BBF6B;	
+}
+#color-list-sykBlue{
+	background-color: #00AECC;	
+}
+#color-list-gray{
+	background-color: #838C91;	
+}
+/*------------------------------*/
+
 .can-not-click{
 	color:#8C8C8C;
 }

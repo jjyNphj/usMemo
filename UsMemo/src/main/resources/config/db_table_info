@@ -11,7 +11,6 @@ create table member(
 create table board(
 	num number primary key,
 	name varchar(100),
-	background_color varchar2(100)
 );
 
 create table list(
@@ -66,7 +65,8 @@ create table memberGrade(
 	bNum number,
 	memId varchar(100),
 	grade number,
-    star varchar(2)
+    star varchar(2),
+    background_color varchar2(80)
 );
 
 create table activity(

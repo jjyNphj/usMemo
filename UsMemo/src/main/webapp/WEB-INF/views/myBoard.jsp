@@ -52,7 +52,7 @@
 			<div class="member-boards-myBoards-content">
 				<c:forEach var="list" items="${Board}" varStatus="i">
 				<div class="member-boards-wrapper">
-					<a class="member-boards-background" onclick="goBoard(${list.bNum},'${list.name}')">
+					<a class="member-boards-background" style="background-color: ${list.background_color}" onclick="goBoard(${list.bNum},'${list.name}')">
 						<span class="member-boards-title">${list.name }</span>
 							<c:if test="${list.star=='Y' }"> <span class="member-boards-star glyphicon glyphicon-star"></span></c:if>
 							<c:if test="${list.star=='N' }"> <span class="member-boards-star glyphicon glyphicon-star-empty"></span></c:if>
