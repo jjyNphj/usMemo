@@ -176,6 +176,7 @@ body{
 	font-family: basicFont;
 	font-size: 18pt;
 	color: #f3f3f3;
+    text-overflow: ellipsis;
 	
 }
 .board-header-btn-menu{

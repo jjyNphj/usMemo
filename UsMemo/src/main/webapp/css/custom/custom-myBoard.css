@@ -56,7 +56,7 @@ body, #board-header-wrap{
 	transform:translate3d(0,0,0);
 }
 .member-boards-background,.add-board-background{
-	background-color: #B04632;
+	/* background-color: #B04632; */
 	background-position: center center;
 	background-size: cover;
 	color: #fff;

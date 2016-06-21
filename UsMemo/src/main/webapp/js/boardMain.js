@@ -5,7 +5,19 @@ var sameListFlag=true;
 var before=new Object();
 	 
 widthResize($('.board-name')[0]);
-initBoard();//보드 설정
+		$(document).ready(function() {
+
+				 //보드색 설정
+				var boardColor= $('#boardColor').val();
+				$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+				.css("background-color",boardColor);
+				//리스트네임의 textarea height 조정
+				var textarea_arr=$('h6>textarea.list-name');
+				for(var i=0;i<textarea_arr.length;i++){
+					heightResize(textarea_arr[i]);
+				}
+			
+		});
 		/*
 		 * body영역 설정
 		 * */
@@ -111,18 +123,7 @@ initBoard();//보드 설정
 
 	        	}
 	        	});
-	 function initBoard(){
-		 //보드색 설정
-		var boardColor= $('#boardColor').val();
-		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
-		.css("background-color",boardColor);
-		//리스트네임의 textarea height 조정
-		
-		var textarea_arr=$('h6>textarea.list-name');
-		for(var i=0;i<textarea_arr.length;i++){
-			heightResize(textarea_arr[i]);
-		}
-	 }
+
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;

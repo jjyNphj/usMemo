@@ -47,10 +47,10 @@ function set_allBoards(data){
 		else if(val.star=='N') starred_boards_vlaue='glyphicon-star-empty'; 
 		 $(".all-boards-content").append(
 				 '<div class="all-boards-wrapper">'+
-				 	'<span class="drawer-boardsList-title-background"></span>'+
+				 	'<span class="drawer-boardsList-title-background" style="background-color:'+val.background_color+'"></span>'+
 					'<span class="drawer-boardsList-title-fade"></span>'+
 					 '<a class="drawer-boardsList-title-link" onclick="goBoard('+val.bNum+','+'\''+val.name+'\''+')">'+
-						 '<span class="drawer-boardsList-title-link-thumbnail"></span>'+
+						 '<span class="drawer-boardsList-title-link-thumbnail" style="background-color:'+val.background_color+'"></span>'+
 						 '<span class="drawer-boardsList-title-details">'+
 						 '<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
 						 '<span id="drawer-boardsList-title-star" class="glyphicon '+starred_boards_vlaue+'"></span>'+
@@ -68,10 +68,10 @@ function set_starredBoards(data){
 		$('.starred-boards-content').append(
 				
 				'<div class="starrd-boards-wrapper">'+
-					'<span class="drawer-boardsList-title-background"></span>'+
+					'<span class="drawer-boardsList-title-background"  style="background-color:'+val.background_color+'"></span>'+
 					'<span class="drawer-boardsList-title-fade"></span>'+
 					 '<a class="drawer-boardsList-title-link" onclick="goBoard('+val.bNum+','+'\''+val.name+'\''+')">'+
-					 	'<span class="drawer-boardsList-title-link-thumbnail"></span>'+
+					 	'<span class="drawer-boardsList-title-link-thumbnail" style="background-color:'+val.background_color+'"></span>'+
 						'<span class="drawer-boardsList-title-details">'+
 						'<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
 						'<span id="drawer-boardsList-title-star" class="glyphicon glyphicon-star"></span>'+
