@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.BoardInfo;
@@ -82,20 +83,16 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/deleteBoard")
-	public ModelAndView boardDelete(@RequestParam int bNum) throws SQLException {
-		logger.info("bNum: {}",bNum);
+	public ModelAndView boardDelete(@ModelAttribute MemberGrade memberGrade) throws SQLException {
 		/*
 		 * 사용자가 선택한 보드(bNum)에 해당하는 card,list,memberGrade,board 행 모두 삭제
 		 * */
 
 		ModelAndView mv= new ModelAndView();
-		mv.addObject("sucess","y");
-		//myBoard.jsp 부름
-		//mv.setViewName("board/myBoard");
-		mv.setViewName("myBoard");	
+		//mv.addObject("sucess","y");
+		mv.setView(new RedirectView("/usMemo/board/main?memId="+memberGrade.getmemId()));	
 		//DB 지우기 위해 보내는 부분, myBoard.jsp에서 선택된 bNum 전달
-		boardService.getBoardDelete(bNum);
-		//mv.addObject("Board",boardService.myBoardList(memId));
+		boardService.getBoardDelete(memberGrade.getbNum());
 		return mv;
 	}
 	

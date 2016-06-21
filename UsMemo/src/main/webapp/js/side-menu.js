@@ -105,7 +105,7 @@ $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.s
 function goDeletePage(bNum) {
 	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
 		if(answer){ 
-	        var url ='/usMemo/board/deleteBoard?bNum='+bNum;
+	        var url ='/usMemo/board/deleteBoard?bNum='+bNum+'&memId='+static_memId;
 	            window.open(url, "_self",  '');
 	     }
 } 
