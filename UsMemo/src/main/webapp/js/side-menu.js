@@ -1,6 +1,51 @@
 var static_bNum=$('#bNum').val();
 var static_memId=$('#memId').val();
 
+/**
+ * 이벤트 
+ */
+
+$('.side-menu-delete-board-btn').click(function(){
+	// 보드 삭제 버튼 이벤트 
+	goDeletePage(static_bNum);
+});
+$('.side-menu-change-color-btn').click(function(){
+	//보드색 바꾸기 이벤트 
+});
+function bind_change_permission(){
+	/**
+	 * 	바인딩을 클릭한 버튼의 드롭다운으로 연결을 해야함. 그렇지 않으면 엉뚱한 창이 열림.
+	 * 
+	 */
+	$('.side-menu-change-permission-btn').click(function(){
+		//권한바꾸기 버튼 클릭시 이벤트
+		$(this).parent().next().toggle("slow"); //.side-menu-change-permission 을 토글시켜야함.
+		$(this).parent().toggle("slow");//.side-menu-members-info을 토글
+	});
+	$('.side-menu-return-memberInfo-btn').click(function(){
+		//회원정보로 되돌아가기 버튼 클릭
+		$('.side-menu-change-permission').toggle("slow");
+		$('.side-menu-members-info').toggle("slow");
+	});
+	$('.side-menu-change-permission-close-btn').click(function(){
+		//권한바꾸기에서 창을 끌때 이벤트, 다시 프로필을 클릭하면 회원정보가 뜨게 바꿔놓아야함.
+		var select=$(this).parents($('.dropdown.side-menu-members.open')).children('.side-menu-members-btn');
+		select.dropdown('toggle');
+		$(this).parent().parent('.side-menu-change-permission').toggle();//.side-menu-change-permission을 토글
+		//$('.side-menu-change-permission').toggle();
+		$(this).parent().parent('.side-menu-change-permission').prev('.side-menu-members-info').toggle(); //.side-menu-members-info을 토글
+		//$('.side-menu-members-info').toggle();
+	});
+	$('.side-menu-members').on('hidden.bs.dropdown', function () {
+		$('.side-menu-change-permission').css("display","none");
+		$('.side-menu-members-info').css("display","");
+	});
+}
+/*
+$('.all-activity-btn').click(function(){
+	openAllActivity(static_bNum);
+});*/
+
 function bind_memberInfo_dropdown_setMember(){
 	/*
 	 * 사이드메뉴의 사람이름 클릭시 보여지는 회원정보 창 끄기버튼 설정
@@ -20,8 +65,9 @@ function bind_memberInfo_dropdown_setMember(){
 	 * 창이 꺼지는 것을 방지함. 
 	 * dropdown-menu클래스의 명확한 id를 적어주어야함.(반드시 id로 표기할것.) 
 	 */
+	var temp=$('.memberInfo-dropdown-view-content');
 	
-	$('#memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
+	$('.memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
 }
 function bind_memberInfo_dropdown_activityMember(){
@@ -55,11 +101,6 @@ $('#my-dropdown-view-content').bind('click', function (e) { e.stopPropagation() 
 $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
 }
-
-$('.side-menu-delete-board-btn').click(function(){
-	// 보드 삭제 버튼 이벤트 
-	goDeletePage(static_bNum);
-});
 
 function goDeletePage(bNum) {
 	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
@@ -103,6 +144,7 @@ function addMemberFunc(id,bNum){
 	            	///window.location.reload();
 	            	var memId=$("#memId").val();
 	            	cleanMemberListView();
+	            	clean_activitys();
 	            	openMenu(bNum, memId);
 	            	cleanFindeMemberText();
 	            } ,
@@ -185,6 +227,7 @@ function addMemberFunc(id,bNum){
 				dataType:'json',
 				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
 				contentType: 'application/json',
+				async:true,
 				success:function(data){
 					console.log(data);
 					/*var ch=$('#setMember > *').length;
@@ -193,6 +236,7 @@ function addMemberFunc(id,bNum){
 					var bNum=$("#bNum").val();
 					var grade=menu_checkSessionId(data,memId);
 					menu_setMemberList(data,memId,grade,bNum);
+					openActivity(bNum);
 					//}
 				} ,
 				error : function(xhr, status, error) {
@@ -201,10 +245,34 @@ function addMemberFunc(id,bNum){
 			}); 
 	}
 	/**
-	 * activity 불러오기
+	 * 일부분의 activity 불러오기
 	 * @param bNum
 	 */
 	function openActivity(bNum){
+		  var url='/usMemo/activity/getSomeActivity/'+bNum;
+		  
+			$.ajax({
+				url: url,	      
+				type:'post',
+				dataType:'json',
+				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
+				contentType: 'application/json',
+				success:function(data){
+					console.log(data);
+					setActivity(data,'someActivity');
+					setAllActivityBtn();
+				} ,
+				error : function(xhr, status, error) {
+				alert(error);
+				}
+			});
+	}
+	
+	/**
+	 * 모든 activity 불러오기
+	 * @param bNum
+	 */
+	function openAllActivity(bNum){
 		  var url='/usMemo/activity/getAllActivity/'+bNum;
 		  
 			$.ajax({
@@ -215,7 +283,7 @@ function addMemberFunc(id,bNum){
 				contentType: 'application/json',
 				success:function(data){
 					console.log(data);
-					setActivity(data);
+					setActivity(data,'allActivity');
 				} ,
 				error : function(xhr, status, error) {
 				alert(error);
@@ -223,204 +291,26 @@ function addMemberFunc(id,bNum){
 			});
 	}
 	
+	function setAllActivityBtn(){
+		var modalString='<a class="all-activity-btn" data-toggle="modal" data-target="#allActivityModal" onclick="openAllActivity('+static_bNum+')">View all activity...</a>';
+		$('.side-menu-activity-content').append(modalString);
+	}
 	/**
 	 * activity의 내용을 html에 setting하기.
 	 * @param data
 	 */
-	function setActivity(data){
+	function setActivity(data,type){
 		var result='';
 		$.each(data,function(index,val){
-			var format=val.format;
-			result+='<div class="activity-unit">'+
-						'<div class="dropdown activity-unit-my">'+
-							'<div class="my-img-wrapper dropdown-toggle" data-toggle="dropdown">'+
-								'<span><img id="my-img_'+val.memId+'" class="my-img" src='+val.profile_image+'><span>'+
-							'</div>'+
-							'<div id="my-dropdown-view-content" class="dropdown-menu" >'+
-								'<div class="my-members-info">'+
-									'<div class="my-members-info-wrapper">'+
-										'<div class="my-members-info-img-wrapper">'+
-											'<img class="my-members-info-img" src="'+val.profile_image+'">'+
-										'</div>'+
-										'<div class="my-members-info-text-wrapper">'+
-											'<span class="my-member-name">'+val.name+'</span>'+
-											'<span class="my-member-nickname">('+val.nickname+')</span>'+
-											'<br><span class="my-member-email">'+val.email+'</span>'+
-										'</div>'+
-										'<div class="my-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
-									'</div>'+
-								'</div>'+
-							'</div>'+
-						'</div>'+
-						'<div class="activity-unit-contents-wrapper">';
-			format=format.replace('#me#',activity_memberInfo_setting_dropdown(val));
-			
-			switch (val.activity_name) {
-			case 'create_board':
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
-				//result+=format;
-				break;
-			case 'addList':
-				var get_list_name=activity_getListInfo(val.value_num);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
-				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
-				//result+=format;
-				break;
-			case 'addCard':
-				var get_list_name=activity_getListInfo(val.to_num);
-				var get_card_name=activity_getCardInfo(val.value_num);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
-				format=format.replace('#listName#','<span class="listInfo-dropdown-view">'+get_list_name+'</span>');
-				format=format.replace('#cardName#',
-						'<a class="cardInfo-dropdown-view"  onclick="editCard('+val.value_num+')" data-toggle="modal" data-target="#cardInfoView">'+get_card_name+'</a>'
-						);
-				break;
-			case 'updateCardLocation':
-				var get_to_list_name=activity_getListInfo(val.to_num);
-				var get_from_list_name=activity_getListInfo(val.from_num);
-				var get_card_name=activity_getCardInfo(val.value_num);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
-				format=format.replace('#toListName#','<span class="listInfo-dropdown-view">'+get_to_list_name+'</span>');
-				format=format.replace('#fromListName#','<span class="listInfo-dropdown-view">'+get_from_list_name+'</span>');
-				format=format.replace('#cardName#',
-						'<a class="cardInfo-dropdown-view"  onclick="editCard('+val.value_num+')" data-toggle="modal" data-target="#cardInfoView">'+get_card_name+'</a>'
-						);
-				break;
-			case 'addFriend':
-				var get_friend_info=activity_getFriendInfo(val.value_string);
-				/*format=format.replace('#me#','<span class="memberInfo-dropdown-view">'+val.nickname+'</span>');*/
-				format=format.replace('#firendName#',activity_memberInfo_setting_dropdown(get_friend_info));
-				format=format.replace('#authority#','<span class="friendInfo-auth-dropdown-view">'+get_friend_info.grade+'</span>');
-				break;
+			result+=val.last_activity;
+		});
 
-/*			default:
-				break;*/
-			}
-			result+=format;
-			result+='</div></div>'; //end of div, activity-unit
-			
-			
-			//me 부분을 nickname으로 치환하는 과정.
-
-		/*	if(format.indexOf('#me#')!=-1){
-				format= format.replace('#me#','<me>#me#');
-				var arr=format.split('#me#');
-				
-				for(var i=0; i<arr.length; i++){
-					if(arr[i]=='<me>'){
-						result+='<span class="memberInfo-dropdown-view">'+val.nickname+'</span>';
-					}
-					else{
-						result+=arr[i];
-					}
-				}
-			}
-			if(format.indexOf('#listName#')!=-1){
-				format= format.replace('#listName#','<listName>#listName#');
-				var arr=format.split('#listName#');
-				
-				for(var i=0; i<arr.length; i++){
-					if(arr[i]=='<listName>'){
-						var get_list_name=activity_getListInfo(val.value_num);
-						result+='<span class="listInfo-dropdown-view">'+get_list_name+'</span>';
-					}
-					else{
-						result+=arr[i];
-					}
-				}
-			}
-			result+='</div>'; //end of div, activity-unit
-*/		});
-		$('.side-menu-activity-content').append(result);
+		if(type=='someActivity'){$('.side-menu-activity-content').append(result);}
+		else if(type='allActivity'){$('#all-activity-modal-content-wrapper').append(result);}
 		bind_memberInfo_dropdown_activityMember();//이벤트 바인드
 	}
 	
-	function activity_memberInfo_setting_dropdown(val){
-	return '<div class="dropdown activity-memberInfo-dropdown-view">'+
-		'<a class="activity-memberInfo-dropdown-view-btn dropdown-toggle" data-toggle="dropdown">'+
-			'<span>'+val.nickname+'</span>'+
-		'</a>'+
-		'<div id="activity-memberInfo-dropdown-view-content" class="dropdown-menu" >'+
-			'<div class="activity-members-info">'+
-				'<div class="activity-members-info-wrapper">'+
-					'<div class="activity-members-info-img-wrapper">'+
-						'<img class="activity-members-info-img" src="'+val.profile_image+'">'+
-					'</div>'+
-					'<div class="activity-members-info-text-wrapper">'+
-						'<span class="activity-member-name">'+val.name+'</span>'+
-						'<span class="activity-member-nickname">('+val.nickname+')</span>'+
-						'<br><span class="activity-member-email">'+val.email+'</span>'+
-					'</div>'+
-					'<div class="activity-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
-				'</div>'+
-			'</div>'+
-		'</div>'+
-	'</div>';
-	}
 
-	function activity_getListInfo(listNum){
-		  var url='/usMemo/activity/getListInfo/'+listNum;
-		  var list_name;
-			$.ajax({
-				url: url,	      
-				type:'post',
-				dataType:'json',
-				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
-				contentType: 'application/json',
-				async: false,
-				success:function(data){
-					console.log(data);
-					list_name=data.name;
-				} ,
-				error : function(xhr, status, error) {
-				alert(error);
-				}
-			});
-			return list_name;
-	}
-	function activity_getCardInfo(cardNum){
-		var url='/usMemo/activity/getCardInfo/'+cardNum;
-		  var card_name;
-			$.ajax({
-				url: url,	      
-				type:'post',
-				dataType:'json',
-				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
-				contentType: 'application/json',
-				async: false,
-				success:function(data){
-					console.log(data);
-					card_name=data.name;
-				} ,
-				error : function(xhr, status, error) {
-				alert(error);
-				}
-			});
-			return card_name;
-	}
-	function activity_getFriendInfo(friendNum){
-		var url='/usMemo/activity/getFriendInfo/'+static_bNum+'/'+friendNum;
-		  var friendInfo;
-			$.ajax({
-				url: url,	      
-				type:'post',
-				dataType:'json',
-				/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
-				contentType: 'application/json',
-				async: false,
-				success:function(data){
-					console.log(data);
-					friendInfo=data;
-				} ,
-				error : function(xhr, status, error) {
-				alert(error);
-				}
-			});
-			
-			if(friendInfo.grade==1){friendInfo.grade='admin';}
-			else if(friendInfo.grade==2){friendInfo.grade='member';}
-			return friendInfo;
-	}
 	/**
 	 * 현재 멤버리스트에서 로그인한 사용자의 grade를 얻어오기
 	 * @param data
@@ -443,36 +333,133 @@ function addMemberFunc(id,bNum){
 			//var img_id='#profile_image'+index;
 			var member_select_id='#memberInfo'+index;
 			//이미지 설정함
-			
+			var change_permission_html;
 			var grade_string;
 			if(val.grade==1){grade_string='admin';}
 			else if(val.grade==2){grade_string='normal';}
 			
-			$("#setMember").append(
-					'<div class="dropdown side-menu-members">'+
-						'<a class="side-menu-members-btn dropdown-toggle" data-toggle="dropdown">'+
-							'<span><img id="profile_image'+index+'" src="'+val.profile_image+'" title="" class="side-menu-profile_image"></span>'+
-						'</a>'+
-						'<div id="memberInfo-dropdown-view-content" class="dropdown-menu">'+
-							'<div class="side-menu-members-info">'+
-								'<div class="side-menu-members-info-wrapper">'+
-									'<div class="side-menu-members-info-img-wrapper">'+
-										'<img class="side-menu-members-info-img" src="'+val.profile_image+'">'+
-									'</div>'+
-									'<div class="side-menu-members-info-text-wrapper">'+
-										'<span class="side-menu-member-name">'+val.name+'</span>'+
-										'<span class="side-menu-member-nickname">('+val.nickname+')</span>'+
-										'<br><span class="side-menu-member-email">'+val.email+'</span>'+
-									'</div>'+
-									'<div class="side-menu-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
-								'</div>'+
-								'<hr>'+
-								'<div class="side-menu-change-permission-btn hover-blue">'+
-									'<span>Change permissions...('+grade_string+')</span>'+
-								'</div>'+
-							'</div>'+
+			if(sessionId==val.id){
+				//현재 로그인한 사용자의 프로필을 열었을 경우  
+				change_permission_html=
+					'<div class="side-menu-change-permission-wrapper can-not-click">'+
+						'<div class="change-permission-admin">'+
+							'<span class="permission-bold">Admin</span>'+
+							'<span class="glyphicon glyphicon-ok"></span>'+
+							'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
 						'</div>'+
-					'</div>');
+						'<div class="change-permission-member can-not-click">'+
+							'<span class="permission-bold">Nomal</span>'+
+							'<div>can view and edit cards. Can\'t changes settings.</div>'+
+						'</div>'+
+					'</div>';
+			}
+			else if(sessionId!=val.id){
+				//현재로그인한 사람이 아닌 다른사람의 프로필을 열었을 경우
+				if(grade==1){
+					//현재 로그인한 사람이 관리자일경우만 바꿀 수 있음. 
+				
+					if(val.grade==1){
+						//현재 열람중인 프로필이 관리자일 경우 -> 일반으로만 바꿀 수 있게 
+					change_permission_html=
+						'<div class="side-menu-change-permission-wrapper">'+
+							'<div class="change-permission-admin can-not-click">'+
+								'<span class="permission-bold">Admin</span>'+
+								'<span class="glyphicon glyphicon-ok"></span>'+
+								'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+							'</div>'+
+							'<div class="change-permission-member hover-blue" onclick="updateMemberGrade('+val.id+','+bNum+',2)">'+
+								'<span class="permission-bold">Nomal</span>'+
+								'<div>can view and edit cards. Can\'t changes settings.</div>'+
+							'</div>'+
+						'</div>';
+					}
+					else if(val.grade==2){
+						//현재 열람중인 프로필이 일반일 경우 -> 관리자로만 바꿀 수 있게 
+						change_permission_html=
+							'<div class="side-menu-change-permission-wrapper">'+
+								'<div class="change-permission-admin hover-blue" onclick="updateMemberGrade('+val.id+','+bNum+',1)">'+
+									'<span class="permission-bold">Admin</span>'+
+									'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+								'</div>'+
+								'<div class="change-permission-member can-not-click">'+
+									'<span class="permission-bold">Nomal</span>'+
+									'<span class="glyphicon glyphicon-ok"></span>'+
+									'<div>can view and edit cards. Can\'t changes settings.</div>'+
+								'</div>'+
+							'</div>';
+					}
+				}
+				else if(grade==2){
+
+					if(val.grade==1){
+						//현재 열람중인 프로필이 관리자일 경우
+					change_permission_html=
+						'<div class="side-menu-change-permission-wrapper">'+
+							'<div class="change-permission-admin">'+
+								'<span class="permission-bold">Admin</span>'+
+								'<span class="glyphicon glyphicon-ok"></span>'+
+								'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+							'</div>'+
+							'<div class="change-permission-member">'+
+								'<span class="permission-bold">Nomal</span>'+
+								'<div>can view and edit cards. Can\'t changes settings.</div>'+
+							'</div>'+
+						'</div>';
+					}
+					else if(val.grade==2){
+						change_permission_html=
+							'<div class="side-menu-change-permission-wrapper">'+
+								'<div class="change-permission-admin">'+
+									'<span class="permission-bold">Admin</span>'+
+									'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
+								'</div>'+
+								'<div class="change-permission-member">'+
+									'<span class="permission-bold">Nomal</span>'+
+									'<span class="glyphicon glyphicon-ok"></span>'+
+									'<div>can view and edit cards. Can\'t changes settings.</div>'+
+								'</div>'+
+							'</div>';
+						
+					}
+				}
+			}
+			
+			var result=	
+			'<div class="dropdown side-menu-members">'+
+					'<a class="side-menu-members-btn dropdown-toggle" data-toggle="dropdown">'+
+					'<span><img id="profile_image'+index+'" src="'+val.profile_image+'" title="" class="side-menu-profile_image"></span>'+
+					'</a>'+
+				'<div class="memberInfo-dropdown-view-content dropdown-menu">'+
+					'<div class="side-menu-members-info">'+
+						'<div class="side-menu-members-info-wrapper">'+
+							'<div class="side-menu-members-info-img-wrapper">'+
+								'<img class="side-menu-members-info-img" src="'+val.profile_image+'">'+
+							'</div>'+
+							'<div class="side-menu-members-info-text-wrapper">'+
+								'<span class="side-menu-member-name">'+val.name+'</span>'+
+								'<span class="side-menu-member-nickname">('+val.nickname+')</span>'+
+								'<br><span class="side-menu-member-email">'+val.email+'</span>'+
+							'</div>'+
+							'<div class="side-menu-members-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
+						'</div>'+
+						'<hr>'+
+						'<div class="side-menu-change-permission-btn hover-blue">'+
+							'<span>Change permissions...('+grade_string+')</span>'+
+						'</div>'+
+					'</div>'+
+					'<div class="side-menu-change-permission " style="display:none;">'+
+					'<div class="side-menu-change-permission-header">'+
+						'<div class="side-menu-return-memberInfo-btn"><span class="glyphicon glyphicon-menu-left"></span></div>'+
+						'<span class="side-menu-change-permission-header-text">Change Permissions</span>'+
+						'<div class="side-menu-change-permission-close-btn"><span class="glyphicon glyphicon-remove"></span></div>'+
+					'</div>'+
+					'<hr>'+
+					change_permission_html+
+				'</div>'+
+				'</div>'+
+			'</div>';
+			
+			$("#setMember").append(result);
 
 			//$(img_id).attr("src",val.profile_image);
 				//권한에 따라 타이틀만 변경해야함.
@@ -509,6 +496,7 @@ function addMemberFunc(id,bNum){
 					}*/
 		});
 		bind_memberInfo_dropdown_setMember();//이벤트 바인드
+		bind_change_permission();
 	}
 	
 	
@@ -554,7 +542,7 @@ function addMemberFunc(id,bNum){
 			}else if($("#wrapper").hasClass('toggled')){
 			 //화면그림
 				openMenu(bNum,memId);
-				openActivity(bNum);
+				
 			}
 			$("#wrapper").toggleClass("toggled");
 			$(".board-wrapper").toggleClass("is-show-menu");
@@ -605,4 +593,31 @@ function addMemberFunc(id,bNum){
 	function clean_activitys(){
 		$('.side-menu-activity-content>*').detach();
 	}
+	
+	$('.color-list-item').click(function(){
+		var change_color=$(this).css("background-color");
+		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+		.css("background-color",change_color);
+		update_background_color(change_color);
+				});
+	
+	function update_background_color(change_color){
+		 $.ajax({
+	            url: '/usMemo/board/update/backgroundColor?memId='+static_memId+'+&bNum='+static_bNum+'&background_color='+change_color,
+	            type :'post',
+	            success:function(){
+	            } ,
+		       error :function(data,status,er) { 
+		    	   alert("error: "+data+" status: "+status+" er:"+er);
+		    	   console.log("error: "+data+" status: "+status+" er:"+er);
+	         }
+	        }); 
+	
+		
+	}
+	
+	$('.background-color-list-close-btn').click(function(){
+		/*배경색 바꾸기 드롭다운 끄기 클릭시 */
+		
+	});
 

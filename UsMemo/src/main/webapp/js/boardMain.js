@@ -4,8 +4,8 @@ var updateCard =new Object();
 var sameListFlag=true;
 var before=new Object();
 	 
-
-
+widthResize($('.board-name')[0]);
+initBoard();//보드 설정
 		/*
 		 * body영역 설정
 		 * */
@@ -32,6 +32,8 @@ var before=new Object();
 				$(".addListBtn").css("width",list_unit_width);
 				
 			}
+			
+			
 		/*
 		 * 버튼설정
 		 * */
@@ -109,7 +111,18 @@ var before=new Object();
 
 	        	}
 	        	});
-	        
+	 function initBoard(){
+		 //보드색 설정
+		var boardColor= $('#boardColor').val();
+		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+		.css("background-color",boardColor);
+		//리스트네임의 textarea height 조정
+		
+		var textarea_arr=$('h6>textarea.list-name');
+		for(var i=0;i<textarea_arr.length;i++){
+			heightResize(textarea_arr[i]);
+		}
+	 }
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;
@@ -465,12 +478,6 @@ var before=new Object();
 
 	});
 
- 	//clear,close나 X버튼 누르면 textarea 내용 초기화 시키기.
-    function clearForm(o){
-        $('[type=text], select, textarea#cardDescription', o).val('');
-    } 
-    
-
     
     $("#board-header-starred").click(function(){
     	if($(this).hasClass("glyphicon glyphicon-star-empty")){
@@ -528,4 +535,87 @@ var before=new Object();
     		})
     	} 
     }
+    function widthResize(obj) {
+    	//textarea에 입력된 크기만큼 세로 길이 조정
+    	obj.style.width = "1px";
+    	obj.style.width = (10+obj.scrollWidth)+"px";
+    }
+  //이름 수정시 엔터치면 바로 이름 저장 되는 부분
+    function enterSave(e,thisElement) {
+    	/*
+    	 * boardMain에서 키가 눌릴때마다 키코드를 찾음
+    	 * keyCode가 0이면  which 리턴, 엔터의 키코드 13이므로 엔터 치는 순간 if문으로 넘어감
+    	 * keyCode와 which는 ie,firefox 브라우저의 차이떄문에...?
+    	 * */
+    	
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13 ) { //Enter keycode
+        	
+            e.preventDefault();
+            //엔터 친후 textarea에서 커서 제거하기
+           /* var className=thisElement.className;
+            var type=thisElement.type;
+            $(type+'.'+className).blur();*/
+            thisElement.blur();
+            var className=thisElement.className;
+            if (className=='list-name'){
+            editListName(thisElement);	}
+            else if(className=='board-name'){
+            	editBoardName(thisElement);
+            }
+            
+
+        }
+    }
+    
+	//카드 수정창에서 카드 이름쓰는 부분에서 포커스가 벗어나면 카드이름 저장하는 부분
+	$("textarea.list-name").blur(function()
+		{editListName(this);		});
+	
+	$("input.board-name").blur(function()
+				{editBoardName(this);
+			});
+
+	
+	function editListName(thisElement){
+		  var listId = thisElement.id;
+          listId=listId.split('_');
+         
+          var num=listId[1];
+          var name=thisElement.value;
+
+          var url='/usMemo/list/edit/listName?num='+num+'&name='+name;
+	
+			$.ajax({
+				url: url,
+				type:'post',
+				success:function(){
+				} ,
+				error : function(xhr, status, error) {
+					alert(error);
+				}
+			})
+			
+	}
+	
+	function editBoardName(thisElement){
+		 var boardId = thisElement.id;
+		  boardId=boardId.split('_');
+        
+         var num=boardId[1];
+         var name=thisElement.value;
+
+         var url='/usMemo/board/edit/boardName?bNum='+num+'&name='+name;
+	
+			$.ajax({
+				url: url,
+				type:'post',
+				success:function(){
+				} ,
+				error : function(xhr, status, error) {
+					alert(error);
+				}
+			})
+	}
+
 	 

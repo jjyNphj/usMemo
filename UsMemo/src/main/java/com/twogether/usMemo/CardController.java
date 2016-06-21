@@ -55,8 +55,8 @@ public class CardController {
 		
 		
 		logger.info("check change location: {}",cardLocation.toString());
-		cardService.updateLocation(cardLocation);
-		activityService.updateCardLocation(cardLocation);
+		boolean activity_check=cardService.updateLocation(cardLocation);
+		if(activity_check) activityService.updateCardLocation(cardLocation);
 		return "/board/boardMain";
 	}
 	
@@ -111,6 +111,7 @@ public class CardController {
 
 		mv.setViewName("board/boardMain");
 		cardService.editCardName(card);
+		activityService.updateActivity("changeCardName",card.getNum());
 		System.out.println("CardController card name: " + card.getName());
 		return mv;
 	}
@@ -123,6 +124,7 @@ public class CardController {
 
 		mv.setViewName("board/boardMain");
 		cardService.deleteCardInfo(card);
+		activityService.deleteCard(card);
 		return mv;
 	}	
 	

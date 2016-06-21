@@ -35,14 +35,42 @@
 				</form>
 			    </div>
   			</div>
-  			<div id="side-menu-delete-board-wrapper">
   			<hr>
-  				<div class="side-menu-delete-board-btn">
-  					<span class="glyphicon glyphicon-trash"></span>
-  					<span>delete Board...</span>
-  				</div>
+  				<div class="side-menu-option-menu">
+		  			<div id="side-menu-delete-board-wrapper">
+		  				<div class="side-menu-delete-board-btn">
+		  					<span class="glyphicon glyphicon-trash"></span>
+		  					<span>delete Board...</span>
+		  				</div>
+		  			</div>
+		  			<div id="side-menu-change-color-wrapper" class="dropdown">
+		  				<div class="side-menu-change-color-btn dropdown-toggle" data-toggle="dropdown">
+		  					<span class="glyphicon glyphicon-cog"></span>
+		  					<span>Change Background</span>
+		  				</div>
+		  				<div class="dropdown-menu">
+		  					<div class="background-color-list">
+		  						<div class="background-color-list-header">
+		  							<span class="background-color-list-header-text">Change Background</span>
+		  							<span class="background-color-list-close-btn glyphicon glyphicon-remove"></span>
+		  						</div>
+		  						<hr>
+		  						<div class="background-color-list-select">
+				  						<div id="color-list-blue" class="color-list-item"></div>
+				  						<div id="color-list-orange" class="color-list-item"></div>
+				  						<div id="color-list-green" class="color-list-item"></div>
+				  						<div id="color-list-red" class="color-list-item"></div>
+				  						<div id="color-list-purple" class="color-list-item"></div>
+				  						<div id="color-list-pink" class="color-list-item"></div>
+				  						<div id="color-list-lightGreen" class="color-list-item"></div>
+				  						<div id="color-list-sykBlue" class="color-list-item"></div>
+				  						<div id="color-list-gray" class="color-list-item"></div>
+		  						</div>
+		  					</div>
+		  				</div>
+		  			</div>
+	  			</div>
   			<hr>
-  			</div>
   			<div class="side-menu-activity-wrapper">
   				<div class="side-menu-activity-header">
   					<span class="side-menu-activity-header-text">Activity</span>

@@ -5,6 +5,7 @@ public class Board {
 	private int bNum;
 	private String name;
 	private String star;
+	private String background_color;
 	
 	public int getbNum() {
 		return bNum;
@@ -24,7 +25,13 @@ public class Board {
 	public void setStar(String star) {
 		this.star = star;
 	}
-	
+	public String getBackground_color() {
+		return background_color;
+	}
+	public void setBackground_color(String background_color) {
+		this.background_color = background_color;
+	}
+
 	
 	
 

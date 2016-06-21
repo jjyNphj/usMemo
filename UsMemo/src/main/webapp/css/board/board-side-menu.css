@@ -1,6 +1,10 @@
 .side-menu-container{
-	display: flex;
- 	flex-flow: column wrap;
+	/* display: flex;
+ 	flex-flow: column wrap; */
+}
+#sidebar-wrapper{
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .side-menu-header-wrapper,.side-menu-activity-header{
@@ -92,7 +96,7 @@ hr{
 	flex: 1;
 }
 
-.side-menu-members-info,.my-members-info,.activity-members-info{
+.side-menu-members-info,.my-members-info,.activity-members-info,.side-menu-change-permission {
 	background-color:#fff;
   /*   position: absolute;
     left: 10px; */
@@ -116,10 +120,105 @@ hr{
 	flex: 1 1 auto;
 	padding-left: 3px;
 }
-
+.side-menu-option-menu{
+	width: 100%;
+}
 .side-menu-delete-board-btn{
 	padding-left: 15px;
 	line-height: 30px;
 	color: red;
 }
 
+.side-menu-activity-content{
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.background-color-list{
+	/* width: 90%; */
+	width: 320px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e2e4e6;
+}
+.background-color-list-select{
+/* 	display: flex;
+	flex-direction:column;
+	flex-wrap: wrap; */
+	display: -webkit-flex; /* Safari */
+    -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+    display: flex;
+    flex-wrap: wrap;
+}
+.background-color-list-header{
+	padding: 10px;
+	display: flex;
+	
+}
+.background-color-list-header-text{
+	flex: 1 1 auto;
+	text-align: center;
+}
+.color-list-item{
+	width: 100px;/* 33% */
+	height: 100px;
+	
+    margin: 3px;
+	border-radius: 3px;
+}
+.color-list-item:HOVER{
+	background-color: rgba( 0, 0, 0, 0.15 );
+}
+/*---------------»ö»ó css------------------*/
+
+#color-list-blue{
+	background-color: #0079BF;
+}				
+#color-list-orange{
+	background-color: #D29034;
+}
+#color-list-green{
+	background-color: #519839;	
+}
+#color-list-red{
+	background-color: #B04632;	
+}
+#color-list-purple{
+	background-color: #89609E;	
+}
+#color-list-pink{
+	background-color: #CD5A91;	
+}
+#color-list-lightGreen{
+	background-color: #4BBF6B;	
+}
+#color-list-sykBlue{
+	background-color: #00AECC;	
+}
+#color-list-gray{
+	background-color: #838C91;	
+}
+/*------------------------------*/
+
+.can-not-click{
+	color:#8C8C8C;
+}
+.side-menu-change-permission-header{
+	display: flex;
+	padding: 5px;
+}
+.side-menu-change-permission-header-text{
+	flex: 1 1 auto;
+    text-align: center;
+}
+.side-menu-members-info,.side-menu-change-permission {
+	width: 320px;
+}
+
+.side-menu-change-permission-wrapper{
+    white-space: initial;
+}
+
+.change-permission-admin,.change-permission-member{
+	padding:5px;
+}

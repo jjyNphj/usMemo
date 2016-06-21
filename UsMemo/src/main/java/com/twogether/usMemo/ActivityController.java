@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.twogether.usMemo.dto.Activity;
+import com.twogether.usMemo.dto.ActivityDataMember;
 import com.twogether.usMemo.dto.Card;
 import com.twogether.usMemo.dto.ListDTO;
 import com.twogether.usMemo.dto.Member;
@@ -26,6 +27,13 @@ public class ActivityController {
 	@Autowired ActivityService activityService;
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
+	@RequestMapping("/getSomeActivity/{bNum}")
+	@ResponseBody
+	public List<Activity> getSomeActivity(@PathVariable("bNum") int bNum){
+		List<Activity> activity=new ArrayList<Activity>();
+				activity=activityService.getSomeActivity(bNum);
+			return activity;	
+	}
 	@RequestMapping("/getAllActivity/{bNum}")
 	@ResponseBody
 	public List<Activity> getAllActivity(@PathVariable("bNum") int bNum){
@@ -34,7 +42,7 @@ public class ActivityController {
 			return activity;	
 	}
 	
-	@RequestMapping("/getListInfo/{listNum}")
+/*	@RequestMapping("/getListInfo/{listNum}")
 	@ResponseBody
 	public ListDTO getListInfo(@PathVariable("listNum") int listNum){
 		
@@ -58,7 +66,7 @@ public class ActivityController {
 		Member result = new Member();
 		result = activityService.getFriendInfo(memberInfo);
 		return result; 
-	}
+	}*/
 	
 	
 }

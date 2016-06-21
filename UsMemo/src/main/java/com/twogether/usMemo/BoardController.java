@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.twogether.usMemo.dto.Board;
 import com.twogether.usMemo.dto.BoardInfo;
+import com.twogether.usMemo.dto.ListDTO;
+import com.twogether.usMemo.dto.MemberGrade;
 import com.twogether.usMemo.service.ActivityService;
 import com.twogether.usMemo.service.BoardService;
 import com.twogether.usMemo.service.MemberService;
@@ -72,9 +74,10 @@ public class BoardController {
 		mv.addObject("listList", map.get("listList"));
 		mv.addObject("cardList",map.get("cardList"));
 		mv.addObject("bNum",board.getbNum());
-		mv.addObject("bName",board.getName());
+		mv.addObject("bName",boardService.getBoardName(board.getbNum()));
 		mv.addObject("myInfo",memberService.getMyInfo(id));
 		mv.addObject("star",memberService.getThisBoardStar(board.getbNum(),id));
+		mv.addObject("boardColor",boardService.getThisBoardColor(board.getbNum(),id));
 		return mv;
 	}
 	
@@ -105,6 +108,7 @@ public class BoardController {
 		mv.setViewName("myBoard");
 		int nowBNum=boardService.boardCreate(name, memId);
 		activityService.create_board(memId,nowBNum);
+		
 		return mv;	
 	}
 	
@@ -114,6 +118,27 @@ public class BoardController {
 		boardInfo=boardService.getAllBoards(memId);
 
 		return boardInfo;
+	}
+	
+	@RequestMapping("/edit/boardName")
+	public ModelAndView editBoardName(@ModelAttribute Board board){
+		
+		ModelAndView mv= new ModelAndView();
+
+		mv.setViewName("board/boardMain");
+		boardService.editBoardName(board);
+		return mv;
+	}
+	
+	@RequestMapping("/update/backgroundColor")
+	public ModelAndView updateBackgroundColor(@ModelAttribute MemberGrade memberGrade){
+
+		ModelAndView mv= new ModelAndView();
+
+		mv.setViewName("board/boardMain");
+		boardService.updateBackgroundColor(memberGrade);
+		
+		return mv;
 	}
 
 }

@@ -49,7 +49,9 @@
 							<div class="col-xs-12 col-sm-12 col-md-12" >
 								 <div class="col-xs-8 col-sm-8 col-md-8"  style="text-align:left; color: white;">
 								 <a class="board-header-barnd">
-									 	<span id="board-header-brand-text">${bName }</span>
+									 	<span id="board-header-brand-text">
+									 	<input type="text" value="${bName }" class="board-name" id="board-name-text_${bNum }"  onkeypress="enterSave(event,this)" onkeyup="widthResize(this)">
+									 	</span>
 									 	<c:if test="${star eq 'Y' }"><span id="board-header-starred" class="glyphicon glyphicon-star"></span></c:if>
 									 	<c:if test="${star eq 'N' }"><span id="board-header-starred" class="glyphicon glyphicon-star-empty"></span></c:if>
 								 </a> 
@@ -71,6 +73,7 @@
 								<form>
 									<input type="hidden" id="bNum" value="${bNum }" /> <input
 										type="hidden" id="memId" value="${sessionScope.id }" />
+										<input type="hidden" id="boardColor" value="${boardColor }">
 								</form>
 								<div id="list-wrapper">
 								<div class="list_all">
@@ -82,9 +85,9 @@
 													<!-- style= "background-color: blue;"> -->
 													<div class="list_unit_name no-include-sortable">
 														<!--  style="background-color: red;"> -->
-														<h6>
+														<h6 style="margin-bottom: 0px;">
 														<%-- 	${l.num } /  --%>
-															${l.name}
+															<textarea class="list-name" id="list-name-text_${l.num }"  onkeypress="enterSave(event,this)" onkeyup="heightResize(this)">${l.name}</textarea>
 															<span class="delete-list-btn glyphicon glyphicon-trash" onclick="deleteListInfo(${l.num})">
 															</span>
 														</h6>
@@ -113,7 +116,7 @@
 															<div class="addCard_group no-include-sortable hide">
 																<div class="form-group no-include-sortable">
 																	<!-- textarea 폼의 디자인 div -->
-																	<textarea class="form-control"
+																	<textarea class="form-control cardName_textarea"
 																		placeholder="Here, add Card's name" rows="5"
 																		id="cardName${l.num}" style="resize: none;"></textarea>
 																</div>
@@ -168,6 +171,9 @@
 	<div class="modal-cardInfoView">
 		<jsp:include page="board-cardInfo.jsp"></jsp:include>
 	</div>
+	<div class="modal-allActivity">
+		<jsp:include page="board-allActivity.jsp"></jsp:include>
+	</div>
 
 	
 		<!-- js -->
@@ -178,8 +184,8 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/jquery.autogrowtextarea.js"></script>
-	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/cardInfoView.js"></script>
+	<script src="${pageContext.request.contextPath}/js/boardMain.js"></script>
 	<script src="${pageContext.request.contextPath}/js/side-menu.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-drawer.js"></script>
 	<script src="${pageContext.request.contextPath}/js/board/board-setting.js"></script>

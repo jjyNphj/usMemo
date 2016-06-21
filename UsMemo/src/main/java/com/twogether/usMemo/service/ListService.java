@@ -169,4 +169,10 @@ public class ListService {
 		return obj;
 		}
 
+	public void editListName(ListDTO list) {
+		
+		listDao.editListName(list);
+		
+	}
+
 }

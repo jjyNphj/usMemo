@@ -52,22 +52,27 @@
 			<div class="member-boards-myBoards-content">
 				<c:forEach var="list" items="${Board}" varStatus="i">
 				<div class="member-boards-wrapper">
-					<a class="member-boards-background" onclick="goBoard(${list.bNum},'${list.name}')">
+					<a class="member-boards-background" style="background-color: ${list.background_color}" onclick="goBoard(${list.bNum},'${list.name}')">
 						<span class="member-boards-title">${list.name }</span>
 							<c:if test="${list.star=='Y' }"> <span class="member-boards-star glyphicon glyphicon-star"></span></c:if>
 							<c:if test="${list.star=='N' }"> <span class="member-boards-star glyphicon glyphicon-star-empty"></span></c:if>
 					</a>
 				</div>
 				</c:forEach>
-			</div>
-		</div>
 	<!-- 보드 추가 부분 -->
-		<div class="dropdown">
-			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+		<div class="add-board-wrapper dropdown">
+			<!-- <div id="add-board"> -->
+				<div class="add-board-background dropdown-toggle" data-toggle="dropdown">
+					<div class="add-board-text">
+						board create
+					</div>
+				</div>
+		<!-- 	</div> -->
+<!-- 			<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
 				  board create   <span class="caret"></span>
-			</button>
+			</button> -->
 			
-			<ul class="dropdown-menu">
+			<div class="dropdown-menu">
 			<div class="modal-body">
 				<p>Create Board</p>
 				
@@ -82,11 +87,13 @@
 						<!-- submit 누르면 form에 적힌 action 주소로 넘어감. -->
 						<!-- <button type="submit" class="btn btn-primary">Submit</button> -->
 						<button type="button" class="btn btn-primary" onclick="createBoard(memId)">Submit</button>
-						<button type="button" class="btn btn-default" data-toggle="dropdown">Close</button>
+						<button type="button" class="btn btn-default" data-toggle="dropdown" onclick="clearForm(this.form)">Close</button>
 					</div>
 				</form>
 			</div>			
-			</ul>
+			</div>
+		</div>
+			</div>
 		</div>
 	</div>
 	</div>

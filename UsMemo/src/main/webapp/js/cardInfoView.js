@@ -61,6 +61,15 @@ $(document).ready(function() {
 				}
 			})
 		});
+	
+	
+	$('#cardInfoView').on('shown.bs.modal',function(){
+		
+		var textarea_arr=$('h4>textarea.textarea-card-name');
+		for(var i=0;i<textarea_arr.length;i++){
+			heightResize(textarea_arr[i]);
+		}
+	});
 });
 
 //전달받은 파일첨부 이름을  화면에 보기 좋게 출력
@@ -148,6 +157,7 @@ function editCard(cNum) {
 		dataType:'json',
 		/* Jackson라이브러리의 컨텐츠 타입으로 JSON HTTP 메시지와 객체 사이의 변환을 처리 */
 		contentType: 'application/json',
+		async: false,
 		success:function(data){
 			//의아한 점> CardController에서 넘어온 json 형태의 객체는 jsp에서 자동으로 자바스크립트 객체로 변환되는 것인가..? 파싱 일을 여러번 하는것 같은 느낌..
 			//결론> 지워도 되네여. CardController에서 넘어오는 json 타입 자동으로 자바스크립트 객체로 변환해주는듯? 
@@ -160,7 +170,13 @@ function editCard(cNum) {
 			
 		   /* $('#card_Name').autoGrow();*/
 			console.log(data);
-		} ,
+		},
+/*		complete:function(){
+			var textarea_arr=$('h4>textarea.textarea-card-name');
+			for(var i=0;i<textarea_arr.length;i++){
+				heightResize(textarea_arr[i]);
+			}
+		},*/
 		error : function(xhr, status, error) {
 		alert(error);
 		}
@@ -267,5 +283,7 @@ function setCardInfo(cardInfo){
 	 /* 2016. 4. 30. 오후 8:31:18 형태로 바꿔줌*/
 	 var card_date = date.toLocaleString();
 	$("#card_Date").text(card_date);
+
+		
  }
  

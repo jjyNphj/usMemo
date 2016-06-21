@@ -48,6 +48,7 @@
  	margin: 5px 6px 5px 6px;
 	padding: 2px 6px 2px 8px; 
 	white-space: normal;
+	word-wrap: break-word;
 /*     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -98,7 +99,7 @@
 }  */
 
 /* 사용자가 카드의 이름을 수정하는 부분 */
-.textarea-card-name {
+.textarea-card-name ,.list-name{
 	/*사용자가 textarea 사이즈 조정 금지*/
 	resize:none;
 	/* 스크롤바 생성X */
@@ -113,7 +114,32 @@
 	
 } 
 
+.board-name{
+	/*사용자가 textarea 사이즈 조정 금지*/
+	resize:none;
+	/* 스크롤바 생성X */
+	overflow-y:hidden;
+	border:0;
+	background:clear;
+	min-height:30px;	
+	/* display:inline; */
+	/* overflow: auto;  */
+	/* height: $('card_Name').prop("scrollHeight"); */
+	
+} 
+
 .delete-list-btn {
 	color: red;
 	float: right; 
+}
+
+.list-name,.board-name{
+	background-color: rgba( 255, 255, 255, 0 );
+}
+.list-name:FOCUS{
+	background-color: rgba( 255, 255, 255, 1 );
+}
+.board-name:FOCUS{
+	background-color: rgba( 255, 255, 255, 1 );
+	color: black;
 }

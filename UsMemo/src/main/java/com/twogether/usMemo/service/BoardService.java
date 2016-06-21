@@ -51,6 +51,7 @@ public class BoardService {
 			resultBoard.setbNum(i.getbNum());
 			resultBoard.setName(boardDao.getBoardNameBybNum(i.getbNum()));
 			resultBoard.setStar(i.getStar());
+			resultBoard.setBackground_color(i.getBackground_color());
 			System.out.println("º¸µå: "+resultBoard.getName());
 			
 			resultList.add(resultBoard);			
@@ -226,5 +227,26 @@ public class BoardService {
 	
 	public List<BoardInfo> getAllBoards(String memId){
 		return boardDao.getAllBoards(memId);
+	}
+
+	public void editBoardName(Board board) {
+		
+		boardDao.editBoardName(board);
+		
+	}
+
+	public String getBoardName(int bNum) {
+		return boardDao.getBoardName(bNum);
+	}
+
+	public void updateBackgroundColor(MemberGrade memberGrade) {
+		boardDao.updateBackgroundColor(memberGrade);
+	}
+
+	public String getThisBoardColor(int getbNum, String id) {
+		MemberGrade memberGrade = new MemberGrade();
+		memberGrade.setbNum(getbNum);
+		memberGrade.setmemId(id);
+		return boardDao.getThisBoardColor(memberGrade);
 	}
 }

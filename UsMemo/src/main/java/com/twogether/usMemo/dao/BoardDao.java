@@ -100,6 +100,25 @@ public class BoardDao {
 		return sqlMapClientTemplate.queryForList("Board.getAllBoardsById",memId);
 	}
 
+	public void editBoardName(Board board) {
+		
+		sqlMapClientTemplate.update("Board.editBoardName",board);
+		
+	}
+
+	public String getBoardName(int bNum) {
+		return (String) sqlMapClientTemplate.queryForObject("Board.getBoardName",bNum);
+	}
+
+	public void updateBackgroundColor(MemberGrade memberGrade) {
+		sqlMapClientTemplate.update("Board.updateBackgroundColor",memberGrade);
+		
+	}
+
+	public String getThisBoardColor(MemberGrade memberGrade) {
+		return (String) sqlMapClientTemplate.queryForObject("Board.getThisBoardColor",memberGrade);
+	}
+
 	
 //	public int getBoardNumById(String id){
 //		//회원 id로 보드의 bNum 구하기
