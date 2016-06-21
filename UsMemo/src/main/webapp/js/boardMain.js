@@ -5,7 +5,7 @@ var sameListFlag=true;
 var before=new Object();
 	 
 widthResize($('.board-name')[0]);
-		$(document).ready(function() {
+		$(document).ready(function() { //보드가 열릴때 기본 설정들임. 로딩이 느린 이유 때문에 ready에 넣은 것임.
 
 				 //보드색 설정
 				var boardColor= $('#boardColor').val();
@@ -485,7 +485,7 @@ widthResize($('.board-name')[0]);
     		//즐겨찾기로 해줘야함.
     		$(this).removeClass("glyphicon glyphicon-star-empty");
     		$(this).addClass("glyphicon glyphicon-star");
-    		updateStarBoard('Y');
+    		updateStarBoard('Y',static_bNum,static_memId);
     	}else if(!$(this).hasClass("glyphicon glyphicon-star-empty")){
     		$(this).removeClass("glyphicon glyphicon-star");
     		$(this).addClass("glyphicon glyphicon-star-empty");
@@ -493,9 +493,9 @@ widthResize($('.board-name')[0]);
     	}
     });
 	
-    function updateStarBoard(star){
-    	var bNum=$('#bNum').val();
-    	var memId=$('#memId').val();
+    function updateStarBoard(star,bNum,memId){
+    	/*var bNum=$('#bNum').val();
+    	var memId=$('#memId').val();*/
     	
     	var url='/usMemo/member/updateStar?bNum='+bNum+'&memId='+memId+'&star='+star;
     	 $.ajax({

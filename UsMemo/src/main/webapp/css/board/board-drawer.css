@@ -72,6 +72,9 @@
 	border-radius: 3px;
 	color: #444;
 	background-color: transparent;
+	
+    flex: 1 1 auto;
+	
 }
 .drawer-boardsList-title-link-thumbnail{
 	background-color: #B04632;
@@ -101,13 +104,16 @@
 	flex: 1 1 auto;
     padding-right: 4px;
 }
-#drawer-boardsList-title-star{
-	padding: 2px 5px 0 5px;
+.drawer-boardsList-title-star{
+	padding: 10px 5px 10px 5px;
 	float: right;
 	flex: 0 0 auto;
 } 
 .glyphicon-star{
 	color: #f2d600;
+}
+.drawer-boardsList-title-wrapper{
+	display: flex;
 }
 
 
