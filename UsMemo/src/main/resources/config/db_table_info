@@ -10,7 +10,7 @@ create table member(
 
 create table board(
 	num number primary key,
-	name varchar(100),
+	name varchar(100)
 );
 
 create table list(

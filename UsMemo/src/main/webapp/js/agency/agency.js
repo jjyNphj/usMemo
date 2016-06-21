@@ -34,3 +34,23 @@ function video_controller() {
         video.pause();
      }	
 }
+
+function video_controller2() {
+	var video = document.getElementById("video-background");
+	//div>a.collapsed는 Stop&Play 버튼의 상태를 찾는 것임
+	//Stop&Play를 눌러서 동영상이 정지되고 이미지가 뜨게 되면  collapsed라는 클래스가 생김.
+	var check_pause = $("div>a.collapsed").val();
+	//Stop&Play 버튼을 누르지 않고 동영상이 실행되고 있는경우
+	if (check_pause == null && !video.paused) {
+		video.pause();
+	//Stop&Play 버튼을 누르지 않고 동영상이 정지되어 있는경우
+	} else if(check_pause == null && video.paused) {
+		video.play();
+	//Stop&Play 버튼을 눌렀고 동영상이 정지되어 있는경우
+	} else if(check_pause != null && video.paused) {
+		video.pause();
+	//그외의 모든 경우
+	} else {
+		video.pause();
+	}
+}

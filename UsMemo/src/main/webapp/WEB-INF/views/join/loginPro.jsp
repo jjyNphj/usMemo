@@ -26,9 +26,9 @@ ${sessionScope.id }
 		var state_token= $.cookie("state_token");
 
 var naver = NaverAuthorize({
-	client_id : "ZnxAOuCVv8j9OLASYEHE",
+	client_id : "h1ZMSWqDjJSY20p865Ys",
 	redirect_uri : "http://127.0.0.1:8080/usMemo/loginPro",
-	client_secret : "tJrkiSgMRo"
+	client_secret : "fCKQuU8hmN"
 
 });
 

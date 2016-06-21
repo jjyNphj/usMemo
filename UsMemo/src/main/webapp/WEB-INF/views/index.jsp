@@ -118,11 +118,11 @@
                 <!-- <h4 class="koreanfont">UsMemo와 지금 시작하세요</h4> -->
                 <hr class="hrsize">
                 <!-- <a href="#video-background" id="toggleVideo" data-toggle="collapse" class="btn btn-primary btn-xl">Toggle Video</a>  -->
-                <a href="#video-background" data-toggle="modal" data-target="#myModal" class="btn btn-primary-fix btn-xl-size" onclick="video_controller();">
+                <a href="#video-background" data-toggle="modal" data-target="#myModal" class="btn btn-primary-fix btn-xl-size" onclick="video_controller2();">
                 	<span class="glyphicon glyphicon-expand"></span>&nbsp;&nbsp;Guide Video
                 </a>
                 <a href="#video-background" data-toggle="collapse" class="btn btn-primary-fix btn-xl-size" onclick="video_controller();">
-                	<span class="glyphicon glyphicon-pause"></span>&nbsp;&nbsp;Video Stop
+                	<span class="glyphicon glyphicon-pause"></span>&nbsp;&nbsp;Stop&Play
                 </a>  
                <!--  &nbsp; &nbsp;&nbsp; -->
                 <!-- <a href="#about" class="btn btn-primary btn-xl-size page-scroll">Introduce</a> -->
@@ -137,8 +137,8 @@
     </header>
     
     <!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-		<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove-sign"></span></button>
+	<div id="myModal" class="modal fade" role="dialog" style="overflow-y:hidden;">
+		<button type="button" class="close" data-dismiss="modal" onclick="video_controller2();"><span class="glyphicon glyphicon-remove-sign"></span></button>
 	  <!-- <div class="modal-dialog"> -->
 		<!-- <div class="block-container"> -->
 		
@@ -149,12 +149,12 @@
 	        <div id="help" >
 		        <div class="overlay">
 		            <div class="container">
-		                <div class="row text-center">
-		                    <div class="col-md-12">
-		                        <h2 data-wow-delay="0.3s" class="wow rollIn animated fontcolor-margin"><strong>HOW TO USE ?</strong></h2>
-		                        <p class="sub-head fontcolor koreanfont">UsMemo 사이트를 이용하는 방법은 아래의 동영상을 참고하시길 바랍니다. </p>
+		                <!-- <div class="row text-center"> -->
+		                    <div class="col-md-12 text-center">
+		                        <h2 data-wow-delay="0.3s" class="wow rollIn animated fontcolor-margin"><strong><br>HOW TO USE ?</strong></h2>
+		                        <!-- <p class="sub-head fontcolor koreanfont">UsMemo 사이트를 이용하는 방법은 아래의 동영상을 참고하시길 바랍니다. </p> -->
 		                    </div>
-		                </div>
+		               <!--  </div> -->
 		                
 		                    <!-- <div class="col-lg-6 col-lg-offset-1  col-md-6 col-md-offset-1"> -->		                    
 	                    <div class="col-md-12">
@@ -222,7 +222,8 @@
 		                       <div class="content">
 		                           <div class="main">
 		                               <h4 class="text-center koreanfont">맡은 역할</h4>
-		                               <p class="text-center koreanfont">기획,핵심 기능 개발,보드와 리스트/카드 화면 디자인을 개발 </p>
+		                               <p class="text-center koreanfont">업무지시 및 총괄 <br>기획 및 데이터베이스 설계<br>
+		                               									핵심 기능 구현<br>보드/리스트/카드 화면 디자인 구현 </p>
 		                               <p class="text-center koreanfont">블로그주소 : 
 		                       			<a class="h3color" href="http://blog.naver.com/kiela929">http://blog.naver.com/kiela929</a>
 		                       		</p>
@@ -264,7 +265,7 @@
 		                           <div class="main">
 		                               <h3 class="name">Jang Ji Yeon</h3>
 		                               <p class="profession">Programmer</p>
-		                               <p class="text-center">"인생 좌우명"</p>
+		                               <p class="text-center">"노력하라,나는 할 수 있다."</p>
 		                           </div>
 		                           <div class="footer">
 		                                <button class="btn btn-simple" onclick="rotateCard(this)">
@@ -280,7 +281,7 @@
 		                       <div class="content">
 		                           <div class="main">
 		                               <h4 class="text-center koreanfont">맡은 역할</h4>
-		                               <p class="text-center koreanfont">기획,보조 기능 개발,메인디자인을 개발 </p>
+		                               <p class="text-center koreanfont">기획 및 보조 기능 구현<br>메인 화면 디자인 구현 </p>
 		                               <p class="text-center koreanfont">블로그주소 : 
 		                       			<a class="h3color" href="http://blog.naver.com/jang_delay">http://blog.naver.com/jang_delay</a>
 		                       		</p>
@@ -324,7 +325,7 @@
 	                <div class="col-md-6 text-muted">
 	                    <p class="koreanfont h3color">UsMemo는 웹기반의 프로젝트 관리 소프트웨어입니다.</p>
 	                    <p class="koreanfont h3color">보드 안에 리스트, 리스트 안에 카드가 들어가며, 카드안에 간단한 메모부터 장문의 글을 넣을 수 있습니다. 또한 다른 사용자와 카드를 공유할 수도 있습니다.</p>
-	                    <p class="koreanfont h3color">순간순간 떠오르는 것을 간단하게 메모하고, 단순한 디자인을 가지고 있어 직관적으로 사용할 수 있습니다.</p>
+	                    <p class="koreanfont h3color">순간순간 떠오르는 것을 간단하게 메모할 수 있으며, 단순한 디자인을 가지고 있어 직관적으로 사용할 수 있습니다.</p>
 	                    <p class="koreanfont h3color">해야할 일이나 읽어야 할 책,자신만의 버킷리스트 등 이제 친구와 당신의 생각을 교환해보세요.</p>
 	                </div>            
 	                <div class="clearfix"></div>
@@ -353,7 +354,7 @@
                     <ul class="timeline">
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/about/1.jpg" alt="">
+                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/main/1.png" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -368,7 +369,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/about/2.jpg" alt="">
+                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/main/1.png" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -382,7 +383,7 @@
                         </li>
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/about/3.jpg" alt="">
+                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/main/2.png" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -396,7 +397,7 @@
                         </li>
                         <li class="timeline-inverted">
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/about/4.jpg" alt="">
+                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/main/3.png" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -411,7 +412,7 @@
                         </li>                      
                         <li>
                             <div class="timeline-image">
-                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/about/3.jpg" alt="">
+                                <img class="img-circle img-responsive" src="${pageContext.request.contextPath}/img/main/4.png" alt="">
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -589,7 +590,8 @@
     <!-- Portfolio Modal 1 -->
     <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <!-- <div class="close-modal" data-dismiss="modal"> -->
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -601,18 +603,13 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Eclipse</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_eclipse.jpg" alt="">
-                            <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                            <p>
-                                <strong>Want these icons in this portfolio item sample?</strong>You can download 60 of them for free, courtesy of <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">RoundIcons.com</a>, or you can purchase the 1500 icon set <a href="https://getdpd.com/cart/hoplink/18076?referrer=bvbo4kax5k8ogc">here</a>.</p>
-                            <ul class="list-inline">
-                                <li>Date: July 2014</li>
-                                <li>Client: Round Icons</li>
-                                <li>Category: Graphic Design</li>
-                            </ul>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Eclipse</h2>
+                            <p class="item-intro text-muted">Developer Tool.</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_eclipse_bigsize.jpg" alt="">
+                            <p class="koreanfont">JAVA를 기반으로 한 소프트웨어 개발 툴의 일종으로, <br>어떤 OS에서든 누구든 자유롭게 이용 및 수정,재배포가 가능하다는 장점을 가지고 있다.</p>  
+                            <p class="koreanfont">jdk 1.8.0_65 버전과 jre 1.8.0_73 버전의 환경에서 현재 사이트를 제작하였다.</p>
+
+                            <button type="button" class="btn btn-primary-red " data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -623,7 +620,7 @@
     <!-- Portfolio Modal 2 -->
     <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -633,12 +630,15 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <h2>Project Heading</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_oracle.png" alt="">
-                            <p><a href="http://designmodo.com/startup/?u=787">Startup Framework</a> is a website builder for professionals. Startup Framework contains components and complex blocks (PSD+HTML Bootstrap themes and templates) which can easily be integrated into almost any design. All of these components are made in the same style, and can easily be integrated into projects, allowing you to create hundreds of solutions for your future projects.</p>
-                            <p>You can preview Startup Framework <a href="http://designmodo.com/startup/?u=787">here</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Oracle</h2>
+                            <p class="item-intro text-muted">Database Management System(PL/SQL support).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_oracle_bigsize.png" alt="">
+                            <p class="koreanfont">오라클은 미국 오라클사의 관계형 데이터베이스 관리 시스템의 이름으로, 현재 가장 널리 사용되는 DBMS이다.<br> 
+                            	오라클은 PL/SQL을 지원하기에 SQL문의 질의어뿐 아니라 조건문,반복문,변수,상수 선언 가능하다.</p> 
+                            <p class="koreanfont">현재 웹사이트 제작에는 프로시저를 사용하기 위해 PL/SQL이 사용되고 있다.<br> 
+                            	해당부분은 보드안의 리스트와 카드를 추가/삭제하는 부분으로, <br>조건문을 사용하고 한번의 호출만으로 여러 sql문을 연속적으로 처리하기 위해 프로시저를 사용하였다.</p>
+                            
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -649,7 +649,7 @@
     <!-- Portfolio Modal 3 -->
     <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -660,12 +660,16 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Tomcat</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_tomcat.png" alt="">
-                            <p>Treehouse is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. This is bright and spacious design perfect for people or startup companies looking to showcase their apps or other projects.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/treehouse-free-psd-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Apache Tomcat</h2>
+                            <p class="item-intro text-muted">Web Application Server(WAS).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_tomcat_bigsize.png" alt="">
+                            <p class="koreanfont">아파치 톰캣은 서블릿 컨테이너(또는 웹 컨테이너)만 있는 웹 애플리케이션 서버이다.<br>
+                            	웹 서버와 연동하여 실행할 수 있는 자바 환경을 제공하여 <br>자바 서버 페이지(JSP)와 자바 서블릿이 실행할 수 있는 환경을 제공하고 있다.<br>
+                            	톰캣은 관리툴을 통해 설정을 변경할 수 있지만, XML 파일을 편집하여 설정할 수도 있다.<br> 그리고, 톰캣은 HTTP 서버도 자체 내장하기도 한다.
+                            </p>
+                            <p>현재 웹 사이트는 Tomcat v8.0 Server를 사용한다.</p>
+                            
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -676,7 +680,7 @@
     <!-- Portfolio Modal 4 -->
     <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -687,12 +691,16 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Maven</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_maven.png" alt="">
-                            <p>Start Bootstrap's Agency theme is based on Golden, a free PSD website template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Golden is a modern and clean one page web template that was made exclusively for Best PSD Freebies. This template has a great portfolio, timeline, and meet your team sections that can be easily modified to fit your needs.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/golden-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Maven</h2>
+                            <p class="item-intro text-muted">Project Management Tool.<br>(library management,build function).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_maven_bigsize.png" alt="">
+                            <p class="koreanfont">메이븐은 프로젝트 객체 모델이라는 개념을 바탕으로 <br>프로젝트 의존성 관리,라이브러리 관리,프로젝트 생명 주기 관리 기능 등을 제공하는 프로젝트 관리 도구이다.<br>
+                            	pom.xml이라는 파일에 어떠한 라이브러리를 사용할 것인지 기입하면 <br>Maven이 자동으로 다운/설치를 해주며 경로도 지정해준다.<br>
+                            </p>
+                            <p class="koreanfont">많은 라이브러리를 간편하게 관리하고<br> git을 이용한 팀 프로젝트시 더 유용하므로 현재 웹 사이트 제작에 메이븐을 사용한다. 
+                            </p>
+                            
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -703,7 +711,7 @@
     <!-- Portfolio Modal 5 -->
     <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -714,12 +722,21 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Spring</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_spring.png" alt="">
-                            <p>Escape is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Escape is a one page web template that was designed with agencies in mind. This template is ideal for those looking for a simple one page solution to describe your business and offer your services.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/escape-one-page-psd-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Spring</h2>
+                            <p class="item-intro text-muted">MVC pattern based web framework.</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_spring_bigsize.png" alt="">
+                            <p class="koreanfont">스프링은 거대한 컨테이너임과 동시에 Ioc/DI를 기반으로 하고 있으며, <br>서비스 추상화를 통해 삼위일체로 분리되는 3단 변신로봇이라고 한다. <br>
+                            	Ioc는 컨테이너의 역할로 코드 컨트롤(객체의 생성과 소멸)을 대신 해주며, <br>DI는 사용하고 있는 코드가 무엇인지 몰라도 일단 가져다 쓰는 진보적인 프로그래밍 작성 방식이다.
+                            </p>
+                            <p class="koreanfont">스프링 MVC(Model View Controller) 프레임 워크는 스프링이 제공하는 트랜잭션,DI,AOP를 손쉽게 사용할수 있다.<br>
+                            	스프링 MVC를 이용하면 개발자는 클라이언트로부터 요청을 처리할 <br>컨트롤러와 결과값을 뿌리는 뷰단만 만들면 되므로 훨씬 손쉽게 개발을 할 수 있다.<br>
+                            	그러므로 현재 웹 제작은 스프링 MVC 구조로 만들어졌다. <br>
+                            </p>
+                            <p class="koreanfont">
+                            	개발 환경은 Spring 3.1.1버전을 사용하며, <br>DI를 사용하면서 DB와 접촉하는 부분은 iBatis 2.3.4.726 프레임워크를 이용한다.
+                            </p>
+                            
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -730,7 +747,7 @@
     <!-- Portfolio Modal 6 -->
     <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -741,12 +758,15 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Bootstrap</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_bootstrap.jpg" alt="">
-                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Bootstrap</h2>
+                            <p class="item-intro text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_bootstrap_bigsize.jpg" alt="">
+                            <p class="koreanfont">부트스트랩은 각종 레이아웃,버튼,입력창 등의 디자인을 CSS와 JavaScript로 만들어 놓은 것이다.<br>
+                            	웹 디자이너나 개발자 사이에서는 웹 디자인의 혁명이라고 불릴 정도로 폭발적인 반응을 얻는 프레임워크이다.<br>
+                            	또한 웹 페이지를 데스크탑,태블릿,스마트폰 모두에서 무리없이 보게 만들 수 있는 반응형 웹 디자인을 지원한다.
+                            </p>
+                            <p class="koreanfont">현재 웹 사이트는 부트스트랩 v3.3.6으로 제작되었다.</p>
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -757,7 +777,7 @@
 	<!-- Portfolio Modal 7 -->
     <div class="portfolio-modal modal fade" id="portfolioModal7" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -768,12 +788,19 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Jquery</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_jquery.png" alt="">
-                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Jquery</h2>
+                            <p class="item-intro text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_jquery_bigsize.png" alt="">
+                            <p class="koreanfont">자바스크립트와 HTML 사이의 상호작용을 강조하는 경량화된 웹 애플리케이션 프레임워크이다.<br>
+                            	가볍고 빠르며, 간결한 오픈소스 스크립트 라이브러리이다.
+                            </p>
+                            <p class="koreanfont">
+                            	보드 안의 리스트와 카드들을 자유롭게 움직이기 위한 Sortable 기능을 사용하기 위해 jQuery를 사용하였다.<br>
+                            	또한 현재 웹 제작에 사용되는 부트스트랩을 사용하기 위해선 jQuery 또한 사용해야한다. <br>
+                            	개발환경은 jQuery v1.11.1이다. 
+                            </p>
+                            
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -784,7 +811,7 @@
     <!-- Portfolio Modal 8 -->
     <div class="portfolio-modal modal fade" id="portfolioModal8" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -795,12 +822,18 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Git</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_git.png"" alt="">
-                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Git</h2>
+                            <p class="item-intro text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_git_bigsize.png"" alt="">
+                            <p class="koreanfont">깃은 프로그램 등의 소스 코드 관리를 위한 분산 버전 관리 시스템이다.<br>
+                            	git은 여러가지의 Branch를 생성해서 합병/삭제를 통해 여러가지를 시도해 볼수 있고, <br>합병/삭제등이 가능하여 Branch의 독립성을 제공한다.<br>
+                            	여려 명이 동시에 작업하는 등 병렬 개발이 가능해져, 팀프로젝트  협업 코딩을 관리하기 좋은 툴이다.                            
+                            </p>
+                            <p class="koreanfont">병렬개발과 체계적인 개발을 위해 git을 사용하고 있으며, <br>커뮤니티 github에 웹 제작을 위한 작업이력이 남아있다.<br>
+                            	현재 git 4.3.1 버전을 사용중이며, 우리의 github의 주소는 <a class="redcolor" href="https://github.com/jjyNphj/usMemo.git">https://github.com/jjyNphj/usMemo.git</a>이다.
+                            </p>
+                            
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>
@@ -811,7 +844,7 @@
     <!-- Portfolio Modal 9 -->
     <div class="portfolio-modal modal fade" id="portfolioModal9" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
+            <div data-dismiss="modal">
                 <div class="lr">
                     <div class="rl">
                     </div>
@@ -822,12 +855,16 @@
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <!-- Project Details Go Here -->
-                            <h2>Naver Login API</h2>
-                            <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
-                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_naver.png" alt="">
-                            <p>Dreams is a free PSD web template built by <a href="https://www.behance.net/MathavanJaya">Mathavan Jaya</a>. Dreams is a modern one page web template designed for almost any purpose. It’s a beautiful template that’s designed with the Bootstrap framework in mind.</p>
-                            <p>You can download the PSD template in this portfolio sample item at <a href="http://freebiesxpress.com/gallery/dreams-free-one-page-web-template/">FreebiesXpress.com</a>.</p>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
+                            <h2 class="fontcolor-margin-portfolio">Naver Login API</h2>
+                            <p class="item-intro text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design).</p>
+                            <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_naver_bigsize.png" alt="">
+                            <p class="koreanfont">네이버 아이디로 로그인은 OAuth 2.0 기반의 사용자 인증 기능을 제공해 <br>네이버가 아닌 다른 서비스에서 네이버의 사용자 인증 기능을 이용할 수 있게 하는 서비스이다.<br>
+								별도의 아이디나 비밀번호를 기억할 필요 없이 네이버 아이디로 간편하고 안전하게 서비스에 로그인할 수 있다.<br>
+							</p>
+							<p class="koreanfont">네이버 아이디로 로그인한 사용자의 이름,메일 주소,별명,프로필 사진,생일,연령대,성별 등의 <br>사용자 정보를 API로 손쉽게 불러오기 위하여 사용하였다. 
+							</p>
+
+                            <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
                 </div>

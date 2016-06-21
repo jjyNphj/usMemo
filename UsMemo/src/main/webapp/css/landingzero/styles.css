@@ -129,7 +129,8 @@ section h3.koreanfont {
 }
 
 .modal-content {
-    background-color: #1d1d1d;
+    /* background-color: #1d1d1d; */
+    background-color: #fff;
 }
 
 section {
@@ -568,8 +569,10 @@ img::-moz-selection {
 }
 
 #help {
-    color:#2b3a3a;
-    background-color:#2b3a3a;
+    /* color:#2b3a3a; */
+    color:#ffffff;
+    /* background-color:#2b3a3a; */
+    background-color:#ffffff;
 	/* background: url(../../img/help.jpg) no-repeat center center; */
 	/* padding: 0; */
 	-webkit-background-size: cover;
@@ -581,15 +584,17 @@ img::-moz-selection {
 }
 
 #help .overlay  {
-	background: rgba(32, 32, 32, 0.3);
+	/* background: rgba(32, 32, 32, 0.3); */
+	background: rgba(255, 255, 255, 0.3);
 	/* padding-top: 80px;
 	padding-bottom: 100px; */
 	width:100%;
 	height:100%;
+	
 }
 
 .vedio-style {
-	border: 5px solid #F05B42;
+	/* border: 5px solid #F05B42; */
 	width: 100%;
 	height:600px;
 	min-height: 300px;
