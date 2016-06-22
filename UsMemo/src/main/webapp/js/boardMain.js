@@ -492,24 +492,7 @@ widthResize($('.board-name')[0]);
     		updateStarBoard('N');
     	}
     });
-	
-    function updateStarBoard(star,bNum,memId){
-    	/*var bNum=$('#bNum').val();
-    	var memId=$('#memId').val();*/
-    	
-    	var url='/usMemo/member/updateStar?bNum='+bNum+'&memId='+memId+'&star='+star;
-    	 $.ajax({
-	            url: url,
-	            type :'post',
-	            success:function(){
-	            } ,
-		       error :function(data,status,er) { 
-		    	   alert("error: "+data+" status: "+status+" er:"+er);
-		    	   console.log("error: "+data+" status: "+status+" er:"+er);
-	         }
-    	 });
-    	
-    }
+
     
     //리스트 삭제시 하위의 카드까지 모두 삭제
     function deleteListInfo(num){

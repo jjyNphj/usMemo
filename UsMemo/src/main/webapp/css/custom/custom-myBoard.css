@@ -50,12 +50,17 @@ body, #board-header-wrap{
 
 .member-boards-wrapper,.add-board-wrapper{
 	box-sizing: border-box;
-	padding: 0 1pc 8px 0;
+	padding: 10px;
+	/* margin: 3px;   */
 	position: relative;
 	width: 25%;
+	
+    margin-top: 2px;
+    margin-bottom: 2px;
+
 	transform:translate3d(0,0,0);
 }
-.member-boards-background,.add-board-background{
+.member-boards-link,.add-board-background{
 	/* background-color: #B04632; */
 	background-position: center center;
 	background-size: cover;
@@ -66,6 +71,7 @@ body, #board-header-wrap{
 	padding: 8px 9pt;
 	position: relative;
 	text-decoration: none;
+	min-height: 60px;
 }
 .add-board-background{
 	background-color: #E2E4E6;
@@ -74,4 +80,39 @@ body, #board-header-wrap{
 .add-board-background:HOVER{
 	background-color: #D6DADC;
 	color: #505050;
+}
+
+.member-boards-title-background,.add-board-background{
+	width: 98%;
+	height: 100%;
+	position: absolute;
+	background-position: center center;
+	background-size: cover;
+}
+.member-boards-wrapper:HOVER{
+	/* background-color: rgba( 0, 0, 0, 0.15 )  */
+	opacity: 0.8 !important;
+}
+.member-boards-title-wrapper{
+	display: flex;
+	
+    min-height: 88px;
+	
+}
+.member-boards-link{
+	flex: 1 1 auto;
+}
+.add-board-wrapper-background{
+	width: 98%;
+	height: 100%;
+	
+    min-height: 88px;
+	
+}
+.member-boards-star{
+	padding-top: 8px;
+	
+}
+.add-board-text{
+	text-align: center;
 }

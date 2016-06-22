@@ -1,5 +1,3 @@
-var static_bNum=$('#bNum').val();
-var static_memId=$('#memId').val();
 
 /**
  * 이벤트 

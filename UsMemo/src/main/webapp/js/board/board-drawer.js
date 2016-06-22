@@ -1,3 +1,5 @@
+var static_bNum=$('#bNum').val();
+var static_memId=$('#memId').val();
 /*board의 상단 메뉴*/
 
 /*boardmenu의 보드목록 불러오는 이벤트, 즐겨찾기클릭의 중복을 막기 위해 바꿈. */
@@ -76,7 +78,7 @@ function set_allBoards(data){
 							 '<a class="drawer-boardsList-title-link" onclick="goBoard('+val.bNum+','+'\''+val.name+'\''+')">'+
 								 '<span class="drawer-boardsList-title-link-thumbnail" style="background-color:'+val.background_color+'"></span>'+
 								 '<span class="drawer-boardsList-title-details">'+
-								 '<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
+								 '<div id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</div>'+
 							 '</a>'+
 							 '<span id="drawer-boardsList-star_'+val.bNum+'" class="drawer-boardsList-title-star glyphicon '+starred_boards_vlaue+'"></span>'+
 							 '</span>'+
@@ -100,7 +102,7 @@ function set_starredBoards(data){
 							 '<a class="drawer-boardsList-title-link" onclick="goBoard('+val.bNum+','+'\''+val.name+'\''+')">'+
 							 	'<span class="drawer-boardsList-title-link-thumbnail" style="background-color:'+val.background_color+'"></span>'+
 								'<span class="drawer-boardsList-title-details">'+
-								'<span id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</span>'+
+								'<div id="allBoardName_'+val.bNum+'" class="drawer-boardsList-name" >'+val.name+'</div>'+
 							'</a>'+
 							'<span id="drawer-boardsList-star_'+val.bNum+'" class="drawer-boardsList-title-star glyphicon glyphicon-star"></span>'+
 							'</span>'+
@@ -113,6 +115,23 @@ function set_starredBoards(data){
 	//initDrawerBoard();
 }
 
+function updateStarBoard(star,bNum,memId){
+	/*var bNum=$('#bNum').val();
+	var memId=$('#memId').val();*/
+	
+	var url='/usMemo/member/updateStar?bNum='+bNum+'&memId='+memId+'&star='+star;
+	 $.ajax({
+            url: url,
+            type :'post',
+            success:function(){
+            } ,
+	       error :function(data,status,er) { 
+	    	   alert("error: "+data+" status: "+status+" er:"+er);
+	    	   console.log("error: "+data+" status: "+status+" er:"+er);
+         }
+	 });
+	
+}
 function clean_allBoards(){
 	$('.all-boards-content>*').detach();
 }
