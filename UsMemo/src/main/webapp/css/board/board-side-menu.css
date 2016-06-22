@@ -58,6 +58,10 @@ hr{
 }
 #findOption{
 	padding: 10px 5px 10px 5px;
+	width: 320px;
+}
+.help-block{
+	white-space: normal;
 }
 .side-menu-members{
 	padding: 0 3px 0 3px;
@@ -119,6 +123,7 @@ hr{
 .activity-unit-contents-wrapper{
 	flex: 1 1 auto;
 	padding-left: 3px;
+	white-space: normal;
 }
 .side-menu-option-menu{
 	width: 100%;

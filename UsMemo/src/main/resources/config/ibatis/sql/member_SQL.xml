@@ -38,7 +38,7 @@
 		</select>
 		
 		<insert id="addFriend" parameterClass="memberGrade">
-			insert into memberGrade values(memberGrade_num_seq.nextval,#bNum#,#memId#,2,'N')
+			insert into memberGrade values(memberGrade_num_seq.nextval,#bNum#,#memId#,2,'N','rgb(176, 70, 50)')
 			<selectKey keyProperty="num" resultClass="int" type="post">
 				select MEMBERGRADE_NUM_SEQ.CURRVAL from dual
 			</selectKey>	
