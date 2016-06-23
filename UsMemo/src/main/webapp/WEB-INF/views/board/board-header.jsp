@@ -14,9 +14,9 @@
 				 </div>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4" style="text-align:center;"> 
-			<a class="header-btn-home" href="#">
-			 <span class="header-logo glyphicon glyphicon-object-align-top" "></span>
-			 <span class="header-text" >UsMemo</span>
+			<a class="header-btn-home" href="/usMemo/index">
+				 <span class="header-logo glyphicon glyphicon-object-align-top" "></span>
+				 <span class="header-text" >UsMemo</span>
 			 </a>
 			 </div>
 			<div class="col-xs-4 col-sm-4 col-md-4"  style="text-align:right;">

@@ -45,7 +45,6 @@ body, #board-header-wrap{
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     -webkit-padding-start: 40px;
-	
 }
 
 .member-boards-wrapper,.add-board-wrapper{
@@ -53,6 +52,7 @@ body, #board-header-wrap{
 	padding: 0 1pc 8px 0;
 	position: relative;
 	width: 25%;
+	height:114px;
 	transform:translate3d(0,0,0);
 }
 .member-boards-background,.add-board-background{
@@ -60,6 +60,7 @@ body, #board-header-wrap{
 	background-position: center center;
 	background-size: cover;
 	color: #fff;
+	height:96px;
 	display: block;
 	line-height: 20px;
 	margin-bottom: 8px;
@@ -74,4 +75,46 @@ body, #board-header-wrap{
 .add-board-background:HOVER{
 	background-color: #D6DADC;
 	color: #505050;
+}
+.member-boards-title{
+	min-height: 60px;
+	position: relative;
+	height:80px;
+	padding-top:5px;
+	padding-bottom: 20px;
+	padding-right: 37px;
+	float:left;
+}
+.member-boards-star {
+	position: relative;
+    font-size: 14px;
+    width: 25px;
+	height: 36px;
+	padding: 9px;
+    right: 0;
+    top: 0;
+    float:right;
+} 
+/* a.header-btn-home>span.header-text{
+	color:#f3f3f3;
+	font-family:"Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive
+} */
+.header-btn-home{
+	color: rgba( 225, 225, 225, 0.75);
+	/* a태그 hover시 언더라인 없애기 */
+	text-decoration:none !important;
+}
+.header-btn-home:hover{
+	color:#f3f3f3;
+}
+.header-text{
+	color: rgba( 225, 225, 225, 0.75);
+	font-family:"Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+	font-size:19px;
+}
+.header-text:hover{
+	color:#f3f3f3;
+}
+.header-text-myInfo{
+	padding:0 20px;
 }

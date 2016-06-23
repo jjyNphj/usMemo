@@ -28,6 +28,7 @@ body, #board-header-wrap{
 	position: relative;
 	/* overflow-x: auto; */
  	 margin-bottom:20px;   
+ 	 margin-top:10px;
 }
 
 #board-canvas{
@@ -44,4 +45,20 @@ body, #board-header-wrap{
 .header-btn-home{
 	/* color: #CA9D94; */
 	color: rgba( 225, 225, 225, 0.75);
-	}
+	/* a태그 hover시 언더라인 없애기 */
+	text-decoration:none !important;
+}
+/* .header-btn-home:hover{
+	color:#f3f3f3;
+} */
+.header-text{
+	color: rgba( 225, 225, 225, 0.75);
+	font-family:"Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive;
+	font-size:19px;
+}
+.header-text:hover{
+	color:#f3f3f3;
+}
+.header-text-myInfo{
+	padding:0 20px;
+}

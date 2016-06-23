@@ -14,6 +14,9 @@
 	<link href="${pageContext.request.contextPath}/css/board/board-drawer.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/common/board-common.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/custom/custom-myBoard.css" rel="stylesheet">
+	
+	<!-- font -->
+	<link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
