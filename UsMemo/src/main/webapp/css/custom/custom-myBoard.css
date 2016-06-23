@@ -5,6 +5,12 @@
 body, #board-header-wrap{
 	background-color: #f3f3f3;
 }
+.myBoard-content{
+	
+    height: 90%;
+    overflow-y: auto;
+	
+}
 #header{
 	background-color: #026AA7; 
 }

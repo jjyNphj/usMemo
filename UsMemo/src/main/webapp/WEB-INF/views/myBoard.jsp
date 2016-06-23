@@ -24,7 +24,7 @@
 		<jsp:include page="board/board-header.jsp"></jsp:include>				
 	</div><!-- end header -->
 			
-	<div id="content">
+	<div id="content" class="myBoard-content">
 	<div class="member-boards-view">
 		<div class="member-boards-starred">
 			<div class="member-boards-starred-header">
