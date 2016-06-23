@@ -542,11 +542,14 @@ widthResize($('.board-name')[0]);
             $(type+'.'+className).blur();*/
             thisElement.blur();
             var className=thisElement.className;
-            if (className=='list-name'){
-            editListName(thisElement);	}
-            else if(className=='board-name'){
+            if ($(thisElement).hasClass("list-name")){
+            editListName(thisElement);	
+            }else if($(thisElement).hasClass("board-name")){
             	editBoardName(thisElement);
+            }else if($(thisElement).hasClass("find-member")){
+            	findMember(thisElement.value);
             }
+           
             
 
         }

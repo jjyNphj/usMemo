@@ -162,6 +162,7 @@ function addMemberFunc(id,bNum){
 	            success:function(){
 	            	var memId=$("#memId").val();
 	            	cleanMemberListView();
+	            	clean_activitys();
 	            	openMenu(bNum, memId);
 	            } ,
 		       error :function(data,status,er) { 
@@ -173,38 +174,42 @@ function addMemberFunc(id,bNum){
 	
 
 	$("#findMember").keyup(function(){
-		
-		 var url='/usMemo/member/friend/find/'+$(this).val()+'/'+static_bNum;
-			 
-			  $.ajax({
-		            url: url,
-		            type:'post',
-		            datatype: 'json',
-		            success:function(data){
-		               	console.log(data);
-		               	var result='';
-		               	$.each(data,function(index,val){
-		               		result+=
-		               		'<br>'+
-		               		'<a class="list-group-item">'+
-			               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+static_bNum+')">'+
-				               		'<div class="col-md-2">'+
-				               			'<img src="'+val.profile_image+'" class="side-menu-profile_image" />'+
-				               		'</div>'+
-				               		'<div class="col-md-4">'+
-				               			'<span>'+val.name+'<br>('+val.nickname+')<br>'+val.email+'</span>'+
-				               		'</div>'+
-			               		'</div>'+
-		               		'</a>';
-		               	});
-		               		$("#findMemberResult").html(result);
-		               	
-		            } ,
-			       error : function(xhr, status, error) {
-		              console.log(error);
-		         }
-		        }) 
+		findMember($(this).val());
 		});
+	
+	function findMember(findName){
+		 var url='/usMemo/member/friend/find/'+findName+'/'+static_bNum;
+		 
+		  $.ajax({
+	            url: url,
+	            type:'post',
+	            datatype: 'json',
+	            success:function(data){
+	               	console.log(data);
+	               	var result='';
+	               	$.each(data,function(index,val){
+	               		result+=
+	               		'<br>'+
+	               		'<a class="list-group-item">'+
+		               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+static_bNum+')">'+
+			               		'<div class="col-md-2">'+
+			               			'<img src="'+val.profile_image+'" class="side-menu-profile_image" />'+
+			               		'</div>'+
+			               		'<div class="col-md-4">'+
+			               			'<span>'+val.name+'<br>('+val.nickname+')<br>'+val.email+'</span>'+
+			               		'</div>'+
+		               		'</div>'+
+	               		'</a>';
+	               	});
+	               		$("#findMemberResult").html(result);
+	               	
+	            } ,
+		       error : function(xhr, status, error) {
+	              console.log(error);
+	         }
+	        }) 
+	}
+	
 	var check=true;
 	
 	function openMenu(bNum, memId){

@@ -27,7 +27,7 @@
 			      <form role="form">
 					<label for="pwd">친구검색</label> 
 					<span id="findMember-close-btn" class="glyphicon glyphicon-remove"></span>
-					<input type="text" class="form-control" id="findMember"	placeholder="이름, 닉네임, email 등으로 검색해보세요."> 
+					<input type="text" class="find-member form-control" id="findMember"  onkeypress="enterSave(event,this)" placeholder="이름, 닉네임, email 등으로 검색해보세요."> 
 					<div class="help-block">당신의 보드에 팀멤버를 등록하세요. 쉽게 공유할 수 있습니다. </div>
 					
 					<div id="findMemberResult" class="list-group">
