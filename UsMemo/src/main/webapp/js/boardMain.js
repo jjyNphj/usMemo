@@ -138,7 +138,7 @@ widthResize($('.board-name')[0]);
             type:'post',
             success:function(){
             
-            	alert("happy!");
+            	//alert("happy!");
             	window.location.reload();
             } ,
 	       error : function(xhr, status, error) {
@@ -156,7 +156,7 @@ widthResize($('.board-name')[0]);
 	            url: url,
 	            type:'post',
 	            success:function(){
-	               	alert("success");
+	               	//alert("success");
 	            	window.location.reload();
 	            } ,
 		       error : function(xhr, status, error) {

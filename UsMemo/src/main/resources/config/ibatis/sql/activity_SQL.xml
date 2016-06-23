@@ -62,12 +62,14 @@
 		</select>
 		
 		<select id="getSomeActivity" parameterClass="int" resultMap="activityMap">
-			select a.num, a.activity_data_num, a.last_activity, d.bNum, d.write_time
+			select * from (select a.num, a.activity_data_num, a.last_activity, d.bNum, d.write_time
 			from activity a
 			inner join activity_data d 
 			on d.num=a.activity_data_num
-			where bNum=#bNum# and rownum <![CDATA[<=]]> 8
-			order by d.write_time desc
+			where bNum=#bNum# 
+			order by TO_CHAR(d.write_time,'YYYY-MM-DD HH24:Mi:SS') desc
+			)
+			where rownum <![CDATA[<=]]> 8
 		</select>
 		
 		<select id="getAllActivity" parameterClass="int" resultMap="activityMap">
@@ -76,7 +78,7 @@
 			inner join activity_data d 
 			on d.num=a.activity_data_num
 			where bNum=#bNum#
-			order by d.write_time desc
+			order by TO_CHAR(d.write_time,'YYYY-MM-DD HH24:Mi:SS') desc
 		</select>
 		
 		<insert id="addList" parameterClass="activityDataMember">
