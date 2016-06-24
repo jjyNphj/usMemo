@@ -11,11 +11,65 @@ widthResize($('.board-name')[0]);
 				var boardColor= $('#boardColor').val();
 				$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
 				.css("background-color",boardColor);
+				
+				//스크롤바 색 설정
+				var setScrollBar=$('.list_all,.card_all,.boards-drawer-content,.side-menu-activity-content,#findMemberResult,#allActivityModal');
+				var scrollBarColorClassName;
+				
+				var boardColorHex=rgb2hex(boardColor);
+					switch(boardColorHex){
+					case '#0079bf':
+						scrollBarColorClassName='scrollbar-color-blue';
+						break;
+					case '#d29034':
+						scrollBarColorClassName='scrollbar-color-orange'
+						break;
+					case '#519839':
+						scrollBarColorClassName='scrollbar-color-green';
+						break;
+					case '#b04632':
+						scrollBarColorClassName='scrollbar-color-red';
+						break;
+					case '#89609e':
+						scrollBarColorClassName='scrollbar-color-purple';
+						break;
+					case '#cd5a91':
+						scrollBarColorClassName='scrollbar-color-pink';
+						break;
+					case '#4bbf6b':
+						scrollBarColorClassName='scrollbar-color-lightGreen';
+						break;
+					case '#00aecc':
+						scrollBarColorClassName='scrollbar-color-sykBlue';
+						break;
+					case '#838c91':
+						scrollBarColorClassName='scrollbar-color-gray';
+						break;
+						
+					}
+					
+					setScrollBar.addClass('scrollbar-setting '+scrollBarColorClassName);
+
 				//리스트네임의 textarea height 조정
 				var textarea_arr=$('h6>textarea.list-name');
 				for(var i=0;i<textarea_arr.length;i++){
 					heightResize(textarea_arr[i]);
 				}
+				
+				
+				
+				
+				
+		        /**
+		         * rgb타입을 hex 타입으로 바꾸는 함수.
+		         */
+		        function rgb2hex(rgb){
+		        	 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+		        	 return (rgb && rgb.length === 4) ? "#" +
+		        	  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+		        	  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+		        	  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+		        	}
 			
 		});
 		/*
@@ -124,6 +178,8 @@ widthResize($('.board-name')[0]);
 	        	}
 	        	});
 
+
+	        
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;
