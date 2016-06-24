@@ -386,13 +386,16 @@ widthResize($('.board-name')[0]);
 	 }
 
 	$(function() {
+		/**
+		 * .disableSelection();은 리스트안에 있는 텍스트가 드래그 되는것을 방지.
+		 */
 		/*
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
 		$(".list_all").sortable({
-			/*axis:"x",*/
+			axis:"x",
 /*			cancel: "#addListLI" 입력을 못하게 막음,*/
-			items: ".list_unit, div:not(.no-include-sortable,.card_all,.card_unit)"/*"div:not(#addListLI,#addCardLI,.card_unit)"*/,
+			items: "div:not(.no-include-sortable,.card_all,.card_unit)"/*.list_unit,*/,
 			/*움직이는 대상에서 제외*/
 			item:function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
@@ -435,7 +438,7 @@ widthResize($('.board-name')[0]);
 			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
 		      connectWith: ".card_all",
 	/*	      cancel: "#addCardLI" addbtn은 움직일 수 없게 설정,*/
-		      items: ".card_unit, div:not(.no-include-sortable)",
+		      items: "div:not(.no-include-sortable)",
 			  start: function (event, ui) {  
 				  var productOrder = $(this).sortable("toArray");
 				  updateCardStart(productOrder,ui.item.index());

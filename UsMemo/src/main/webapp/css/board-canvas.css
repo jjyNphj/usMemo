@@ -21,7 +21,11 @@
 }
 /*카드의 영역을 일관되게 맞추기 위해 패딩 0 */
 .card_all{
-	padding: 0;
+	/*padding은 반드시 주어야!!! 
+	그래야 빈 리스트에 카드를 넣을 수 있다.
+	*/
+	padding-top:5px;
+	padding-bottom: 5px;
 	width:236;
 	height:100%;
 	overflow-y: overlay;
