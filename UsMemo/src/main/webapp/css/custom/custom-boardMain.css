@@ -28,6 +28,7 @@ body, #board-header-wrap{
 	position: relative;
 	/* overflow-x: auto; */
  	 margin-bottom:20px;   
+ 	 margin-top:10px;
 }
 
 #board-canvas{

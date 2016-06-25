@@ -643,7 +643,7 @@ function addMemberFunc(id,bNum){
 	
 		
 	}
-	
+
 	/*$('.background-color-list-close-btn').click(function(){
 		배경색 바꾸기 드롭다운 끄기 클릭시 
 		

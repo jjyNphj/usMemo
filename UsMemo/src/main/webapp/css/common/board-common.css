@@ -272,4 +272,7 @@ body{
 .header-myInfo-dropdown-header-text{
 	flex:1;
 }
-
+a{
+	/* a태그 hover시 언더라인 없애기 */
+   text-decoration:none !important;
+}
