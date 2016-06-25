@@ -86,6 +86,7 @@
 .addList_group{
 	/*add List의 입력창 , 버튼 부분*/
 	 padding: 4px 4px 2px 4px;
+	 min-height: 270px;
 	
 }
 .addList_textarea{
