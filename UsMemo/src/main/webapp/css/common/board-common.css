@@ -1,10 +1,10 @@
  /**
  boardMain의 전체적인 디자인 
  */
- 
-    @font-face {
+ @font-face {
+ /* font-family:"Kaushan Script","Helvetica Neue",Helvetica,Arial,cursive*/   
    font-family: 'logoFont'; /* 폰트 패밀리 이름 주기*/
-   src: url('../fonts/JENNASUE.TTF'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
+   src: url('../fonts/KaushanScript-Regular.otf'); /*폰트 파일 주소 GIDDYUPSTD.OTF , ARCENA.TTF*/
 } 
     @font-face {
    font-family: 'basicFont'; /* 폰트 패밀리 이름 주기*/
@@ -176,6 +176,7 @@ body{
 	font-family: basicFont;
 	font-size: 18pt;
 	color: #f3f3f3;
+    text-overflow: ellipsis;
 	
 }
 .board-header-btn-menu{
@@ -271,4 +272,7 @@ body{
 .header-myInfo-dropdown-header-text{
 	flex:1;
 }
-
+a{
+	/* a태그 hover시 언더라인 없애기 */
+   text-decoration:none !important;
+}

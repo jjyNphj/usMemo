@@ -24,7 +24,7 @@
 		<jsp:include page="board/board-header.jsp"></jsp:include>				
 	</div><!-- end header -->
 			
-	<div id="content">
+	<div id="content" class="myBoard-content">
 	<div class="member-boards-view">
 		<div class="member-boards-starred">
 			<div class="member-boards-starred-header">
@@ -35,10 +35,13 @@
 				<c:forEach var="list" items="${Board}" varStatus="i">
 					<c:if test="${list.star=='Y' }">
 						<div class="member-boards-wrapper">
-							<a class="member-boards-background"  onclick="goBoard(${list.bNum},'${list.name}')">
-								<span class="member-boards-title">${list.name }</span>
-								<span class="member-boards-star glyphicon glyphicon-star"></span>
-							</a>
+							<span class="member-boards-title-background" style="background-color: ${list.background_color}" onclick="goBoard(${list.bNum},'${list.name}')"></span>
+							<div class="member-boards-title-wrapper">
+								<a class="member-boards-link" onclick="goBoard(${list.bNum},'${list.name}')">
+									<span class="member-boards-title-text">${list.name }</span>
+								</a>
+								<span id="member-boards-star_${list.bNum }" class="member-boards-star glyphicon glyphicon-star"></span>
+							</div>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -52,19 +55,24 @@
 			<div class="member-boards-myBoards-content">
 				<c:forEach var="list" items="${Board}" varStatus="i">
 				<div class="member-boards-wrapper">
-					<a class="member-boards-background" style="background-color: ${list.background_color}" onclick="goBoard(${list.bNum},'${list.name}')">
-						<span class="member-boards-title">${list.name }</span>
-							<c:if test="${list.star=='Y' }"> <span class="member-boards-star glyphicon glyphicon-star"></span></c:if>
-							<c:if test="${list.star=='N' }"> <span class="member-boards-star glyphicon glyphicon-star-empty"></span></c:if>
-					</a>
+					<span class="member-boards-title-background" style="background-color: ${list.background_color}" onclick="goBoard(${list.bNum},'${list.name}')"></span>
+						<div class="member-boards-title-wrapper">
+							<a class="member-boards-link" onclick="goBoard(${list.bNum},'${list.name}')">
+								<span class="member-boards-title-text">${list.name }</span>
+							</a>
+							<c:if test="${list.star=='Y' }"> <span id="member-boards-star_${list.bNum }" class="member-boards-star glyphicon glyphicon-star"></span></c:if>
+							<c:if test="${list.star=='N' }"> <span id="member-boards-star_${list.bNum }" class="member-boards-star glyphicon glyphicon-star-empty"></span></c:if>
+						</div>
 				</div>
 				</c:forEach>
 	<!-- 보드 추가 부분 -->
 		<div class="add-board-wrapper dropdown">
 			<!-- <div id="add-board"> -->
 				<div class="add-board-background dropdown-toggle" data-toggle="dropdown">
-					<div class="add-board-text">
-						board create
+					<div class="add-board-wrapper-background">
+						<div class="add-board-text">
+							board create
+						</div>
 					</div>
 				</div>
 		<!-- 	</div> -->

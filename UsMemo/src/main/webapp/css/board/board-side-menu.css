@@ -58,6 +58,10 @@ hr{
 }
 #findOption{
 	padding: 10px 5px 10px 5px;
+	width: 320px;
+}
+.help-block{
+	white-space: normal;
 }
 .side-menu-members{
 	padding: 0 3px 0 3px;
@@ -119,6 +123,7 @@ hr{
 .activity-unit-contents-wrapper{
 	flex: 1 1 auto;
 	padding-left: 3px;
+	white-space: normal;
 }
 .side-menu-option-menu{
 	width: 100%;
@@ -221,4 +226,11 @@ hr{
 
 .change-permission-admin,.change-permission-member{
 	padding:5px;
+}
+
+#activity-memberInfo-dropdown-view-content{
+	left: -90px;
+}
+a.activity-memberInfo-dropdown-view-btn:hover, a.cardInfo-dropdown-view:HOVER,a.all-activity-btn:HOVER,#card_fileName>a:HOVER {
+	color:#68B3C8 !important;
 }

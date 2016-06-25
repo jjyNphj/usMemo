@@ -391,7 +391,7 @@
                                     <h4 class="subheading">Period For Core Technology</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted koreanfont">Spring MVC 패턴을 이용하여 웹의 기본 틀 구현<br>Naver 로그인 API 적용 <br>핵심 기능인 리스트,카드간의 이동은 Jquery sortable을 바꾸고, DB적용은 링크드리스트 자료구조 적용</p>
+                                    <p class="text-muted koreanfont">Spring MVC 패턴을 이용하여 웹의 기본 틀 구현.<br>Naver 로그인 API 적용.<br>핵심 기능인 리스트, 카드간의 이동은<br>Jquery sortable로 구현.<br>리스트와 카드의 정확한 위치를 반영하기 위하여<br>DB설계시 linkedList 자료구조를 적용.</p>
                                 </div>
                             </div>
                         </li>
@@ -405,8 +405,8 @@
                                     <h4 class="subheading">Period For Add Function</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted koreanfont">기본 틀 안에 실질적인 기능 추가<br>보드,리스트,카드 삭제/추가/수정
-                                    <br>친구찾기,친구추가(공유기능,관리자권한),활동내역<br>보드 즐겨찾기,파일첨부 등</p>
+                                    <p class="text-muted koreanfont">기본 틀 안에 실질적인 기능 추가<br>보드, 리스트, 카드의 CRUD 구현.
+                                    <br>친구찾기, 친구추가(공유기능)<br>보드 즐겨찾기, 파일첨부 등 구현.</p>
                                 </div>
                             </div>
                         </li>                      
@@ -416,11 +416,11 @@
                             </div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4 class="h3color">2016-04</h4>
+                                    <h4 class="h3color">2016-06</h4>
                                     <h4 class="subheading">Period For Core Technology</h4>
                                 </div>
                                 <div class="timeline-body">
-                                    <p class="text-muted koreanfont">메뉴바,버튼,스크롤 등 UI 디자인 적용<br>오류 수정,테스트</p>
+                                    <p class="text-muted koreanfont">사용자의 활동내역 기능추가.<br>메인화면, 메뉴바, 버튼, 스크롤 등 UI 디자인 적용.<br>오류 수정 및 알파테스트.</p>
                                 </div>
                             </div>
                         </li>
@@ -634,9 +634,9 @@
                             <p class="item-intro text-muted">Database Management System(PL/SQL support).</p>
                             <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_oracle_bigsize.png" alt="">
                             <p class="koreanfont">오라클은 미국 오라클사의 관계형 데이터베이스 관리 시스템의 이름으로, 현재 가장 널리 사용되는 DBMS이다.<br> 
-                            	오라클은 PL/SQL을 지원하기에 SQL문의 질의어뿐 아니라 조건문,반복문,변수,상수 선언 가능하다.</p> 
+                            	오라클은 PL/SQL을 지원하기에 SQL문의 질의어뿐 아니라 조건문, 반복문, 변수, 상수 선언 가능하다.</p> 
                             <p class="koreanfont">현재 웹사이트 제작에는 프로시저를 사용하기 위해 PL/SQL이 사용되고 있다.<br> 
-                            	해당부분은 보드안의 리스트와 카드를 추가/삭제하는 부분으로, <br>조건문을 사용하고 한번의 호출만으로 여러 sql문을 연속적으로 처리하기 위해 프로시저를 사용하였다.</p>
+                            	프로시저를 사용한 부분은 보드안의 리스트와 카드를 추가/삭제하는 부분으로, <br>조건문을 사용하고 한번의 호출만으로 여러 sql문을 연속적으로 처리하기 위해 프로시저를 사용하였다.</p>
                             
                             <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
@@ -665,7 +665,6 @@
                             <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_tomcat_bigsize.png" alt="">
                             <p class="koreanfont">아파치 톰캣은 서블릿 컨테이너(또는 웹 컨테이너)만 있는 웹 애플리케이션 서버이다.<br>
                             	웹 서버와 연동하여 실행할 수 있는 자바 환경을 제공하여 <br>자바 서버 페이지(JSP)와 자바 서블릿이 실행할 수 있는 환경을 제공하고 있다.<br>
-                            	톰캣은 관리툴을 통해 설정을 변경할 수 있지만, XML 파일을 편집하여 설정할 수도 있다.<br> 그리고, 톰캣은 HTTP 서버도 자체 내장하기도 한다.
                             </p>
                             <p>현재 웹 사이트는 Tomcat v8.0 Server를 사용한다.</p>
                             
@@ -694,7 +693,7 @@
                             <h2 class="fontcolor-margin-portfolio">Maven</h2>
                             <p class="item-intro text-muted">Project Management Tool.<br>(library management,build function).</p>
                             <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_maven_bigsize.png" alt="">
-                            <p class="koreanfont">메이븐은 프로젝트 객체 모델이라는 개념을 바탕으로 <br>프로젝트 의존성 관리,라이브러리 관리,프로젝트 생명 주기 관리 기능 등을 제공하는 프로젝트 관리 도구이다.<br>
+                            <p class="koreanfont">메이븐은 프로젝트 객체 모델이라는 개념을 바탕으로 <br>프로젝트 의존성 관리, 라이브러리 관리, 프로젝트 생명 주기 관리 기능 등을 제공하는 프로젝트 관리 도구이다.<br>
                             	pom.xml이라는 파일에 어떠한 라이브러리를 사용할 것인지 기입하면 <br>Maven이 자동으로 다운/설치를 해주며 경로도 지정해준다.<br>
                             </p>
                             <p class="koreanfont">많은 라이브러리를 간편하게 관리하고<br> git을 이용한 팀 프로젝트시 더 유용하므로 현재 웹 사이트 제작에 메이븐을 사용한다. 
@@ -761,9 +760,9 @@
                             <h2 class="fontcolor-margin-portfolio">Bootstrap</h2>
                             <p class="item-intro text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design).</p>
                             <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_bootstrap_bigsize.jpg" alt="">
-                            <p class="koreanfont">부트스트랩은 각종 레이아웃,버튼,입력창 등의 디자인을 CSS와 JavaScript로 만들어 놓은 것이다.<br>
+                            <p class="koreanfont">부트스트랩은 각종 레이아웃, 버튼, 입력창 등의 디자인을 CSS와 JavaScript로 만들어 놓은 것이다.<br>
                             	웹 디자이너나 개발자 사이에서는 웹 디자인의 혁명이라고 불릴 정도로 폭발적인 반응을 얻는 프레임워크이다.<br>
-                            	또한 웹 페이지를 데스크탑,태블릿,스마트폰 모두에서 무리없이 보게 만들 수 있는 반응형 웹 디자인을 지원한다.
+                            	또한 웹 페이지를 데스크탑, 태블릿, 스마트폰 모두에서 무리없이 보게 만들 수 있는 반응형 웹 디자인을 지원한다.
                             </p>
                             <p class="koreanfont">현재 웹 사이트는 부트스트랩 v3.3.6으로 제작되었다.</p>
                             <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
@@ -795,8 +794,8 @@
                             	가볍고 빠르며, 간결한 오픈소스 스크립트 라이브러리이다.
                             </p>
                             <p class="koreanfont">
-                            	보드 안의 리스트와 카드들을 자유롭게 움직이기 위한 Sortable 기능을 사용하기 위해 jQuery를 사용하였다.<br>
-                            	또한 현재 웹 제작에 사용되는 부트스트랩을 사용하기 위해선 jQuery 또한 사용해야한다. <br>
+                            	jQuery를 사용하여 보드 안의 리스트와 카드들을 자유롭게 움직이기 위한 Sortable 기능 등을 구현하였다.<br>
+                            	또한 jQuery를 활용한 부트스트랩으로 기능을 확장하였다.<br>
                             	개발환경은 jQuery v1.11.1이다. 
                             </p>
                             
@@ -826,10 +825,10 @@
                             <p class="item-intro text-muted">HTML5 based open source web design framework.<br>(CSS, JavaScript, Responsive Web Design).</p>
                             <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_git_bigsize.png"" alt="">
                             <p class="koreanfont">깃은 프로그램 등의 소스 코드 관리를 위한 분산 버전 관리 시스템이다.<br>
-                            	git은 여러가지의 Branch를 생성해서 합병/삭제를 통해 여러가지를 시도해 볼수 있고, <br>합병/삭제등이 가능하여 Branch의 독립성을 제공한다.<br>
-                            	여려 명이 동시에 작업하는 등 병렬 개발이 가능해져, 팀프로젝트  협업 코딩을 관리하기 좋은 툴이다.                            
+                            	git은 여러가지의 Branch를 생성해서 병합/삭제를 통해 여러가지를 시도해 볼 수 있고, <br>따라서 Branch의 독립성을 제공한다.<br>
+                            	여려 명이 동시에 작업하는 등 병렬 개발이 가능해져 팀프로젝트 협업 코딩을 관리하기 좋은 툴이다.                            
                             </p>
-                            <p class="koreanfont">병렬개발과 체계적인 개발을 위해 git을 사용하고 있으며, <br>커뮤니티 github에 웹 제작을 위한 작업이력이 남아있다.<br>
+                            <p class="koreanfont">병렬개발과 체계적인 개발을 위해 git을 사용하고 있으며, <br>커뮤니티 github에 현 프로젝트의 작업이력이 남아있다.<br>
                             	현재 git 4.3.1 버전을 사용중이며, 우리의 github의 주소는 <a class="redcolor" href="https://github.com/jjyNphj/usMemo.git">https://github.com/jjyNphj/usMemo.git</a>이다.
                             </p>
                             
@@ -861,7 +860,7 @@
                             <p class="koreanfont">네이버 아이디로 로그인은 OAuth 2.0 기반의 사용자 인증 기능을 제공해 <br>네이버가 아닌 다른 서비스에서 네이버의 사용자 인증 기능을 이용할 수 있게 하는 서비스이다.<br>
 								별도의 아이디나 비밀번호를 기억할 필요 없이 네이버 아이디로 간편하고 안전하게 서비스에 로그인할 수 있다.<br>
 							</p>
-							<p class="koreanfont">네이버 아이디로 로그인한 사용자의 이름,메일 주소,별명,프로필 사진,생일,연령대,성별 등의 <br>사용자 정보를 API로 손쉽게 불러오기 위하여 사용하였다. 
+							<p class="koreanfont">네이버 아이디로 로그인한 사용자의 이름, 메일 주소, 별명, 프로필 사진, 생일, 연령대, 성별 등의 <br>사용자 정보를 API로 손쉽게 불러오기 위하여 사용하였다. 
 							</p>
 
                             <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
@@ -928,9 +927,9 @@
 			$.cookie("state_token", state);
 		}
 		var naver = NaverAuthorize({
-			client_id : "h1ZMSWqDjJSY20p865Ys",
+			client_id : "ZnxAOuCVv8j9OLASYEHE",
 			redirect_uri : "http://127.0.0.1:8080/usMemo/login",
-			client_secret : "fCKQuU8hmN"
+			client_secret : "tJrkiSgMRo"
 		});
 
 		function loginNaver() {

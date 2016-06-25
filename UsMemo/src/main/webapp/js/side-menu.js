@@ -1,5 +1,3 @@
-var static_bNum=$('#bNum').val();
-var static_memId=$('#memId').val();
 
 /**
  * 이벤트 
@@ -105,7 +103,7 @@ $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.s
 function goDeletePage(bNum) {
 	var answer=confirm("선택하신 보드를 삭제하시겠습니까?");
 		if(answer){ 
-	        var url ='/usMemo/board/deleteBoard?bNum='+bNum;
+	        var url ='/usMemo/board/deleteBoard?bNum='+bNum+'&memId='+static_memId;
 	            window.open(url, "_self",  '');
 	     }
 } 
@@ -121,6 +119,7 @@ function addMemberFunc(id,bNum){
 		            	var memId=$("#memId").val();
 		            	cleanMemberListView();
 		            	cleanFindMemberListView(id);
+		            	clean_activitys();
 		            	openMenu(bNum, memId);
 		            	
 		            } ,
@@ -163,6 +162,7 @@ function addMemberFunc(id,bNum){
 	            success:function(){
 	            	var memId=$("#memId").val();
 	            	cleanMemberListView();
+	            	clean_activitys();
 	            	openMenu(bNum, memId);
 	            } ,
 		       error :function(data,status,er) { 
@@ -174,38 +174,42 @@ function addMemberFunc(id,bNum){
 	
 
 	$("#findMember").keyup(function(){
-		
-		 var url='/usMemo/member/friend/find/'+$(this).val()+'/'+static_bNum;
-			 
-			  $.ajax({
-		            url: url,
-		            type:'post',
-		            datatype: 'json',
-		            success:function(data){
-		               	console.log(data);
-		               	var result='';
-		               	$.each(data,function(index,val){
-		               		result+=
-		               		'<br>'+
-		               		'<a class="list-group-item">'+
-			               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+static_bNum+')">'+
-				               		'<div class="col-md-2">'+
-				               			'<img src="'+val.profile_image+'" class="side-menu-profile_image" />'+
-				               		'</div>'+
-				               		'<div class="col-md-4">'+
-				               			'<span>'+val.name+'<br>('+val.nickname+')<br>'+val.email+'</span>'+
-				               		'</div>'+
-			               		'</div>'+
-		               		'</a>';
-		               	});
-		               		$("#findMemberResult").html(result);
-		               	
-		            } ,
-			       error : function(xhr, status, error) {
-		              console.log(error);
-		         }
-		        }) 
+		findMember($(this).val());
 		});
+	
+	function findMember(findName){
+		 var url='/usMemo/member/friend/find/'+findName+'/'+static_bNum;
+		 
+		  $.ajax({
+	            url: url,
+	            type:'post',
+	            datatype: 'json',
+	            success:function(data){
+	               	console.log(data);
+	               	var result='';
+	               	$.each(data,function(index,val){
+	               		result+=
+	               		'<br>'+
+	               		'<a class="list-group-item">'+
+		               		'<div id="friendFinding_'+val.id+'" class="row" onclick="addMemberFunc('+val.id+','+static_bNum+')">'+
+			               		'<div class="col-md-2">'+
+			               			'<img src="'+val.profile_image+'" class="side-menu-profile_image" />'+
+			               		'</div>'+
+			               		'<div class="col-md-4">'+
+			               			'<span>'+val.name+'<br>('+val.nickname+')<br>'+val.email+'</span>'+
+			               		'</div>'+
+		               		'</div>'+
+	               		'</a>';
+	               	});
+	               		$("#findMemberResult").html(result);
+	               	
+	            } ,
+		       error : function(xhr, status, error) {
+	              console.log(error);
+	         }
+	        }) 
+	}
+	
 	var check=true;
 	
 	function openMenu(bNum, memId){
@@ -333,22 +337,35 @@ function addMemberFunc(id,bNum){
 			//var img_id='#profile_image'+index;
 			var member_select_id='#memberInfo'+index;
 			//이미지 설정함
+			var sessionLoginCheck='';
 			var change_permission_html;
+			var grade_admin_check_html='';
+			var grade_normal_check_html='';
 			var grade_string;
 			if(val.grade==1){grade_string='admin';}
 			else if(val.grade==2){grade_string='normal';}
 			
 			if(sessionId==val.id){
 				//현재 로그인한 사용자의 프로필을 열었을 경우  
+				sessionLoginCheck='<span>it\'s me!</span><br>';
+				if(val.grade==1){
+					//현재 열람중인 프로필이 관리자일 경우
+					grade_admin_check_html='<span class="glyphicon glyphicon-ok"></span>';
+				}else if(val.grade==2){
+					//현재 열람중인 프로필이 일반일 경우 
+					grade_normal_check_html='<span class="glyphicon glyphicon-ok"></span>';
+				}
+				
 				change_permission_html=
 					'<div class="side-menu-change-permission-wrapper can-not-click">'+
 						'<div class="change-permission-admin">'+
 							'<span class="permission-bold">Admin</span>'+
-							'<span class="glyphicon glyphicon-ok"></span>'+
+							grade_admin_check_html+
 							'<div>can view and edit cards, remove members, and change settings for thw board.</div>'+
 						'</div>'+
 						'<div class="change-permission-member can-not-click">'+
 							'<span class="permission-bold">Nomal</span>'+
+							grade_normal_check_html+
 							'<div>can view and edit cards. Can\'t changes settings.</div>'+
 						'</div>'+
 					'</div>';
@@ -388,6 +405,14 @@ function addMemberFunc(id,bNum){
 								'</div>'+
 							'</div>';
 					}
+					
+					
+					change_permission_html+=
+						'<hr>'+
+						'<div class="delete-member-wrapper">'+
+							'<div class="delete-member-btn hover-blue" onclick="deleteMember('+val.id+','+bNum+')">'+
+								'<span class="delete-member-text">Remove from Board... </span>'+
+						'</div>';
 				}
 				else if(grade==2){
 
@@ -436,6 +461,7 @@ function addMemberFunc(id,bNum){
 								'<img class="side-menu-members-info-img" src="'+val.profile_image+'">'+
 							'</div>'+
 							'<div class="side-menu-members-info-text-wrapper">'+
+								sessionLoginCheck+
 								'<span class="side-menu-member-name">'+val.name+'</span>'+
 								'<span class="side-menu-member-nickname">('+val.nickname+')</span>'+
 								'<br><span class="side-menu-member-email">'+val.email+'</span>'+
@@ -596,9 +622,10 @@ function addMemberFunc(id,bNum){
 	
 	$('.color-list-item').click(function(){
 		var change_color=$(this).css("background-color");
-		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
-		.css("background-color",change_color);
+		/*$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+		.css("background-color",change_color);*/
 		update_background_color(change_color);
+		
 				});
 	
 	function update_background_color(change_color){
@@ -606,6 +633,7 @@ function addMemberFunc(id,bNum){
 	            url: '/usMemo/board/update/backgroundColor?memId='+static_memId+'+&bNum='+static_bNum+'&background_color='+change_color,
 	            type :'post',
 	            success:function(){
+	            	location.reload();
 	            } ,
 		       error :function(data,status,er) { 
 		    	   alert("error: "+data+" status: "+status+" er:"+er);
@@ -615,9 +643,9 @@ function addMemberFunc(id,bNum){
 	
 		
 	}
-	
-	$('.background-color-list-close-btn').click(function(){
-		/*배경색 바꾸기 드롭다운 끄기 클릭시 */
+
+	/*$('.background-color-list-close-btn').click(function(){
+		배경색 바꾸기 드롭다운 끄기 클릭시 
 		
-	});
+	});*/
 

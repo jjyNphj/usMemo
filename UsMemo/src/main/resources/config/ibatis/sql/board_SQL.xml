@@ -24,6 +24,7 @@
 		<result property="grade" column="grade" />
 		<result property="name" column="name" />    
 		<result property="star" column="star"/>
+		<result property="background_color" column="background_color"/>
     </resultMap>
 
 	
@@ -65,7 +66,7 @@
 	</delete>
 	
 	<select id="getAllBoardsById" parameterClass="String" resultMap="getAllBoards">
-		select b.name,g.num as memberGrade_num, g.bNum, g.memId, g.grade, g.star  
+		select b.name,g.num as memberGrade_num, g.bNum, g.memId, g.grade, g.star,g.background_color  
 		from board b Inner Join memberGrade g
 		on b.num=g.bNum
 		where g.memId=#memId# 

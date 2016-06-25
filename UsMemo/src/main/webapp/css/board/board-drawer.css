@@ -24,6 +24,17 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	max-height: 619px;
+	
+	padding: 10px 5px 10px 0;
+	
+}
+.board-drawer-header-text{
+	
+    text-align: center;
+    line-height: 28px;
+    font-size: 15px;
+    font-weight: 700;
+	
 }
 #find-board-name{
 	width: 98%;
@@ -50,7 +61,7 @@
 	opacity: initial;
 }
 .drawer-boardsList-title-background{
-	background-color: #B04632;
+	/* background-color: #B04632; */
 	opacity: 0.13;
 	background-size: cover;
 	background-position: center center;
@@ -72,6 +83,9 @@
 	border-radius: 3px;
 	color: #444;
 	background-color: transparent;
+	
+    flex: 1 1 auto;
+	
 }
 .drawer-boardsList-title-link-thumbnail{
 	background-color: #B04632;
@@ -101,13 +115,16 @@
 	flex: 1 1 auto;
     padding-right: 4px;
 }
-#drawer-boardsList-title-star{
-	padding: 2px 5px 0 5px;
+.drawer-boardsList-title-star{
+	padding: 10px 5px 10px 5px;
 	float: right;
 	flex: 0 0 auto;
 } 
 .glyphicon-star{
 	color: #f2d600;
+}
+.drawer-boardsList-title-wrapper{
+	display: flex;
 }
 
 

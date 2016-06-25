@@ -55,3 +55,23 @@ function createBoard(memId) {
 function clearForm(o){
     $('textarea#cardDescription, textarea#boardComment', o).val('');
 } 
+
+$('.member-boards-star').click(function(){
+	//보드리스트에 있는 보드들의 즐겨찾기를 클릭할 시 발생하는 이벤트
+	var bNumId= $(this).attr('id');
+	var bNum=bNumId.split('_');
+	bNum=bNum[1];
+	
+	if($(this).hasClass("glyphicon glyphicon-star-empty")){
+		//즐겨찾기로 해줘야함.
+		$(this).removeClass("glyphicon glyphicon-star-empty");
+		$(this).addClass("glyphicon glyphicon-star");
+		updateStarBoard('Y',bNum,static_memId);
+	}else if(!$(this).hasClass("glyphicon glyphicon-star-empty")){
+		$(this).removeClass("glyphicon glyphicon-star");
+		$(this).addClass("glyphicon glyphicon-star-empty");
+		updateStarBoard('N',bNum,static_memId);
+	}
+	location.reload();
+});
+

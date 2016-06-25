@@ -1,24 +1,55 @@
 /* Let's get this party started */
-::-webkit-scrollbar {/*사이즈*/
+.scrollbar-setting::-webkit-scrollbar {/*사이즈*/
     width: 12px;
     height: 12px;
 }
  
 /* Track */
-::-webkit-scrollbar-track {
+.scrollbar-setting::-webkit-scrollbar-track {
     /*  -webkit-box-shadow: inset 0 0 inset #963C2B;   */
-    background: #963C2B;
+/*      background: #963C2B;  */
     -webkit-border-radius: 10px;
     border-radius: 5px;/*양끝둥글기*/
 }
+.scrollbar-color-::-webkit-scrollbar-track {
+	
+
+	}
+.scrollbar-color-blue::-webkit-scrollbar-track{
+	background: #0079BF;
+}				
+.scrollbar-color-orange::-webkit-scrollbar-track{
+	background: #D29034;
+}
+.scrollbar-color-green::-webkit-scrollbar-track{
+	background: #519839;	
+}
+.scrollbar-color-red::-webkit-scrollbar-track{
+	background: #B04632;	
+}
+.scrollbar-color-purple::-webkit-scrollbar-track{
+	background: #89609E;	
+}
+.scrollbar-color-pink::-webkit-scrollbar-track{
+	background: #CD5A91;	
+}
+.scrollbar-color-lightGreen::-webkit-scrollbar-track{
+	background: #4BBF6B;	
+}
+.scrollbar-color-sykBlue::-webkit-scrollbar-track{
+	background: #00AECC;	
+}
+.scrollbar-color-gray::-webkit-scrollbar-track{
+	background: #838C91;	
+}
  
 /* Handle */
-::-webkit-scrollbar-thumb {
+.scrollbar-setting::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: #C08A7F; /* rgba(255,0,0,0.8) */ 
+    background: rgba( 225, 225, 225, 0.75); /* rgba(255,0,0,0.8) */ 
   /*   -webkit-box-shadow: inset 0 0 6px #963C2B; *//* rgba(0,0,0,0.5) */ 
 }
-::-webkit-scrollbar-thumb:window-inactive {
-	background: #C08A7F; 
+.scrollbar-setting::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba( 225, 225, 225, 0.75); 
 }

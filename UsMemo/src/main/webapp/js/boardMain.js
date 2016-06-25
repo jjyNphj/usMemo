@@ -5,7 +5,73 @@ var sameListFlag=true;
 var before=new Object();
 	 
 widthResize($('.board-name')[0]);
-initBoard();//보드 설정
+		$(document).ready(function() { //보드가 열릴때 기본 설정들임. 로딩이 느린 이유 때문에 ready에 넣은 것임.
+
+				 //보드색 설정
+				var boardColor= $('#boardColor').val();
+				$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
+				.css("background-color",boardColor);
+				
+				//스크롤바 색 설정
+				var setScrollBar=$('.list_all,.card_all,.boards-drawer-content,.side-menu-activity-content,#findMemberResult,#allActivityModal');
+				var scrollBarColorClassName;
+				
+				var boardColorHex=rgb2hex(boardColor);
+					switch(boardColorHex){
+					case '#0079bf':
+						scrollBarColorClassName='scrollbar-color-blue';
+						break;
+					case '#d29034':
+						scrollBarColorClassName='scrollbar-color-orange'
+						break;
+					case '#519839':
+						scrollBarColorClassName='scrollbar-color-green';
+						break;
+					case '#b04632':
+						scrollBarColorClassName='scrollbar-color-red';
+						break;
+					case '#89609e':
+						scrollBarColorClassName='scrollbar-color-purple';
+						break;
+					case '#cd5a91':
+						scrollBarColorClassName='scrollbar-color-pink';
+						break;
+					case '#4bbf6b':
+						scrollBarColorClassName='scrollbar-color-lightGreen';
+						break;
+					case '#00aecc':
+						scrollBarColorClassName='scrollbar-color-sykBlue';
+						break;
+					case '#838c91':
+						scrollBarColorClassName='scrollbar-color-gray';
+						break;
+						
+					}
+					
+					setScrollBar.addClass('scrollbar-setting '+scrollBarColorClassName);
+
+				//리스트네임의 textarea height 조정
+				var textarea_arr=$('h6>textarea.list-name');
+				for(var i=0;i<textarea_arr.length;i++){
+					heightResize(textarea_arr[i]);
+				}
+				
+				
+				
+				
+				
+		        /**
+		         * rgb타입을 hex 타입으로 바꾸는 함수.
+		         */
+		        function rgb2hex(rgb){
+		        	 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+		        	 return (rgb && rgb.length === 4) ? "#" +
+		        	  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+		        	  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+		        	  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+		        	}
+			
+		});
 		/*
 		 * body영역 설정
 		 * */
@@ -111,18 +177,9 @@ initBoard();//보드 설정
 
 	        	}
 	        	});
-	 function initBoard(){
-		 //보드색 설정
-		var boardColor= $('#boardColor').val();
-		$('body, #board-header-wrap,.member-boards-background,.add-board-background,.drawer-boardsList-title-background,.drawer-boardsList-title-link-thumbnail')
-		.css("background-color",boardColor);
-		//리스트네임의 textarea height 조정
-		
-		var textarea_arr=$('h6>textarea.list-name');
-		for(var i=0;i<textarea_arr.length;i++){
-			heightResize(textarea_arr[i]);
-		}
-	 }
+
+
+	        
 	 function addCard(lNum,nameNum){
 		 /*lnum과 sessionid로 card에 정보 넣기*/
 		 var u='#listContents'+lNum;
@@ -137,7 +194,7 @@ initBoard();//보드 설정
             type:'post',
             success:function(){
             
-            	alert("happy!");
+            	//alert("happy!");
             	window.location.reload();
             } ,
 	       error : function(xhr, status, error) {
@@ -155,7 +212,7 @@ initBoard();//보드 설정
 	            url: url,
 	            type:'post',
 	            success:function(){
-	               	alert("success");
+	               	//alert("success");
 	            	window.location.reload();
 	            } ,
 		       error : function(xhr, status, error) {
@@ -385,13 +442,16 @@ initBoard();//보드 설정
 	 }
 
 	$(function() {
+		/**
+		 * .disableSelection();은 리스트안에 있는 텍스트가 드래그 되는것을 방지.
+		 */
 		/*
 		1) 리스트의 갯수만큼 동적 생성해야함.
 		2) 리스트간 카드 넘기기  */
 		$(".list_all").sortable({
-			/*axis:"x",*/
+			axis:"x",
 /*			cancel: "#addListLI" 입력을 못하게 막음,*/
-			items: ".list_unit, div:not(.no-include-sortable,.card_all,.card_unit)"/*"div:not(#addListLI,#addCardLI,.card_unit)"*/,
+			items: "div:not(.no-include-sortable,.card_all,.card_unit)"/*.list_unit,*/,
 			/*움직이는 대상에서 제외*/
 			item:function(event, ui) {    
 	               var productOrder = $(this).sortable("toArray");
@@ -434,7 +494,7 @@ initBoard();//보드 설정
 			  /*발생순서 : item-start-change-beforeStop-update-(remove-receive-update)-deactivate-stop */
 		      connectWith: ".card_all",
 	/*	      cancel: "#addCardLI" addbtn은 움직일 수 없게 설정,*/
-		      items: ".card_unit, div:not(.no-include-sortable)",
+		      items: "div:not(.no-include-sortable)",
 			  start: function (event, ui) {  
 				  var productOrder = $(this).sortable("toArray");
 				  updateCardStart(productOrder,ui.item.index());
@@ -484,31 +544,14 @@ initBoard();//보드 설정
     		//즐겨찾기로 해줘야함.
     		$(this).removeClass("glyphicon glyphicon-star-empty");
     		$(this).addClass("glyphicon glyphicon-star");
-    		updateStarBoard('Y');
+    		updateStarBoard('Y',static_bNum,static_memId);
     	}else if(!$(this).hasClass("glyphicon glyphicon-star-empty")){
     		$(this).removeClass("glyphicon glyphicon-star");
     		$(this).addClass("glyphicon glyphicon-star-empty");
-    		updateStarBoard('N');
+    		updateStarBoard('N',static_bNum,static_memId);
     	}
     });
-	
-    function updateStarBoard(star){
-    	var bNum=$('#bNum').val();
-    	var memId=$('#memId').val();
-    	
-    	var url='/usMemo/member/updateStar?bNum='+bNum+'&memId='+memId+'&star='+star;
-    	 $.ajax({
-	            url: url,
-	            type :'post',
-	            success:function(){
-	            } ,
-		       error :function(data,status,er) { 
-		    	   alert("error: "+data+" status: "+status+" er:"+er);
-		    	   console.log("error: "+data+" status: "+status+" er:"+er);
-	         }
-    	 });
-    	
-    }
+
     
     //리스트 삭제시 하위의 카드까지 모두 삭제
     function deleteListInfo(num){
@@ -558,11 +601,14 @@ initBoard();//보드 설정
             $(type+'.'+className).blur();*/
             thisElement.blur();
             var className=thisElement.className;
-            if (className=='list-name'){
-            editListName(thisElement);	}
-            else if(className=='board-name'){
+            if ($(thisElement).hasClass("list-name")){
+            editListName(thisElement);	
+            }else if($(thisElement).hasClass("board-name")){
             	editBoardName(thisElement);
+            }else if($(thisElement).hasClass("find-member")){
+            	findMember(thisElement.value);
             }
+           
             
 
         }
