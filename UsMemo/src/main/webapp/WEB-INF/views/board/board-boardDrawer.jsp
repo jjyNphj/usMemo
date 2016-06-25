@@ -3,8 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="boards-drawer-view dropdown-menu" >
 	<div class="boards-drawer-content">
-		<div class="find-board form-group">
+<!-- 		<div class="find-board form-group">
 			<input type="text" class="form-control" id="find-board-name" placeholder="Find boards by name...">
+		</div> -->
+		<div class="board-drawer-header">
+			<div class="board-drawer-header-text">Board List</div>
+			<hr>
 		</div>
 		<div class="board-drawer-boards">
 			<div class="starred-boards">
@@ -25,7 +29,7 @@
 			</div>
 		</div>
 		
-		<div id="board-drawer-newBoard">
+<!-- 		<div id="board-drawer-newBoard">
 			<div class="new-board-btn">
 				<span class="new-board-btn-text">Create new board...</span>
 			</div>
@@ -41,6 +45,6 @@
 				</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>

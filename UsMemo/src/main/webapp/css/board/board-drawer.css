@@ -24,6 +24,17 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	max-height: 619px;
+	
+	padding: 10px 5px 10px 0;
+	
+}
+.board-drawer-header-text{
+	
+    text-align: center;
+    line-height: 28px;
+    font-size: 15px;
+    font-weight: 700;
+	
 }
 #find-board-name{
 	width: 98%;
