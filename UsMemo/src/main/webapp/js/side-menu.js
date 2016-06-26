@@ -86,8 +86,12 @@ $('.my-members-close-btn').click(function(){
 $('.activity-members-close-btn').click(function(){
 	var select=$(this).parents($('.dropdown.activity-memberInfo-dropdown-view.open')).children('.activity-memberInfo-dropdown-view-btn');
 	select.dropdown('toggle');
+	$(this).parents('#activity-memberInfo-dropdown-view-content').css("left",0); 
+	//설정한 left의 위치를 다시 원래의 위치로 돌림. 그래야 창을 다시 열어도 원하는 자리에 위치하게됨.
 });
-
+$('.activity-memberInfo-dropdown-view').on('hidden.bs.dropdown', function () {
+	$(this).children('#activity-memberInfo-dropdown-view-content').css("left",0); 
+});
 /*
  * 드롭다운
  * 창이 꺼지는 것을 방지함. 
@@ -309,7 +313,7 @@ function addMemberFunc(id,bNum){
 			result+=val.last_activity;
 		});
 
-		if(type=='someActivity'){$('.side-menu-activity-content').append(result);}
+		if(type=='someActivity'){$('.side-menu-activity-content').append(result); testPosition();}
 		else if(type='allActivity'){$('#all-activity-modal-content-wrapper').append(result);}
 		bind_memberInfo_dropdown_activityMember();//이벤트 바인드
 	}
@@ -648,4 +652,28 @@ function addMemberFunc(id,bNum){
 		배경색 바꾸기 드롭다운 끄기 클릭시 
 		
 	});*/
-
+	
+	function testPosition(){
+		
+	
+	$('.activity-memberInfo-dropdown-view-btn').click(function(){
+		var thisEle=$(this).parent().parent();
+		var top=thisEle.offset().top;
+		var left=thisEle.offset().left;
+		var right=thisEle.offset().right;
+		var bottom=thisEle.offset().bottom;
+		var width=thisEle.width();
+		var height=thisEle.height();
+		
+		var dropdownEle=$(this).next('#activity-memberInfo-dropdown-view-content');
+		var d_top=dropdownEle.offset().top;
+		var d_left=dropdownEle.offset().left;
+		var d_right=dropdownEle.offset().right;
+		var d_bottom=dropdownEle.offset().bottom;
+		var d_width=dropdownEle.width();
+		var d_height=dropdownEle.height();
+		
+		dropdownEle.css("left",left-d_left);
+		
+	});
+	}
