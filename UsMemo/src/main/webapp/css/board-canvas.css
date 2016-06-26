@@ -151,3 +151,6 @@
 #addListLI{
 	min-width: 270px;
 }
+.cardInfo-dropdown-view{
+	word-break:break-all;
+}
