@@ -37,6 +37,7 @@ function bind_change_permission(){
 	$('.side-menu-members').on('hidden.bs.dropdown', function () {
 		$('.side-menu-change-permission').css("display","none");
 		$('.side-menu-members-info').css("display","");
+		$('.memberInfo-dropdown-view-content').css("left",0);//드롭다운의 위치 조정 후 다시 reset해주어야만 다시 창을 열었을 때도 계산식이 제대로 적용됨.
 	});
 }
 /*
@@ -313,8 +314,13 @@ function addMemberFunc(id,bNum){
 			result+=val.last_activity;
 		});
 
-		if(type=='someActivity'){$('.side-menu-activity-content').append(result); testPosition();}
-		else if(type='allActivity'){$('#all-activity-modal-content-wrapper').append(result);}
+		if(type=='someActivity'){
+			$('.side-menu-activity-content').append(result); 
+			activity_memberInfo_set_position();
+		}else if(type='allActivity'){
+			$('#all-activity-modal-content-wrapper').append(result);
+			}
+		
 		bind_memberInfo_dropdown_activityMember();//이벤트 바인드
 	}
 	
@@ -526,6 +532,7 @@ function addMemberFunc(id,bNum){
 					}*/
 		});
 		bind_memberInfo_dropdown_setMember();//이벤트 바인드
+		find_memberInfo_set_position();//드롭다운 이벤트 위치 바인드
 		bind_change_permission();
 	}
 	
@@ -653,27 +660,42 @@ function addMemberFunc(id,bNum){
 		
 	});*/
 	
-	function testPosition(){
-		
+	function activity_memberInfo_set_position(){
+		/**
+		 * 액티비티에서 회원이름 클릭시 생기는 드롭다운을 사이드메뉴 영역의 중앙으로 이동시키는 이벤트 메서드.
+		 */
 	
 	$('.activity-memberInfo-dropdown-view-btn').click(function(){
-		var thisEle=$(this).parent().parent();
-		var top=thisEle.offset().top;
-		var left=thisEle.offset().left;
-		var right=thisEle.offset().right;
-		var bottom=thisEle.offset().bottom;
-		var width=thisEle.width();
-		var height=thisEle.height();
+		var standardEle=$(this).parent().parent();
+		var top=standardEle.offset().top;
+		var left=standardEle.offset().left;/*
+		var right=standardEle.offset().right;
+		var bottom=standardEle.offset().bottom;*/
+		var width=standardEle.width();
+		var height=standardEle.height();
 		
 		var dropdownEle=$(this).next('#activity-memberInfo-dropdown-view-content');
 		var d_top=dropdownEle.offset().top;
-		var d_left=dropdownEle.offset().left;
+		var d_left=dropdownEle.offset().left;/*
 		var d_right=dropdownEle.offset().right;
-		var d_bottom=dropdownEle.offset().bottom;
+		var d_bottom=dropdownEle.offset().bottom;*/
 		var d_width=dropdownEle.width();
 		var d_height=dropdownEle.height();
 		
 		dropdownEle.css("left",left-d_left);
 		
 	});
+	}
+	function find_memberInfo_set_position(){
+		/**
+		 *  회원목록에서 회원프로필 클릭시 생기는 드롭다운을 사이드메뉴 영역의 중앙으로 이동시키는 이벤트 메서드.
+		 */
+		$('.side-menu-members-btn').click(function(){
+			var standardEle=$('#setMember'); //setmember 영역의 left위치에서 생기는 dropdown의 left 차이만큼 옮기면 정 중앙에 오게됨.
+			var standard_left=standardEle.offset().left;
+			var dropdownEle=$(this).next('.memberInfo-dropdown-view-content');
+			var dropdown_left=dropdownEle.offset().left;
+			
+			dropdownEle.css("left",standard_left-dropdown_left);
+		})
 	}
