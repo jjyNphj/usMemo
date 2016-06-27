@@ -40,7 +40,7 @@
 <div id="header">
 	<jsp:include page="board-header.jsp"></jsp:include>				
 </div><!-- end header -->
-		<div id="content">
+		<div id="content" class="boardMain-content">
 			
 			<div class="board-wrapper">
 				<div id="board-main-content">

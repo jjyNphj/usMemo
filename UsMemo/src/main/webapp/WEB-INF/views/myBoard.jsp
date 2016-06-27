@@ -80,7 +80,7 @@
 				  board create   <span class="caret"></span>
 			</button> -->
 			
-			<div class="dropdown-menu">
+			<div class="dropdown-menu addboard-btn">
 			<div class="modal-body">
 				<p>Create Board</p>
 				

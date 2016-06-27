@@ -96,6 +96,9 @@ body{
 	position:relative;
 	padding-bottom: 20px;/*보드화면에서 맨아래 스크롤부분을 패딩으로 남김.*/
 	/* overflow-x: auto; *//*맨아래스크롤생기게함.*/
+	/* height: inherit; */
+}
+.boardMain-content{
 	height: inherit;
 }
 .board-wrapper{

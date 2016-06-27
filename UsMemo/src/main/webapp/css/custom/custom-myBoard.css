@@ -118,3 +118,6 @@ body, #board-header-wrap{
 .add-board-text{
 	text-align: center;
 }
+.addboard-btn{
+	top: inherit;
+}
