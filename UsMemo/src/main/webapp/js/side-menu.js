@@ -103,6 +103,11 @@ $('.activity-memberInfo-dropdown-view').on('hidden.bs.dropdown', function () {
 $('#my-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 $('#activity-memberInfo-dropdown-view-content').bind('click', function (e) { e.stopPropagation() });
 
+//allAcitivity 실행후 껐을 때 내용 초기화시키기.
+$('#allActivityModal').on('hidden.bs.modal',function(){
+	clean_all_activity();
+});
+
 }
 
 function goDeletePage(bNum) {
@@ -629,6 +634,10 @@ function addMemberFunc(id,bNum){
 	
 	function clean_activitys(){
 		$('.side-menu-activity-content>*').detach();
+	}
+	
+	function clean_all_activity(){
+		$('#all-activity-modal-content-wrapper>*').detach();
 	}
 	
 	$('.color-list-item').click(function(){

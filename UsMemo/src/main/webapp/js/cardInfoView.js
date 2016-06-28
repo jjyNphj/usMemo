@@ -70,6 +70,13 @@ $(document).ready(function() {
 			heightResize(textarea_arr[i]);
 		}
 	});
+	$('#cardInfoView').on('hidden.bs.modal',function(){
+				
+		//allActivity에서 넘어온 cardInfoView라면 다시 allActivity 모달창 열어주기
+		if($('#allActivityModal').hasClass('in')){
+			$('#allActivityModal').css("display","block");
+		}
+	});
 });
 
 //전달받은 파일첨부 이름을  화면에 보기 좋게 출력
@@ -141,6 +148,11 @@ function enterSaveProcess(e) {
 
 //카드 수정창 뜨는 부분(해당 num에 따른 listAndCard에 있는 데이터 값 다 가져오기)
 function editCard(cNum) {
+	
+		//만일 allActivity에서 연결된것이라면 설정 바꾸기
+	if($('#allActivityModal').hasClass('in')){
+		$('#allActivityModal').css("display","none");
+	}
 	var url='/usMemo/card/edit';
 	var listAndcard = new Object();
 	listAndcard.cNum = cNum;
