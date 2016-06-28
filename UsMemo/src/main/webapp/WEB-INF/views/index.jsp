@@ -206,7 +206,7 @@
 		                           <div class="main">
 		                               <h3 class="name">Park Hye Jin</h3>
 		                               <p class="profession">Programmer</p>
-		                               <p class="text-center">"인생 좌우명"</p>
+		                               <p class="text-center">""</p>
 		                           </div>
 		                           <div class="footer">
 		                                <button class="btn btn-simple" onclick="rotateCard(this)">
@@ -637,7 +637,8 @@
                             	오라클은 PL/SQL을 지원하기에 SQL문의 질의어뿐 아니라 조건문, 반복문, 변수, 상수 선언 가능하다.</p> 
                             <p class="koreanfont">현재 웹사이트 제작에는 프로시저를 사용하기 위해 PL/SQL이 사용되고 있다.<br> 
                             	프로시저를 사용한 부분은 보드안의 리스트와 카드를 추가/삭제하는 부분으로, <br>조건문을 사용하고 한번의 호출만으로 여러 sql문을 연속적으로 처리하기 위해 프로시저를 사용하였다.</p>
-                            
+                            <p class="koreanfont">현재 iBatis 2.3.4.726 프레임워크를 이용하였다. 
+                            </p>
                             <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
                         </div>
                     </div>
@@ -724,15 +725,10 @@
                             <h2 class="fontcolor-margin-portfolio">Spring</h2>
                             <p class="item-intro text-muted">MVC pattern based web framework.</p>
                             <img class="img-responsive img-centered" src="${pageContext.request.contextPath}/img/main/portfolio_spring_bigsize.png" alt="">
-                            <p class="koreanfont">스프링은 거대한 컨테이너임과 동시에 Ioc/DI를 기반으로 하고 있으며, <br>서비스 추상화를 통해 삼위일체로 분리되는 3단 변신로봇이라고 한다. <br>
-                            	Ioc는 컨테이너의 역할로 코드 컨트롤(객체의 생성과 소멸)을 대신 해주며, <br>DI는 사용하고 있는 코드가 무엇인지 몰라도 일단 가져다 쓰는 진보적인 프로그래밍 작성 방식이다.
+                            <p class="koreanfont">스프링은 자바 엔터프라이즈 애플리케이션 개발에 사용되는 애플리케이션 프레임워크다. <br> 
+                            애플리케이션 프레임워크는 애플리케이션 개발을 빠르고 효율적으로 할 수 있도록  <br> 애플리케이션의 바탕이 되는 틀과 공통 프로그래밍 모델, 기술 API 등을 제공해준다. 
                             </p>
-                            <p class="koreanfont">스프링 MVC(Model View Controller) 프레임 워크는 스프링이 제공하는 트랜잭션,DI,AOP를 손쉽게 사용할수 있다.<br>
-                            	스프링 MVC를 이용하면 개발자는 클라이언트로부터 요청을 처리할 <br>컨트롤러와 결과값을 뿌리는 뷰단만 만들면 되므로 훨씬 손쉽게 개발을 할 수 있다.<br>
-                            	그러므로 현재 웹 제작은 스프링 MVC 구조로 만들어졌다. <br>
-                            </p>
-                            <p class="koreanfont">
-                            	개발 환경은 Spring 3.1.1버전을 사용하며, <br>DI를 사용하면서 DB와 접촉하는 부분은 iBatis 2.3.4.726 프레임워크를 이용한다.
+                            <p class="koreanfont"> 현재 웹 제작은 스프링 MVC 구조이며, 개발 환경은 Spring 3.1.1이다. <br>
                             </p>
                             
                             <button type="button" class="btn btn-primary-red" data-dismiss="modal"><i class="fa fa-times"></i> Close Project</button>
