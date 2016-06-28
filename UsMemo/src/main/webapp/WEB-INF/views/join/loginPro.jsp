@@ -18,7 +18,7 @@
 
 </head>
 <body>
-${sessionScope.id }
+<%-- ${sessionScope.id } --%>
 <script type="text/javascript">
 /* var checklogout='${checklogout}'; */
 		var access_token= $.cookie("access_token");
