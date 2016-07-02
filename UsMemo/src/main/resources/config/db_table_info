@@ -63,7 +63,7 @@ create table activity_format (
 create table memberGrade(
 	num number primary key,
 	bNum number,
-	memId varchar(100),
+	memId number,
 	grade number,
     star varchar(2),
     background_color varchar2(80)

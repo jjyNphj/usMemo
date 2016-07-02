@@ -101,7 +101,33 @@ background-color:#fcfcfc;
 
 .bg-light-white
  {
-background-image:url(../../img/main/wall.jpg);
+background-image:url(../../img/9-1.jpg);
+background-repeat:none;
+background-attachment:scroll;
+background-position:center center;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+background-size:cover;
+-o-background-size:cover;
+/* background-repeat:repeat-x; */
+/* background-repeat:no-repeat; */
+/* background-color:#FFF; */
+/* background-color:#EAEAEA; */
+/* background-color:#F05F40; */
+}
+
+.bg-light-image
+ {
+background-image:url(../../img/11.jpg);
+/* background-repeat:none; */
+background-attachment:scroll;
+background-position:center center;
+-webkit-background-size:cover;
+-moz-background-size:cover;
+background-size:cover;
+-o-background-size:cover;
+background-repeat:repeat-x;
+/* background-repeat:no-repeat; */
 /* background-color:#FFF; */
 /* background-color:#EAEAEA; */
 /* background-color:#F05F40; */
@@ -220,7 +246,7 @@ background-color:#222
 	color:#fff;
 	/* background-color:#fec503; */
 	background-color:#EE472A;
-	/* border-color:#f6bf01 */
+	/* background-color:#0fc4ff; */
 	border-color:#F05B42
 }
 .btn-primary:active,.btn-primary.active,.open .dropdown-toggle.btn-primary
@@ -281,7 +307,7 @@ background-color:#fff
 }
 .navbar-default
  {
-background-color:#963C2B; 
+background-color:#004358; 
 /* background-color:#F0F0F0;*/
 border-color:transparent
 }
@@ -375,7 +401,7 @@ border-radius:3px
 }
 .navbar-default.navbar-shrink
  {
-background-color:#963C2B;
+background-color:#004358;
 /* background-color:#F0F0F0; */
 padding:10px 0
 }
@@ -387,7 +413,8 @@ font-size:1.5em
 }
 header
  {
-background-image:url(../../img/help.jpg);
+/* background-image:url(../../img/main/wall.jpg); */
+background-image:url(../../img/2.jpeg);
 background-repeat:none;
 background-attachment:scroll;
 background-position:center center;

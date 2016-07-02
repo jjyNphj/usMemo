@@ -129,7 +129,7 @@
                 <!-- <a href="#services" class="btn btn-primary btn-xl page-scroll">Get Started</a> -->
             </div>
         </div>
-        <video autoplay="" loop="" class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="${pageContext.request.contextPath}/img/help.jpg" id="video-background">
+        <video autoplay="" loop="" class="fillWidth fadeIn wow collapse in" data-wow-delay="0.5s" poster="${pageContext.request.contextPath}/img/2.jpeg" id="video-background">
             <!-- <iframe src="https://www.youtube.com/embed/sbc2yBheAbo" frameborder="0"></iframe> -->
           	<source src="img/trello_video.mp4" type="video/mp4">
             <!-- <source src="https://s3-us-west-2.amazonaws.com/coverr/mp4/Traffic-blurred2.mp4" type="video/mp4"> -->
@@ -206,7 +206,7 @@
 		                           <div class="main">
 		                               <h3 class="name">Park Hye Jin</h3>
 		                               <p class="profession">Programmer</p>
-		                               <p class="text-center">""</p>
+		                               <p class="text-center">"carpe diem!"</p>
 		                           </div>
 		                           <div class="footer">
 		                                <button class="btn btn-simple" onclick="rotateCard(this)">
@@ -441,7 +441,7 @@
     
     
 	<!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-white">
+    <section id="portfolio" class="bg-light-image">
         <div class="container rowcolor">
             <div class="row">
                 <div class="col-lg-12 text-center">
