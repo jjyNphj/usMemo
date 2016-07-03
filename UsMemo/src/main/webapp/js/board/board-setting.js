@@ -24,7 +24,7 @@ function deleteBoard(bNum,name){
 	       type:'post',
 	       
 	       success:function(){	       
-	       	alert("보드가 삭제 되었습니다.");
+	       	alert("보드가 삭제되었습니다.");
 	       	window.location.reload();
 	       } ,
 	      error : function(xhr, status, error) {
@@ -42,7 +42,7 @@ function createBoard(memId) {
 	       type:'post',
 	       
 	       success:function(){	       
-	       	alert("보드가 추가 되었습니다.");
+	       	alert("보드가 추가되었습니다.");
 	       	window.location.reload();
 	       } ,
 	      error : function(xhr, status, error) {

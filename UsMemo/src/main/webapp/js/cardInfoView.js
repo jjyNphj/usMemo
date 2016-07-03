@@ -43,7 +43,7 @@ $(document).ready(function() {
 				url: url,
 				type:'post',
 				success:function(){
-					alert("CardName edit!");
+					//alert("CardName edit!");
 	
 					//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
 					//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
@@ -220,7 +220,7 @@ function addCardDescription(card_num,cardDescription){
 
 		type:'post',
 		success:function(){
-			alert("CardContent add!");
+			//alert("CardContent add!");
 		} ,
 		error : function(xhr, status, error) {
 			alert(error);
@@ -242,7 +242,7 @@ function deleteCardInfo() {
 			type:'post',
 
 			success:function(){
-				alert("카드정보 삭제!");
+				alert("삭제되었습니다.");
 				//innerHTML은 전체 html 소스에서 card_lnum이라는 id를 가진 태그 안의 내용을 가져옴
 				//setCardInfo()부분에서 id값 넣어줌. board-cardInfo.jsp 부분에 뿌려줌.
 				var lnum = document.getElementById('card_lnum').innerHTML;

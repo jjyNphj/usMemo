@@ -231,6 +231,6 @@ hr{
 #activity-memberInfo-dropdown-view-content{
 	/* left: -90px; */
 }
-a.activity-memberInfo-dropdown-view-btn:hover, a.cardInfo-dropdown-view:HOVER,a.all-activity-btn:HOVER,#card_fileName>a:HOVER {
+a.activity-memberInfo-dropdown-view-btn:hover, a.cardInfo-dropdown-view:HOVER,a.all-activity-btn:HOVER,#card_fileName>a:HOVER,#card_fileName>a:FOCUS  {
 	color:#68B3C8 !important;
 }

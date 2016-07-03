@@ -137,7 +137,7 @@
     </header>
     
     <!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog" style="overflow-y:hidden;">
+	<div id="myModal" class="modal fade" role="dialog" >
 		<button type="button" class="close" data-dismiss="modal" onclick="video_controller2();"><span class="glyphicon glyphicon-remove-sign"></span></button>
 	  <!-- <div class="modal-dialog"> -->
 		<!-- <div class="block-container"> -->

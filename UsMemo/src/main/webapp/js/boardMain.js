@@ -565,7 +565,7 @@ widthResize($('.board-name')[0]);
     			type:'post',
 
     			success:function(){
-    				alert("리스트와 카드 정보 삭제!");
+    				alert("리스트가 삭제되었습니다.");
 
     				console.log("num:"+num);		
 
