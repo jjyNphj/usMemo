@@ -196,12 +196,16 @@ public class ActivityService {
 				break;
 			case "addList":
 				listInfo=getListInfo(requestInfo.getValue_num());
+				if(listInfo!=null){
 				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
+				}
 				break;
 			case "addCard":
 				toListInfo=getListInfo(requestInfo.getTo_num());
 				cardInfo=getCardInfo(requestInfo.getValue_num());
+				if(toListInfo!=null){
 				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
+				}
 				if(cardInfo!=null){
 					format=format.replace("#cardName#",
 							"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
@@ -212,8 +216,12 @@ public class ActivityService {
 				toListInfo=getListInfo(requestInfo.getTo_num());
 				fromListInfo=getListInfo(requestInfo.getFrom_num());
 				cardInfo=getCardInfo(requestInfo.getValue_num());
-			format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
-			format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+fromListInfo.getName()+"</span>");
+				if(toListInfo!=null){
+					format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
+				}
+				if(fromListInfo!=null){
+					format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+fromListInfo.getName()+"</span>");
+				}
 			
 			if(cardInfo!=null){
 				format=format.replace("#cardName#",
