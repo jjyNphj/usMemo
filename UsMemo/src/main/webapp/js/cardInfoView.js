@@ -76,6 +76,8 @@ $(document).ready(function() {
 		if($('#allActivityModal').hasClass('in')){
 			$('#allActivityModal').css("display","block");
 		}
+		$('#exampleInputFile').val('');
+		
 	});
 });
 
