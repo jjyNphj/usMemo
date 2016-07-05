@@ -244,6 +244,8 @@ public class ActivityService {
 //							"<a class=\"cardInfo-dropdown-view\">"+cardInfo.getName()+"</a>"
 //							);
 				break;
+			case "deleteList":
+				break;
 		
 			}
 		result+=format;
@@ -284,14 +286,14 @@ public class ActivityService {
 		 * 3) "delete [카드이름] from [리스트이름]" 적어주기 
 		 * 
 		 */
-		List<Activity> allCardActivity= new ArrayList<Activity>();
-		allCardActivity=activityDao.getActivityByCardNum(cNum);
+		List<Activity> allActivity= new ArrayList<Activity>();
+		allActivity=activityDao.getActivityByCardNum(cNum);
 		
 		//모든 액티비티 지우기. 
-		activityDao.deleteActivityCardByNum(allCardActivity);
+		activityDao.deleteActivityByNum(allActivity);
 		
 		//모든 액티비티_data지우기.
-		activityDao.deleteActivityDataCardByActivityDataNum(allCardActivity);
+		activityDao.deleteActivityDataByActivityDataNum(allActivity);
 		
 		
 		//삭제했다는 액티비티 추가.
@@ -379,6 +381,39 @@ public class ActivityService {
 			
 			activityDao.updateActivity(activityInfo);
 		}
+		
+	}
+
+
+	public void deleteList(ListDTO listDTO, String memId) {
+		/**
+		 * 1) 리스트num을 가지는 모든 액티비티data가지고오기
+		 * 2) dataNum으로 모든 activity, activity_data 지우기.
+		 * 3) activity에 현재 리스트를 지웠다는 activity넣어주기.
+		 */
+		
+		List<Activity> allActivity= new ArrayList<Activity>();
+		allActivity=activityDao.getActivityByListNum(listDTO.getNum());
+		
+		//모든 액티비티 지우기. 
+		activityDao.deleteActivityByNum(allActivity);
+		
+		//모든 액티비티_data지우기.
+		activityDao.deleteActivityDataByActivityDataNum(allActivity);
+		
+		
+		//삭제했다는 액티비티 추가.
+		ActivityDataMember requestInfo= new ActivityDataMember();
+		requestInfo.setbNum(listDTO.getbNum());
+//		requestInfo.setValue_num(cNum);
+		requestInfo.setMemId(memId);
+		requestInfo.setActivity_name("deleteList");
+		requestInfo.setActivity_name_num(activityDao.getActivityNumByActivityName(requestInfo.getActivity_name()));
+		activityDao.insertListDeleteActivityData(requestInfo);
+		
+		
+		addActivity(requestInfo);
+		
 		
 	}
 	

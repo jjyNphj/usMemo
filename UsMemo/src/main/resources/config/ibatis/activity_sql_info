@@ -10,4 +10,4 @@ insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'addFriend','
 
 insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'deleteCard','#me# deleted Card from #listName#');
 
-insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'deleteList','#me# deleted #listName# from this board');
+insert into ACTIVITY_FORMAT values(ACTIVITY_FORMAT_num_seq.nextval,'deleteList','#me# deleted List from this board');

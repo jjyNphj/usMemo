@@ -558,7 +558,7 @@ widthResize($('.board-name')[0]);
     	var deleteChoice = window.confirm('정말로 이 리스트를 삭제하시겠습니까?(하위 카드 내용도 전부 삭제 됩니다.)');	
     	
     	if(deleteChoice) {
-    		var url='/usMemo/list/delete/ListInfo?num='+num;
+    		var url='/usMemo/list/delete/ListInfo/'+static_bNum+'/'+static_memId+'/'+num;
 
     		$.ajax({
     			url: url,

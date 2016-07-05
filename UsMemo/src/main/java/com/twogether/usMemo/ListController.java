@@ -41,13 +41,17 @@ public class ListController {
 		return "/board/boardMain";
 	}
 	
-	@RequestMapping("/delete/ListInfo")
-	public ModelAndView deleteListInfo(@ModelAttribute ListDTO listDTO){
+	@RequestMapping("/delete/ListInfo/{bNum}/{memId}/{num}")
+	public ModelAndView deleteListInfo(@PathVariable("bNum") int bNum,@PathVariable("memId") String memId, @PathVariable("num") int num){
 		
 		//리스트 삭제 버튼 누르고 삭제하는 부분
 		ModelAndView mv= new ModelAndView();
-
+		ListDTO listDTO= new ListDTO();
+		listDTO.setNum(num);
+		listDTO.setbNum(bNum);
+		
 		mv.setViewName("board/boardMain");
+		activityService.deleteList(listDTO,memId);
 		listService.deleteListInfo(listDTO);
 		return mv;
 	}

@@ -97,6 +97,15 @@ public class ActivityDao {
 		return sqlMapClientTemplate.queryForList("Activity.getActivityByCardNum",cNum);
 
 	}
+	/**
+	 * 리스트 번호를 to, from_num, value_num 에 가지고 있는 모든 정보 가지고옴.
+	 * @param num
+	 * @return
+	 */
+	public List<Activity> getActivityByListNum(int lNum) {
+		return sqlMapClientTemplate.queryForList("Activity.getActivityByListNum",lNum);
+	}
+	
 	/*
 	public void updateDeletedCards(List<Activity> allCardActivity) {
 
@@ -122,35 +131,41 @@ public class ActivityDao {
 		sqlMapClientTemplate.update("Activity.updateActivity",activityInfo);
 	}
 
-	public void deleteActivityCardByNum(List<Activity> allCardActivity) {
+	public void deleteActivityByNum(List<Activity> allActivity) {
 
-		//activity에서 cardnum을 가진 모든 액티비티정보 지우기.
-		Iterator<Activity> it = allCardActivity.iterator();
+		//현재 가지고 있는 데이터(리스트나 카드)가 들어있는 액티비티를 삭제.
+		Iterator<Activity> it = allActivity.iterator();
 
 		while(it.hasNext()){
-			sqlMapClientTemplate.delete("Activity.deleteActivityCardByNum",it.next().getNum());
+			sqlMapClientTemplate.delete("Activity.deleteActivityByNum",it.next().getNum());
 		}
 
 	}
 
-	public void deleteActivityDataCardByActivityDataNum(
-			List<Activity> allCardActivity) {
 
-		//해당 카드가 가지고 있는 액티비디 data를 모두 지우기.
-
-		Iterator<Activity> it = allCardActivity.iterator();
+	public void deleteActivityDataByActivityDataNum(
+			List<Activity> allActivity) {
+		//현재 가지고 있는 데이터(리스트나 카드)가 들어있는 액티비티data 를 삭제.
+		Iterator<Activity> it = allActivity.iterator();
 
 		while(it.hasNext()){
-			sqlMapClientTemplate.delete("Activity.deleteActivityDataCardByActivityDataNum",it.next().getActivity_data_num());
+			sqlMapClientTemplate.delete("Activity.deleteActivityDataByActivityDataNum",it.next().getActivity_data_num());
 			
 		}
 
 		}
 
 
-	
-
 	public void insertCardDeleteActivityData(ActivityDataMember requestInfo) {
 		sqlMapClientTemplate.insert("Activity.insertCardDeleteActivityData",requestInfo);
 		
-	}}
+	}
+
+	public void insertListDeleteActivityData(ActivityDataMember requestInfo) {
+		sqlMapClientTemplate.insert("Activity.insertListDeleteActivityData",requestInfo);
+		
+	}
+
+
+}
+

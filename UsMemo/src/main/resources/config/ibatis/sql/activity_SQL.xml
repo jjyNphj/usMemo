@@ -118,6 +118,13 @@
 			on d.num=a.activity_data_num 
 			where d.value_num=#num#
 		</select>
+		<select id="getActivityByListNum" parameterClass="int" resultMap="activityMap">
+			select a.num, a.activity_data_num, a.last_activity, d.bNum 
+			from activity_data d 
+			inner join activity a 
+			on d.num=a.activity_data_num 
+			where d.value_num=#num# or d.to_num=#num# or d.from_num=#num#
+		</select>
 		
 		<update id="updateDeletedCards" parameterClass="activity">
 			update Activity set last_activity=#last_activity# where num=#num#
@@ -149,11 +156,11 @@
 			update activity set last_activity=#last_activity# where activity_data_num=#activity_data_num#
 		</update>
 		
-		<delete id="deleteActivityCardByNum" parameterClass="int">
+		<delete id="deleteActivityByNum" parameterClass="int">
 			delete Activity where num=#activity_num#
 		</delete>
-		
-		<delete id="deleteActivityDataCardByActivityDataNum" parameterClass="int">
+
+		<delete id="deleteActivityDataByActivityDataNum" parameterClass="int">
 			delete Activity_data where num=#activity_data_num#
 		</delete>
 		
@@ -163,6 +170,15 @@
 				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
 			</selectKey>
 		</insert>
+		
+		<insert id="insertListDeleteActivityData"  parameterClass="activityDataMember">
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,null,null,null,null)
+			<selectKey keyProperty="num" resultClass="int" type="post">
+				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
+			</selectKey>
+		</insert>
+
+
 
 	</sqlMap>
 	
