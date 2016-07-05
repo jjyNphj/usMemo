@@ -254,7 +254,8 @@ function deleteCardInfo() {
 				console.log("lnum:"+lnum + " card_name:" + name + " card_num:" + num + " card_unit_id:" + card_unit_id);		
 
 				//$()안에있는 조건에 해당하는 태그를 포함한 하위 요소, 이벤트, 데이터 모두 제거
-				$('div.card_unit#'+card_unit_id).remove();
+				var origin_card=$('div.card_unit#'+card_unit_id);
+				origin_card.remove();
 			} ,
 			error : function(xhr, status, error) {
 				alert(error);
