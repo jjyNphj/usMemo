@@ -59,7 +59,9 @@ public class CardService {
 		System.out.println("CardService card name: " + card.getName());
 	}
 	
-	public void deleteCardInfo(Card card) {
+	public void deleteCardInfo(int cNum) {
+		Card card = new Card();
+		card.setNum(cNum);
 		cardDao.deleteCardInfo(card);
 	}
 

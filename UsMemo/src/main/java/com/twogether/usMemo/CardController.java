@@ -116,15 +116,16 @@ public class CardController {
 		return mv;
 	}
 	
-	@RequestMapping("/delete/CardInfo")
-	public ModelAndView deleteCardInfo(@ModelAttribute Card card){
+	@RequestMapping("/delete/CardInfo/{bNum}/{num}/{memId}/{lNum}")
+	public ModelAndView deleteCardInfo(@PathVariable("bNum") int bNum, @PathVariable("num") int num, @PathVariable("memId") String memId
+			,@PathVariable("lNum") int lNum){
 		
 		//카드 수정하기 창에서 카드 이름을 수정하고 엔터를 칠 경우 저장하는 부분
 		ModelAndView mv= new ModelAndView();
 
 		mv.setViewName("board/boardMain");
-		cardService.deleteCardInfo(card);
-		activityService.deleteCard(card);
+		activityService.deleteCard(num, bNum, memId,lNum);
+		cardService.deleteCardInfo(num);
 		return mv;
 	}	
 	

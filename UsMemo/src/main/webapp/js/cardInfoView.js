@@ -237,7 +237,10 @@ function deleteCardInfo() {
 	
 	if(deleteChoice) {
 		var num = document.getElementById('card_num').innerHTML;
-		var url='/usMemo/card/delete/CardInfo?num='+num;
+		var bNum= static_bNum;
+		var memId= static_memId;
+		var lNum= document.getElementById('card_lnum').innerHTML;
+		var url='/usMemo/card/delete/CardInfo/'+bNum+'/'+num+'/'+memId+'/'+lNum;
 
 		$.ajax({
 			url: url,

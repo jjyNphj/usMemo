@@ -196,38 +196,26 @@ public class ActivityService {
 				break;
 			case "addList":
 				listInfo=getListInfo(requestInfo.getValue_num());
-				if(listInfo!=null){
 				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+listInfo.getName()+"</span>");
-				}
 				break;
 			case "addCard":
 				toListInfo=getListInfo(requestInfo.getTo_num());
 				cardInfo=getCardInfo(requestInfo.getValue_num());
-				if(toListInfo!=null){
 				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
-				}
-				if(cardInfo!=null){
 					format=format.replace("#cardName#",
 							"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
 							);
-				}
 				break;
 			case "updateCardLocation":
 				toListInfo=getListInfo(requestInfo.getTo_num());
 				fromListInfo=getListInfo(requestInfo.getFrom_num());
 				cardInfo=getCardInfo(requestInfo.getValue_num());
-				if(toListInfo!=null){
-					format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
-				}
-				if(fromListInfo!=null){
-					format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+fromListInfo.getName()+"</span>");
-				}
+				format=format.replace("#toListName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
+				format=format.replace("#fromListName#","<span class=\"listInfo-dropdown-view\">"+fromListInfo.getName()+"</span>");
 			
-			if(cardInfo!=null){
 				format=format.replace("#cardName#",
 						"<a class=\"cardInfo-dropdown-view\"  onclick=\"editCard("+cardInfo.getNum()+")\" data-toggle=\"modal\" data-target=\"#cardInfoView\">"+cardInfo.getName()+"</a>"
 						);
-				}
 			break;
 			case "addFriend":
 				memberGradeInfo.setbNum(requestInfo.getbNum());
@@ -247,6 +235,14 @@ public class ActivityService {
 				//format=format.replace("#me#","<span class=\"memberInfo-dropdown-view\">"+val.nickname+"</span>");
 				format=format.replace("#friendName#",activity_memberInfo_setting_dropdown(memberInfoToActivityData));
 				format=format.replace("#authority#","<span class=\"friendInfo-auth-dropdown-view\">"+grade+"</span>");
+				break;
+			case "deleteCard":
+				toListInfo=getListInfo(requestInfo.getFrom_num());
+//				cardInfo=getCardInfo(requestInfo.getValue_num());
+				format=format.replace("#listName#","<span class=\"listInfo-dropdown-view\">"+toListInfo.getName()+"</span>");
+//				format=format.replace("#cardName#",
+//							"<a class=\"cardInfo-dropdown-view\">"+cardInfo.getName()+"</a>"
+//							);
 				break;
 		
 			}
@@ -281,15 +277,52 @@ public class ActivityService {
 		}
 
 
-	public void deleteCard(Card card) {
-		
+	public void deleteCard(int cNum, int bNum,String memId, int lNum) {
+		/**
+		 * 1) 카드삭제후 현재 삭제된 카드를 가지고 있는 액티비티 다 가지고오기
+		 * 2) activity_data_num으로 activity 삭제
+		 * 3) "delete [카드이름] from [리스트이름]" 적어주기 
+		 * 
+		 */
 		List<Activity> allCardActivity= new ArrayList<Activity>();
-		allCardActivity=activityDao.getActivityByCardNum(card);
+		allCardActivity=activityDao.getActivityByCardNum(cNum);
 		
+		//모든 액티비티 지우기. 
+		activityDao.deleteActivityCardByNum(allCardActivity);
+		
+		//모든 액티비티_data지우기.
+		activityDao.deleteActivityDataCardByActivityDataNum(allCardActivity);
+		
+		
+		//삭제했다는 액티비티 추가.
+		ActivityDataMember requestInfo= new ActivityDataMember();
+		requestInfo.setbNum(bNum);
+//		requestInfo.setValue_num(cNum);
+		requestInfo.setMemId(memId);
+		requestInfo.setFrom_num(lNum);
+		requestInfo.setActivity_name("deleteCard");
+		requestInfo.setActivity_name_num(activityDao.getActivityNumByActivityName(requestInfo.getActivity_name()));
+		activityDao.insertCardDeleteActivityData(requestInfo);
+		
+		
+		addActivity(requestInfo);
+		
+		/*
 		Iterator<Activity> it = allCardActivity.iterator();
 		while(it.hasNext()){
 			Activity tempActivity=new Activity();
 			tempActivity=it.next();
+			
+			int activity_data_num= tempActivity.getNum();
+			
+			//액티비티 다 지우기
+			activityDao.deleteCardByNum(activity_data_num);
+			
+			
+			//
+			
+			
+			
 			String last_activity= tempActivity.getLast_activity();
 			String [] value=last_activity.split("onclick=\"editCard\\(");
 			int start=value[1].indexOf("data-target=\"#cardInfoView\"");
@@ -298,17 +331,17 @@ public class ActivityService {
 			String result= value[0]+subStringResult;
 			tempActivity.setLast_activity(result);
 			
-		}
+		}*/
 		
-		updateDeletedCards(allCardActivity);
+		//updateDeletedCards(allCardActivity);
 	}
 
 
-	private void updateDeletedCards(List<Activity> allCardActivity) {
+/*	private void updateDeletedCards(List<Activity> allCardActivity) {
 		
 		activityDao.updateDeletedCards(allCardActivity);
 		
-	}
+	}*/
 
 	/**
 	 * 카드이름을 바꿨을 때 액티비티에서도 모든 이름을 바꿔주어야함.

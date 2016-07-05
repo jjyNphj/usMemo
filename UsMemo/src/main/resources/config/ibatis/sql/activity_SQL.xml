@@ -148,6 +148,21 @@
 		<update id="updateActivity" parameterClass="activity">
 			update activity set last_activity=#last_activity# where activity_data_num=#activity_data_num#
 		</update>
+		
+		<delete id="deleteActivityCardByNum" parameterClass="int">
+			delete Activity where num=#activity_num#
+		</delete>
+		
+		<delete id="deleteActivityDataCardByActivityDataNum" parameterClass="int">
+			delete Activity_data where num=#activity_data_num#
+		</delete>
+		
+		<insert id="insertCardDeleteActivityData"  parameterClass="activityDataMember">
+			insert into activity_data values(activity_data_num_seq.nextval,#activity_name_num#,#memId#,#bNum#,sysdate,#value_num#,null,null,#from_num#)
+			<selectKey keyProperty="num" resultClass="int" type="post">
+				select ACTIVITY_DATA_NUM_SEQ.CURRVAL from DUAL
+			</selectKey>
+		</insert>
 
 	</sqlMap>
 	
