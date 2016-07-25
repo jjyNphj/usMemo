@@ -95,3 +95,51 @@ BEGIN
 	END IF;
   COMMIT;
 END;
+/
+
+create or replace procedure deleteListProcedure
+(list_num IN number)
+is
+list_llink number;
+list_rlink number;
+
+BEGIN
+	select llink, rlink into list_llink, list_rlink from list where num = list_num;
+  
+	--한 보드 안에 리스트가 딱 한개 존재하는 경우
+  --그냥 해당 리스트 삭제하기,해당 리스트의 하위 카드 모두 삭제
+	IF (list_llink = -1 AND list_rlink = -1)
+	THEN	
+	delete from list where num = list_num;
+  delete from card where lNum = list_num;
+
+	--가장 맨 앞의 리스트가 삭제되는 경우
+  --update:삭제되는 리스트넘버의 rlink와 연결된 리스트넘버의 llink를 -1로 변경
+	ELSIF (list_llink = -1 AND list_rlink != -1)
+	THEN	
+	update list set llink = -1 where num = list_rlink;
+	delete from list where num = list_num;
+  delete from card where lNum = list_num;
+
+	--가장 마지막 리스트가 삭제되는 경우
+	ELSIF (list_rlink = -1 AND list_llink != -1)
+	THEN
+	update list set rlink = -1 where num = list_llink;
+	delete from list where num = list_num;
+  delete from card where lNum = list_num;
+
+	--가운데 끼어있는 리스트가 삭제되는 경우
+  --update 1번째:삭제되는 리스트넘버의 llink와 연결된 리스트넘버의 rlink를 알맞게 변경
+  --update 2번째:삭제되는 리스트넘버의 rlink와 연결된 리스트넘버의 llink를 알맞게 변경
+	ELSIF (list_llink != -1 AND list_rlink != -1)
+	THEN	
+	update list set rlink = list_rlink where num = list_llink;	
+	update list set llink = list_llink where num = list_rlink;
+	delete from list where num = list_num;
+  delete from card where lNum = list_num;
+  
+	END IF;
+  COMMIT;
+  
+END;
+/

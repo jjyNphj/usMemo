@@ -25,7 +25,7 @@
                
                <div class="modal-body">
                   <p>You wrote:<br><span id="card_Date"></span></p>
-                  <p>카드 상세 내용 입력하는 부분, 수정</p>
+                  <!-- <p>카드 상세 내용 입력하는 부분, 수정</p> -->
 
                   <!-- textarea의 내용 id변수에 저장 -->
                   <textarea class="form-control" style="resize:none;" rows="10"  id="cardDescription" placeholder="카드상세내용을 입력해주세요."></textarea>
